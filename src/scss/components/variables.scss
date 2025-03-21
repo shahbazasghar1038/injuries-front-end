@@ -3,13 +3,38 @@
 @use 'sass:string' as string;
 
 
-$primary-color: #111;
-$secondary-color: #222;
-$tertiary-color: #333;
-$quaternary-color: #444;
-$quinary-color: #555;
-$senary-color: #666;
-$septenary-color: #777;
+$primary-color: #465FFF;
+$Background-Body-Secondary: #F9FAFB;
+$color-gray-54:  #344054;
+$white-color: #FFF;
+$blue-39: #1D2939;
+$blue-85: #667085;
+$blue-light-B3: #98A2B3;
+
+// $secondary-color: #222;
+// $tertiary-color: #333;
+// $quaternary-color: #444;
+// $quinary-color: #555;
+// $senary-color: #666;
+// $septenary-color: #777;
+$primary-hover-color: #465fff9e;
+
+
+.text-primary{
+  color: $primary-color;
+}
+.text-gray-54{
+  color: $color-gray-54;
+}
+.text-blue-39{
+  color: $blue-39;
+}
+.text-blue-85{
+  color: $blue-85;
+}
+.bg-gray-54{
+  background-color: $Background-Body-Secondary;
+}
 
 
 $media_queries: (

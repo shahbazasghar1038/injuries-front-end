@@ -8,3 +8,18 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
+
+.container-auth{
+    max-width: 1440px;
+    padding-left: 9.4%;
+    padding-right: 9.4%;
+    margin: 0 auto;
+    @media screen and (max-width:1500px){
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    @media screen and (min-width:1501px){
+        max-width: 1440px;
+    }
+}

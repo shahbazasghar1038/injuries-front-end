@@ -1,0 +1,41 @@
+@use './variables.scss' as *;
+
+
+h4{
+    font-family: "Outfit", sans-serif;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 122.222%;
+    @include for_breakpoint(sm-mobile) {
+        font-size: 24px;
+    }
+    @include for_breakpoint(lg-mobile) {
+        font-size: 28px;
+    }
+    @include for_breakpoint(tablet) {
+        font-size: 30px;
+    }
+}
+
+p{
+    font-family: "Outfit", sans-serif;
+    line-height: normal; 
+    font-weight: 400;
+    word-break: break-word;
+}
+
+.fs-14{
+    font-size: 14px;
+    line-height: 142.857%;
+}
+
+.fw-400{
+    font-weight: 400;
+}
+.fw-500{
+    font-weight: 500;
+}
+.fw-600{
+    font-weight: 600;
+}

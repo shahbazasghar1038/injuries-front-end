@@ -1,3 +1,49 @@
-@use './typography' as *;
-@use './buttons' as *;
-@use './auth' as *;
+@use './variables.scss' as *;
+
+.auth-layout {
+    height: calc(100vh - 90px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-bg {
+    border-radius: 16px;
+    background: $white-color;
+    padding: 32px;
+    width: 100%;
+    max-width: 440px;
+
+    @include for_breakpoint(sm-mobile) {
+        padding: 16px;
+        border-radius: 8px;
+    }
+    @include for_breakpoint(lg-mobile) {
+        padding: 20px;
+        border-radius: 10px;
+    }
+    @include for_breakpoint(tablet) {
+        padding: 24px;
+        border-radius: 12px;
+    }
+}
+
+.auth-input {
+    display: flex;
+    height: 44px;
+    padding: 10px 16px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+    border-radius: 8px;
+    border: 1px solid #D0D5DD;
+    background: $white-color;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    font-family: "Outfit", sans-serif;
+    color:  $blue-light-B3;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 142.857% ;
+}
