@@ -10,6 +10,12 @@
     @include for_breakpoint(tablet) {
         padding-top: 50px;
     }
+    @include for_breakpoint(laptop) {
+        padding-top: 50px;
+    }
+    @include for_breakpoint(desktop) {
+        padding-top: 50px;
+    }
 }
 
 
@@ -25,4 +31,12 @@
 }
 .mb--20{
     margin-bottom: 20px !important;
+}
+
+.form-width{
+    width: 440px;
+    @include for_breakpoint(sm-mobile) {
+        width: 100%;
+    }
+   
 }
