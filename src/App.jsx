@@ -1,6 +1,8 @@
 import SignIn from './pages/AuthPages/SignIn'
 import ForgotPassword from './pages/AuthPages/ForgotPassword'
 import SignUp from './pages/AuthPages/SignUp'
+import PersonalInfo from './pages/AuthPages/PersonalInfo'
+
 
 function App() {
 
@@ -8,7 +10,8 @@ function App() {
     <>
       {/* <SignIn /> */}
       {/* <ForgotPassword /> */}
-      <SignUp />
+      {/* <SignUp /> */}
+      <PersonalInfo />
     </>
   )
 }
