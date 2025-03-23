@@ -5,7 +5,7 @@ import ForgotPassword from './pages/AuthPages/ForgotPassword'
 import SignUp from './pages/AuthPages/SignUp'
 import PersonalInfo from './pages/AuthPages/PersonalInfo'
 import OTPVerfication from './pages/AuthPages/OTPVerfication'
-
+import Home from './pages/Dashboard/Home'
 // Your components
  
 const NotFound = () => <h1>404: Page Not Found</h1>;
@@ -23,6 +23,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/personal-info" element={<PersonalInfo />} />
         <Route path="/otp-verification" element={<OTPVerfication />} />
+        <Route path="/home" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
