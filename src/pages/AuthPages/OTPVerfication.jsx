@@ -69,6 +69,7 @@ const OTPVerfication = () => {
                                             onChange={(e) => handleChange(e, index)}
                                             onKeyDown={(e) => handleKeyDown(e, index)}
                                             ref={(el) => (inputRefs.current[index] = el)}
+                                            className="h-11 otp-input input-px-1"
                                         />
                                     </Col>
                                 ))}

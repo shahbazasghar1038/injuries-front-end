@@ -11,8 +11,8 @@ function App() {
       {/* <SignIn /> */}
       {/* <ForgotPassword /> */}
       {/* <SignUp /> */}
-      <PersonalInfo />
-      {/* <OTPVerfication /> */}
+      {/* <PersonalInfo /> */}
+      <OTPVerfication />
     </>
   )
 }
