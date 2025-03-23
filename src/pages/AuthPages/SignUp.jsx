@@ -1,11 +1,22 @@
 import React, { useState } from 'react'
 import AuthLayout from './AuthPageLayout'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
     const [selectedRole, setSelectedRole] = useState('doctor'); // Default to doctor as shown in image
+    const navigate = useNavigate();
 
     const handleRoleSelect = (role) => {
         setSelectedRole(role);
+    };
+
+    const handleContinue = () => {
+        if (selectedRole === 'doctor') {
+            navigate('/personal-info');
+        } else {
+            // Handle attorney path if needed
+            navigate('/attorney-signup');
+        }
     };
 
     return (
@@ -106,8 +117,11 @@ const SignUp = () => {
                     </div>
 
                     <div className="flex flex-col items-center gap-5 relative self-stretch w-full flex-[0_0_auto]">
-                        <button className="btn btn-primary w-full">
-                                Continue
+                        <button 
+                            className="btn btn-primary w-full"
+                            onClick={handleContinue}
+                        >
+                            Continue
                         </button>
 
                         <p className="relative w-fit font-normal text-transparent text-sm tracking-[0] leading-[14px]">

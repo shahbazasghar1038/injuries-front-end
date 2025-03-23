@@ -2,6 +2,7 @@ import AuthPageLayout from './AuthPageLayout'
 import React from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Flex } from 'antd';
+import { Link } from 'react-router-dom';
 
 
 const SignIn = () => {
@@ -57,7 +58,7 @@ const SignIn = () => {
               <Form.Item name="remember" valuePropName="checked" noStyle>
                 <Checkbox>Remember me</Checkbox>
               </Form.Item>
-              <a href="">Forgot password</a>
+              <Link to={'/forgot-password'}>Forgot password</Link>
             </Flex>
           </Form.Item>
 
@@ -65,7 +66,7 @@ const SignIn = () => {
             <Button block type="primary" htmlType="submit" className='btn btn-primary'>
               Log in
             </Button>
-            <p className='text-14 fw-400 $color-gray-54 mt-5'>Don’t have an account?  <a href="" className="text-primary">Sign Up</a></p>
+            <p className='text-14 fw-400 $color-gray-54 mt-5'>Don’t have an account?  <Link to={'/sign-up'} className="text-primary">Sign Up</Link></p>
           </Form.Item>
         </Form>
 

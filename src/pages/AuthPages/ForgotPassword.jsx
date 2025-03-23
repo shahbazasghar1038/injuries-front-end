@@ -8,6 +8,7 @@ import {
   EyeInvisibleOutlined,
 } from "@ant-design/icons";
 import { CloseOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 
 export const ForgotPassword = () => {
@@ -328,9 +329,9 @@ export const ForgotPassword = () => {
           height: "298px"
         }}
         modalRender={(node) => (
-          <div style={{ borderRadius: "24px", overflow: "hidden" }}>
+          <Link to={'/sign-up'} style={{ borderRadius: "24px", overflow: "hidden" }}>
             {node}
-          </div>
+          </Link>
         )}
       >
         <Row justify="center" style={{ marginBottom: "20px" }}>
@@ -371,7 +372,7 @@ export const ForgotPassword = () => {
         </Row>
 
           <h5 className="text-blue-39 mb-3">Password Reset</h5>
-          <p className="fs-14text-blue-85 mb-8">Congratulations! You've successfully update the password.</p>
+          <p className="fs-14 text-blue-85 mb-8">Congratulations! You've successfully update the password.</p>
 
         <div
           style={{

@@ -6,6 +6,7 @@ import {
     EyeOutlined,
   } from "@ant-design/icons";
   import { Button, Checkbox, Col, Form, Input, Row, Typography } from "antd";
+import { Link } from 'react-router-dom';
 
 const { Text } = Typography;
 
@@ -118,13 +119,13 @@ const PersonalInfo = () => {
                         </Checkbox>
                     </Form.Item>
                     <Form.Item>
-                        <Button className='btn btn-primary' block>
+                        <Link to={'/otp-verification'} className='btn btn-primary' block>
                             Continue
-                        </Button>
+                        </Link>
                     </Form.Item>
                     <Form.Item>
                         <p style={{ textAlign: "center" }}>
-                            Already have an account? <a href="#">Sign In</a>
+                            Already have an account? <Link to={'/sign-in'}>Sign In</Link>
                         </p>
                     </Form.Item>
                 </Form>
