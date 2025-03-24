@@ -1,11 +1,12 @@
 import AuthPageLayout from './AuthPageLayout'
-import React from 'react';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import React, { useState } from 'react';
+import { LockOutlined, UserOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Flex } from 'antd';
 import { Link } from 'react-router-dom';
 
 
 const SignIn = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -51,7 +52,16 @@ const SignIn = () => {
             ]}
           >
           <label className='text-14 fw-500 text-blue-39 mb-2'>Password</label>
-            <Input type="password" className='auth-input' placeholder="******" />
+            <Input
+              type={passwordVisible ? "text" : "password"}
+              className='auth-input'
+              placeholder="******"
+              suffix={
+                <span onClick={() => setPasswordVisible(!passwordVisible)} style={{ cursor: 'pointer' }}>
+                  {passwordVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                </span>
+              }
+            />
           </Form.Item>
           <Form.Item className='mb--20'>
             <Flex justify="space-between" align="center">
@@ -66,7 +76,7 @@ const SignIn = () => {
             <Button block type="primary" htmlType="submit" className='btn btn-primary'>
               Log in
             </Button>
-            <p className='text-14 fw-400 $color-gray-54 mt-5'>Don’t have an account?  <Link to={'/sign-up'} className="text-primary">Sign Up</Link></p>
+            <p className='text-14 fw-400 $color-gray-54 mt-5'>Don't have an account?  <Link to={'/sign-up'} className="text-primary">Sign Up</Link></p>
           </Form.Item>
         </Form>
 

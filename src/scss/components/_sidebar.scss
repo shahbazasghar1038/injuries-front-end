@@ -1,0 +1,55 @@
+@use './variables.scss' as *;
+
+.sidebar{
+    width: 260px;
+    height: 100dvh;
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    z-index: 99;
+    min-height: 647px;
+    overflow-y: auto;
+
+    .sidebar-text{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 12px;
+        .text{
+            position: relative;
+            font-family: "Outfit", sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 142.857%;
+            color: $color-gray-54;
+            
+            &.logout{
+                color: $danger-color;
+            }
+
+            &.active{
+                color:  $primary-color;
+            }
+        }
+    }
+}
+
+.layout-flex {
+    display: flex;
+    align-items: start;
+
+    .content-wrapper{
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+   
+    .content-padding {
+        padding: 24px;
+    }
+
+    .layout-padding {
+        padding: 0px 0px 0px 260px;
+    }
+
+}
