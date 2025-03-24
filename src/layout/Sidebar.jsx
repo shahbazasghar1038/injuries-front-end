@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Icons } from '../components/svg/Icons'
+import logo from '../assets/logo.svg'
+
 const Sidebar = () => {
   return (
     <div className="sidebar flex flex-col w-[260px] h-[1024px] items-start gap-7 pt-8 pb-5 px-5 relative bg-white border-r [border-right-style:solid] border-[#e4e7ec]">
@@ -8,7 +10,7 @@ const Sidebar = () => {
         <img
           className="relative w-[169px] h-[23.94px]"
           alt="Frame"
-          src="https://c.animaapp.com/m8lkn9ova2S0gg/img/frame-26.png"
+          src={logo}
         />
 
         <div className="flex flex-col items-start gap-6 relative self-stretch w-full flex-[0_0_auto]">
