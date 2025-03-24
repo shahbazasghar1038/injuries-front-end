@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { Icons } from '../components/svg/Icons'
 const Sidebar = () => {
   return (
     <div className="sidebar flex flex-col w-[260px] h-[1024px] items-start gap-7 pt-8 pb-5 px-5 relative bg-white border-r [border-right-style:solid] border-[#e4e7ec]">
@@ -21,7 +21,9 @@ const Sidebar = () => {
               <Link to="/pre-vetted-cases" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-[#ecf3ff] rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    {/* <TargetCustomer className="!relative !w-6 !h-6" /> */}
+                        <div>
+                            <Icons.PreVettedCasesIcon />
+                        </div> 
                     <div className="text">
                       Pre-vetted Cases
                     </div>
@@ -32,7 +34,9 @@ const Sidebar = () => {
               <Link to="/ongoing-cases" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    {/* <ClipboardAlt className="!relative !w-6 !h-6" /> */}
+                    <div>
+                        <Icons.OngoingCasesIcon />
+                    </div>
                     <div className="text">
                       Ongoing Cases
                     </div>
@@ -43,7 +47,9 @@ const Sidebar = () => {
               <Link to="/lien-resolution" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    {/* <Revenue className="!relative !w-6 !h-6" /> */}
+                    <div>
+                        <Icons.LienResolutionIcon />
+                    </div>
                     <div className="text">
                       Lien Resolution
                     </div>
@@ -54,7 +60,9 @@ const Sidebar = () => {
               <Link to="/archive" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    {/* <Archive className="!relative !w-6 !h-6" /> */}
+                    <div>
+                        <Icons.ArchiveIcon />
+                    </div>
                     <div className="text">
                       Archive
                     </div>
@@ -65,7 +73,9 @@ const Sidebar = () => {
               <Link to="/providers" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    {/* <PersonalData className="!relative !w-6 !h-6" /> */}
+                    <div>
+                        <Icons.ProviderIcon />
+                    </div>
                     <div className="text">
                       Providers
                     </div>
@@ -84,7 +94,9 @@ const Sidebar = () => {
               <Link to="/settings" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    {/* <UserSettings className="!relative !w-6 !h-6" /> */}
+                    <div>
+                        <Icons.SettingsIcon />
+                    </div>
                     <div className="text">
                       Settings
                     </div>
@@ -95,7 +107,9 @@ const Sidebar = () => {
               <Link to="/logout" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    {/* <Exit className="!relative !w-6 !h-6" /> */}
+                    <div>
+                        <Icons.LogoutIcon />
+                    </div>
                     <div className="text logout">
                       Logout
                     </div>
