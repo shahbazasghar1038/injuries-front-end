@@ -37,6 +37,26 @@
                 color: #465FFF !important;
             }
         }
+        &.active{
+            background-color: #ECF3FF;
+            
+            // Change icon color on hover
+            div:first-child {
+                color: #465FFF;
+                
+                // Target SVG paths if needed
+                svg {
+                    path {
+                        fill: #465FFF;
+                    }
+                }
+            }
+            
+            // Change text color on hover
+            .text {
+                color: #465FFF !important;
+            }
+        }
         
         .text{
             position: relative;
@@ -56,9 +76,7 @@
                 }
             }
 
-            &.active{
-                color: $primary-color;
-            }
+            
         }
     }
     

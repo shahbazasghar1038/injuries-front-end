@@ -1,9 +1,43 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Icons } from '../components/svg/Icons'
 import logo from '../assets/logo.svg'
 
 const Sidebar = () => {
+  const location = useLocation();
+  const { pathname } = location;
+  
+  // Menu navigation items
+  const menuItems = [
+    { path: '/home', label: 'Pre-vetted Cases', icon: <Icons.PreVettedCasesIcon /> },
+    { path: '/ongoing-cases', label: 'Ongoing Cases', icon: <Icons.OngoingCasesIcon /> },
+    { path: '/lien-resolution', label: 'Lien Resolution', icon: <Icons.LienResolutionIcon /> },
+    { path: '/archive', label: 'Archive', icon: <Icons.ArchiveIcon /> },
+    { path: '/providers', label: 'Providers', icon: <Icons.ProviderIcon /> },
+  ];
+
+  // User options navigation items
+  const userOptions = [
+    { path: '/settings', label: 'Settings', icon: <Icons.SettingsIcon /> },
+    { path: '/logout', label: 'Logout', icon: <Icons.LogoutIcon />, className: 'logout' },
+  ];
+
+  // Render navigation link
+  const renderNavLink = (item) => (
+    <Link to={item.path} className="w-full" key={item.path}>
+      <div className={`sidebar-text ${pathname === item.path ? 'active' : ''} relative self-stretch w-full flex-[0_0_auto] rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer ${pathname === item.path ? 'bg-[#ecf3ff]' : 'bg-white'}`}>
+        <div className="flex items-center gap-3 relative flex-1 grow">
+          <div className={`text-inherit group-hover:text-[#465FFF] ${pathname === item.path ? 'text-[#465FFF]' : ''}`}>
+            {item.icon}
+          </div>
+          <div className={`text ${item.className || ''} group-hover:text-[#465FFF] ${pathname === item.path ? 'text-[#465FFF]' : ''}`}>
+            {item.label}
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+  
   return (
     <div className="sidebar flex flex-col w-[260px] h-[1024px] items-start gap-7 pt-8 pb-5 px-5 relative bg-white border-r [border-right-style:solid] border-[#e4e7ec]">
       <div className="flex flex-col items-start gap-7 relative self-stretch w-full flex-[0_0_auto]">
@@ -20,70 +54,7 @@ const Sidebar = () => {
             </div>
 
             <div className="flex flex-col items-start gap-1 relative self-stretch w-full flex-[0_0_auto]">
-              <Link to="/home" className="w-full">
-                <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-[#ecf3ff] rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
-                  <div className="flex items-center gap-3 relative flex-1 grow">
-                        <div className="text-inherit group-hover:text-[#465FFF]">
-                            <Icons.PreVettedCasesIcon />
-                        </div> 
-                    <div className="text group-hover:text-[#465FFF]">
-                      Pre-vetted Cases
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              <Link to="/ongoing-cases" className="w-full">
-                <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
-                  <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div className="text-inherit group-hover:text-[#465FFF]">
-                        <Icons.OngoingCasesIcon />
-                    </div>
-                    <div className="text group-hover:text-[#465FFF]">
-                      Ongoing Cases
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              <Link to="/lien-resolution" className="w-full">
-                <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
-                  <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div className="text-inherit group-hover:text-[#465FFF]">
-                        <Icons.LienResolutionIcon />
-                    </div>
-                    <div className="text group-hover:text-[#465FFF]">
-                      Lien Resolution
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              <Link to="/archive" className="w-full">
-                <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
-                  <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div className="text-inherit group-hover:text-[#465FFF]">
-                        <Icons.ArchiveIcon />
-                    </div>
-                    <div className="text group-hover:text-[#465FFF]">
-                      Archive
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              <Link to="/providers" className="w-full">
-                <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
-                  <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div className="text-inherit group-hover:text-[#465FFF]">
-                        <Icons.ProviderIcon />
-                    </div>
-                    <div className="text group-hover:text-[#465FFF]">
-                      Providers
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              {menuItems.map(renderNavLink)}
             </div>
           </div>
 
@@ -93,36 +64,12 @@ const Sidebar = () => {
             </div>
 
             <div className="flex flex-col items-start gap-1 relative self-stretch w-full flex-[0_0_auto]">
-              <Link to="/settings" className="w-full">
-                <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
-                  <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div className="text-inherit group-hover:text-[#465FFF]">
-                        <Icons.SettingsIcon />
-                    </div>
-                    <div className="text group-hover:text-[#465FFF]">
-                      Settings
-                    </div>
-                  </div>
-                </div>
-              </Link>
-
-              <Link to="/logout" className="w-full">
-                <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
-                  <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div className="text-inherit group-hover:text-[#465FFF]">
-                        <Icons.LogoutIcon />
-                    </div>
-                    <div className="text logout group-hover:text-[#465FFF]">
-                      Logout
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              {userOptions.map(renderNavLink)}
             </div>
           </div>
         </div>
       </div>
-  </div>
+    </div>
   )
 }
 
