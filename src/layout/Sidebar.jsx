@@ -20,13 +20,13 @@ const Sidebar = () => {
             </div>
 
             <div className="flex flex-col items-start gap-1 relative self-stretch w-full flex-[0_0_auto]">
-              <Link to="/pre-vetted-cases" className="w-full">
+              <Link to="/home" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-[#ecf3ff] rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                        <div>
+                        <div className="text-inherit group-hover:text-[#465FFF]">
                             <Icons.PreVettedCasesIcon />
                         </div> 
-                    <div className="text">
+                    <div className="text group-hover:text-[#465FFF]">
                       Pre-vetted Cases
                     </div>
                   </div>
@@ -36,10 +36,10 @@ const Sidebar = () => {
               <Link to="/ongoing-cases" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div>
+                    <div className="text-inherit group-hover:text-[#465FFF]">
                         <Icons.OngoingCasesIcon />
                     </div>
-                    <div className="text">
+                    <div className="text group-hover:text-[#465FFF]">
                       Ongoing Cases
                     </div>
                   </div>
@@ -49,10 +49,10 @@ const Sidebar = () => {
               <Link to="/lien-resolution" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div>
+                    <div className="text-inherit group-hover:text-[#465FFF]">
                         <Icons.LienResolutionIcon />
                     </div>
-                    <div className="text">
+                    <div className="text group-hover:text-[#465FFF]">
                       Lien Resolution
                     </div>
                   </div>
@@ -62,10 +62,10 @@ const Sidebar = () => {
               <Link to="/archive" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div>
+                    <div className="text-inherit group-hover:text-[#465FFF]">
                         <Icons.ArchiveIcon />
                     </div>
-                    <div className="text">
+                    <div className="text group-hover:text-[#465FFF]">
                       Archive
                     </div>
                   </div>
@@ -75,10 +75,10 @@ const Sidebar = () => {
               <Link to="/providers" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div>
+                    <div className="text-inherit group-hover:text-[#465FFF]">
                         <Icons.ProviderIcon />
                     </div>
-                    <div className="text">
+                    <div className="text group-hover:text-[#465FFF]">
                       Providers
                     </div>
                   </div>
@@ -96,10 +96,10 @@ const Sidebar = () => {
               <Link to="/settings" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div>
+                    <div className="text-inherit group-hover:text-[#465FFF]">
                         <Icons.SettingsIcon />
                     </div>
-                    <div className="text">
+                    <div className="text group-hover:text-[#465FFF]">
                       Settings
                     </div>
                   </div>
@@ -109,10 +109,10 @@ const Sidebar = () => {
               <Link to="/logout" className="w-full">
                 <div className="sidebar-text relative self-stretch w-full flex-[0_0_auto] bg-white rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer">
                   <div className="flex items-center gap-3 relative flex-1 grow">
-                    <div>
+                    <div className="text-inherit group-hover:text-[#465FFF]">
                         <Icons.LogoutIcon />
                     </div>
-                    <div className="text logout">
+                    <div className="text logout group-hover:text-[#465FFF]">
                       Logout
                     </div>
                   </div>

@@ -14,6 +14,30 @@
         align-items: center;
         gap: 12px;
         padding: 8px 12px;
+        transition: background-color 0.2s ease-in-out;
+        
+        // Add hover effects for the group
+        &:hover {
+            background-color: #ECF3FF;
+            
+            // Change icon color on hover
+            div:first-child {
+                color: #465FFF;
+                
+                // Target SVG paths if needed
+                svg {
+                    path {
+                        fill: #465FFF;
+                    }
+                }
+            }
+            
+            // Change text color on hover
+            .text {
+                color: #465FFF !important;
+            }
+        }
+        
         .text{
             position: relative;
             font-family: "Outfit", sans-serif;
@@ -22,13 +46,40 @@
             font-weight: 500;
             line-height: 142.857%;
             color: $color-gray-54;
+            transition: color 0.2s ease-in-out;
             
             &.logout{
                 color: $danger-color;
+                
+                &:hover {
+                    color: #465FFF;
+                }
             }
 
             &.active{
-                color:  $primary-color;
+                color: $primary-color;
+            }
+        }
+    }
+    
+    // Active state styling for the entire sidebar item
+    .active {
+        .sidebar-text {
+            background-color: #ECF3FF;
+            
+            div:first-child {
+                color: #465FFF;
+                
+                svg {
+                    path {
+                        fill: #465FFF;
+                        stroke: #465FFF;
+                    }
+                }
+            }
+            
+            .text {
+                color: #465FFF;
             }
         }
     }
@@ -51,5 +102,4 @@
     .layout-padding {
         padding: 0px 0px 0px 260px;
     }
-
 }
