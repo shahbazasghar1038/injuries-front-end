@@ -1,0 +1,26 @@
+
+@use './components/variables.scss' as *;
+@use './components/init.scss' as *;
+
+body {
+    background-color: #F9FAFB;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Outfit", sans-serif;
+}
+
+.container-auth{
+    max-width: 1440px;
+    padding-left: 9.4%;
+    padding-right: 9.4%;
+    margin: 0 auto;
+    @media screen and (max-width:1500px){
+        width: 100%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    @media screen and (min-width:1501px){
+        max-width: 1440px;
+    }
+}
