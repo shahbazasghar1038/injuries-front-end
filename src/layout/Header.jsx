@@ -15,7 +15,6 @@ const Header = () => {
 
               <Link className="inline-flex items-center gap-2.5 p-3 relative flex-[0_0_auto] bg-white rounded-[999px] border border-solid border-[#e4e7ec]">
                 <div className="absolute w-3 h-3 top-px left-[31px] bg-[#fd8439] rounded-md border-2 border-solid border-white" />
-
                 <div className="relative w-5 h-5">
                   <Icons.notificationIcon />
                 </div>
