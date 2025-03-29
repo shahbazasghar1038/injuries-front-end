@@ -2,7 +2,31 @@ import React from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import { Icons } from '../../components/svg/Icons'
 
+
 const Home = () => {
+
+
+  const contacts = [
+    { initials: "KF", name: "Kierra Franci", bgColor: "#fdf1f9", textColor: "#dc2590" },
+    { initials: "?", name: "+1 (603) 555-0123", bgColor: "white", textColor: "#344053" },
+    { initials: "CP", name: "Chance Philips", bgColor: "#fff5ed", textColor: "#ec4909" },
+    { initials: "TG", name: "Terry Geidt", bgColor: "#ebfdf2", textColor: "#039754" },
+    { initials: "KF", name: "Kierra Frances", bgColor: "#fdf1f9", textColor: "#dc2590" },
+    { initials: "TJ", name: "Terry Jones", bgColor: "#ebfdf2", textColor: "#039754" },
+    { initials: "MP", name: "Michael Philips", bgColor: "#fff5ed", textColor: "#ec4909" },
+  ];
+
+
+  const questions = [
+    "What is your first name?",
+    "What is your last name?",
+    "What is your phone number?",
+    "Do you have health insurance?",
+    "How old are you?",
+    "How bad is your car damaged?",
+    "What are your injuries?",
+  ];
+
   return (
     <AuthenticatedLayout>
       <div className='flex justify-between items-center gap-2'>
@@ -67,119 +91,29 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="h-[720px] gap-1 px-5 py-0 flex flex-col items-start relative self-stretch w-full">
-            <div className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg">
-              <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
-                <div className="relative w-12 h-12 bg-[#fdf1f9] rounded-[28px] overflow-hidden">
-                  <div className="absolute top-3.5 left-[17px] font-text-xs-semibold font-[number:var(--text-xs-semibold-font-weight)] text-[#dc2590] text-[length:var(--text-xs-semibold-font-size)] text-center tracking-[var(--text-xs-semibold-letter-spacing)] leading-[var(--text-xs-semibold-line-height)] whitespace-nowrap [font-style:var(--text-xs-semibold-font-style)]">
-                    KF
-                  </div>
-                </div>
+           
+            <div className="h-[720px] gap-1 px-5 py-0 flex flex-col items-start relative self-stretch w-full">
+                {contacts.map((contact, index) => (
+                  <div 
+                    key={index} 
+                    className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg transition-all duration-300 hover:bg-[var(--Card-Secondary-Background,#F2F4F7)] hover:rounded-[var(--Utilities-Border-Radius-LG,8px)] cursor-pointer"
+                  >
+                    <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
+                      <div className="relative w-12 h-12 rounded-[28px] overflow-hidden" style={{ backgroundColor: contact.bgColor }}>
+                        <div className="flex items-center justify-center h-full fs-12 fw-600  pink-color" style={{ color: contact.textColor }}>
+                          {contact.initials}
+                        </div>
+                      </div>
 
-                <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
-                  <div className="relative self-stretch mt-[-1.00px] font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] leading-[var(--text-sm-medium-line-height)] font-text-sm-medium tracking-[var(--text-sm-medium-letter-spacing)] [font-style:var(--text-sm-medium-font-style)]">
-                    Kierra Franci
+                      <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
+                        <div className="relative contact-name">
+                          {contact.name}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                ))}
             </div>
-
-            <div className="gap-[50px] p-3 flex-[0_0_auto] bg-[#f2f3f6] rounded-lg flex flex-col items-start relative self-stretch w-full">
-              <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
-                <div className="bg-white relative w-12 h-12 rounded-[28px] overflow-hidden">
-                  <div className="absolute top-3.5 left-[21px] font-[number:var(--text-xs-semibold-font-weight)] text-[#344053] text-[length:var(--text-xs-semibold-font-size)] text-center leading-[var(--text-xs-semibold-line-height)] whitespace-nowrap font-text-xs-semibold tracking-[var(--text-xs-semibold-letter-spacing)] [font-style:var(--text-xs-semibold-font-style)]">
-                    ?
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
-                  <div className="relative self-stretch mt-[-1.00px] font-[number:var(--text-sm-medium-font-weight)] text-[#1d2838] text-[length:var(--text-sm-medium-font-size)] leading-[var(--text-sm-medium-line-height)] font-text-sm-medium tracking-[var(--text-sm-medium-letter-spacing)] [font-style:var(--text-sm-medium-font-style)]">
-                    +1 (603) 555-0123
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg">
-              <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
-                <div className="bg-[#fff5ed] relative w-12 h-12 rounded-[28px] overflow-hidden">
-                  <div className="absolute top-3.5 left-4 font-[number:var(--text-xs-semibold-font-weight)] text-[#ec4909] text-[length:var(--text-xs-semibold-font-size)] text-center leading-[var(--text-xs-semibold-line-height)] whitespace-nowrap font-text-xs-semibold tracking-[var(--text-xs-semibold-letter-spacing)] [font-style:var(--text-xs-semibold-font-style)]">
-                    CP
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
-                  <div className="relative self-stretch mt-[-1.00px] font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] leading-[var(--text-sm-medium-line-height)] font-text-sm-medium tracking-[var(--text-sm-medium-letter-spacing)] [font-style:var(--text-sm-medium-font-style)]">
-                    Chance Philips
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg">
-              <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
-                <div className="bg-[#ebfdf2] relative w-12 h-12 rounded-[28px] overflow-hidden">
-                  <div className="absolute top-3.5 left-4 font-[number:var(--text-xs-semibold-font-weight)] text-[#039754] text-[length:var(--text-xs-semibold-font-size)] text-center leading-[var(--text-xs-semibold-line-height)] whitespace-nowrap font-text-xs-semibold tracking-[var(--text-xs-semibold-letter-spacing)] [font-style:var(--text-xs-semibold-font-style)]">
-                    TG
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
-                  <div className="relative self-stretch mt-[-1.00px] font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] leading-[var(--text-sm-medium-line-height)] font-text-sm-medium tracking-[var(--text-sm-medium-letter-spacing)] [font-style:var(--text-sm-medium-font-style)]">
-                    Terry Geidt
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg">
-              <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
-                <div className="relative w-12 h-12 bg-[#fdf1f9] rounded-[28px] overflow-hidden">
-                  <div className="absolute top-3.5 left-[17px] font-text-xs-semibold font-[number:var(--text-xs-semibold-font-weight)] text-[#dc2590] text-[length:var(--text-xs-semibold-font-size)] text-center tracking-[var(--text-xs-semibold-letter-spacing)] leading-[var(--text-xs-semibold-line-height)] whitespace-nowrap [font-style:var(--text-xs-semibold-font-style)]">
-                    KF
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
-                  <div className="relative self-stretch mt-[-1.00px] font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] leading-[var(--text-sm-medium-line-height)] font-text-sm-medium tracking-[var(--text-sm-medium-letter-spacing)] [font-style:var(--text-sm-medium-font-style)]">
-                    Kierra Frances
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg">
-              <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
-                <div className="bg-[#ebfdf2] relative w-12 h-12 rounded-[28px] overflow-hidden">
-                  <div className="absolute top-3.5 left-[18px] font-[number:var(--text-xs-semibold-font-weight)] text-[#039754] text-[length:var(--text-xs-semibold-font-size)] text-center leading-[var(--text-xs-semibold-line-height)] whitespace-nowrap font-text-xs-semibold tracking-[var(--text-xs-semibold-letter-spacing)] [font-style:var(--text-xs-semibold-font-style)]">
-                    TJ
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
-                  <div className="relative self-stretch mt-[-1.00px] font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] leading-[var(--text-sm-medium-line-height)] font-text-sm-medium tracking-[var(--text-sm-medium-letter-spacing)] [font-style:var(--text-sm-medium-font-style)]">
-                    Terry Jones
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg">
-              <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
-                <div className="bg-[#fff5ed] relative w-12 h-12 rounded-[28px] overflow-hidden">
-                  <div className="absolute top-3.5 left-[15px] font-[number:var(--text-xs-semibold-font-weight)] text-[#ec4909] text-[length:var(--text-xs-semibold-font-size)] text-center leading-[var(--text-xs-semibold-line-height)] whitespace-nowrap font-text-xs-semibold tracking-[var(--text-xs-semibold-letter-spacing)] [font-style:var(--text-xs-semibold-font-style)]">
-                    MP
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
-                  <div className="relative self-stretch mt-[-1.00px] font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] leading-[var(--text-sm-medium-line-height)] font-text-sm-medium tracking-[var(--text-sm-medium-letter-spacing)] [font-style:var(--text-sm-medium-font-style)]">
-                    Michael Philips
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="inline-flex flex-col items-start gap-6 relative flex-[0_0_auto]">
@@ -203,31 +137,21 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="inline-flex items-center gap-2 relative flex-[0_0_auto] mt-[-8.00px] mb-[-8.00px]">
-                <div className="inline-flex items-center justify-center gap-2 p-2 relative flex-[0_0_auto] rounded-lg overflow-hidden border border-solid border-[#e4e7ec] shadow-shadow-xs">
+              <div className="flex-center relative flex-[0_0_auto] mt-[-8.00px] mb-[-8.00px]">
+                <div className="flex-center relative flex-[0_0_auto] overflow-hidden bg--btn">
                   <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[18px] h-[18px] top-[3px] left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-20.svg"
-                    />
+                    <Icons.downloadIcon />
                   </div>
                 </div>
 
-                <div className="inline-flex items-center justify-center gap-2 p-2 relative flex-[0_0_auto] rounded-lg overflow-hidden border border-solid border-[#e4e7ec] shadow-shadow-xs">
+                <div className=" relative flex-[0_0_auto] overflow-hidden bg--btn">
                   <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-5 h-5 top-0.5 left-0.5"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-2.svg"
-                    />
+                    <Icons.DeleteIcon />
                   </div>
                 </div>
 
-                <button className="all-[unset] box-border inline-flex px-4 py-2.5 bg-[#465fff] rounded-lg shadow-shadow-xs items-center justify-center gap-2 relative flex-[0_0_auto] overflow-hidden border-0 border-none">
-                  <div className="relative w-fit font-medium text-white text-sm leading-5 whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
+                <button className="btn btn-primary btn-sm">
                     Accept
-                  </div>
                 </button>
               </div>
             </div>
@@ -266,304 +190,35 @@ const Home = () => {
               </div>
 
               <div className="flex-col items-start gap-3 flex relative self-stretch w-full flex-[0_0_auto]">
-                <div className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                      <Icons.ArrowRightIcon />
-                      <p className="relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#1d2838] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]">
-                        What is your first name?
-                      </p>
-                    </div>
-                  </div>
+                  {questions.map((question, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]"
+                    >
+                      <div className="flex items-center gap-4 relative flex-1 grow">
+                        <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
+                          <Icons.ArrowRightIcon />
+                          <p className="relative w-fit mt-[-1.00px] font-text-md-regular text-[#1d2838]">
+                            {question}
+                          </p>
+                        </div>
+                      </div>
 
-                  <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#fff9eb] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                      Pending
-                    </div>
-                  </div>
+                      <div className="inline-flex items-center justify-center px-2 py-0.5 bg-[#fff9eb] rounded-[999px]">
+                        <div className="font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap">
+                          Pending
+                        </div>
+                      </div>
 
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-[17px] top-[3px] left-[5px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-1.svg"
-                    />
-                  </div>
+                      <div className="relative w-6 h-6 cursor-pointer">
+                        <Icons.EditIcon />
+                      </div>
 
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-5 top-0.5 left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon.svg"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                      <Icons.ArrowRightIcon />
-                      <p className="relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#1d2838] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]">
-                        What is your last name?
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#fff9eb] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                      Pending
-                    </div>
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-[17px] top-[3px] left-[5px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-1.svg"
-                    />
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-5 top-0.5 left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon.svg"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                      <Icons.ArrowRightIcon />
-                      <p className="relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#1d2838] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]">
-                        What is your phone number?
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#fff9eb] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                      Pending
-                    </div>
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-[17px] top-[3px] left-[5px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-1.svg"
-                    />
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-5 top-0.5 left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon.svg"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                      {/* <ArrowRight1 className="!relative !w-6 !h-6" /> */}
-                      <Icons.ArrowRightIcon />
-                      <p className="relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#1d2838] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]">
-                        Do you have health Insurance?
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#fff9eb] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                      Pending
-                    </div>
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-[17px] top-[3px] left-[5px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-1.svg"
-                    />
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-5 top-0.5 left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon.svg"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                    <Icons.ArrowRightIcon />
-                      <div className="relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#1d2838] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]">
-                        How old are you?
+                      <div className="relative w-6 h-6 cursor-pointer">
+                      <Icons.DelBoxIcon />
                       </div>
                     </div>
-                  </div>
-
-                  <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#fff9eb] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                      Pending
-                    </div>
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-[17px] top-[3px] left-[5px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-1.svg"
-                    />
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-5 top-0.5 left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon.svg"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                    <Icons.ArrowRightIcon />
-                      <p className="relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#1d2838] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]">
-                        How bad is your car damaged ?
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#fff9eb] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                      Pending
-                    </div>
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-[17px] top-[3px] left-[5px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-1.svg"
-                    />
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-5 top-0.5 left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon.svg"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                    <Icons.ArrowRightIcon />
-                      <p className="relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#1d2838] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]">
-                        What are your injuries ?
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#fff9eb] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                      Pending
-                    </div>
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-[17px] top-[3px] left-[5px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-1.svg"
-                    />
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-5 top-0.5 left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon.svg"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                    <Icons.ArrowRightIcon />
-                      <p className="relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#1d2838] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]">
-                        Do you know that the person that hit your car has
-                        insurance?
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#fff9eb] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                      Pending
-                    </div>
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-[17px] top-[3px] left-[5px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-1.svg"
-                    />
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-5 top-0.5 left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon.svg"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                    <Icons.ArrowRightIcon />
-                      <div className="relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#1d2838] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]">
-                        Any Addition Information?
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-[#ebfdf2] inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-medium text-[#039754] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                      Completed
-                    </div>
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-[17px] top-[3px] left-[5px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-1.svg"
-                    />
-                  </div>
-
-                  <div className="relative w-6 h-6">
-                    <img
-                      className="absolute w-[17px] h-5 top-0.5 left-[3px]"
-                      alt="Icon"
-                      src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon.svg"
-                    />
-                  </div>
-                </div>
+                  ))}
               </div>
             </div>
           </div>
