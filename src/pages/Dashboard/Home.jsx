@@ -1,10 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import { Icons } from '../../components/svg/Icons'
 
+// At the top of your component, before the return statement
+const dropdownAnimation = `
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slideDown {
+    animation: slideDown 0.3s ease-out forwards;
+  }
+`;
 
 const Home = () => {
 
+  // Add state to track which dropdown is open
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  // Toggle dropdown function
+  const toggleDropdown = (index) => {
+    if (openDropdown === index) {
+      setOpenDropdown(null);
+    } else {
+      setOpenDropdown(index);
+    }
+  };
 
   const contacts = [
     { initials: "KF", name: "Kierra Franci", bgColor: "#fdf1f9", textColor: "#dc2590" },
@@ -27,8 +55,25 @@ const Home = () => {
     "What are your injuries?",
   ];
 
+  // Sample data for dropdown content
+  const dropdownContent = [
+    {
+      paragraph: "This field collects the client's first name for identification purposes.",
+      pdfUrl: "/documents/first-name-guidelines.pdf",
+      pdfName: "First Name Guidelines.pdf"
+    },
+    // Add similar content for other questions
+    {
+      paragraph: "This field collects the client's last name for identification purposes.",
+      pdfUrl: "/documents/last-name-guidelines.pdf",
+      pdfName: "Last Name Guidelines.pdf"
+    },
+    // ... add content for all questions
+  ];
+
   return (
     <AuthenticatedLayout>
+      <style>{dropdownAnimation}</style>
       <div className='flex justify-between items-center gap-2'>
         <p className='fs-20 fw-600 text-blue-39'>Pre-vetted Cases</p>
         <div className="flex items-center gap-1.5">
@@ -193,30 +238,63 @@ const Home = () => {
                   {questions.map((question, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-5 p-5 self-stretch w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]"
+                      className="flex flex-col items-start w-full"
                     >
-                      <div className="flex items-center gap-4 relative flex-1 grow">
-                        <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                          <Icons.ArrowRightIcon />
-                          <p className="relative w-fit mt-[-1.00px] font-text-md-regular text-[#1d2838]">
-                            {question}
-                          </p>
+                      <div
+                        className="p-5 w-full bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm relative flex-[0_0_auto]"
+                      >
+                        <div className='flex items-center gap-5  self-stretch'>
+                            <div className="flex items-center gap-4 relative flex-1 grow">
+                              <div 
+                                className="inline-flex items-center gap-3 relative flex-[0_0_auto] cursor-pointer"
+                                onClick={() => toggleDropdown(index)}
+                              >
+                                <Icons.ArrowRightIcon className="cursor-pointer" />
+                                <p className="relative w-fit mt-[-1.00px] font-text-md-regular text-[#1d2838] cursor-pointer">
+                                  {question}
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="inline-flex items-center justify-center px-2 py-0.5 bg-[#fff9eb] rounded-[999px]">
+                              <div className="font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap">
+                                Pending
+                              </div>
+                            </div>
+
+                            <div className="relative w-6 h-6 cursor-pointer">
+                              <Icons.EditIcon />
+                            </div>
+
+                            <div className="relative w-6 h-6 cursor-pointer">
+                              <Icons.DelBoxIcon />
+                            </div>
                         </div>
+                          {/* <div className="flex flex-col gap-2">
+                              <p className="text-gray-700 mb-3">{dropdownContent[index]?.paragraph || "Additional information about this question."}</p>
+                              <div className="flex items-center gap-2 bg-white p-2 rounded border border-gray-200">
+                                <Icons.downloadIcon className="w-5 h-5 text-blue-500" />
+                                <a href={dropdownContent[index]?.pdfUrl || "#"} className="text-blue-500 hover:underline" download>
+                                  {dropdownContent[index]?.pdfName || "Documentation.pdf"}
+                                </a>
+                              </div>
+                          </div> */}
                       </div>
-
-                      <div className="inline-flex items-center justify-center px-2 py-0.5 bg-[#fff9eb] rounded-[999px]">
-                        <div className="font-medium text-[#db6803] text-xs text-center leading-[18px] whitespace-nowrap">
-                          Pending
+                      
+                      {/* Dropdown content */}
+                      {openDropdown === index && (
+                        <div className="overflow-hidden transition-all duration-300 ease-in-out transform origin-top">
+                          <div className="mt-2 animate-slideDown">
+                            <p className="text-gray-700 mb-3">{dropdownContent[index]?.paragraph || "Additional information about this question."}</p>
+                            <div className="flex items-center gap-2 bg-white p-2 rounded border border-gray-200">
+                              <Icons.downloadIcon className="w-5 h-5 text-blue-500" />
+                              <a href={dropdownContent[index]?.pdfUrl || "#"} className="text-blue-500 hover:underline" download>
+                                {dropdownContent[index]?.pdfName || "Documentation.pdf"}
+                              </a>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-
-                      <div className="relative w-6 h-6 cursor-pointer">
-                        <Icons.EditIcon />
-                      </div>
-
-                      <div className="relative w-6 h-6 cursor-pointer">
-                      <Icons.DelBoxIcon />
-                      </div>
+                      )}
                     </div>
                   ))}
               </div>
