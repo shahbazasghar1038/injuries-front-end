@@ -34,15 +34,27 @@ const Home = () => {
     }
   };
 
+
+
   const contacts = [
-    { initials: "KF", name: "Kierra Franci", bgColor: "#fdf1f9", textColor: "#dc2590" },
-    { initials: "?", name: "+1 (603) 555-0123", bgColor: "white", textColor: "#344053" },
-    { initials: "CP", name: "Chance Philips", bgColor: "#fff5ed", textColor: "#ec4909" },
-    { initials: "TG", name: "Terry Geidt", bgColor: "#ebfdf2", textColor: "#039754" },
-    { initials: "KF", name: "Kierra Frances", bgColor: "#fdf1f9", textColor: "#dc2590" },
-    { initials: "TJ", name: "Terry Jones", bgColor: "#ebfdf2", textColor: "#039754" },
-    { initials: "MP", name: "Michael Philips", bgColor: "#fff5ed", textColor: "#ec4909" },
+    { initials: "KF", name: "Kierra Franci", phone: "+1 (603) 111-2233", bgColor: "#fdf1f9", textColor: "#dc2590" },
+    { initials: "?", name: "Unknown", phone: "+1 (603) 555-0123", bgColor: "white", textColor: "#344053" },
+    { initials: "CP", name: "Chance Philips", phone: "+1 (603) 222-3344", bgColor: "#fff5ed", textColor: "#ec4909" },
+    { initials: "TG", name: "Terry Geidt", phone: "+1 (603) 333-4455", bgColor: "#ebfdf2", textColor: "#039754" },
+    { initials: "KF", name: "Kierra Frances", phone: "+1 (603) 444-5566", bgColor: "#fdf1f9", textColor: "#dc2590" },
+    { initials: "TJ", name: "Terry Jones", phone: "+1 (603) 555-6677", bgColor: "#ebfdf2", textColor: "#039754" },
+    { initials: "MP", name: "Michael Philips", phone: "+1 (603) 666-7788", bgColor: "#fff5ed", textColor: "#ec4909" },
   ];
+  
+
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredContacts = contacts.filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      contact.phone.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
 
   const questions = [
@@ -113,6 +125,7 @@ const Home = () => {
       </div>
 
       <div className="content-wrapper-div">
+
         <div className="contact-list-main-div">
           <div className="flex flex-col w-[264px] items-start gap-1.5 relative flex-[0_0_auto]">
             <div className="flex flex-col items-start gap-1.5 relative self-stretch w-full flex-[0_0_auto]">
@@ -127,10 +140,13 @@ const Home = () => {
                   </div>
 
                   <input
-                    className="relative flex-1 mt-[-1.00px] font-normal text-[#98a1b2] text-sm leading-5 [font-family:'Outfit',Helvetica] tracking-[0] [background:transparent] border-[none] p-0"
-                    placeholder="Search..."
-                    type="text"
-                  />
+        className="relative flex-1 mt-[-1.00px] font-normal text-[#98a1b2] text-sm leading-5 [font-family:'Outfit',Helvetica] tracking-[0] [background:transparent] border-[none] p-0"
+        placeholder="Search..."
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+
                 </div>
               </div>
             </div>
@@ -138,26 +154,31 @@ const Home = () => {
 
            
             <div className="h-[720px] gap-1 px-5 py-0 flex flex-col items-start relative self-stretch w-full">
-                {contacts.map((contact, index) => (
-                  <div 
-                    key={index} 
-                    className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg transition-all duration-300 hover:bg-[var(--Card-Secondary-Background,#F2F4F7)] hover:rounded-[var(--Utilities-Border-Radius-LG,8px)] cursor-pointer"
-                  >
-                    <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
-                      <div className="relative w-12 h-12 rounded-[28px] overflow-hidden" style={{ backgroundColor: contact.bgColor }}>
-                        <div className="flex items-center justify-center h-full fs-12 fw-600  pink-color" style={{ color: contact.textColor }}>
-                          {contact.initials}
-                        </div>
-                      </div>
+            {filteredContacts.map((contact, index) => (
+        <div
+          key={index}
+          className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg transition-all duration-300 hover:bg-[var(--Card-Secondary-Background,#F2F4F7)] hover:rounded-[var(--Utilities-Border-Radius-LG,8px)] cursor-pointer"
+        >
+          <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
+            <div
+              className="relative w-12 h-12 rounded-[28px] overflow-hidden"
+              style={{ backgroundColor: contact.bgColor }}
+            >
+              <div
+                className="flex items-center justify-center h-full fs-12 fw-600 pink-color"
+                style={{ color: contact.textColor }}
+              >
+                {contact.initials}
+              </div>
+            </div>
 
-                      <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
-                        <div className="relative contact-name">
-                          {contact.name}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+            <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
+              <div className="relative contact-name">{contact.name}</div>
+              <div className="relative contact-phone text-gray-500">{contact.phone}</div>
+            </div>
+          </div>
+        </div>
+      ))}
             </div>
         </div>
 
