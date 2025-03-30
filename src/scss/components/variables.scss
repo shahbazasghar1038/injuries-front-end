@@ -10,7 +10,9 @@ $white-color: #FFF;
 $blue-39: #1D2939;
 $blue-85: #667085;
 $blue-light-B3: #98A2B3;
+$dark-light-EC: #E4E7EC;
 $danger-color: #F04438;
+$pink-color: #DD2590;
 
 // $secondary-color: #222;
 // $tertiary-color: #333;
@@ -32,6 +34,9 @@ $primary-hover-color: #465fff9e;
 }
 .text-blue-85{
   color: $blue-85;
+}
+.pink-color{
+  color: $pink-color;
 }
  
 .bg-gray-54{
