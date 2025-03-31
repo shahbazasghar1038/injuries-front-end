@@ -40,6 +40,44 @@ const Home = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
+  // Add this question data array
+  const questions = [
+    { 
+      id: 1, 
+      question: "What is your first name?", 
+      answer: "My first name is Emerson. 1 2 3 4", 
+      status: "Completed" 
+    },
+    { 
+      id: 2, 
+      question: "What is your last name?", 
+      answer: "My last name is Smith.", 
+      status: "Pending" 
+    },
+    { 
+      id: 3, 
+      question: "What is your phone number?", 
+      answer: "+1 (603) 555-0123", 
+      status: "Completed" 
+    },
+    { 
+      id: 4, 
+      question: "When did the incident occur?", 
+      answer: "Last Thursday around 3pm.", 
+      status: "Pending" 
+    }
+  ];
+
+  // Track which questions are open
+  const [openQuestions, setOpenQuestions] = useState({});
+
+  const toggleQuestion = (id) => {
+    setOpenQuestions(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -228,46 +266,60 @@ const Home = () => {
 
                
                 {/* ------------------------------------------------------------- */}
-                <div className="flex items-center gap-5 p-5 w-full relative bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm">
-                  <div className="flex items-center gap-4 relative flex-1 grow">
-                    <div className="items-start gap-3 flex-1 grow flex relative">
-                      <div className={`cursor-pointer ${isDropdownOpen ? 'hidden' : ''}`} onClick={toggleDropdown}>
-                        <Icons.QuestionIconRIght />
-                      </div>
-                      <div className={`cursor-pointer ${isDropdownOpen ? '' : 'hidden'}`} onClick={toggleDropdown}>
-                        <Icons.QuestionDropDown />
-                      </div>
-                      <div className="flex flex-col items-start justify-center gap-1 relative flex-1 grow">
-                        <div className="items-center gap-2.5 self-stretch w-full flex-[0_0_auto] flex relative">
-                          <p className="text-question cursor-pointer relative w-fit mt-[-1.00px] font-text-md-regular font-[number:var(--text-md-regular-font-weight)] text-[#344053] text-[length:var(--text-md-regular-font-size)] tracking-[var(--text-md-regular-letter-spacing)] leading-[var(--text-md-regular-line-height)] whitespace-nowrap [font-style:var(--text-md-regular-font-style)]"
-                             onClick={toggleDropdown}>
-                            What is your first name?
-                          </p>
+                {questions.map((item) => (
+                  <div key={item.id} className="flex items-center gap-5 p-5 w-full relative bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm">
+                    <div className="flex items-center gap-4 relative flex-1 grow">
+                      <div className="items-start gap-3 flex-1 grow flex relative">
+                        <div className={`cursor-pointer ${openQuestions[item.id] ? 'hidden' : ''}`} onClick={() => toggleQuestion(item.id)}>
+                          <Icons.QuestionIconRIght />
                         </div>
+                        <div className={`cursor-pointer ${openQuestions[item.id] ? '' : 'hidden'}`} onClick={() => toggleQuestion(item.id)}>
+                          <Icons.QuestionDropDown />
+                        </div>
+                        <div className="flex flex-col items-start justify-center gap-1 relative flex-1 grow">
+                          <div className="items-center gap-2.5 self-stretch w-full flex-[0_0_auto] flex relative">
+                            <p className="text-question cursor-pointer relative w-fit "
+                               onClick={() => toggleQuestion(item.id)}>
+                              {item.question}
+                            </p>
+                          </div>
 
-                        <div className={`dropdown-content items-center justify-center gap-2.5 self-stretch w-full flex-[0_0_auto] flex relative ${isDropdownOpen ? 'animate-slideDown' : 'hidden'}`}>
-                          <p className="relative flex-1 mt-[-1.00px] font-text-md-medium font-[number:var(--text-md-medium-font-weight)] text-[#344053] text-[length:var(--text-md-medium-font-size)] tracking-[var(--text-md-medium-letter-spacing)] leading-[var(--text-md-medium-line-height)] [font-style:var(--text-md-medium-font-style)]">
-                            My first name is Emerson. 1 2 3 4
-                          </p>
+                          <div className={`dropdown-content items-center justify-center gap-2.5 self-stretch w-full flex-[0_0_auto] flex relative ${openQuestions[item.id] ? 'animate-slideDown' : 'hidden'}`}>
+                            <p className="relative flex-1 text">
+                              {item.answer}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#ebfdf2] rounded-[999px]">
-                    <div className="relative w-fit mt-[-1.00px] font-text-xs-medium font-[number:var(--text-xs-medium-font-weight)] text-[#039754] text-[length:var(--text-xs-medium-font-size)] text-center tracking-[var(--text-xs-medium-letter-spacing)] leading-[var(--text-xs-medium-line-height)] whitespace-nowrap [font-style:var(--text-xs-medium-font-style)]">
-                      Completed
+                    <div 
+                      className={`inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] rounded-[999px] ${
+                        item.status === "Completed" 
+                          ? "bg-[#ECFDF3]" 
+                          : "bg-[#FFFAEB]"
+                      }`}
+                    >
+                      <div 
+                        className={`relative w-fit status-tag ${
+                          item.status === "Completed" 
+                            ? "text-[#039855]" 
+                            : "text-[#B54708]"
+                        }`}
+                      >
+                        {item.status}
+                      </div>
+                    </div>
+
+                    <div className="relative w-6 h-6 cursor-pointer">
+                      <Icons.EditIcon />
+                    </div>
+
+                    <div className="relative w-6 h-6 cursor-pointer">
+                      <Icons.DelBoxIcon />
                     </div>
                   </div>
-
-                  <div className="relative w-6 h-6 cursor-pointer">
-                    <Icons.EditIcon />
-                  </div>
-
-                  <div className="relative w-6 h-6 cursor-pointer">
-                    <Icons.DelBoxIcon />
-                  </div>
-                </div>
+                ))}
                 {/* ------------------------------------------------------------- */}
               </div>
             </div>
