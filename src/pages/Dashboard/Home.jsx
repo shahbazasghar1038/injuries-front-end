@@ -161,12 +161,12 @@ const Home = () => {
               </div>
             </div>
 
-
+{/* ---------------CONTACT LIST  -----------------------------  */}
             <div className="h-[720px] gap-1 px-5 py-0 flex flex-col items-start relative self-stretch w-full">
               {filteredContacts.map((contact, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg transition-all duration-300 hover:bg-[var(--Card-Secondary-Background,#F2F4F7)] hover:rounded-[var(--Utilities-Border-Radius-LG,8px)] cursor-pointer"
+                  className="contact-list-item flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg transition-all duration-300 hover:bg-[var(--Card-Secondary-Background,#F2F4F7)] hover:rounded-[var(--Utilities-Border-Radius-LG,8px)] cursor-pointer"
                 >
                   <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
                     <div
@@ -189,10 +189,12 @@ const Home = () => {
                 </div>
               ))}
             </div>
+{/* ---------------CONTACT LIST  -----------------------------  */}
+
           </div>
 
           <div className="inline-flex flex-col items-start gap-6 relative flex-[0_0_auto]">
-            <div className="flex flex-col w-[828px] h-[800px] items-center relative bg-white border-r [border-right-style:solid] border-b [border-bottom-style:solid] border-[#e4e7ec]">
+            <div className="contact-detail-div flex flex-col w-[828px] h-[800px] items-center relative bg-white border-r [border-right-style:solid] border-b [border-bottom-style:solid] border-[#e4e7ec]">
               <div className="flex h-16 items-center gap-4 px-6 py-5 relative self-stretch w-full border-b [border-bottom-style:solid] border-[#e4e7ec]">
                 <div className="relative w-5 h-5 bg-[#98a1b2] rounded-[10px]" />
 
