@@ -135,3 +135,13 @@ body {
     white-space: nowrap;
     font-style: normal;
 }
+
+.ongoing-card{
+    border: 1px solid $dark-light-EC;
+    border-radius: 16px;
+    padding: 24px;
+
+    &.inner-card{
+        border-top: 1px solid $dark-light-EC;
+    }
+}
