@@ -253,7 +253,7 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <div className=" relative flex-[0_0_auto] overflow-hidden bg--btn">
+                  <div className="case-delete-btn relative flex-[0_0_auto] overflow-hidden bg--btn">
                     <div className="relative w-6 h-6">
                       <Icons.DeleteIcon />
                     </div>
