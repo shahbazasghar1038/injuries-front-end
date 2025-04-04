@@ -41,6 +41,8 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
+  // Add state to track deleted questions
+  const [deletedQuestions, setDeletedQuestions] = useState({});
   
   // Instead of a static questions array, let's create a function that generates questions based on selected contact
   const getContactQuestions = (contact) => {
@@ -79,6 +81,11 @@ const Home = () => {
   
   // Get questions for the selected contact
   const currentQuestions = getContactQuestions(selectedContact);
+  
+  // Filter out deleted questions
+  const filteredQuestions = currentQuestions.filter(
+    question => !deletedQuestions[`${selectedContact.phone}-${question.id}`]
+  );
 
   const toggleQuestion = (id) => {
     setOpenQuestions(prev => ({
@@ -95,6 +102,14 @@ const Home = () => {
     setSelectedContact(contact);
     // Reset open questions when switching contacts
     setOpenQuestions({});
+  };
+
+  // Add this function to handle question deletion
+  const handleDeleteQuestion = (questionId) => {
+    setDeletedQuestions(prev => ({
+      ...prev,
+      [`${selectedContact.phone}-${questionId}`]: true
+    }));
   };
 
   const filteredContacts = contacts.filter(
@@ -285,7 +300,7 @@ const Home = () => {
 
                
                 {/* ------------------------------------------------------------- */}
-                {currentQuestions.map((item) => (
+                {filteredQuestions.map((item) => (
                   <div key={item.id} className="flex items-center gap-5 p-5 w-full relative bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm">
                     <div className="flex items-center gap-4 relative flex-1 grow">
                       <div className="items-start gap-3 flex-1 grow flex relative">
@@ -334,7 +349,10 @@ const Home = () => {
                       <Icons.EditIcon />
                     </div>
 
-                    <div className="relative w-6 h-6 cursor-pointer">
+                    <div 
+                      className="relative w-6 h-6 cursor-pointer"
+                      onClick={() => handleDeleteQuestion(item.id)}
+                    >
                       <Icons.DelBoxIcon />
                     </div>
                   </div>
