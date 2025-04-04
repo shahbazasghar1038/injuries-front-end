@@ -121,8 +121,8 @@ const Home = () => {
       <div className="content-card-bg flex flex-col items-start relative mt-6">
         <div className="cases-tabs-container">
           <div className="inline-flex items-start gap-1 p-0.5 relative flex-[0_0_auto] bg-[#f2f3f6] rounded-lg">
-            <div className="inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] bg-white rounded-md shadow-[0px_1px_2px_#1018280d]">
-              <div className="relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium text-[#0f1728] text-sm tracking-[0] leading-5 whitespace-nowrap">
+            <div className="cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] bg-white rounded-md shadow-[0px_1px_2px_#1018280d]">
+              <div className="cursor-pointer relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium text-[#0f1728] text-sm tracking-[0] leading-5 whitespace-nowrap">
                 New Cases
               </div>
 
@@ -133,7 +133,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] rounded-md">
+            <div className="cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] rounded-md">
               <div className="relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium text-[#667084] text-sm tracking-[0] leading-5 whitespace-nowrap">
                 Archived
               </div>
