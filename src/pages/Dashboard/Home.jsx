@@ -40,6 +40,7 @@ const Home = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedContact, setSelectedContact] = useState(contacts[0]);
   
   // Add this question data array
   const questions = [
@@ -81,6 +82,12 @@ const Home = () => {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleContactSelect = (contact) => {
+    setSelectedContact(contact);
+    // Reset open questions when switching contacts
+    setOpenQuestions({});
   };
 
   const filteredContacts = contacts.filter(
@@ -166,7 +173,10 @@ const Home = () => {
               {filteredContacts.map((contact, index) => (
                 <div
                   key={index}
-                  className="contact-list-item flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg transition-all duration-300 hover:bg-[var(--Card-Secondary-Background,#F2F4F7)] hover:rounded-[var(--Utilities-Border-Radius-LG,8px)] cursor-pointer"
+                  className={`contact-list-item flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg transition-all duration-300 hover:bg-[var(--Card-Secondary-Background,#F2F4F7)] hover:rounded-[var(--Utilities-Border-Radius-LG,8px)] cursor-pointer ${
+                    selectedContact && selectedContact.phone === contact.phone ? 'active bg-[var(--Card-Secondary-Background,#F2F4F7)] rounded-[var(--Utilities-Border-Radius-LG,8px)]' : ''
+                  }`}
+                  onClick={() => handleContactSelect(contact)}
                 >
                   <div className="flex items-center gap-3 relative self-stretch w-full flex-[0_0_auto]">
                     <div
@@ -200,12 +210,12 @@ const Home = () => {
 
                 <div className="flex flex-col items-start gap-1 relative flex-1 grow mt-[-11.00px] mb-[-11.00px]">
                   <div className="self-stretch font-medium text-[#1d2838] text-base leading-6 relative mt-[-1.00px] [font-family:'Outfit',Helvetica] tracking-[0]">
-                    +1 (603) 555-0123
+                    {selectedContact ? selectedContact.name : "Select a contact"}
                   </div>
 
                   <div className="flex items-start gap-1 relative self-stretch w-full flex-[0_0_auto]">
                     <div className="w-fit font-[number:var(--text-xs-regular-font-weight)] text-[#667084] text-[length:var(--text-xs-regular-font-size)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap relative mt-[-1.00px] font-text-xs-regular tracking-[var(--text-xs-regular-letter-spacing)] [font-style:var(--text-xs-regular-font-style)]">
-                      New Client
+                      {selectedContact ? selectedContact.phone : "No phone selected"}
                     </div>
 
                     <div className="w-fit font-[number:var(--text-xs-regular-font-weight)] text-[#465fff] text-[length:var(--text-xs-regular-font-size)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap relative mt-[-1.00px] font-text-xs-regular tracking-[var(--text-xs-regular-letter-spacing)] [font-style:var(--text-xs-regular-font-style)]">
