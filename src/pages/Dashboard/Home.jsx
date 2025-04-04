@@ -42,36 +42,43 @@ const Home = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
   
-  // Add this question data array
-  const questions = [
-    { 
-      id: 1, 
-      question: "What is your first name?", 
-      answer: "My first name is Emerson. 1 2 3 4", 
-      status: "Completed" 
-    },
-    { 
-      id: 2, 
-      question: "What is your last name?", 
-      answer: "My last name is Smith.", 
-      status: "Pending" 
-    },
-    { 
-      id: 3, 
-      question: "What is your phone number?", 
-      answer: "+1 (603) 555-0123", 
-      status: "Completed" 
-    },
-    { 
-      id: 4, 
-      question: "When did the incident occur?", 
-      answer: "Last Thursday around 3pm.", 
-      status: "Pending" 
-    }
-  ];
+  // Instead of a static questions array, let's create a function that generates questions based on selected contact
+  const getContactQuestions = (contact) => {
+    if (!contact) return [];
+    
+    return [
+      { 
+        id: 1, 
+        question: "What is your first name?", 
+        answer: contact.name.split(' ')[0], // Extract first name from full name
+        status: "Completed" 
+      },
+      { 
+        id: 2, 
+        question: "What is your last name?", 
+        answer: contact.name.split(' ').length > 1 ? contact.name.split(' ')[1] : "N/A", // Extract last name if available
+        status: "Pending" 
+      },
+      { 
+        id: 3, 
+        question: "What is your phone number?", 
+        answer: contact.phone, 
+        status: "Completed" 
+      },
+      { 
+        id: 4, 
+        question: "When did the incident occur?", 
+        answer: `Last ${contact.name.length > 5 ? "Thursday" : "Monday"} around ${contact.phone.slice(-1)}pm.`, // Just an example of dynamic content
+        status: "Pending" 
+      }
+    ];
+  };
 
   // Track which questions are open
   const [openQuestions, setOpenQuestions] = useState({});
+  
+  // Get questions for the selected contact
+  const currentQuestions = getContactQuestions(selectedContact);
 
   const toggleQuestion = (id) => {
     setOpenQuestions(prev => ({
@@ -278,7 +285,7 @@ const Home = () => {
 
                
                 {/* ------------------------------------------------------------- */}
-                {questions.map((item) => (
+                {currentQuestions.map((item) => (
                   <div key={item.id} className="flex items-center gap-5 p-5 w-full relative bg-white rounded-xl border border-solid border-[#e4e7ec] shadow-shadows-shadow-sm">
                     <div className="flex items-center gap-4 relative flex-1 grow">
                       <div className="items-start gap-3 flex-1 grow flex relative">
