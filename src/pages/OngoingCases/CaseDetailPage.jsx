@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Avatar, Card, Input } from "antd";
+import { Button, Avatar, Card, Input , Form, Menu, Dropdown } from "antd";
 import {
   UserOutlined,
   CheckCircleOutlined,
@@ -8,6 +8,9 @@ import {
   MoreOutlined,
   ExclamationCircleOutlined,
   SearchOutlined,
+  DeleteOutlined,
+  InboxOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
 import AuthenticatedLayout from "../../layout/AuthenticatedLayout";
 import Breadcrumb from "./partials/Breadcrumb";
@@ -16,6 +19,8 @@ import calender from "../../assets/icons/calender.png";
 import flash from "../../assets/icons/bolt.png";
 import { Icons } from "../../components/svg/Icons";
 import CustomModal from "../../components/ui/CustomModal";
+import TaskForm from "./partials/TaskForm";
+import SelectMedicalProvidersDemo from "./partials/SelectMedicalProvidersModal";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -189,6 +194,81 @@ const CaseDetailPage = () => {
     }));
   };
 
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false)
+
+  // Form instances
+  const [addForm] = Form.useForm()
+
+    // Modal handlers
+    const showAddModal = () => {
+        setIsAddModalVisible(true)
+      }
+    
+      const handleAddCancel = () => {
+        addForm.resetFields()
+        setIsAddModalVisible(false)
+      }
+    
+    
+      const handleAddSubmit = (values) => {
+        console.log("Add task values:", values)
+        addForm.resetFields()
+        setIsAddModalVisible(false)
+      }
+
+    //   provider menu 
+
+    const handleMenuClick = (e) => {
+      console.log('Clicked menu item:', e.key);
+  
+      switch (e.key) {
+        case 'edit':
+          // Handle edit logic
+          console.log('Edit profile selected');
+          break;
+        case 'archive':
+          // Handle archive logic
+          console.log('Move to archive selected');
+          break;
+        case 'delete':
+          // Handle delete logic
+          console.log('Delete selected');
+          break;
+        default:
+          break;
+      }
+    };
+    const menu = (
+        <Menu
+          className="rounded-2xl shadow-xl p-6 bg-white w-44 gap-8"
+          onClick={handleMenuClick}
+        >
+          <Menu.Item
+            key="edit"
+            className="flex items-center gap-5 text-[#344054] hover:bg-gray-100 rounded-lg px-3 py-2"
+          >
+            <EditOutlined className="text-xl text-[#667085]" />
+            <span className="font-semibold ml-3">Edit profile</span>
+          </Menu.Item>
+    
+          <Menu.Item
+            key="archive"
+            className="flex items-center gap-3 text-gray-800 hover:bg-gray-100 rounded-lg px-3 py-4"
+          >
+            <InboxOutlined className="text-xl" />
+            <span className="font-semibold ml-3">Move to archive</span>
+          </Menu.Item>
+    
+          <Menu.Item
+            key="delete"
+            className="flex items-center gap-3 text-red-500 hover:bg-red-100 rounded-lg px-3 py-2"
+          >
+            <DeleteOutlined className="text-xl text-[#D92D20]" />
+            <span className="font-semibold ml-3 text-[#D92D20]">Delete</span>
+          </Menu.Item>
+        </Menu>
+      );
+
   return (
     <AuthenticatedLayout>
       <div className="lg:flex gap-2 justify-between">
@@ -219,18 +299,17 @@ const CaseDetailPage = () => {
           </div>
 
           <div className="flex gap-2">
-            <Button
-              type="primary"
-              icon={<PlusOutlined />}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
-              Add Provider
-            </Button>
+          
+<SelectMedicalProvidersDemo/>
+
+
+<Dropdown overlay={menu} trigger={['click']}>
             <Button
               type="text"
               icon={<MoreOutlined />}
               className="flex items-center justify-center"
-            />
+              />
+              </Dropdown>
           </div>
         </div>
         {/* Action buttons */}
@@ -286,6 +365,7 @@ const CaseDetailPage = () => {
                 type="primary"
                 icon={<PlusOutlined />}
                 size="large"
+                onClick={showAddModal}  
                 className="bg-blue-600 hover:bg-blue-700"
               >
                 Add New Task
@@ -403,7 +483,15 @@ const CaseDetailPage = () => {
       </div>
       </div>
 
-      <CustomModal/>
+      <CustomModal
+        open={isAddModalVisible}
+        onClose={handleAddCancel}>
+        <TaskForm form={addForm} onCancel={handleAddCancel} onSubmit={handleAddSubmit} isEdit={false} />
+      </CustomModal>
+
+{/* add provider modal  */}
+
+
     </AuthenticatedLayout>
   );
 };
