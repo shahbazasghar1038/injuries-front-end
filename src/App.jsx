@@ -8,6 +8,8 @@ import OTPVerfication from './pages/AuthPages/OTPVerfication'
 import Home from './pages/Dashboard/Home'
 import OngoingCases from './pages/OngoingCases/Index'
 import CaseDetailPage from './pages/OngoingCases/CaseDetailPage';
+import 'react-phone-input-2/lib/style.css'
+
  
 const NotFound = () => <h1>404: Page Not Found</h1>;
 

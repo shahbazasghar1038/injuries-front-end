@@ -15,6 +15,7 @@ import oldman from "../../assets/icons/oldman.png";
 import calender from "../../assets/icons/calender.png";
 import flash from "../../assets/icons/bolt.png";
 import { Icons } from "../../components/svg/Icons";
+import CustomModal from "../../components/ui/CustomModal";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -401,6 +402,8 @@ const CaseDetailPage = () => {
         </div>
       </div>
       </div>
+
+      <CustomModal/>
     </AuthenticatedLayout>
   );
 };
