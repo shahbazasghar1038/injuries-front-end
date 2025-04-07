@@ -22,10 +22,6 @@ const dropdownAnimation = `
 
 const Home = () => {
 
-
-
-
-
   const contacts = [
     { initials: "KF", name: "Kierra Franci", phone: "+1 (603) 111-2233", bgColor: "#fdf1f9", textColor: "#dc2590" },
     { initials: "?", name: "Unknown", phone: "+1 (603) 555-0123", bgColor: "white", textColor: "#344053" },
@@ -36,8 +32,9 @@ const Home = () => {
     { initials: "MP", name: "Michael Philips", phone: "+1 (603) 666-7788", bgColor: "#fff5ed", textColor: "#ec4909" },
   ];
 
-
-
+  // Instead of using the contacts array directly, maintain it in state so we can modify it
+  const [contactsList, setContactsList] = useState(contacts);
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
@@ -112,14 +109,31 @@ const Home = () => {
     }));
   };
 
-  const filteredContacts = contacts.filter(
+  // Add function to delete a contact
+  const handleDeleteContact = () => {
+    if (!selectedContact) return;
+    
+    // Remove the contact from the list
+    const updatedContacts = contactsList.filter(contact => contact.phone !== selectedContact.phone);
+    setContactsList(updatedContacts);
+    
+    // Select the first contact from the remaining list or set to null if empty
+    if (updatedContacts.length > 0) {
+      setSelectedContact(updatedContacts[0]);
+    } else {
+      setSelectedContact(null);
+    }
+    
+    // Reset any open questions
+    setOpenQuestions({});
+  };
+  
+  // Filter contacts based on search query from the contactsList state (not the original contacts array)
+  const filteredContacts = contactsList.filter(
     (contact) =>
       contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       contact.phone.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-
-
 
   return (
     <AuthenticatedLayout>
@@ -136,8 +150,8 @@ const Home = () => {
       <div className="content-card-bg flex flex-col items-start relative mt-6">
         <div className="cases-tabs-container">
           <div className="inline-flex items-start gap-1 p-0.5 relative flex-[0_0_auto] bg-[#f2f3f6] rounded-lg">
-            <div className="cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] bg-white rounded-md shadow-[0px_1px_2px_#1018280d]">
-              <div className="cursor-pointer relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium text-[#0f1728] text-sm tracking-[0] leading-5 whitespace-nowrap">
+            <div className="new-cases-btn cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] bg-white rounded-md shadow-[0px_1px_2px_#1018280d]">
+              <div className=" relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium text-[#0f1728] text-sm tracking-[0] leading-5 whitespace-nowrap">
                 New Cases
               </div>
 
@@ -148,7 +162,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] rounded-md">
+            <div className="archived-btn cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] rounded-md">
               <div className="relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium text-[#667084] text-sm tracking-[0] leading-5 whitespace-nowrap">
                 Archived
               </div>
@@ -162,8 +176,8 @@ const Home = () => {
           </div>
         </div>
 
+        {/* -----------------CONTENT WRAPPER DIV------------------------------------------------------------ */}
         <div className="content-wrapper-div">
-
           <div className="contact-list-main-div">
             <div className="flex flex-col w-[264px] items-start gap-1.5 relative flex-[0_0_auto]">
               <div className="flex flex-col items-start gap-1.5 relative self-stretch w-full flex-[0_0_auto]">
@@ -190,7 +204,7 @@ const Home = () => {
               </div>
             </div>
 
-{/* ---------------CONTACT LIST  -----------------------------  */}
+            {/* ---------------CONTACT LIST  -----------------------------  */}
             <div className="h-[720px] gap-1 px-5 py-0 flex flex-col items-start relative self-stretch w-full">
               {filteredContacts.map((contact, index) => (
                 <div
@@ -221,7 +235,7 @@ const Home = () => {
                 </div>
               ))}
             </div>
-{/* ---------------CONTACT LIST  -----------------------------  */}
+            {/* ---------------CONTACT LIST  -----------------------------  */}
 
           </div>
 
@@ -232,37 +246,44 @@ const Home = () => {
 
                 <div className="flex flex-col items-start gap-1 relative flex-1 grow mt-[-11.00px] mb-[-11.00px]">
                   <div className="self-stretch font-medium text-[#1d2838] text-base leading-6 relative mt-[-1.00px] [font-family:'Outfit',Helvetica] tracking-[0]">
-                    {selectedContact ? selectedContact.name : "Select a contact"}
+                    {selectedContact ? selectedContact.name : "No contact selected"}
                   </div>
 
                   <div className="flex items-start gap-1 relative self-stretch w-full flex-[0_0_auto]">
                     <div className="w-fit font-[number:var(--text-xs-regular-font-weight)] text-[#667084] text-[length:var(--text-xs-regular-font-size)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap relative mt-[-1.00px] font-text-xs-regular tracking-[var(--text-xs-regular-letter-spacing)] [font-style:var(--text-xs-regular-font-style)]">
-                      {selectedContact ? selectedContact.phone : "No phone selected"}
+                      {selectedContact ? selectedContact.phone : ""}
                     </div>
 
-                    <div className="w-fit font-[number:var(--text-xs-regular-font-weight)] text-[#465fff] text-[length:var(--text-xs-regular-font-size)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap relative mt-[-1.00px] font-text-xs-regular tracking-[var(--text-xs-regular-letter-spacing)] [font-style:var(--text-xs-regular-font-style)]">
-                      Transferred Call
-                    </div>
+                    {selectedContact && (
+                      <div className="w-fit font-[number:var(--text-xs-regular-font-weight)] text-[#465fff] text-[length:var(--text-xs-regular-font-size)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap relative mt-[-1.00px] font-text-xs-regular tracking-[var(--text-xs-regular-letter-spacing)] [font-style:var(--text-xs-regular-font-style)]">
+                        Transferred Call
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                <div className="flex-center relative flex-[0_0_auto] mt-[-8.00px] mb-[-8.00px]">
-                  <div className="flex-center relative flex-[0_0_auto] overflow-hidden bg--btn">
-                    <div className="relative w-6 h-6">
-                      <Icons.downloadIcon />
+                {selectedContact && (
+                  <div className="flex-center relative flex-[0_0_auto] mt-[-8.00px] mb-[-8.00px]">
+                    <div className="flex-center relative flex-[0_0_auto] overflow-hidden bg--btn">
+                      <div className="relative w-6 h-6">
+                        <Icons.downloadIcon />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="case-delete-btn relative flex-[0_0_auto] overflow-hidden bg--btn">
-                    <div className="relative w-6 h-6">
-                      <Icons.DeleteIcon />
+                    <div 
+                      className="case-delete-btn relative flex-[0_0_auto] overflow-hidden bg--btn cursor-pointer"
+                      onClick={handleDeleteContact}
+                    >
+                      <div className="relative w-6 h-6">
+                        <Icons.DeleteIcon />
+                      </div>
                     </div>
-                  </div>
 
-                  <button className="btn btn-primary btn-sm">
-                    Accept
-                  </button>
-                </div>
+                    <button className="btn btn-primary btn-sm">
+                      Accept
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col h-[688px] items-start gap-6 p-6 relative self-stretch w-full bg-white overflow-hidden overflow-y-scroll">
@@ -362,6 +383,7 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {/* -----------------CONTENT WRAPPER DIV------------------------------------------------------------ */}
       </div>
       {/* ----------------------------------------------------------------------------- */}
     </AuthenticatedLayout>
