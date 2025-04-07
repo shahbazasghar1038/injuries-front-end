@@ -6,7 +6,7 @@ import { PlusOutlined, SearchOutlined } from "@ant-design/icons"
 
 const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
   // State for selected providers
-  const [selectedRowKeys, setSelectedRowKeys] = useState([""])
+  const [selectedRowKeys, setSelectedRowKeys] = useState([" "])
   const [searchText, setSearchText] = useState("")
 
   // Sample data for medical providers
@@ -203,6 +203,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
             value={searchText}
             onChange={handleSearch}
             className="w-full"
+            allowClear
           />
         </div>
         <Button
