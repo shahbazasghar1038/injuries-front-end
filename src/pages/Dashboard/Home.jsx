@@ -311,7 +311,8 @@ const Home = () => {
                       {selectedContact ? selectedContact.phone : ""}
                     </div>
 
-                    {selectedContact && (
+                    {/* Only show "Transferred Call" text in New Cases tab */}
+                    {selectedContact && activeTab === "new" && (
                       <div className="w-fit font-[number:var(--text-xs-regular-font-weight)] text-[#465fff] text-[length:var(--text-xs-regular-font-size)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap relative mt-[-1.00px] font-text-xs-regular tracking-[var(--text-xs-regular-letter-spacing)] [font-style:var(--text-xs-regular-font-style)]">
                         Transferred Call
                       </div>
