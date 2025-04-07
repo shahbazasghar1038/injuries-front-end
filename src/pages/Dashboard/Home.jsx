@@ -21,6 +21,8 @@ const dropdownAnimation = `
 `;
 
 const Home = () => {
+  // Add state for active tab
+  const [activeTab, setActiveTab] = useState("new");
 
   const contacts = [
     { initials: "KF", name: "Kierra Franci", phone: "+1 (603) 111-2233", bgColor: "#fdf1f9", textColor: "#dc2590" },
@@ -32,8 +34,16 @@ const Home = () => {
     { initials: "MP", name: "Michael Philips", phone: "+1 (603) 666-7788", bgColor: "#fff5ed", textColor: "#ec4909" },
   ];
 
+  // Create separate arrays for new and archived contacts
+  const archivedContacts = [
+    { initials: "AR", name: "Archived User", phone: "+1 (603) 999-8877", bgColor: "#f0f4ff", textColor: "#465fff" },
+    { initials: "OA", name: "Old Account", phone: "+1 (603) 888-7766", bgColor: "#ebfdf2", textColor: "#039754" },
+    { initials: "DA", name: "Deleted Account", phone: "+1 (603) 777-6655", bgColor: "#fdf1f9", textColor: "#dc2590" },
+  ];
+
   // Instead of using the contacts array directly, maintain it in state so we can modify it
   const [contactsList, setContactsList] = useState(contacts);
+  const [archivedList, setArchivedList] = useState(archivedContacts);
   
   const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -128,8 +138,11 @@ const Home = () => {
     setOpenQuestions({});
   };
   
-  // Filter contacts based on search query from the contactsList state (not the original contacts array)
-  const filteredContacts = contactsList.filter(
+  // Get the current list based on active tab
+  const currentList = activeTab === "new" ? contactsList : archivedList;
+  
+  // Filter contacts based on search query from the current list
+  const filteredContacts = currentList.filter(
     (contact) =>
       contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       contact.phone.toLowerCase().includes(searchQuery.toLowerCase())
@@ -150,26 +163,48 @@ const Home = () => {
       <div className="content-card-bg flex flex-col items-start relative mt-6">
         <div className="cases-tabs-container">
           <div className="inline-flex items-start gap-1 p-0.5 relative flex-[0_0_auto] bg-[#f2f3f6] rounded-lg">
-            <div className="new-cases-btn cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] bg-white rounded-md shadow-[0px_1px_2px_#1018280d]">
-              <div className=" relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium text-[#0f1728] text-sm tracking-[0] leading-5 whitespace-nowrap">
+            <div 
+              className={`new-cases-btn cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] ${
+                activeTab === "new" ? "bg-white rounded-md shadow-[0px_1px_2px_#1018280d]" : "bg-transparent"
+              }`}
+              onClick={() => setActiveTab("new")}
+            >
+              <div className={`relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium ${
+                activeTab === "new" ? "text-[#0f1728]" : "text-[#667084]"
+              } text-sm tracking-[0] leading-5 whitespace-nowrap`}>
                 New Cases
               </div>
 
-              <div className="mt-[-1.00px] mb-[-1.00px] bg-[#ecf3ff] inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] rounded-[999px]">
-                <div className="relative w-fit mt-[-1.00px] font-medium text-[#465fff] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                  23
+              <div className={`mt-[-1.00px] mb-[-1.00px] inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] rounded-[999px] ${
+                activeTab === "new" ? "bg-[#ECF3FF]" : "bg-white"
+              }`}>
+                <div className={`relative w-fit mt-[-1.00px] font-medium text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0] ${
+                  activeTab === "new" ? "text-[#465FFF]" : "text-[#667085]"
+                }`}>
+                  {contactsList.length}
                 </div>
               </div>
             </div>
 
-            <div className="archived-btn cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] rounded-md">
-              <div className="relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium text-[#667084] text-sm tracking-[0] leading-5 whitespace-nowrap">
+            <div 
+              className={`archived-btn cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] ${
+                activeTab === "archived" ? "bg-white rounded-md shadow-[0px_1px_2px_#1018280d]" : "bg-transparent"
+              }`}
+              onClick={() => setActiveTab("archived")}
+            >
+              <div className={`relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium ${
+                activeTab === "archived" ? "text-[#0f1728]" : "text-[#667084]"
+              } text-sm tracking-[0] leading-5 whitespace-nowrap`}>
                 Archived
               </div>
 
-              <div className="mt-[-1.00px] mb-[-1.00px] bg-white inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] rounded-[999px]">
-                <div className="relative w-fit mt-[-1.00px] font-medium text-[#667084] text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0]">
-                  3
+              <div className={`mt-[-1.00px] mb-[-1.00px] inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] rounded-[999px] ${
+                activeTab === "archived" ? "bg-[#ECF3FF]" : "bg-white"
+              }`}>
+                <div className={`relative w-fit mt-[-1.00px] font-medium text-xs text-center leading-[18px] whitespace-nowrap [font-family:'Outfit',Helvetica] tracking-[0] ${
+                  activeTab === "archived" ? "text-[#465FFF]" : "text-[#667085]"
+                }`}>
+                  {archivedList.length}
                 </div>
               </div>
             </div>
