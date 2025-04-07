@@ -18,6 +18,10 @@
     outline: none !important;
     height: 44px !important;
 
+    &.btn-sm{
+        height: 40px !important;
+    }
+
     &.btn-primary{
         border-radius: 8px;
         border: 1px solid $primary-color;
