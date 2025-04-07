@@ -173,7 +173,7 @@ const ProviderPage = () => {
     {
       title: (
         <div className="text-right">
-          Available on <br />
+          Available on  
           InjurySynx
         </div>
       ),
@@ -182,7 +182,7 @@ const ProviderPage = () => {
       width: 120,
       render: (text) => (
         <div className="text-right">
-          <span className="text-green-500">{text}</span>
+          <span className="text-green-500 px-2 py-0.5 rounded-full bg-green-100">{text}</span>
         </div>
       ),
     },
@@ -198,16 +198,16 @@ const ProviderPage = () => {
 
 
 
-    <div className="p-6 bg-white rounded-xl shadow-sm mt-6  ">
-      <div className="lg:flex xl:flex justify-between relative">
+    <div className=" bg-white rounded-xl shadow-sm mt-6  ">
+      <div className=" p-3 lg:p-6 lg:flex xl:flex justify-between items-center relative">
 
-        <div className="flex flex-col mb-6">
+        <div className="flex flex-col mb-">
           <h1 className="text-xl font-semibold text-gray-800">Medical Providers</h1>
         </div>
 
-        <div className="flex  md:flex-row justify-between gap-4 mb-8">
+        <div className="flex  md:flex-row justify-between gap-4 mb-">
         <Input
-        placeholder="Search cases..."
+        placeholder="Search providers..."
         prefix={<SearchOutlined className="text-gray-400" />}
         className="max-w-md mb-4"
         size="large"
@@ -216,7 +216,7 @@ const ProviderPage = () => {
             allowClear
       />
           <Button type="primary"  onClick={showModal} icon={<PlusOutlined />} size="large" className="bg-blue-600 hover:bg-blue-700">
-            Add New Case
+          Add medical provider
           </Button>
         </div>
       </div>
