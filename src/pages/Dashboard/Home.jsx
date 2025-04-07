@@ -47,6 +47,7 @@ const Home = () => {
   
   const [searchQuery, setSearchQuery] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // Initialize selectedContact based on activeTab
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
   // Add state to track deleted questions
   const [deletedQuestions, setDeletedQuestions] = useState({});
@@ -148,6 +149,27 @@ const Home = () => {
       contact.phone.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Update tab switching to set the first contact as active
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    
+    // Reset search query when switching tabs
+    setSearchQuery("");
+    
+    // Select first contact from the appropriate list
+    if (tab === "new" && contactsList.length > 0) {
+      setSelectedContact(contactsList[0]);
+    } else if (tab === "archived" && archivedList.length > 0) {
+      setSelectedContact(archivedList[0]);
+    } else {
+      // If the selected list is empty, set selectedContact to null
+      setSelectedContact(null);
+    }
+    
+    // Reset open questions when switching tabs
+    setOpenQuestions({});
+  };
+
   return (
     <AuthenticatedLayout>
       <style>{dropdownAnimation}</style>
@@ -167,7 +189,7 @@ const Home = () => {
               className={`new-cases-btn cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] ${
                 activeTab === "new" ? "bg-white rounded-md shadow-[0px_1px_2px_#1018280d]" : "bg-transparent"
               }`}
-              onClick={() => setActiveTab("new")}
+              onClick={() => handleTabChange("new")}
             >
               <div className={`relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium ${
                 activeTab === "new" ? "text-[#0f1728]" : "text-[#667084]"
@@ -190,7 +212,7 @@ const Home = () => {
               className={`archived-btn cursor-pointer inline-flex h-10 items-center justify-center gap-2 px-4 py-2.5 relative flex-[0_0_auto] ${
                 activeTab === "archived" ? "bg-white rounded-md shadow-[0px_1px_2px_#1018280d]" : "bg-transparent"
               }`}
-              onClick={() => setActiveTab("archived")}
+              onClick={() => handleTabChange("archived")}
             >
               <div className={`relative w-fit mt-[-1.00px] [font-family:'Outfit',Helvetica] font-medium ${
                 activeTab === "archived" ? "text-[#0f1728]" : "text-[#667084]"
@@ -297,7 +319,8 @@ const Home = () => {
                   </div>
                 </div>
 
-                {selectedContact && (
+                {/* Show action buttons for New Cases tab */}
+                {selectedContact && activeTab === "new" && (
                   <div className="flex-center relative flex-[0_0_auto] mt-[-8.00px] mb-[-8.00px]">
                     <div className="flex-center relative flex-[0_0_auto] overflow-hidden bg--btn">
                       <div className="relative w-6 h-6">
@@ -319,6 +342,27 @@ const Home = () => {
                     </button>
                   </div>
                 )}
+                
+                {/* Show vertical ellipsis menu for Archive tab */}
+                {selectedContact && activeTab === "archived" && (
+                  <div 
+                    className="flex-center relative flex-[0_0_auto] mt-[-8.00px] mb-[-8.00px] cursor-pointer"
+                    onClick={() => {
+                      // Handle the vertical menu click action
+                      console.log("Archive actions menu clicked");
+                      // Could show a popup menu with archive-specific actions
+                    }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path 
+                        fill-rule="evenodd" 
+                        clip-rule="evenodd" 
+                        d="M8.24512 5C8.24512 4.0335 9.02862 3.25 9.99512 3.25H10.0035C10.9699 3.25 11.7535 4.0335 11.7535 5C11.7535 5.9665 10.9699 6.75 10.0035 6.75H9.99512C9.02862 6.75 8.24512 5.9665 8.24512 5ZM8.24512 15C8.24512 14.0335 9.02862 13.25 9.99512 13.25H10.0035C10.9699 13.25 11.7535 14.0335 11.7535 15C11.7535 15.9665 10.9699 16.75 10.0035 16.75H9.99512C9.02862 16.75 8.24512 15.9665 8.24512 15ZM9.99512 8.25C9.02862 8.25 8.24512 9.0335 8.24512 10C8.24512 10.9665 9.02862 11.75 9.99512 11.75H10.0035C10.9699 11.75 11.7535 10.9665 11.7535 10C11.7535 9.0335 10.9699 8.25 10.0035 8.25H9.99512Z" 
+                        fill="#667085"
+                      />
+                    </svg>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col h-[688px] items-start gap-6 p-6 relative self-stretch w-full bg-white overflow-hidden overflow-y-scroll">
@@ -329,29 +373,32 @@ const Home = () => {
                     </div>
                   </div>
 
-                  <div className="flex w-24 items-center justify-between relative">
-                    <div className="inline-flex flex-col items-start gap-2.5 relative flex-[0_0_auto]">
-                      <div className="flex p-2.5 self-stretch w-full bg-white rounded-lg items-center justify-center gap-2 relative flex-[0_0_auto] overflow-hidden border-0 border-none">
+                  {/* Only show the Intake action icons in New Cases tab */}
+                  {activeTab === "new" && (
+                    <div className="flex w-24 items-center justify-between relative">
+                      <div className="inline-flex flex-col items-start gap-2.5 relative flex-[0_0_auto]">
+                        <div className="flex p-2.5 self-stretch w-full bg-white rounded-lg items-center justify-center gap-2 relative flex-[0_0_auto] overflow-hidden border-0 border-none">
+                          <div className="relative w-5 h-5">
+                            <img
+                              className="absolute w-[15px] h-[15px] top-[3px] left-[3px]"
+                              alt="Icon"
+                              src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-14.svg"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="inline-flex p-2.5 bg-[#ecf3ff] rounded-[999px] items-center justify-center gap-2 relative flex-[0_0_auto] overflow-hidden border-0 border-none">
                         <div className="relative w-5 h-5">
                           <img
-                            className="absolute w-[15px] h-[15px] top-[3px] left-[3px]"
+                            className="absolute w-3 h-3 top-1 left-1"
                             alt="Icon"
-                            src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-14.svg"
+                            src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-5.svg"
                           />
                         </div>
                       </div>
                     </div>
-
-                    <div className="inline-flex p-2.5 bg-[#ecf3ff] rounded-[999px] items-center justify-center gap-2 relative flex-[0_0_auto] overflow-hidden border-0 border-none">
-                      <div className="relative w-5 h-5">
-                        <img
-                          className="absolute w-3 h-3 top-1 left-1"
-                          alt="Icon"
-                          src="https://c.animaapp.com/m8ta5gibWvtvPM/img/icon-5.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
+                  )}
                 </div>
 
                
@@ -383,34 +430,42 @@ const Home = () => {
                       </div>
                     </div>
 
-                    <div 
-                      className={`inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] rounded-[999px] ${
-                        item.status === "Completed" 
-                          ? "bg-[#ECFDF3]" 
-                          : "bg-[#FFFAEB]"
-                      }`}
-                    >
+                    {/* Only show status badges in New Cases tab */}
+                    {activeTab === "new" && (
                       <div 
-                        className={`relative w-fit status-tag ${
+                        className={`inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] rounded-[999px] ${
                           item.status === "Completed" 
-                            ? "text-[#039855]" 
-                            : "text-[#B54708]"
+                            ? "bg-[#ECFDF3]" 
+                            : "bg-[#FFFAEB]"
                         }`}
                       >
-                        {item.status}
+                        <div 
+                          className={`relative w-fit status-tag ${
+                            item.status === "Completed" 
+                              ? "text-[#039855]" 
+                              : "text-[#B54708]"
+                          }`}
+                        >
+                          {item.status}
+                        </div>
                       </div>
-                    </div>
+                    )}
 
-                    <div className="relative w-6 h-6 cursor-pointer">
-                      <Icons.EditIcon />
-                    </div>
+                    {/* Only show edit and delete icons in New Cases tab */}
+                    {activeTab === "new" && (
+                      <>
+                        <div className="relative w-6 h-6 cursor-pointer">
+                          <Icons.EditIcon />
+                        </div>
 
-                    <div 
-                      className="relative w-6 h-6 cursor-pointer"
-                      onClick={() => handleDeleteQuestion(item.id)}
-                    >
-                      <Icons.DelBoxIcon />
-                    </div>
+                        <div 
+                          className="relative w-6 h-6 cursor-pointer"
+                          onClick={() => handleDeleteQuestion(item.id)}
+                        >
+                          <Icons.DelBoxIcon />
+                        </div>
+                      </>
+                    )}
                   </div>
                 ))}
                 {/* ------------------------------------------------------------- */}
