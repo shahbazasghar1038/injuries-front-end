@@ -176,6 +176,8 @@ body {
 
     .ant-modal-close{
         top: 18px;
-    inset-inline-end: 20px;
+        inset-inline-end: 20px;
+        border-radius: 24px !important;
+        background: #F2F4F7 !important;
     }
 }
