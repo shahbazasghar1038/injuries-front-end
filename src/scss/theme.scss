@@ -159,3 +159,18 @@ body {
 .ant-table-cell{
     padding: 12px 8px !important  ;
 }
+
+
+.action-modal{
+    .ant-modal-content{
+        border-radius: 24px;
+        background: #FFF;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        text-align: center;
+    }
+}
