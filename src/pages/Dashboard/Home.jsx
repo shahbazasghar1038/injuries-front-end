@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import { Icons } from '../../components/svg/Icons'
+import ActionModal from '../../components/ui/ActionModal'
 
 // At the top of your component, before the return statement
 const dropdownAnimation = `
@@ -120,10 +121,18 @@ const Home = () => {
     }));
   };
 
-  // Add function to delete a contact
+  // Add state for delete confirmation modal
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  
+  // Modify the handleDeleteContact function to show modal instead of deleting immediately
   const handleDeleteContact = () => {
     if (!selectedContact) return;
-    
+    // Show confirmation modal
+    setDeleteModalVisible(true);
+  };
+  
+  // Add function to handle actual deletion after confirmation
+  const confirmDeleteContact = () => {
     // Remove the contact from the list
     const updatedContacts = contactsList.filter(contact => contact.phone !== selectedContact.phone);
     setContactsList(updatedContacts);
@@ -137,6 +146,9 @@ const Home = () => {
     
     // Reset any open questions
     setOpenQuestions({});
+    
+    // Close the modal
+    setDeleteModalVisible(false);
   };
   
   // Get the current list based on active tab
@@ -477,6 +489,14 @@ const Home = () => {
         {/* -----------------CONTENT WRAPPER DIV------------------------------------------------------------ */}
       </div>
       {/* ----------------------------------------------------------------------------- */}
+      <ActionModal 
+        open={deleteModalVisible}
+        onCancel={() => setDeleteModalVisible(false)}
+        onConfirm={confirmDeleteContact}
+        title="Delete Case"
+        content={`Lorem ipsum dolor sit amet consectetur. Feugiat ipsum libero tempor felis
+risus nisi non. Quisque eu ut tempor curabitur.`}
+      />
     </AuthenticatedLayout>
   )
 }
