@@ -182,7 +182,7 @@ const ProviderPage = () => {
       width: 120,
       render: (text) => (
         <div className="text-right">
-          <span className="text-green-500 px-2 py-0.5 rounded-full bg-green-100">{text}</span>
+          <span className="text-green-600 font-semibold px-2 py-0.5 rounded-full bg-green-100">{text}</span>
         </div>
       ),
     },
