@@ -11,7 +11,7 @@ import CaseDetailPage from './pages/OngoingCases/CaseDetailPage';
 import 'react-phone-input-2/lib/style.css'
 import ProviderPage from './pages/Providers/ProviderPage';
 import UserProfile from './pages/Settings/Profile/UserProfile';
-
+import IntakeSetting from './pages/Settings/Profile/IntakeSetting';
  
 const NotFound = () => <h1>404: Page Not Found</h1>;
 
@@ -33,6 +33,7 @@ function App() {
         <Route path="/cases-detail" element={<CaseDetailPage />} />
         <Route path="/providers" element={<ProviderPage />} />
         <Route path="/settings" element={<UserProfile />} />
+        <Route path="/intake-setting" element={<IntakeSetting />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

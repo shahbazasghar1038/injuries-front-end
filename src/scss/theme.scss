@@ -30,7 +30,12 @@ body {
    background-color: $white-color;
    border-radius: 16px;
    border: 1px solid #E4E7EC;
+
+   &.p--24{
+    padding: 24px;
+   }
 }
+ 
 
 // items-center gap-[274px] p-6 border-b [border-bottom-style:solid] border-[#e4e7ec] flex relative self-stretch w-full flex-[0_0_auto]
 .cases-tabs-container{
@@ -179,5 +184,33 @@ body {
         inset-inline-end: 20px;
         border-radius: 24px !important;
         background: #F2F4F7 !important;
+    }
+}
+
+.setting-layout-div{
+    display: flex;
+    padding: 0px;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 12px 12px 0px 0px;
+    border-bottom: 1px solid #E4E7EC;
+}
+
+.setting-layout-link{
+    font-family: "Outfit", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 12px; 
+    color: #667085;/* 142.857% */
+
+
+    &.active{
+        border-radius: 0px;
+        border-bottom: 2px solid #465FFF;
+        color: #465FFF;
+
     }
 }
