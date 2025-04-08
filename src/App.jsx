@@ -31,6 +31,7 @@ function App() {
         <Route path="/ongoing-cases" element={<OngoingCases />} />
         <Route path="/cases-detail" element={<CaseDetailPage />} />
         <Route path="/providers" element={<ProviderPage />} />
+        <Route path="/settings" element={<ProviderPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
