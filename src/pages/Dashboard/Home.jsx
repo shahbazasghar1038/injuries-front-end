@@ -495,7 +495,8 @@ const Home = () => {
         onConfirm={confirmDeleteContact}
         title="Delete Case"
         content={`Lorem ipsum dolor sit amet consectetur. Feugiat ipsum libero tempor felis
-risus nisi non. Quisque eu ut tempor curabitur.`}
+                  risus nisi non. Quisque eu ut tempor curabitur.`}
+        showButtons={true}
       />
     </AuthenticatedLayout>
   )
