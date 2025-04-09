@@ -25,9 +25,10 @@ const PersonalInfo = () => {
                     </p>
                 </div>
                 <Form layout="vertical">
-                    <Row gutter={16}>
+                    <Row gutter={16} style={{ marginBottom: '16px' }}>
                         <Col span={12}>
                             <Form.Item 
+                                style={{ marginBottom: '16px' }} 
                                 label={<>Full name <span style={{ color: "red" }}>*</span></>}
                                 rules={[{ required: true, message: 'Please enter your full name' }]}
                             >
@@ -36,6 +37,7 @@ const PersonalInfo = () => {
                         </Col>
                         <Col span={12}>
                             <Form.Item 
+                                style={{ marginBottom: '16px' }} 
                                 label={<>Email <span style={{ color: "red" }}>*</span></>}
                                 rules={[{ required: true, message: 'Please enter your email' }]}
                             >
@@ -43,7 +45,7 @@ const PersonalInfo = () => {
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Row gutter={16}>
+                    <Row gutter={[16, 16]} style={{ marginBottom: '16px' }}>
                         <Col span={12}>
                             <Form.Item 
                                 label={<>Password <span style={{ color: "red" }}>*</span></>}
@@ -73,7 +75,7 @@ const PersonalInfo = () => {
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Row gutter={16}>
+                    <Row gutter={[16, 16]} style={{ marginBottom: '16px' }}>
                         <Col span={12}>
                               {/* Phone */}
           <Form.Item
@@ -86,7 +88,7 @@ const PersonalInfo = () => {
         enableSearch
         inputStyle={{
           width: '100%',
-          height: '40px',
+          height: '44px',
           borderRadius: '6px',
           border: '1px solid #d9d9d9',
           fontSize: '16px',
@@ -105,14 +107,14 @@ const PersonalInfo = () => {
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Row gutter={16}>
+                    <Row gutter={[16, 16]} style={{ marginBottom: '16px' }}>
                         <Col span={24}>
                             <Form.Item label="Street Address">
                                 <Input className='auth-input' placeholder="Enter your address" />
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Row gutter={16}>
+                    <Row gutter={[16, 16]} style={{ marginBottom: '16px' }}>
                         <Col span={12}>
                             <Form.Item label="Select State">
                                 <Input className='auth-input' placeholder="Select your state" />
@@ -124,7 +126,7 @@ const PersonalInfo = () => {
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Form.Item>
+                    <Form.Item style={{ paddingBottom: '16px' }}>
                         <Checkbox>
                             By creating an account means you agree to the{" "}
                             <a href="#">Terms and Conditions</a>, and our{" "}
@@ -136,11 +138,7 @@ const PersonalInfo = () => {
                             Continue
                         </Link>
                     </Form.Item>
-                    <Form.Item>
-                        <p style={{ textAlign: "center" }}>
-                            Already have an account? <Link to={'/sign-in'}>Sign In</Link>
-                        </p>
-                    </Form.Item>
+                    
                 </Form>
             </div>
         </AuthLayout>
