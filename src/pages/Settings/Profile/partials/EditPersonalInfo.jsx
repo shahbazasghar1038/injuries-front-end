@@ -56,7 +56,7 @@ const EditPersonalInfo = ({ open, onClose, onSave, initialData }) => {
           </Form.Item>
 
           <Form.Item name="bio" label="Bio" className="md:col-span-2">
-            <Input.TextArea rows={3} placeholder="Enter your bio" />
+            <Input placeholder="Enter your bio" />
           </Form.Item>
         </div>
 
