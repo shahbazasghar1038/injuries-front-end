@@ -18,7 +18,7 @@ const Sidebar = () => {
 
   // User options navigation items
   const userOptions = [
-    { path: '/settings', label: 'Settings', icon: <Icons.SettingsIcon /> },
+    { path: '/settings/profile', label: 'Settings', icon: <Icons.SettingsIcon /> },
     { path: '/logout', label: 'Logout', icon: <Icons.LogoutIcon />, className: 'logout' },
   ];
 

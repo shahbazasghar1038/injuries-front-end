@@ -7,12 +7,15 @@ const CaseCard = ({caseItem}) => {
   return (
     <div
     key={caseItem.id}
-    className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow relative"
+    className="border border-gray-200 rounded-xl p-2 hover:shadow-md transition-shadow relative"
   > 
 
+<div className='rounded-xl bg-[#F9FAFB] p-3 '>
     <div className="flex justify-between items-start mb-4">
       <h2 className="text-lg font-semibold text-gray-800">{caseItem.name}</h2>
-     <Link to={'/cases-detail'}> <ArrowRightOutlined className="text-gray-400" /></Link>
+
+     <Link to={'/cases-detail'} className='rounded-lg bg-[#fff] w-8 h-8 flex justify-center items-center'> <ArrowRightOutlined className="text-gray-400" /></Link>
+
     </div>
 
     <div className="space-y-2 text-sm">
@@ -36,6 +39,7 @@ const CaseCard = ({caseItem}) => {
         <span className={`px-2 py-0.5 rounded-md font-medium ${caseItem.statusColor}`}>{caseItem.status}</span>
       </div>
     </div>
+  </div>
   </div>
   )
 }
