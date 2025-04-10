@@ -228,7 +228,7 @@ export default function Payment() {
               </Form.Item>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
               <Form.Item
                 label="Card number"
                 name={`cardNumber-${card.id}`}
