@@ -13,7 +13,7 @@ const SettingsLayout = ({children}) => {
                 <Link to="/settings/profile" className={`setting-layout-link ${currentPath === "/settings/profile" ? "active" : ""}`}>Profile</Link>
                 <Link to="/settings/password" className={`setting-layout-link ${currentPath === "/settings/password" ? "active" : ""}`}>Password</Link>
                 <Link to="/settings/intake-setting" className={`setting-layout-link ${currentPath === "/settings/intake-setting" ? "active" : ""}`}>Intake Setting</Link>
-                <Link to="/settings" className={`setting-layout-link ${currentPath === "/settings/payment" ? "active" : ""}`}>Payment Method</Link>
+                <Link to="/settings/payment" className={`setting-layout-link ${currentPath === "/settings/payment" ? "active" : ""}`}>Payment Method</Link>
             </div>
         {children}
         </div>
