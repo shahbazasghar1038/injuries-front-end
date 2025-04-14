@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from '../../components/ui/Breadcrumb'
+import ActionModal from '../../components/ui/ActionModal'
 
 const Archieve = () => {
     // Add state to track which dropdown is open
     const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
+    // Add state for delete modal
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
 
     // Function to handle dropdown toggle
     const toggleDropdown = (index) => {
@@ -13,6 +17,21 @@ const Archieve = () => {
         } else {
             setOpenDropdownIndex(index);
         }
+    };
+
+    // Function to open delete modal
+    const handleDeleteClick = (item, index) => {
+        setItemToDelete(item);
+        setDeleteModalOpen(true);
+        setOpenDropdownIndex(null); // Close dropdown after clicking
+    };
+
+    // Function to handle deletion confirmation
+    const handleConfirmDelete = () => {
+        // Implement actual deletion logic here
+        console.log('Deleting item:', itemToDelete);
+        setDeleteModalOpen(false);
+        setItemToDelete(null);
     };
 
     const breadcrumbLinks = [
@@ -98,13 +117,18 @@ const Archieve = () => {
                                                 </span>
                                                 <p className='fs-14 fw-600'>Move to Ongoing cases</p>
                                             </div>
-                                            <div className="archive-dropdown-item p-2 cursor-pointer hover:bg-red-50 rounded-lg">
-                                                <span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99951 4.25C7.99951 3.00736 9.00687 2 10.2495 2H13.7495C14.9922 2 15.9995 3.00736 15.9995 4.25V5H18.75H19.999C20.4132 5 20.749 5.33579 20.749 5.75C20.749 6.16421 20.4132 6.5 19.999 6.5H19.5V9.89585V15.8958V19.75C19.5 20.9926 18.4926 22 17.25 22H6.75C5.50736 22 4.5 20.9926 4.5 19.75V15.8958V9.89585V6.5H4C3.58579 6.5 3.25 6.16421 3.25 5.75C3.25 5.33579 3.58579 5 4 5H5.25H7.99951V4.25ZM18 15.8958V9.89585V6.5H15.9995H15.2495H8.74951H7.99951H6V9.89585V15.8958V19.75C6 20.1642 6.33579 20.5 6.75 20.5H17.25C17.6642 20.5 18 20.1642 18 19.75V15.8958ZM9.49951 5H14.4995V4.25C14.4995 3.83579 14.1637 3.5 13.7495 3.5H10.2495C9.8353 3.5 9.49951 3.83579 9.49951 4.25V5ZM10 9.75C10.4142 9.75 10.75 10.0858 10.75 10.5V16.5C10.75 16.9142 10.4142 17.25 10 17.25C9.58579 17.25 9.25 16.9142 9.25 16.5V10.5C9.25 10.0858 9.58579 9.75 10 9.75ZM14.75 10.5C14.75 10.0858 14.4142 9.75 14 9.75C13.5858 9.75 13.25 10.0858 13.25 10.5V16.5C13.25 16.9142 13.5858 17.25 14 17.25C14.4142 17.25 14.75 16.9142 14.75 16.5V10.5Z" fill="#D92D20"/>
-                                                    </svg>
-                                                </span>
-                                                <p className='fs-14 fw-600 text-red-600'>Delete</p>
+                                            <div onClick={() => handleDeleteClick(item, index)} className="archive-dropdown-item p-2 cursor-pointer hover:bg-red-50 rounded-lg">
+                                                <div 
+                                                    className="flex items-center" 
+                                                    
+                                                >
+                                                    <span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99951 4.25C7.99951 3.00736 9.00687 2 10.2495 2H13.7495C14.9922 2 15.9995 3.00736 15.9995 4.25V5H18.75H19.999C20.4132 5 20.749 5.33579 20.749 5.75C20.749 6.16421 20.4132 6.5 19.999 6.5H19.5V9.89585V15.8958V19.75C19.5 20.9926 18.4926 22 17.25 22H6.75C5.50736 22 4.5 20.9926 4.5 19.75V15.8958V9.89585V6.5H4C3.58579 6.5 3.25 6.16421 3.25 5.75C3.25 5.33579 3.58579 5 4 5H5.25H7.99951V4.25ZM18 15.8958V9.89585V6.5H15.9995H15.2495H8.74951H7.99951H6V9.89585V15.8958V19.75C6 20.1642 6.33579 20.5 6.75 20.5H17.25C17.6642 20.5 18 20.1642 18 19.75V15.8958ZM9.49951 5H14.4995V4.25C14.4995 3.83579 14.1637 3.5 13.7495 3.5H10.2495C9.8353 3.5 9.49951 3.83579 9.49951 4.25V5ZM10 9.75C10.4142 9.75 10.75 10.0858 10.75 10.5V16.5C10.75 16.9142 10.4142 17.25 10 17.25C9.58579 17.25 9.25 16.9142 9.25 16.5V10.5C9.25 10.0858 9.58579 9.75 10 9.75ZM14.75 10.5C14.75 10.0858 14.4142 9.75 14 9.75C13.5858 9.75 13.25 10.0858 13.25 10.5V16.5C13.25 16.9142 13.5858 17.25 14 17.25C14.4142 17.25 14.75 16.9142 14.75 16.5V10.5Z" fill="#D92D20"/>
+                                                        </svg>
+                                                    </span>
+                                                    <p className='fs-14 fw-600 text-red-600'>Delete</p>
+                                                </div>
                                             </div>
                                         </div>
                                     )}
@@ -158,6 +182,15 @@ const Archieve = () => {
                 ))}
             </div>
         </div>
+
+        {/* Add delete confirmation modal */}
+        <ActionModal
+            open={deleteModalOpen}
+            onCancel={() => setDeleteModalOpen(false)}
+            onConfirm={handleConfirmDelete}
+            title="Delete Archive Item"
+            content={`Are you sure you want to delete this archived case for ${itemToDelete?.name}? This action cannot be undone.`}
+        />
 
       </AuthenticatedLayout>
    </>
