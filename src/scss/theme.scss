@@ -155,9 +155,9 @@ body {
     padding: 0px !important;
 }
 
-.ant-form-item{
-    margin-bottom:  0 !important;
-}
+// .ant-form-item{
+//     margin-bottom:  0 !important;
+// }
 .ant-form-item-required{
     font-weight: 500 !important;
 }
@@ -217,4 +217,16 @@ body {
 
 .ant-form-item-control-input-content{
     height: 44px !important;
+}
+
+.remember-checkbox{
+    .ant-form-item-control-input-content{
+        height: auto !important;
+    }
+}
+
+.personal-info-form{
+    :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
+        margin-bottom: 0px !important;
+    }
 }
