@@ -14,7 +14,7 @@ import UserProfile from './pages/Settings/Profile/UserProfile';
 import IntakeSetting from './pages/Settings/Preferences/IntakeSetting';
 import UpdatePassword from './pages/Settings/Password/UpdatePassword';
 import Payment from './pages/Settings/Payments/Payment';
- 
+import Archieve from './pages/Archive/Index';
 const NotFound = () => <h1>404: Page Not Found</h1>;
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
         <Route path="/settings/password" element={<UpdatePassword />} />
         <Route path="/settings/intake-setting" element={<IntakeSetting />} />
         <Route path="/settings/payment" element={<Payment />} />
+        <Route path="/archive" element={<Archieve />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
