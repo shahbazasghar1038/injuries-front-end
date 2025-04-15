@@ -99,6 +99,11 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@docuseal/react@^1.0.63":
+  version "1.0.63"
+  resolved "https://registry.npmjs.org/@docuseal/react/-/react-1.0.63.tgz"
+  integrity sha512-bgduC++M3bLTUIEq2pxRX49QO0iIDOg09rgg1sK4x7afBDOMFqOvuqcAT/shRzbJLXryV68rA9vxAf5ACX4qPg==
+
 "@emotion/hash@^0.8.0":
   version "0.8.0"
   resolved "https://registry.npmjs.org/@emotion/hash/-/hash-0.8.0.tgz"
