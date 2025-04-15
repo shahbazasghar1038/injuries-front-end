@@ -1,4 +1,3 @@
-
 @use './components/variables.scss' as *;
 @use './components/init.scss' as *;
 
@@ -155,9 +154,9 @@ body {
     padding: 0px !important;
 }
 
-.ant-form-item{
-    margin-bottom:  0 !important;
-}
+// .ant-form-item{
+//     margin-bottom:  0 !important;
+// }
 .ant-form-item-required{
     font-weight: 500 !important;
 }
@@ -217,4 +216,40 @@ body {
 
 .ant-form-item-control-input-content{
     height: 44px !important;
+}
+
+.remember-checkbox{
+    .ant-form-item-control-input-content{
+        height: auto !important;
+    }
+}
+
+.personal-info-form{
+    :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
+        margin-bottom: 0px !important;
+    }
+}
+
+.archive-dropdown{
+    position: absolute;
+    border-radius: 16px;
+    border: 1px solid #E4E7EC;
+    background: #FFF;
+    box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+    width: 232px;
+    padding: 12px;
+    gap: 10px;
+    z-index: 10;
+}
+
+.archive-dropdown-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.archive-dropdown-item:hover {
+    background-color: #f9fafb;
+    border-radius: 8px;
 }

@@ -24,7 +24,7 @@ const PersonalInfo = () => {
                         Enter your personal info to get started!
                     </p>
                 </div>
-                <Form layout="vertical">
+                <Form layout="vertical" className='personal-info-form'>
                     <Row gutter={16} style={{ marginBottom: '16px' }}>
                         <Col span={12}>
                             <Form.Item 

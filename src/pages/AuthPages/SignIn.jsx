@@ -32,7 +32,7 @@ const navigate = useNavigate()
           }}
           onFinish={onFinish}
         >
-          <Form.Item className="mb--20"
+          <Form.Item 
             name="username"
             rules={[
               {
@@ -40,11 +40,12 @@ const navigate = useNavigate()
                 message: 'Please input your Email!',
               },
             ]}
+            style={{ marginBottom:'20px !important' }}
           >
-          <label className='text-14 fw-500 text-blue-39 mb-2'>Email</label>
+          <label className='text-14 fw-500 text-blue-39 mb-2' style={{display: 'block', marginBottom: '8px'}}>Email</label>
             <Input className='auth-input' placeholder="Username" />
           </Form.Item>
-          <Form.Item className="mb--20"
+          <Form.Item 
             name="password"
             rules={[
               {
@@ -53,7 +54,7 @@ const navigate = useNavigate()
               },
             ]}
           >
-          <label className='text-14 fw-500 text-blue-39 mb-2'>Password</label>
+          <label className='text-14 fw-500 text-blue-39 mb-2' style={{display: 'block', marginBottom: '8px'}}>Password</label>
             <Input
               type={passwordVisible ? "text" : "password"}
               className='auth-input'
@@ -65,7 +66,7 @@ const navigate = useNavigate()
               }
             />
           </Form.Item>
-          <Form.Item className='mb--20'>
+          <Form.Item className='remember-checkbox' style={{ marginBottom: '0px' }}>
             <Flex justify="space-between" align="center">
               <Form.Item name="remember" valuePropName="checked" noStyle>
                 <Checkbox>Remember me</Checkbox>
