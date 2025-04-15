@@ -98,7 +98,7 @@ const Archieve = () => {
         </div>
 
         <div className="content-card-bg p--24">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-[20px_20px] p-6 relative">
+            <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_20px] lg:p-6 relative">
                 {archiveItems.map((item, index) => (
                     <div key={index} className="flex flex-col w-full items-center gap-2 p-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]">
                         <div className="flex flex-col items-start gap-3 p-4 relative flex-1 self-stretch w-full grow bg-[#f8f9fb] rounded-lg">

@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Icons } from '../components/svg/Icons'
 import logo from '../assets/logo.svg'
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
   const { pathname } = location;
   
@@ -39,13 +39,21 @@ const Sidebar = () => {
   );
   
   return (
-    <div className="sidebar flex flex-col w-[260px] h-[1024px] items-start gap-7 pt-8 pb-5 px-5 relative bg-white border-r [border-right-style:solid] border-[#e4e7ec]">
+    <div className={`sidebar flex flex-col md:w-[260px] w-[260px] h-[1024px] items-start gap-7 pt-8 pb-5 px-5 fixed lg:relative z-20 transition-all duration-300 bg-white border-r [border-right-style:solid] border-[#e4e7ec] ${isOpen ? 'left-0' : '-left-[260px] lg:left-0'}`}>
       <div className="flex flex-col items-start gap-7 relative self-stretch w-full flex-[0_0_auto]">
-        <img
-          className="relative w-[169px] h-[23.94px]"
-          alt="Frame"
-          src={logo}
-        />
+        <div className="flex justify-between items-center w-full">
+          <img
+            className="relative w-[169px] h-[23.94px]"
+            alt="Frame"
+            src={logo}
+          />
+          <button 
+            className="lg:hidden text-gray-500 hover:text-gray-700"
+            onClick={onClose}
+          >
+            <Icons.CloseIcon />
+          </button>
+        </div>
 
         <div className="flex flex-col items-start gap-6 relative self-stretch w-full flex-[0_0_auto]">
           <div className="flex flex-col items-start gap-4 relative self-stretch w-full flex-[0_0_auto]">

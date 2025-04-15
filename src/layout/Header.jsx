@@ -1,12 +1,21 @@
 import React from 'react'
 import { Icons } from '../components/svg/Icons'
 import { Link } from 'react-router-dom'
-const Header = () => {
+
+const Header = ({ toggleSidebar }) => {
   return (
     <div className='bg-white py-6 pr-6 border-b [border-bottom-style:solid] border-[#e4e7ec]'>
       <div className='content-wrapper'>
-        <div className="flex w-full items-center justify-end  relative ">
-          <div className="inline-flex items-center gap-4 relative flex-[0_0_auto]">
+        <div className="flex w-full items-center justify-between relative">
+          {/* Hamburger menu for mobile and tablet */}
+          <button 
+            className="lg:hidden pl-6 text-gray-700 hover:text-gray-900"
+            onClick={toggleSidebar}
+          >
+            <Icons.MenuIcon />
+          </button>
+          
+          <div className="inline-flex items-center gap-4 relative flex-[0_0_auto] profile-header ml-auto">
             <div className="inline-flex items-start gap-3 relative flex-[0_0_auto]">
               {/* <Link className="inline-flex items-center gap-2.5 p-3 relative flex-[0_0_auto] bg-white rounded-[999px] border border-solid border-[#e4e7ec]">
                 <Icons.MoonIcon />

@@ -119,5 +119,14 @@
 
     .layout-padding {
         padding: 0px 0px 0px 260px;
+        @include for_breakpoint(sm-mobile) {
+            padding: 0px 0px 0px 0px;
+        }
+        @include for_breakpoint(lg-mobile) {
+            padding: 0px 0px 0px 0px;
+        }
+        @include for_breakpoint(tablet) {
+            padding: 0px 0px 0px 0px;
+        }
     }
 }
