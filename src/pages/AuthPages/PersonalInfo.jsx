@@ -25,8 +25,8 @@ const PersonalInfo = () => {
                     </p>
                 </div>
                 <Form layout="vertical" className='personal-info-form'>
-                    <Row gutter={16} style={{ marginBottom: '16px' }}>
-                        <Col span={12}>
+                    <Row gutter={[16, 16]} style={{ marginBottom: '16px' }}>
+                        <Col xs={24} sm={12}>
                             <Form.Item 
                                 style={{ marginBottom: '16px' }} 
                                 label={<>Full name <span style={{ color: "red" }}>*</span></>}
@@ -35,7 +35,7 @@ const PersonalInfo = () => {
                                 <Input className='auth-input' placeholder="Enter your full name" />
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item 
                                 style={{ marginBottom: '16px' }} 
                                 label={<>Email <span style={{ color: "red" }}>*</span></>}
@@ -46,7 +46,7 @@ const PersonalInfo = () => {
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]} style={{ marginBottom: '16px' }}>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item 
                                 label={<>Password <span style={{ color: "red" }}>*</span></>}
                                 rules={[{ required: true, message: 'Please enter your password' }]}
@@ -60,7 +60,7 @@ const PersonalInfo = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item 
                                 label={<>Re-enter Password <span style={{ color: "red" }}>*</span></>}
                                 rules={[{ required: true, message: 'Please re-enter your password' }]}
@@ -76,32 +76,32 @@ const PersonalInfo = () => {
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]} style={{ marginBottom: '16px' }}>
-                        <Col span={12}>
-                              {/* Phone */}
-          <Form.Item
-      name="phone"
-      label="Phone"
-      rules={[{ required: true, message: "Please enter phone number" }]}
-    >
-      <PhoneInput
-        country={'us'}
-        enableSearch
-        inputStyle={{
-          width: '100%',
-          height: '44px',
-          borderRadius: '6px',
-          border: '1px solid #d9d9d9',
-          fontSize: '16px',
-        }}
-        buttonStyle={{
-          border: 'none',
-          background: 'transparent',
-        }}
-        containerStyle={{ width: '100%' }}
-      />
-    </Form.Item>
+                        <Col xs={24} sm={12}>
+                            {/* Phone */}
+                            <Form.Item
+                                name="phone"
+                                label="Phone"
+                                rules={[{ required: true, message: "Please enter phone number" }]}
+                            >
+                                <PhoneInput
+                                    country={'us'}
+                                    enableSearch
+                                    inputStyle={{
+                                        width: '100%',
+                                        height: '44px',
+                                        borderRadius: '6px',
+                                        border: '1px solid #d9d9d9',
+                                        fontSize: '16px',
+                                    }}
+                                    buttonStyle={{
+                                        border: 'none',
+                                        background: 'transparent',
+                                    }}
+                                    containerStyle={{ width: '100%' }}
+                                />
+                            </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item label="Specialty">
                                 <Input className='auth-input' placeholder="Select specialty" />
                             </Form.Item>
@@ -115,18 +115,18 @@ const PersonalInfo = () => {
                         </Col>
                     </Row>
                     <Row gutter={[16, 16]} style={{ marginBottom: '16px' }}>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item label="Select State">
                                 <Input className='auth-input' placeholder="Select your state" />
                             </Form.Item>
                         </Col>
-                        <Col span={12}>
+                        <Col xs={24} sm={12}>
                             <Form.Item label="Zip Code">
                                 <Input className='auth-input' placeholder="Enter your zip" />
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Form.Item style={{ paddingBottom: '16px' }}>
+                    <Form.Item style={{ paddingBottom: '16px' }} className='remember-checkbox'>
                         <Checkbox>
                             By creating an account means you agree to the{" "}
                             <a href="#">Terms and Conditions</a>, and our{" "}
