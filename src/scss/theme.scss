@@ -32,6 +32,15 @@ body {
 
    &.p--24{
     padding: 24px;
+    @include for_breakpoint(sm-mobile) {
+       padding: 16px;
+    }
+    @include for_breakpoint(lg-mobile) {
+       padding: 16px;
+    }
+    @include for_breakpoint(tablet) {
+       padding: 16px;
+    }
    }
 }
  
