@@ -2,12 +2,12 @@ import AuthPageLayout from './AuthPageLayout'
 import React, { useState } from 'react';
 import { LockOutlined, UserOutlined, EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Flex } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const SignIn = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-
+const navigate = useNavigate()
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
@@ -26,7 +26,9 @@ const SignIn = () => {
             remember: true,
           }}
           style={{
-            gap: 20,
+            display:'flex',
+            flexDirection:'column',
+            gap: '32px',
           }}
           onFinish={onFinish}
         >
@@ -73,7 +75,7 @@ const SignIn = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button block type="primary" htmlType="submit" className='btn btn-primary'>
+            <Button onClick={()=>navigate('/home ')} block type="primary" htmlType="submit" className='btn btn-primary'>
               Log in
             </Button>
             <p className='text-14 fw-400 $color-gray-54 mt-5'>Don't have an account?  <Link to={'/sign-up'} className="text-primary">Sign Up</Link></p>
