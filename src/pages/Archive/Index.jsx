@@ -104,7 +104,7 @@ const Archieve = () => {
                         <div className="flex flex-col items-start gap-3 p-4 relative flex-1 self-stretch w-full grow bg-[#f8f9fb] rounded-lg">
                             <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
                                 <div className="inline-flex flex-col items-start justify-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit mt-[-1.00px] font-text-xl-bold font-[number:var(--text-xl-bold-font-weight)] text-[#1d2838] text-[length:var(--text-xl-bold-font-size)] tracking-[var(--text-xl-bold-letter-spacing)] leading-[var(--text-xl-bold-line-height)] whitespace-nowrap [font-style:var(--text-xl-bold-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-20 fw-700 text-blue-39">
                                         {item.name}
                                     </div>
                                 </div>
@@ -154,37 +154,27 @@ const Archieve = () => {
 
                             <div className="inline-flex flex-col items-start gap-3 relative flex-[0_0_auto]">
                                 <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-regular font-[number:var(--text-sm-regular-font-weight)] text-[#667084] text-[length:var(--text-sm-regular-font-size)] tracking-[var(--text-sm-regular-letter-spacing)] leading-[var(--text-sm-regular-line-height)] whitespace-nowrap [font-style:var(--text-sm-regular-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-14 fw-400 text-blue-85">
                                         No of files:
                                     </div>
 
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-14 fw-500 text-gray-54">
                                         {item.filesCount}
                                     </div>
                                 </div>
 
                                 <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-regular font-[number:var(--text-sm-regular-font-weight)] text-[#667084] text-[length:var(--text-sm-regular-font-size)] tracking-[var(--text-sm-regular-letter-spacing)] leading-[var(--text-sm-regular-line-height)] whitespace-nowrap [font-style:var(--text-sm-regular-font-style)]">
-                                        Date of Accident:
-                                    </div>
-
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
-                                        {item.accidentDate}
-                                    </div>
-                                </div>
-
-                                <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-regular font-[number:var(--text-sm-regular-font-weight)] text-[#667084] text-[length:var(--text-sm-regular-font-size)] tracking-[var(--text-sm-regular-letter-spacing)] leading-[var(--text-sm-regular-line-height)] whitespace-nowrap [font-style:var(--text-sm-regular-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap  fs-14 fw-400 text-blue-85">
                                         Case Started on:
                                     </div>
 
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-14 fw-500 text-gray-54">
                                         {item.caseStartDate}
                                     </div>
                                 </div>
 
                                 <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit font-text-sm-regular font-[number:var(--text-sm-regular-font-weight)] text-[#667084] text-[length:var(--text-sm-regular-font-size)] tracking-[var(--text-sm-regular-letter-spacing)] leading-[var(--text-sm-regular-line-height)] whitespace-nowrap [font-style:var(--text-sm-regular-font-style)]">
+                                    <div className="relative w-fit  whitespace-nowrap fs-14 fw-400 text-blue-85">
                                         Case Status:
                                     </div>
 
