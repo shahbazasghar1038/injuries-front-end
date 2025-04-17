@@ -71,7 +71,7 @@ const OTPVerfication = () => {
                         </div>
 
                         <div style={{ marginBottom: 24 }}>
-                            <Text>Type your 6 digits security code</Text>
+                            <Text className="text-14 fw-500 text-blue-39">Type your 6 digits security code</Text>
                             <Row gutter={16} style={{ marginTop: 8 }}>
                                 {Array.from({ length: 6 }).map((_, index) => (
                                     <Col key={index} span={4}>
@@ -99,7 +99,7 @@ const OTPVerfication = () => {
                         </Button>
 
                         <p className="fs-14 fw-500 text-gray-54 text-center">
-                            Didn't get the code? <a href='#'>Resend</a>
+                            Didn't get the code? <a href='#' className="text-primary">Resend</a>
                         </p>
                     </Col>
                 </Row>

@@ -28,7 +28,7 @@ const navigate = useNavigate()
           style={{
             display:'flex',
             flexDirection:'column',
-            gap: '32px',
+            gap: '20px',
           }}
           onFinish={onFinish}
         >
@@ -67,11 +67,11 @@ const navigate = useNavigate()
             />
           </Form.Item>
           <Form.Item className='remember-checkbox' style={{ marginBottom: '0px' }}>
-            <Flex justify="space-between" align="center">
+            <Flex justify="space-between" align="center" className='custom-checkbox'>
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox className='text-14 fw-400 secondary-color-54'>Remember me</Checkbox>
               </Form.Item>
-              <Link to={'/forgot-password'}>Forgot password</Link>
+              <Link to={'/forgot-password'} className='text-14 fw-500 text-primary'>Forgot password</Link>
             </Flex>
           </Form.Item>
               
@@ -79,7 +79,7 @@ const navigate = useNavigate()
             <Button onClick={()=>navigate('/home ')} block type="primary" htmlType="submit" className='btn btn-primary'>
               Log in
             </Button>
-            <p className='text-14 fw-400 $color-gray-54 mt-5'>Don't have an account?  <Link to={'/sign-up'} className="text-primary">Sign Up</Link></p>
+            <p className='text-14 fw-400 $color-gray-54 text-center mt-5'>Don't have an account?  <Link to={'/sign-up'} className="text-primary">Sign Up</Link></p>
           </Form.Item>
         </Form>
 

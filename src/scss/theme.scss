@@ -262,3 +262,10 @@ body {
     background-color: #f9fafb;
     border-radius: 8px;
 }
+
+.custom-checkbox{
+    :where(.css-dev-only-do-not-override-1a3rktk).ant-checkbox-wrapper.ant-checkbox-wrapper-in-form-item input[type="checkbox"]{
+        width: 20px;
+        height: 20px;
+    }
+}
