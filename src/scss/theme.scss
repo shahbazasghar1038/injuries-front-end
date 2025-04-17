@@ -237,6 +237,9 @@ body {
     :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
         margin-bottom: 0px !important;
     }
+    label{
+        font-weight: 500 !important;
+    }
 }
 
 .archive-dropdown{
@@ -268,4 +271,26 @@ body {
         width: 20px;
         height: 20px;
     }
+}
+
+.otp-modal{
+    .ant-modal-content{
+        border-radius: 24px;
+    }
+}
+
+.phone-field-container{
+    ::before{
+        display: none !important;
+    }
+}
+.password-field-container{
+    margin-bottom: 20px !important;
+    label.ant-form-item-required::before{
+            display: none !important;
+    }
+    .ant-input-outlined{
+        height: 48px !important;
+    }
+   
 }
