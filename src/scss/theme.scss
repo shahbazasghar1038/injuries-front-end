@@ -294,3 +294,37 @@ body {
     }
    
 }
+
+// .payment-form-container{
+//     input{
+//         height: 48px !important;
+//     }
+//     .ant-select-selector{
+//         height: 48px !important;
+//     }
+// }
+
+.providers-table{
+    table{
+        thead{
+            tr{
+                th{
+                    font-weight: 500 !important;
+                    color: #667085 !important;
+                }
+            }
+        }
+        tbody{
+            tr{
+                th{
+                    font-weight: 500 !important;
+                    color: #667085 !important;
+                }
+                .ant-table-cell{
+                    font-weight: 500 !important;
+                    color: #1D2939 !important;
+                }
+            }
+        }
+    }
+}

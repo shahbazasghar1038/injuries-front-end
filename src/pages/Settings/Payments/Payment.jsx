@@ -134,11 +134,16 @@ export default function Payment() {
     return null
   }
 
+  // Add this function to render required asterisk
+  const renderRequiredMark = () => {
+    return <span className="text-red-500 ml-1">*</span>;
+  }
+
   return (
     <SettingsLayout>
     <div className="max-w-[512px] p-6 bg-white">
       {contextHolder}
-      <Form form={form} layout="vertical" onFinish={handleSubmit}>
+      <Form form={form} layout="vertical" onFinish={handleSubmit} requiredMark={false} >
         <h2 className="text-lg font-medium mb-4">Card details</h2>
 
         {cards.map((card, index) => (
@@ -146,8 +151,8 @@ export default function Payment() {
             {index > 0 && <div className="h-px bg-gray-200 my-6"></div>}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Form.Item
-                label="Name on card"
+              <Form.Item className="payment-form-container"
+                label={<>Name on card {renderRequiredMark()}</>}
                 name={`nameOnCard-${card.id}`}
                 initialValue={card.nameOnCard}
                 rules={[{ required: true, message: "Please enter the name on card" }]}
@@ -167,7 +172,7 @@ export default function Payment() {
                 />
               </Form.Item>
 
-              <Form.Item label="Expiry" required>
+              <Form.Item label={<>Expiry {renderRequiredMark()}</>} className="payment-form-container">
                 <div className="flex space-x-2">
                   <Form.Item
                     name={`expiryMonth-${card.id}`}
@@ -197,7 +202,7 @@ export default function Payment() {
                     </Select>
                   </Form.Item>
 
-                  <Form.Item
+                  <Form.Item className="payment-form-container"
                     name={`expiryYear-${card.id}`}
                     initialValue={card.expiryYear}
                     noStyle
@@ -230,7 +235,7 @@ export default function Payment() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
               <Form.Item
-                label="Card number"
+                label={<>Card number {renderRequiredMark()}</>}
                 name={`cardNumber-${card.id}`}
                 initialValue={card.cardNumber}
                 rules={[
@@ -273,7 +278,7 @@ export default function Payment() {
               </Form.Item>
 
               <Form.Item
-                label="CVV"
+                label={<>CVV {renderRequiredMark()}</>}
                 name={`cvv-${card.id}`}
                 initialValue={card.cvv}
                 rules={[
@@ -328,6 +333,7 @@ export default function Payment() {
               name={`email-${index}`}
               initialValue={email}
               className={index > 0 ? "mt-3" : ""}
+              label={index === 0 ? <><span>Email address</span> {renderRequiredMark()}</> : null}
               rules={[
                 { required: true, message: "Please enter an email address" },
                 { type: "email", message: "Please enter a valid email address" },
