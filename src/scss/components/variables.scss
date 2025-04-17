@@ -14,7 +14,7 @@ $dark-light-EC: #E4E7EC;
 $danger-color: #F04438;
 $pink-color: #DD2590;
 
-// $secondary-color: #222;
+$secondary-color-54: #344054;
 // $tertiary-color: #333;
 // $quaternary-color: #444;
 // $quinary-color: #555;
@@ -37,6 +37,9 @@ $primary-hover-color: #465fff9e;
 }
 .pink-color{
   color: $pink-color;
+}
+.secondary-color-54{
+  color: $secondary-color-54;
 }
  
 .bg-gray-54{

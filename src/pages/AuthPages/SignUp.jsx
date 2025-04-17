@@ -32,7 +32,7 @@ const SignUp = () => {
                             Select your role
                         </h4>
 
-                        <p className="fs-14text-blue-85 fw-400">
+                        <p className="fs-14 text-blue-85 fw-400">
                             How would you like to proceed?
                         </p>
                     </div>
