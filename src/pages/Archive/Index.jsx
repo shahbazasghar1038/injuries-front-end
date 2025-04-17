@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from '../../components/ui/Breadcrumb'
 import ActionModal from '../../components/ui/ActionModal'
+import { Avatar, Button, Input } from 'antd';
+import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
+
 
 const Archieve = () => {
     // Add state to track which dropdown is open
@@ -98,7 +101,23 @@ const Archieve = () => {
         </div>
 
         <div className="content-card-bg p--24">
-            <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_20px] lg:p-6 relative">
+            <div className="lg:flex xl:flex justify-between relative">
+                <div className="flex flex-col">
+                    <h1 className="text-xl font-semibold text-gray-800">Cases</h1>
+                </div>
+
+                <div className="flex  md:flex-row flex-col justify-between gap-4">
+                    <Input
+                    placeholder="Search cases..."
+                    prefix={<SearchOutlined className="text-gray-400" />}
+                    className=" md:max-w-md mb-4 order-1 md:order-0"
+                    size="large"
+                    onChange={(e) => setSearch(e.target.value)}
+                    />
+                 
+                </div>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_20px] relative">
                 {archiveItems.map((item, index) => (
                     <div key={index} className="flex flex-col w-full items-center gap-2 p-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]">
                         <div className="flex flex-col items-start gap-3 p-4 relative flex-1 self-stretch w-full grow bg-[#f8f9fb] rounded-lg">
