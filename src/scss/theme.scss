@@ -239,6 +239,7 @@ body {
     }
     label{
         font-weight: 500 !important;
+        color: #344054 !important;
     }
 }
 
@@ -321,8 +322,13 @@ body {
                     color: #667085 !important;
                 }
                 .ant-table-cell{
-                    font-weight: 500 !important;
-                    color: #1D2939 !important;
+                    font-weight: 400 !important;
+                    color: #667085 !important;
+
+                    &:first-child{
+                        font-weight: 500 !important;
+                        color: #1D2939 !important;
+                    }
                 }
             }
         }

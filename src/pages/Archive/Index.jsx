@@ -101,7 +101,7 @@ const Archieve = () => {
         </div>
 
         <div className="content-card-bg p--24">
-            <div className="lg:flex xl:flex justify-between relative">
+            <div className="lg:flex xl:flex justify-between items-center border-b border-solid border-[#e4e7ec] pb-2.5 mb-6 relative">
                 <div className="flex flex-col">
                     <h1 className="text-xl font-semibold text-gray-800">Cases</h1>
                 </div>
@@ -110,7 +110,7 @@ const Archieve = () => {
                     <Input
                     placeholder="Search cases..."
                     prefix={<SearchOutlined className="text-gray-400" />}
-                    className=" md:max-w-md mb-4 order-1 md:order-0"
+                    className=" md:max-w-xl w-full order-1 md:order-0 h-12"
                     size="large"
                     onChange={(e) => setSearch(e.target.value)}
                     />
@@ -198,7 +198,7 @@ const Archieve = () => {
                                     </div>
 
                                     <div className="inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] bg-[#98a1b2] rounded-[999px]">
-                                        <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-white text-[length:var(--text-sm-medium-font-size)] text-center tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                                        <div className="relative w-fit mt-[-1.00px]  text-white  text-center   whitespace-nowrap fs-14 fw-500">
                                             {item.status}
                                         </div>
                                     </div>
