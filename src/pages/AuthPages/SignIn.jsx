@@ -7,39 +7,36 @@ import {
   EyeInvisibleOutlined,
   EyeOutlined,
 } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Flex } from "antd";
+import { Button, Checkbox, Form, Input, Flex, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/auth";
-// To handle loading state
 
 const SignIn = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const handleLogin = async (credentials) => {
+    try {
+      const response = await loginUser(credentials);
+      if (response.token) {
+        return response;
+      }
+      throw new Error('Login failed');
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const onFinish = async (values) => {
     setLoading(true);
-    const { username, password } = values;
-  };
-  const onSubmit = async () => {
-    setLoading(true);
-    const payload = {
-      email: "muhammadshahbaz1038@gmail.com",
-      password: "password123",
-    };
-
     try {
-      console.log("Logging in with payload:", payload);
-
-      const response = await loginUser(payload);
-      console.log("Login successful:", response);
-      // Check if the response contains a token or user data
-      if (response.token) {
-        alert("Login successful!");
-        navigate("/home ");
-      }
+      const response = await handleLogin(values);
+      messageApi.success('Login successful!');
+      navigate('/home');
     } catch (error) {
-      console.error("Login failed:", error);
-      // Optionally show an error message to the user
+      messageApi.error(error.message || 'Login failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -47,13 +44,13 @@ const SignIn = () => {
 
   return (
     <AuthPageLayout>
+      {contextHolder}
       <div className="form-bg">
         <h4 className="text-blue-39 mb-3">Sign In</h4>
         <p className="text-blue-85 mb-8">
           Enter your email and password to sign in!
         </p>
 
-        {/* --------FORM------- */}
         <Form
           name="login"
           initialValues={{
@@ -67,12 +64,16 @@ const SignIn = () => {
           onFinish={onFinish}
         >
           <Form.Item
-            name="username"
+            name="email"
             rules={[
               {
                 required: true,
                 message: "Please input your Email!",
               },
+              {
+                type: 'email',
+                message: 'Please enter a valid email!',
+              }
             ]}
             style={{ marginBottom: "20px !important" }}
           >
@@ -82,8 +83,9 @@ const SignIn = () => {
             >
               Email
             </label>
-            <Input className="auth-input" placeholder="Username" />
+            <Input className="auth-input" placeholder="Email" />
           </Form.Item>
+
           <Form.Item
             name="password"
             rules={[
@@ -113,6 +115,7 @@ const SignIn = () => {
               }
             />
           </Form.Item>
+
           <Form.Item
             className="remember-checkbox"
             style={{ marginBottom: "0px" }}
@@ -127,19 +130,19 @@ const SignIn = () => {
               
           <Form.Item>
             <Button
-              onClick={() => onSubmit()}
               block
               type="primary"
               htmlType="submit"
               className="btn btn-primary"
+              loading={loading}
             >
               Log in
             </Button>
-            <p className='text-14 fw-400 $color-gray-54 text-center mt-5'>Don't have an account?  <Link to={'/sign-up'} className="text-primary">Sign Up</Link></p>
+            <p className='text-14 fw-400 $color-gray-54 text-center mt-5'>
+              Don't have an account? <Link to={'/sign-up'} className="text-primary">Sign Up</Link>
+            </p>
           </Form.Item>
         </Form>
-
-        {/* --------FORM------- */}
       </div>
     </AuthPageLayout>
   );
