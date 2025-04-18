@@ -78,9 +78,9 @@ const PersonalInfo = () => {
                     <Row gutter={[16, 16]} style={{ marginBottom: '16px' }}>
                         <Col xs={24} sm={12}>
                             {/* Phone */}
-                            <Form.Item
+                            <Form.Item className='phone-field-container'
                                 name="phone"
-                                label="Phone"
+                                label={<>Phone <span style={{ color: "red" }}>*</span></>}
                                 rules={[{ required: true, message: "Please enter phone number" }]}
                             >
                                 <PhoneInput

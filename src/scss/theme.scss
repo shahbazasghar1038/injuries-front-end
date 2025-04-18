@@ -237,6 +237,10 @@ body {
     :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
         margin-bottom: 0px !important;
     }
+    label{
+        font-weight: 500 !important;
+        color: #344054 !important;
+    }
 }
 
 .archive-dropdown{
@@ -267,5 +271,66 @@ body {
     :where(.css-dev-only-do-not-override-1a3rktk).ant-checkbox-wrapper.ant-checkbox-wrapper-in-form-item input[type="checkbox"]{
         width: 20px;
         height: 20px;
+    }
+}
+
+.otp-modal{
+    .ant-modal-content{
+        border-radius: 24px;
+    }
+}
+
+.phone-field-container{
+    ::before{
+        display: none !important;
+    }
+}
+.password-field-container{
+    margin-bottom: 20px !important;
+    label.ant-form-item-required::before{
+            display: none !important;
+    }
+    .ant-input-outlined{
+        height: 48px !important;
+    }
+   
+}
+
+// .payment-form-container{
+//     input{
+//         height: 48px !important;
+//     }
+//     .ant-select-selector{
+//         height: 48px !important;
+//     }
+// }
+
+.providers-table{
+    table{
+        thead{
+            tr{
+                th{
+                    font-weight: 500 !important;
+                    color: #667085 !important;
+                }
+            }
+        }
+        tbody{
+            tr{
+                th{
+                    font-weight: 500 !important;
+                    color: #667085 !important;
+                }
+                .ant-table-cell{
+                    font-weight: 400 !important;
+                    color: #667085 !important;
+
+                    &:first-child{
+                        font-weight: 500 !important;
+                        color: #1D2939 !important;
+                    }
+                }
+            }
+        }
     }
 }

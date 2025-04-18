@@ -59,7 +59,7 @@ const SignIn = () => {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: "32px",
+            gap: "20px",
           }}
           onFinish={onFinish}
         >
@@ -124,7 +124,7 @@ const SignIn = () => {
               <Form.Item name="remember" valuePropName="checked" noStyle>
                 <Checkbox className='text-14 fw-400 secondary-color-54'>Remember me</Checkbox>
               </Form.Item>
-              <Link to={"/forgot-password"}>Forgot password</Link>
+              <Link to={"/forgot-password"} className="text-14 fw-400 text-primary">Forgot password</Link>
             </Flex>
           </Form.Item>
               

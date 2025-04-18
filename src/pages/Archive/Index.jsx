@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from '../../components/ui/Breadcrumb'
 import ActionModal from '../../components/ui/ActionModal'
+import { Avatar, Button, Input } from 'antd';
+import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
+
 
 const Archieve = () => {
     // Add state to track which dropdown is open
@@ -98,13 +101,29 @@ const Archieve = () => {
         </div>
 
         <div className="content-card-bg p--24">
-            <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_20px] lg:p-6 relative">
+            <div className="lg:flex xl:flex justify-between items-center border-b border-solid border-[#e4e7ec] pb-2.5 mb-6 relative">
+                <div className="flex flex-col">
+                    <h1 className="text-xl font-semibold text-gray-800">Cases</h1>
+                </div>
+
+                <div className="flex  md:flex-row flex-col justify-between gap-4">
+                    <Input
+                    placeholder="Search cases..."
+                    prefix={<SearchOutlined className="text-gray-400" />}
+                    className=" md:max-w-xl w-full order-1 md:order-0 h-12"
+                    size="large"
+                    onChange={(e) => setSearch(e.target.value)}
+                    />
+                 
+                </div>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_20px] relative">
                 {archiveItems.map((item, index) => (
                     <div key={index} className="flex flex-col w-full items-center gap-2 p-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]">
                         <div className="flex flex-col items-start gap-3 p-4 relative flex-1 self-stretch w-full grow bg-[#f8f9fb] rounded-lg">
                             <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
                                 <div className="inline-flex flex-col items-start justify-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit mt-[-1.00px] font-text-xl-bold font-[number:var(--text-xl-bold-font-weight)] text-[#1d2838] text-[length:var(--text-xl-bold-font-size)] tracking-[var(--text-xl-bold-letter-spacing)] leading-[var(--text-xl-bold-line-height)] whitespace-nowrap [font-style:var(--text-xl-bold-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-20 fw-700 text-blue-39">
                                         {item.name}
                                     </div>
                                 </div>
@@ -154,42 +173,32 @@ const Archieve = () => {
 
                             <div className="inline-flex flex-col items-start gap-3 relative flex-[0_0_auto]">
                                 <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-regular font-[number:var(--text-sm-regular-font-weight)] text-[#667084] text-[length:var(--text-sm-regular-font-size)] tracking-[var(--text-sm-regular-letter-spacing)] leading-[var(--text-sm-regular-line-height)] whitespace-nowrap [font-style:var(--text-sm-regular-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-14 fw-400 text-blue-85">
                                         No of files:
                                     </div>
 
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-14 fw-500 text-gray-54">
                                         {item.filesCount}
                                     </div>
                                 </div>
 
                                 <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-regular font-[number:var(--text-sm-regular-font-weight)] text-[#667084] text-[length:var(--text-sm-regular-font-size)] tracking-[var(--text-sm-regular-letter-spacing)] leading-[var(--text-sm-regular-line-height)] whitespace-nowrap [font-style:var(--text-sm-regular-font-style)]">
-                                        Date of Accident:
-                                    </div>
-
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
-                                        {item.accidentDate}
-                                    </div>
-                                </div>
-
-                                <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-regular font-[number:var(--text-sm-regular-font-weight)] text-[#667084] text-[length:var(--text-sm-regular-font-size)] tracking-[var(--text-sm-regular-letter-spacing)] leading-[var(--text-sm-regular-line-height)] whitespace-nowrap [font-style:var(--text-sm-regular-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap  fs-14 fw-400 text-blue-85">
                                         Case Started on:
                                     </div>
 
-                                    <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                                    <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-14 fw-500 text-gray-54">
                                         {item.caseStartDate}
                                     </div>
                                 </div>
 
                                 <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
-                                    <div className="relative w-fit font-text-sm-regular font-[number:var(--text-sm-regular-font-weight)] text-[#667084] text-[length:var(--text-sm-regular-font-size)] tracking-[var(--text-sm-regular-letter-spacing)] leading-[var(--text-sm-regular-line-height)] whitespace-nowrap [font-style:var(--text-sm-regular-font-style)]">
+                                    <div className="relative w-fit  whitespace-nowrap fs-14 fw-400 text-blue-85">
                                         Case Status:
                                     </div>
 
                                     <div className="inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] bg-[#98a1b2] rounded-[999px]">
-                                        <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-white text-[length:var(--text-sm-medium-font-size)] text-center tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                                        <div className="relative w-fit mt-[-1.00px]  text-white  text-center   whitespace-nowrap fs-14 fw-500">
                                             {item.status}
                                         </div>
                                     </div>

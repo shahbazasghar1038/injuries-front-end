@@ -66,9 +66,9 @@ const UpdatePassword = () => {
       <h2 className="text-lg font-semibold mb-4">Password</h2>
       <Divider/>
       <Form form={form} layout="vertical" onFinish={handleSubmit}  className="max-w-[491px]">
-        <Form.Item
+        <Form.Item className="password-field-container"
           name="currentPassword"
-          label="Current Password"
+          label={<span>Current Password <span className="text-red-500">*</span></span>}
           rules={[{ required: true, message: "Please enter your current password" }]}
         >
           <Input.Password
@@ -81,9 +81,9 @@ const UpdatePassword = () => {
           />
         </Form.Item>
 
-        <Form.Item
+        <Form.Item className="password-field-container"
           name="newPassword"
-          label="New Password"
+          label={<span>New Password <span className="text-red-500">*</span></span>}
           rules={[
             { required: true, message: "Please enter your new password" },
             {
@@ -114,7 +114,7 @@ const UpdatePassword = () => {
           />
         </Form.Item>
 
-        <div className="my-2 ml-2">
+        <div className="mb-5 ml-2">
           <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
             <ValidationIcon isValid={passwordValidation.length} />
             <span>Min. of 8-16 characters</span>
@@ -133,9 +133,9 @@ const UpdatePassword = () => {
           </div>
         </div>
 
-        <Form.Item
+        <Form.Item className="password-field-container"
           name="confirmPassword"
-          label="Confirm Password"
+          label={<span>Confirm Password <span className="text-red-500">*</span></span>}
           dependencies={["newPassword"]}
           rules={[
             { required: true, message: "Please confirm your password" },

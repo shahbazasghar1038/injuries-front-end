@@ -46,6 +46,12 @@ const OTPVerfication = () => {
     const handleVerifyCode = () => {
         // You can add validation logic here if needed
         setShowSuccessModal(true);
+        
+        // Set a timer to close the modal after 3 seconds
+        setTimeout(() => {
+            setShowSuccessModal(false);
+            navigate('/home'); // Redirect to home page
+        }, 3000);
     };
 
     return (
@@ -110,16 +116,19 @@ const OTPVerfication = () => {
                 footer={null}
                 closable={false}
                 centered
+                className="otp-modal"
                 style={{
                     borderRadius: "24px",
                     maxWidth: "580px",
-                    height: "298px"
+                    height: "278px"
                 }}
                 width={580}
                 bodyStyle={{ 
                     padding: "40px", 
                     textAlign: "center",
-                    height: "298px"
+                    height: "258px",
+                    borderRadius: "24px",
+
                 }}
                 modalRender={(node) => (
                     <Link to={'/sign-up'} style={{ borderRadius: "24px", overflow: "hidden" }}>
