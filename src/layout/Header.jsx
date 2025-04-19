@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Header = ({ toggleSidebar }) => {
   return (
-    <div className='bg-white py-6 pr-6 border-b [border-bottom-style:solid] border-[#e4e7ec]'>
+    <div className='bg-white py-6 pr-6 border-b [border-bottom-style:solid] border-[#e4e7ec] sticky top-0 z-[1]'>
       <div className='content-wrapper'>
         <div className="flex w-full items-center justify-between relative">
           {/* Hamburger menu for mobile and tablet */}
