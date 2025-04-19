@@ -160,13 +160,13 @@ export const ForgotPassword = () => {
           opacity: showOtp ? 1 : 0,
         }}
       >
-        <Row gutter={[0, 16]}>
+        <Row gutter={[0, 12]}>
           <Col span={24}>
             <h4 className="text-blue-39 mb-3">OTP Verification</h4>
-            <p className="text-blue-85 mb-8">A verification code has been sent to michael.james88@gmail.com. Please enter it in the field below.</p>
+            <p className="text-blue-85 fw-400 mb-5">A verification code has been sent to <span className="fw-500">michael.james88@gmail.com</span>. Please enter it in the field below.</p>
           </Col>
           <Col span={24}>
-            <Text>Type your 6 digits security code</Text>
+            <Text className="fs-14 fw-500 text-blue-39">Type your 6 digits security code</Text>
           </Col>
           <Col span={24}>
             <Row gutter={16}>
@@ -192,13 +192,13 @@ export const ForgotPassword = () => {
               block 
               type="primary" 
               htmlType="submit" 
-              className='btn btn-primary mt-6'
+              className='btn btn-primary mt-2'
               onClick={handleVerifyOtp}
             >
               Verify My Account
             </Button>
           </Col>
-          <Col span={24} style={{ textAlign: "center" }}>
+          <Col span={24} style={{ textAlign: "center" }} className="mt-2">
             <Text>
               Didn&apos;t get the code? <a href="#" className="text-primary" >Resend</a>
             </Text>
@@ -220,7 +220,7 @@ export const ForgotPassword = () => {
       >
         <h4 className="text-blue-39 mb-3">Set New Password</h4>
             <p className="text-blue-85 mb-8">Please enter a new password</p>
-        <Form layout="vertical" style={{ marginTop: 24 }}>
+        <Form layout="vertical" style={{ marginTop: 24 }} className="set-new-password-form">
           <Form.Item label="Password">
             <Input.Password
               className="auth-input"
@@ -302,7 +302,7 @@ export const ForgotPassword = () => {
               block 
               type="primary" 
               htmlType="submit" 
-              className='btn btn-primary mt-6'
+              className='btn btn-primary'
               onClick={handleUpdatePassword}
             >
               Update Password

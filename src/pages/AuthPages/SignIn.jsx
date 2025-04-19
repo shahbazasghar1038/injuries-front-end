@@ -46,8 +46,8 @@ const SignIn = () => {
     <AuthPageLayout>
       {contextHolder}
       <div className="form-bg">
-        <h4 className="text-blue-39 mb-3">Sign In</h4>
-        <p className="text-blue-85 mb-8">
+        <h4 className="text-blue-39 fw-600 mb-3">Sign In</h4>
+        <p className="text-blue-85 fw-400 mb-8">
           Enter your email and password to sign in!
         </p>
 
