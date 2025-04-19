@@ -296,14 +296,31 @@ body {
    
 }
 
-// .payment-form-container{
-//     input{
-//         height: 48px !important;
-//     }
+.payment-form-container{
+        input{
+            height: 44px !important;
+        }
+        .select-height{
+            height: 44px !important;
+        }
+        .ant-input-affix-wrapper{
+            height: 44px !important;
+            display: flex;
+            align-items: center;
+        }
 //     .ant-select-selector{
 //         height: 48px !important;
 //     }
-// }
+margin-bottom: 0px !important;
+
+label{
+    color:  #344054 !important;
+    font-size:  14px !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    line-height: 142.857% !important;
+}
+}
 
 .providers-table{
     table{

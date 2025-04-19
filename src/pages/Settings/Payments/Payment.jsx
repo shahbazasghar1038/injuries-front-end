@@ -141,10 +141,10 @@ export default function Payment() {
 
   return (
     <SettingsLayout>
-    <div className="max-w-[512px] p-6 bg-white">
+    <div className="max-w-[512px] bg-white">
       {contextHolder}
       <Form form={form} layout="vertical" onFinish={handleSubmit} requiredMark={false} >
-        <h2 className="text-lg font-medium mb-4">Card details</h2>
+        <h2 className="fs-14 fw-600 text-gray-54 mb-6">Card details</h2>
 
         {cards.map((card, index) => (
           <div key={card.id} className={index > 0 ? "mt-8" : ""}>
@@ -184,6 +184,7 @@ export default function Payment() {
                       placeholder="MM"
                       style={{ width: "50%" }}
                       value={card.expiryMonth}
+                      className="select-height"
                       onChange={(value) => {
                         const updatedCards = cards.map((c) => {
                           if (c.id === card.id) {
@@ -209,6 +210,7 @@ export default function Payment() {
                     rules={[{ required: true, message: "Required" }]}
                   >
                     <Select
+                    className="select-height"
                       placeholder="YYYY"
                       style={{ width: "50%" }}
                       value={card.expiryYear}
@@ -233,8 +235,9 @@ export default function Payment() {
               </Form.Item>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <Form.Item
+              className="payment-form-container"
                 label={<>Card number {renderRequiredMark()}</>}
                 name={`cardNumber-${card.id}`}
                 initialValue={card.cardNumber}
@@ -278,6 +281,7 @@ export default function Payment() {
               </Form.Item>
 
               <Form.Item
+              className="payment-form-container"
                 label={<>CVV {renderRequiredMark()}</>}
                 name={`cvv-${card.id}`}
                 initialValue={card.cvv}
@@ -314,8 +318,8 @@ export default function Payment() {
           </div>
         ))}
 
-        <div className="mt-2 mb-6">
-          <button type="button" className="text-blue-600 flex items-center text-sm" onClick={addAnotherCard}>
+        <div className="mb-6 mt-2">
+          <button type="button" className="fs-14 fw-400 text-primary flex items-center" onClick={addAnotherCard}>
             <PlusOutlined className="mr-1" />
             Add another Card
           </button>
@@ -324,16 +328,16 @@ export default function Payment() {
         <div className="h-px bg-gray-200 my-6"></div>
 
         <div className="mb-6">
-          <h3 className="text-base font-medium mb-1">Email address</h3>
-          <p className="text-gray-500 text-sm mb-3">Invoices will be sent to this email address.</p>
+          <h3 className="fs-14 fw-600 text-gray-54 mb-1">Email address</h3>
+          <p className="fs-14 fw-400 gray-color-67 mb-6">Invoices will be sent to this email address.</p>
 
           {emails.map((email, index) => (
             <Form.Item
               key={index}
               name={`email-${index}`}
               initialValue={email}
-              className={index > 0 ? "mt-3" : ""}
-              label={index === 0 ? <><span>Email address</span> {renderRequiredMark()}</> : null}
+              className={`payment-form-container ${index > 0 ? "mt-3" : ""}`}
+              // label={index === 0 ? <><span>Email address</span> {renderRequiredMark()}</> : null}
               rules={[
                 { required: true, message: "Please enter an email address" },
                 { type: "email", message: "Please enter a valid email address" },
@@ -349,7 +353,7 @@ export default function Payment() {
           ))}
 
           <div className="mt-2">
-            <button type="button" className="text-blue-600 flex items-center text-sm" onClick={addAnotherEmail}>
+            <button type="button" className="fs-14 fw-400 flex items-center text-primary" onClick={addAnotherEmail}>
               <PlusOutlined className="mr-1" />
               Add another
             </button>
@@ -361,17 +365,17 @@ export default function Payment() {
         <Form.Item name="enableAutomaticPayments" valuePropName="checked">
           <Checkbox checked={enableAutomaticPayments} onChange={(e) => setEnableAutomaticPayments(e.target.checked)}>
             <div className="ml-2">
-              <span className="font-medium">Enable Automatic Payments</span>
-              <p className="text-gray-500 text-sm mt-1">Save this card for automatic payments in the future.</p>
+              <span className="fs-14 fw-600 ext-gray-54">Enable Automatic Payments</span>
+              <p className="fs-14 fw-400 gray-color-67">Save this card for automatic payments in the future.</p>
             </div>
           </Checkbox>
         </Form.Item>
 
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <Button type="primary" htmlType="submit" className="bg-blue-600 hover:bg-blue-700">
             Save Payment Information
           </Button>
-        </div>
+        </div> */}
       </Form>
     </div>
     </SettingsLayout>
