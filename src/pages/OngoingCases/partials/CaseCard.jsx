@@ -12,7 +12,7 @@ const CaseCard = ({caseItem}) => {
 
 <div className='rounded-xl bg-[#F9FAFB] p-3 '>
     <div className="flex justify-between items-start mb-4">
-      <h2 className="text-lg font-semibold text-gray-800">{caseItem.name}</h2>
+      <h2 className="fs-20 fw-700 text-blue-39">{caseItem.name}</h2>
 
      <Link to={'/cases-detail'} className='rounded-lg bg-[#fff] w-8 h-8 flex justify-center items-center'> <ArrowRightOutlined className="text-gray-400" /></Link>
 
@@ -20,23 +20,23 @@ const CaseCard = ({caseItem}) => {
 
     <div className="space-y-2 text-sm">
       <div className="flex">
-        <span className="text-gray-500 w-32">No of files:</span>
-        <span className="font-medium">{caseItem.files}</span>
+        <span className="fs-14 fw-400 text-blue-85 w-32">No of files:</span>
+        <span className="fs-14 fw-500 text-gray-54">{caseItem.files}</span>
       </div>
 
       <div className="flex">
-        <span className="text-gray-500 w-32">Date of Accident:</span>
-        <span className="font-medium">{caseItem.accidentDate}</span>
+        <span className="fs-14 fw-400 text-blue-85 w-32">Date of Accident:</span>
+        <span className="fs-14 fw-500 text-gray-54">{caseItem.accidentDate}</span>
       </div>
 
       <div className="flex">
-        <span className="text-gray-500 w-32">Case Started on:</span>
-        <span className="font-medium">{caseItem.startDate}</span>
+        <span className="fs-14 fw-400 text-blue-85 w-32">Case Started on:</span>
+        <span className="fs-14 fw-500 text-gray-54">{caseItem.startDate}</span>
       </div>
 
       <div className="flex items-center">
-        <span className="text-gray-500 w-32">Case Status:</span>
-        <span className={`px-2 py-0.5 rounded-md font-medium ${caseItem.statusColor}`}>{caseItem.status}</span>
+        <span className="fs-14 fw-400 text-blue-85 w-32">Case Status:</span>
+        <span className={`px-2 py-0.5 rounded-md fs-14 fw-500 ${caseItem.statusColor}`}>{caseItem.status}</span>
       </div>
     </div>
   </div>
