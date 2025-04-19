@@ -43,6 +43,15 @@ const Sidebar = ({ isOpen, onClose }) => {
       
       console.log('Is Ongoing Cases active?', isActive);
     }
+    
+    // Special case for settings
+    if (item.path === '/settings/profile') {
+      // Check if the current path is related to any settings routes
+      isActive = isActive || 
+                 pathname.startsWith('/settings/');
+      
+      console.log('Is Settings active?', isActive);
+    }
 
     return (
       <Link to={item.path} className="w-full" key={item.path}>
