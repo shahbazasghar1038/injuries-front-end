@@ -23,20 +23,42 @@ const Sidebar = ({ isOpen, onClose }) => {
   ];
 
   // Render navigation link
-  const renderNavLink = (item) => (
-    <Link to={item.path} className="w-full" key={item.path}>
-      <div className={`sidebar-text ${pathname === item.path ? 'active' : ''} relative self-stretch w-full flex-[0_0_auto] rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer ${pathname === item.path ? 'bg-[#ecf3ff]' : 'bg-white'}`}>
-        <div className="flex items-center gap-3 relative flex-1 grow">
-          <div className={`text-inherit group-hover:text-[#465FFF] ${pathname === item.path ? 'text-[#465FFF]' : ''}`}>
-            {item.icon}
-          </div>
-          <div className={`text ${item.className || ''} group-hover:text-[#465FFF] ${pathname === item.path ? 'text-[#465FFF]' : ''}`}>
-            {item.label}
+  const renderNavLink = (item) => {
+    // Log the current pathname for debugging
+    console.log('Current pathname:', pathname);
+    
+    // More generic approach to check if pathname starts with item path
+    // or if it's related to ongoing cases
+    let isActive = pathname === item.path;
+    
+    // Special case for ongoing cases
+    if (item.path === '/ongoing-cases') {
+      // Check if the current path is related to ongoing cases
+      // by checking if it starts with /ongoing-cases or contains case-detail
+      isActive = isActive || 
+                 pathname.startsWith('/ongoing-cases') || 
+                 pathname.startsWith('/case-detail') ||
+                 pathname.includes('case') ||
+                 pathname.includes('/cases/');
+      
+      console.log('Is Ongoing Cases active?', isActive);
+    }
+
+    return (
+      <Link to={item.path} className="w-full" key={item.path}>
+        <div className={`sidebar-text ${isActive ? 'active' : ''} relative self-stretch w-full flex-[0_0_auto] rounded-lg hover:bg-[#ECF3FF] group transition-colors cursor-pointer ${isActive ? 'bg-[#ecf3ff]' : 'bg-white'}`}>
+          <div className="flex items-center gap-3 relative flex-1 grow">
+            <div className={`text-inherit group-hover:text-[#465FFF] ${isActive ? 'text-[#465FFF]' : ''}`}>
+              {item.icon}
+            </div>
+            <div className={`text ${item.className || ''} group-hover:text-[#465FFF] ${isActive ? 'text-[#465FFF]' : ''}`}>
+              {item.label}
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
-  );
+      </Link>
+    );
+  };
   
   return (
     <>
