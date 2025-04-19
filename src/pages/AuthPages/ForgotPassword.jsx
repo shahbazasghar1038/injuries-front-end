@@ -253,7 +253,7 @@ export const ForgotPassword = () => {
                   }} />
                 </Col>
                 <Col>
-                  <Text type={password ? "secondary" : "disabled"}>
+                  <Text className="fs-12 fw-400 blue-light-b3" type={password ? "text-gray-54" : "disabled"}>
                     Min. of 8-16 characters
                   </Text>
                 </Col>
@@ -265,7 +265,7 @@ export const ForgotPassword = () => {
                   }} />
                 </Col>
                 <Col>
-                  <Text type={password ? "secondary" : "disabled"}>
+                  <Text className="fs-12 fw-400 blue-light-b3" type={password ? "secondary" : "disabled"}>
                     Min. one uppercase letter (a-z)
                   </Text>
                 </Col>
@@ -277,7 +277,7 @@ export const ForgotPassword = () => {
                   }} />
                 </Col>
                 <Col>
-                  <Text type={password ? "secondary" : "disabled"}>
+                  <Text className="fs-12 fw-400 blue-light-b3" type={password ? "secondary" : "disabled"}>
                     Min. one lowercase letter (A-Z)
                   </Text>
                 </Col>
@@ -289,7 +289,7 @@ export const ForgotPassword = () => {
                   }} />
                 </Col>
                 <Col>
-                  <Text type={password ? "secondary" : "disabled"}>
+                  <Text className="fs-12 fw-400 blue-light-b3" type={password ? "secondary" : "disabled"}>
                     Min. one number (0-9)
                   </Text>
                 </Col>

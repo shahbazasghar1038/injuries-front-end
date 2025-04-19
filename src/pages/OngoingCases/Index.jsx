@@ -84,7 +84,7 @@ const OngoingCases = () => {
   return (
     <AuthenticatedLayout>
       <div className='lg:flex gap-2 justify-between'>
-        <p className='page-heading'>Ongoing Cases</p>
+        <p className='fs-20 fw-600 text-blue-39'>Ongoing Cases</p>
         <Breadcrumb  links={breadcrumbLinks} />
       </div>
 
@@ -95,8 +95,8 @@ const OngoingCases = () => {
       <div className="lg:flex xl:flex justify-between relative">
 
         <div className="flex flex-col mb-6">
-          <h1 className="text-xl font-semibold text-gray-800">Cases</h1>
-          <p className="text-sm text-gray-500">
+          <h1 className="fs-16 fw-500 text-blue-39">Cases</h1>
+          <p className="fs-14 fw-400 text-blue-85">
             First three cases are free, after that you will have to pay $50 per case.
           </p>
         </div>
