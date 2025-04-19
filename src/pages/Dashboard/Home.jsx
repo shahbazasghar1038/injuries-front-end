@@ -124,11 +124,23 @@ const Home = () => {
   // Add state for delete confirmation modal
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   
-  // Modify the handleDeleteContact function to show modal instead of deleting immediately
+  // Add state for move confirmation modal
+  const [moveModalVisible, setMoveModalVisible] = useState(false);
+  
+  // Modify the handleDeleteContact function to show move modal instead
   const handleDeleteContact = () => {
     if (!selectedContact) return;
-    // Show confirmation modal
-    setDeleteModalVisible(true);
+    // Show move confirmation modal instead of delete modal
+    setMoveModalVisible(true);
+  };
+  
+  // Add function to handle actual move after confirmation
+  const confirmMoveContact = () => {
+    // Implement move logic here if needed
+    console.log(`Case ${selectedContact.name} moved`);
+    
+    // Close the modal
+    setMoveModalVisible(false);
   };
   
   // Add function to handle actual deletion after confirmation
@@ -361,7 +373,7 @@ const Home = () => {
                     </div>
 
                     <div 
-                      className="case-delete-btn relative flex-[0_0_auto] overflow-hidden bg--btn cursor-pointer"
+                      className="case-move-btn relative flex-[0_0_auto] overflow-hidden bg--btn cursor-pointer"
                       onClick={handleDeleteContact}
                     >
                       <div className="relative w-6 h-6">
@@ -511,6 +523,23 @@ const Home = () => {
         {/* -----------------CONTENT WRAPPER DIV------------------------------------------------------------ */}
       </div>
       {/* ----------------------------------------------------------------------------- */}
+      {/* Move confirmation modal */}
+      <ActionModal 
+        open={moveModalVisible}
+        onCancel={() => setMoveModalVisible(false)}
+        onConfirm={confirmMoveContact}
+        title="Case Moved"
+        content="Congratulations! You've successfully moved the case from archive to new cases."
+        showButtons={false}
+        icon={
+          <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M34.364 6.85053C38.6205 -2.28351 51.3795 -2.28351 55.636 6.85053C58.0129 11.951 63.5594 14.6722 68.9556 13.3853C78.6192 11.0807 86.5743 21.2433 82.2185 30.3287C79.7862 35.402 81.1561 41.5165 85.5082 45.0122C93.3019 51.2725 90.4628 63.9451 80.7747 66.1403C75.3648 67.3661 71.5265 72.2695 71.5572 77.9156C71.6123 88.0265 60.1169 93.6664 52.3918 87.3184C48.0781 83.7737 41.9219 83.7737 37.6082 87.3184C29.8831 93.6664 18.3877 88.0266 18.4428 77.9156C18.4735 72.2695 14.6352 67.3661 9.22531 66.1403C-0.462787 63.9451 -3.30193 51.2725 4.49185 45.0122C8.84391 41.5165 10.2138 35.402 7.78151 30.3287C3.42572 21.2433 11.3808 11.0807 21.0444 13.3853C26.4406 14.6722 31.9871 11.951 34.364 6.85053Z" fill="#ECFDF3"/>
+            <path fillRule="evenodd" clipRule="evenodd" d="M62.5 32.5C62.5 33.8808 61.3808 35 60 35C58.6192 35 57.5 33.8808 57.5 32.5C57.5 31.1192 58.6192 30 60 30C61.3808 30 62.5 31.1192 62.5 32.5ZM35 32.5C35 33.8808 33.8808 35 32.5 35C31.1192 35 30 33.8808 30 32.5C30 31.1192 31.1192 30 32.5 30C33.8808 30 35 31.1192 35 32.5ZM45.1768 52.5C48.5168 52.5 51.6735 53.75 54.0235 56.1L57.9902 52.1333C54.5635 48.7067 50.0102 47 45.1768 47C40.3435 47 35.7902 48.7067 32.3635 52.1333L36.3302 56.1C38.6802 53.75 41.8368 52.5 45.1768 52.5Z" fill="#039855"/>
+          </svg>
+        }
+      />
+      
+      {/* Keep existing modals */}
       <ActionModal 
         open={deleteModalVisible}
         onCancel={() => setDeleteModalVisible(false)}
