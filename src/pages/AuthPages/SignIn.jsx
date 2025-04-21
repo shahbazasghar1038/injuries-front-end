@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/auth";
 
 const SignIn = () => {
+  const [form] = Form.useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -19,27 +20,51 @@ const SignIn = () => {
 
   const handleLogin = async (credentials) => {
     try {
+      console.log('Sending credentials to server:', credentials);
       const response = await loginUser(credentials);
-      if (response.token) {
+      console.log('Server response:', response);
+      
+      if (response?.token) {
         return response;
       }
-      throw new Error('Login failed');
+      throw new Error('Login failed: No token received');
     } catch (error) {
+      console.error('Login error:', error);
       throw error;
     }
   };
 
   const onFinish = async (values) => {
-    setLoading(true);
     try {
-      const response = await handleLogin(values);
+      setLoading(true);
+      console.log('Form values:', values);
+      
+      const loginPayload = {
+        email: values.email,
+        password: values.password
+      };
+
+      const response = await handleLogin(loginPayload);
       messageApi.success('Login successful!');
-      navigate('/home');
+      
+      if (response.token) {
+        localStorage.setItem('token', response.token);
+      }
+      
+      setTimeout(() => {
+        navigate('/home');
+      }, 1000);
+
     } catch (error) {
       messageApi.error(error.message || 'Login failed. Please try again.');
     } finally {
       setLoading(false);
     }
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log('Form validation failed:', errorInfo);
+    messageApi.error('Please check your input and try again.');
   };
 
   return (
@@ -52,6 +77,7 @@ const SignIn = () => {
         </p>
 
         <Form
+          form={form}
           name="login"
           initialValues={{
             remember: true,
@@ -62,6 +88,7 @@ const SignIn = () => {
             gap: "20px",
           }}
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
           <Form.Item
             name="email"
@@ -75,15 +102,21 @@ const SignIn = () => {
                 message: 'Please enter a valid email!',
               }
             ]}
-            style={{ marginBottom: "20px !important" }}
           >
-            <label
-              className="text-14 fw-500 text-blue-39 mb-2"
-              style={{ display: "block", marginBottom: "8px" }}
-            >
-              Email
-            </label>
-            <Input className="auth-input" placeholder="Email" />
+            <div>
+              <label
+                className="text-14 fw-500 text-blue-39 mb-2"
+                style={{ display: "block", marginBottom: "8px" }}
+              >
+                Email
+              </label>
+              <Input 
+                type="email" 
+                className="auth-input" 
+                placeholder="Email"
+                autoComplete="email" 
+              />
+            </div>
           </Form.Item>
 
           <Form.Item
@@ -95,25 +128,28 @@ const SignIn = () => {
               },
             ]}
           >
-            <label
-              className="text-14 fw-500 text-blue-39 mb-2"
-              style={{ display: "block", marginBottom: "8px" }}
-            >
-              Password
-            </label>
-            <Input
-              type={passwordVisible ? "text" : "password"}
-              className="auth-input"
-              placeholder="******"
-              suffix={
-                <span
-                  onClick={() => setPasswordVisible(!passwordVisible)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {passwordVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
-                </span>
-              }
-            />
+            <div>
+              <label
+                className="text-14 fw-500 text-blue-39 mb-2"
+                style={{ display: "block", marginBottom: "8px" }}
+              >
+                Password
+              </label>
+              <Input
+                type={passwordVisible ? "text" : "password"}
+                className="auth-input"
+                placeholder="******"
+                autoComplete="current-password"
+                suffix={
+                  <span
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {passwordVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                  </span>
+                }
+              />
+            </div>
           </Form.Item>
 
           <Form.Item

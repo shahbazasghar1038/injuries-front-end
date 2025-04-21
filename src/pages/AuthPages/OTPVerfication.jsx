@@ -1,12 +1,15 @@
 import { ArrowLeftOutlined, CloseOutlined } from "@ant-design/icons";
-import { Button, Col, Input, Row, Typography, Modal as AntdModal } from "antd";
+import { Button, Col, Input, Row, Typography, Modal as AntdModal, message } from "antd";
 import React, { useState, useRef } from "react";
 import AuthLayout from './AuthPageLayout'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { verifyOtp, resendOtp } from '../../services/auth'; // Import your OTP API functions
 
 const { Title, Text } = Typography;
 
 const OTPVerfication = () => {
+    const location = useLocation();
+    const email = location.state?.email; // Get email from navigation state
     const [otp, setOtp] = useState(Array(6).fill(""));
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const inputRefs = useRef([]);
@@ -43,15 +46,31 @@ const OTPVerfication = () => {
         navigate('/home'); // Redirect to home page
     };
 
-    const handleVerifyCode = () => {
-        // You can add validation logic here if needed
-        setShowSuccessModal(true);
-        
-        // Set a timer to close the modal after 3 seconds
-        setTimeout(() => {
-            setShowSuccessModal(false);
-            navigate('/home'); // Redirect to home page
-        }, 3000);
+    const handleVerifyCode = async () => {
+        try {
+            const otpCode = otp.join('');
+            const response = await verifyOtp({ email, otp: otpCode }); // Call OTP verification API
+            if (response.success) {
+                setShowSuccessModal(true);
+                setTimeout(() => {
+                    setShowSuccessModal(false);
+                    navigate('/home');
+                }, 3000);
+            } else {
+                message.error('Invalid OTP');
+            }
+        } catch (error) {
+            message.error(error.message || 'Verification failed');
+        }
+    };
+
+    const handleResendOtp = async () => {
+        try {
+            await resendOtp({ email }); // Call resend OTP API
+            message.success('OTP resent successfully');
+        } catch (error) {
+            message.error(error.message || 'Failed to resend OTP');
+        }
     };
 
     return (
@@ -71,7 +90,7 @@ const OTPVerfication = () => {
                             <h4 className='text-blue-39 mb-3'>OTP Verification</h4>
                             <p className='fs-14 fw-400 text-blue-85'>
                                 A verification code has been sent to{" "}
-                                <Text strong>paul.jakey89@gmail.com</Text>. Please enter it in the
+                                <Text strong>{email}</Text>. Please enter it in the
                                 field below.
                             </p>
                         </div>
@@ -105,7 +124,7 @@ const OTPVerfication = () => {
                         </Button>
 
                         <p className="fs-14 fw-500 text-gray-54 text-center">
-                            Didn't get the code? <a href='#' className="text-primary">Resend</a>
+                            Didn't get the code? <span className="cursor-pointer text-primary" onClick={handleResendOtp}>Resend</span>
                         </p>
                     </Col>
                 </Row>

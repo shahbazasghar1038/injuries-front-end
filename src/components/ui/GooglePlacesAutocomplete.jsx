@@ -18,7 +18,7 @@ const GooglePlacesAutocomplete = ({
       if (document.querySelector("#google-maps")) return
 
       const script = document.createElement("script")
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${'process.env.REACT_APP_GOOGLE_MAPS_API_KEY'}&libraries=places`
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.REACT_APP_GOOGLE_API_KEY}&libraries=places`
       script.async = true
       script.defer = true
       script.id = "google-maps"
@@ -64,6 +64,18 @@ const GooglePlacesAutocomplete = ({
     const val = e.target.value
     setInputValue(val)
     if (onChange) onChange(val)
+  }
+
+  const handleAddressChange = (placeData) => {
+    if (typeof placeData === 'string') {
+      // Handle manual input
+      console.log('Manual input:', placeData);
+    } else {
+      // Handle selected place
+      console.log('Selected address:', placeData.address);
+      console.log('Coordinates:', placeData.coordinates);
+      console.log('Address components:', placeData.components);
+    }
   }
 
   return (

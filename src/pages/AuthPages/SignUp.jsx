@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import AuthLayout from './AuthPageLayout'
 import { useNavigate } from 'react-router-dom'
+import { message } from 'antd'; // Import message for showing validation error
 
 const SignUp = () => {
     const [selectedRole, setSelectedRole] = useState('doctor'); // Default to doctor as shown in image
@@ -11,12 +12,17 @@ const SignUp = () => {
     };
 
     const handleContinue = () => {
-        if (selectedRole === 'doctor') {
-            navigate('/personal-info');
-        } else {
-            // Handle attorney path if needed
-            navigate('/attorney-signup');
+        // Validate role selection
+        if (!selectedRole) {
+            message.error('Please select a role to continue');
+            return;
         }
+
+        if (selectedRole) {
+            navigate('/personal-info', {
+                state: { role: selectedRole }
+            });
+        } 
     };
 
     return (
