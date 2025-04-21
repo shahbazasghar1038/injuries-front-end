@@ -30,12 +30,23 @@ const PersonalInfo = () => {
     const onFinish = async (values) => {
         try {
             setLoading(true);
-            const payload = {
+            const userData = {
                 ...values,
                 role: userRole,
             };
+
+            const addresses = [{
+                streetAddress: values.address,
+                zipCode: values.zipCode,
+                state: values.state,
+            }];
+
+            const payload = {
+                userData,
+                addresses,
+            };
             
-            console.log('user' , payload)
+            console.log('user', payload);
             const response = await registerUser(payload);
             if (response) {
                 navigate('/otp-verification', { state: { email: values.email } });

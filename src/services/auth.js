@@ -14,7 +14,7 @@ export const loginUser = async (payload) => {
 
 export const registerUser = async (payload) => {
   try {
-    const response = await axiosInstance.post("users/register", payload);
+    const response = await axiosInstance.post("users/create", payload);
     return response.data;
   } catch (error) {
     throw new Error(error?.response?.data?.message || "Registration failed");
