@@ -12,7 +12,7 @@ const Breadcrumb = ({ links }) => {
                 {link.label}
               </a>
             ) : (
-              <span className="font-semibold text-black">{link.label}</span>
+              <span className="fs-14 fw-400 text-blue-39">{link.label}</span>
             )}
           </li>
         ))}
