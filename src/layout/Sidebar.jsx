@@ -35,13 +35,22 @@ const Sidebar = ({ isOpen, onClose }) => {
     if (item.path === '/ongoing-cases') {
       // Check if the current path is related to ongoing cases
       // by checking if it starts with /ongoing-cases or contains case-detail
+      // but exclude case-dashboard path
       isActive = isActive || 
                  pathname.startsWith('/ongoing-cases') || 
                  pathname.startsWith('/case-detail') ||
-                 pathname.includes('case') ||
+                 (pathname.includes('case') && !pathname.includes('case-dashboard')) ||
                  pathname.includes('/cases/');
       
       console.log('Is Ongoing Cases active?', isActive);
+    }
+    
+    // Special case for Lien Resolution
+    if (item.path === '/lien-resolution') {
+      // Check if the current path includes case-dashboard
+      isActive = isActive || pathname.includes('case-dashboard');
+      
+      console.log('Is Lien Resolution active?', isActive);
     }
     
     // Special case for settings
