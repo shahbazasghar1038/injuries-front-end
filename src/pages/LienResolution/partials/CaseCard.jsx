@@ -14,7 +14,7 @@ const CaseCard = ({caseItem}) => {
     <div className="flex justify-between items-start mb-4">
       <h2 className="fs-20 fw-700 text-blue-39">{caseItem.name}</h2>
 
-     <Link to={'/cases-detail'} className='rounded-lg bg-[#fff] w-8 h-8 flex justify-center items-center'> <ArrowRightOutlined className="text-gray-400" /></Link>
+     <Link to={'/case-dashboard'} className='rounded-lg bg-[#fff] w-8 h-8 flex justify-center items-center'> <ArrowRightOutlined className="text-gray-400" /></Link>
 
     </div>
 
