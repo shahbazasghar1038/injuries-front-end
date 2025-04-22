@@ -17,6 +17,7 @@ import Payment from './pages/Settings/Payments/Payment';
 import Archieve from './pages/Archive/Index';
 import LienResolution from './pages/LienResolution/Index';
 import CaseDashboard from './pages/LienResolution/CaseDashboard';
+import CreateDocumentPage from './pages/Settings/Documents/CreateDocumentPage';
 const NotFound = () => <h1>404: Page Not Found</h1>;
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
         <Route path="/settings/password" element={<UpdatePassword />} />
         <Route path="/settings/intake-setting" element={<IntakeSetting />} />
         <Route path="/settings/payment" element={<Payment />} />
+        <Route path="/settings/create-documents" element={<CreateDocumentPage />} />
+        
+
         <Route path="/archive" element={<Archieve />} />
         <Route path="/lien-resolution" element={<LienResolution />} />
         <Route path="/case-dashboard" element={<CaseDashboard />} />
