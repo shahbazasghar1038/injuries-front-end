@@ -1,7 +1,7 @@
 import axiosInstance from "./axios";
 
 export const loginUser = async (payload) => {
-  console.log('payload : ' , payload)
+  console.log("payload : ", payload);
   try {
     const response = await axiosInstance.post("users/login", payload);
     console.log(response);
@@ -14,7 +14,7 @@ export const loginUser = async (payload) => {
 
 export const registerUser = async (payload) => {
   try {
-    const response = await axiosInstance.post("users/register", payload);
+    const response = await axiosInstance.post("users/create", payload);
     return response.data;
   } catch (error) {
     throw new Error(error?.response?.data?.message || "Registration failed");
@@ -23,10 +23,14 @@ export const registerUser = async (payload) => {
 
 export const verifyOtp = async (payload) => {
   try {
-    const response = await axiosInstance.post("users/verify-otp", payload);
+    const response = await axiosInstance.post("users/verify-user", payload);
+    console.log("response : ", response);
+
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.message || "OTP verification failed");
+    throw new Error(
+      error?.response?.data?.message || "OTP verification failed"
+    );
   }
 };
 
