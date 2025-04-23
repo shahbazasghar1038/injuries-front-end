@@ -248,7 +248,7 @@ const CaseDetailPage = () => {
             className="flex items-center gap-5 text-[#344054] hover:bg-gray-100 rounded-lg px-3 py-2"
           >
             <EditOutlined className="text-xl text-[#667085]" />
-            <span className="font-semibold ml-3">Edit profile</span>
+            <span className="fs-14 fw-500 text-gray-54 font-outfit ml-3">Edit profile</span>
           </Menu.Item>
     
           <Menu.Item
@@ -256,15 +256,15 @@ const CaseDetailPage = () => {
             className="flex items-center gap-3 text-gray-800 hover:bg-gray-100 rounded-lg px-3 py-4"
           >
             <InboxOutlined className="text-xl" />
-            <span className="font-semibold ml-3">Move to archive</span>
+            <span className="fs-14 fw-500 text-gray-54 font-outfit ml-3">Move to archive</span>
           </Menu.Item>
     
           <Menu.Item
             key="delete"
-            className="flex items-center gap-3 text-red-500 hover:bg-red-100 rounded-lg px-3 py-2"
+            className="delete-provider flex items-center gap-3 text-red-500 hover:bg-red-100 rounded-lg px-3 py-2"
           >
             <DeleteOutlined className="text-xl text-[#D92D20]" />
-            <span className="font-semibold ml-3 text-[#D92D20]">Delete</span>
+            <span className="fs-14 fw-500 ml-3 font-outfit text-[#D92D20]">Delete</span>
           </Menu.Item>
         </Menu>
       );
