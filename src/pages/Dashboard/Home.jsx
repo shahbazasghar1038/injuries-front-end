@@ -506,7 +506,7 @@ const Home = () => {
                         </div>
 
                         <div 
-                          className="relative w-6 h-6 cursor-pointer"
+                          className="relative w-6 h-6 cursor-pointer delete-question-btn"
                           onClick={() => handleDeleteQuestion(item.id)}
                         >
                           <Icons.DelBoxIcon />
