@@ -49,7 +49,7 @@ const ActionModal = ({ open, onCancel, onConfirm, title, content, icon, showButt
           {icon || defaultIcon}
         </div>
         <h5 className='text-blue-39 mt-7 mb-2'>{title}</h5>
-        <p className='fs-14 fw-400 text-blue-85'>{content || "Are you sure you want to proceed with this action?"}</p>
+        <p className='fs-14 fw-400 text-blue-85'>{content || "This action will permanently remove the case and all associated data. This cannot be undone. Please confirm that you want to proceed."}</p>
       </div>
     </Modal>
   );

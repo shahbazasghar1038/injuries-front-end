@@ -21,6 +21,7 @@ import { Icons } from "../../components/svg/Icons";
 import CustomModal from "../../components/ui/CustomModal";
 import TaskForm from "./partials/TaskForm";
 import SelectMedicalProvidersDemo from "./partials/SelectMedicalProvidersModal";
+import ActionModal from "../../components/ui/ActionModal";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -139,6 +140,8 @@ const CaseDetailPage = () => {
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
   // Add state to track deleted questions
   const [deletedQuestions, setDeletedQuestions] = useState({});
+  // Add state for delete confirmation modal
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   const getContactQuestions = (contact) => {
     if (!contact) return [];
@@ -231,13 +234,26 @@ const CaseDetailPage = () => {
           console.log('Move to archive selected');
           break;
         case 'delete':
-          // Handle delete logic
-          console.log('Delete selected');
+          // Show action modal instead of CustomModal
+          setIsDeleteModalVisible(true);
           break;
         default:
           break;
       }
     };
+    
+    // Handler for confirming deletion
+    const handleConfirmDelete = () => {
+      console.log('Confirmed delete action');
+      // Add your delete implementation here
+      setIsDeleteModalVisible(false);
+    };
+    
+    // Handler for canceling deletion
+    const handleCancelDelete = () => {
+      setIsDeleteModalVisible(false);
+    };
+    
     const menu = (
         <Menu
           className="rounded-2xl shadow-xl p-6 bg-white w-44 gap-8"
@@ -268,6 +284,9 @@ const CaseDetailPage = () => {
           </Menu.Item>
         </Menu>
       );
+
+  // Add state for action modal
+  const [isActionModalVisible, setIsActionModalVisible] = useState(false);
 
   return (
     <AuthenticatedLayout>
@@ -488,6 +507,18 @@ const CaseDetailPage = () => {
         onClose={handleAddCancel}>
         <TaskForm form={addForm} onCancel={handleAddCancel} onSubmit={handleAddSubmit} isEdit={false} />
       </CustomModal>
+
+      {/* Replace CustomModal with ActionModal for delete confirmation */}
+      <ActionModal
+        open={isDeleteModalVisible}
+        onCancel={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        title="Are you sure you want to delete this case?"
+        description="This action will permanently remove the case and all associated data. This cannot be undone. Please confirm that you want to proceed."
+        cancelText="Cancel"
+        confirmText="Delete"
+        confirmButtonProps={{ danger: true }}
+      />
 
 {/* add provider modal  */}
 
