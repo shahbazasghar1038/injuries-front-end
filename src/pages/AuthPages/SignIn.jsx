@@ -158,9 +158,9 @@ const SignIn = () => {
           >
             <Flex justify="space-between" align="center">
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox className='text-14 fw-400 secondary-color-54'>Remember me</Checkbox>
+                <Checkbox className='text-14 fw-400 secondary-color-54 font-outfit'>Keep me logged in</Checkbox>
               </Form.Item>
-              <Link to={"/forgot-password"} className="text-14 fw-400 text-primary">Forgot password</Link>
+              <Link to={"/forgot-password"} className="text-14 fw-400 text-primary font-outfit">Forgot password</Link>
             </Flex>
           </Form.Item>
               
@@ -174,7 +174,7 @@ const SignIn = () => {
             >
               Log in
             </Button>
-            <p className='text-14 fw-400 $color-gray-54 text-center mt-5'>
+            <p className='text-14 fw-400 text-gray-54 text-center mt-5'>
               Don't have an account? <Link to={'/sign-up'} className="text-primary">Sign Up</Link>
             </p>
           </Form.Item>

@@ -116,7 +116,7 @@ export const ForgotPassword = () => {
             <h4 className="text-blue-39 mb-3">Forgot Your Password?</h4>
             <p className="text-blue-85 mb-8">Enter the email address linked to your account, and we'll send you a link to reset your password.</p>
             <div style={{ marginTop: "24px" }}>
-              <Text>
+              <Text className="fs-14 fw-500 text-gray-54 font-outfit">
                 Email <span style={{ color: "#f04437" }}>*</span>
               </Text>
                
@@ -163,7 +163,7 @@ export const ForgotPassword = () => {
         <Row gutter={[0, 12]}>
           <Col span={24}>
             <h4 className="text-blue-39 mb-3">OTP Verification</h4>
-            <p className="text-blue-85 fw-400 mb-5">A verification code has been sent to <span className="fw-500">michael.james88@gmail.com</span>. Please enter it in the field below.</p>
+            <p className="text-blue-85 fw-400 mb-5">A verification code has been sent to <span className="fw-500 text-gray-54">michael.james88@gmail.com</span>. Please enter it in the field below.</p>
           </Col>
           <Col span={24}>
             <Text className="fs-14 fw-500 text-blue-39">Type your 6 digits security code</Text>
@@ -199,8 +199,8 @@ export const ForgotPassword = () => {
             </Button>
           </Col>
           <Col span={24} style={{ textAlign: "center" }} className="mt-2">
-            <Text>
-              Didn&apos;t get the code? <a href="#" className="text-primary" >Resend</a>
+            <Text className="fs-14 fw-400 text-gray-54 font-outfit">
+              Didn&apos;t get the code? <a href="#" className="fw-500 text-primary" >Resend</a>
             </Text>
           </Col>
         </Row>
