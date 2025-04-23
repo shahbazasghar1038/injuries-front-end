@@ -12,7 +12,7 @@ const CaseCard = ({caseItem}) => {
 
 <div className='rounded-xl bg-[#F9FAFB] p-3 '>
     <div className="flex justify-between items-start mb-4">
-      <h2 className="fs-20 fw-700 text-blue-39">{caseItem.name}</h2>
+      <h2 className="fs-20 fw-700 text-blue-39">{caseItem.fullName}</h2>
 
      <Link to={'/cases-detail'} className='rounded-lg bg-[#fff] w-8 h-8 flex justify-center items-center'> <ArrowRightOutlined className="text-gray-400" /></Link>
 
@@ -26,7 +26,7 @@ const CaseCard = ({caseItem}) => {
 
       <div className="flex">
         <span className="fs-14 fw-400 text-blue-85 w-32">Date of Accident:</span>
-        <span className="fs-14 fw-500 text-gray-54">{caseItem.accidentDate}</span>
+        <span className="fs-14 fw-500 text-gray-54">{caseItem.dateOfAccident}</span>
       </div>
 
       <div className="flex">

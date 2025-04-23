@@ -4,7 +4,7 @@ import { CalendarOutlined } from "@ant-design/icons"
 import GooglePlacesAutocomplete from "../../../components/ui/GooglePlacesAutocomplete"
 import PhoneInput from "react-phone-input-2"
 
-const AddNewCaseForm = ({onCancel}) => {
+const AddNewCaseForm = ({onCancel, onSubmit}) => {
 
     const [form] = Form.useForm()
 

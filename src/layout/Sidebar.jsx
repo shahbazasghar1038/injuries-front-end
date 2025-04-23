@@ -25,7 +25,6 @@ const Sidebar = ({ isOpen, onClose }) => {
   // Render navigation link
   const renderNavLink = (item) => {
     // Log the current pathname for debugging
-    console.log('Current pathname:', pathname);
     
     // More generic approach to check if pathname starts with item path
     // or if it's related to ongoing cases

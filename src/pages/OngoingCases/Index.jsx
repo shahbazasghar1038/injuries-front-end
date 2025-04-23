@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from './partials/Breadcrumb';
 import { Avatar, Button, Input } from 'antd';
@@ -6,81 +6,79 @@ import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/ic
 import CaseCard from './partials/CaseCard';
 import AddNewCaseForm from './partials/AddNewCaseForm';
 import CustomModal from '../../components/ui/CustomModal';
-
+import { createCase, getAllCases } from '../../services/cases';
+import { useSelector } from 'react-redux';
 const OngoingCases = () => {
+  const user = useSelector((state) => state.auth.user); // Add this line to select the user
+
+console.log('user',user)
+
+const userID = 3;
+
   const breadcrumbLinks = [
     { label: "Home", href: "/" },
     { label: "Ongoing Cases"},
   ];
   const [search, setSearch] = useState("");
    
-  const cases = [
-    {
-      id: 1,
-      name: "Emerson Workman",
-      files: 0,
-      accidentDate: "04/01/24",
-      startDate: "03/11/25",
-      status: "Enrolled",
-      statusColor: "text-emerald-600 bg-emerald-50",
-    },
-    {
-      id: 2,
-      name: "Flora Berry",
-      files: 4,
-      accidentDate: "04/01/24",
-      startDate: "12/25/24",
-      status: "In Progress",
-      statusColor: "text-blue-600 bg-blue-50",
-    },
-    {
-      id: 3,
-      name: "Robyn Washington",
-      files: 4,
-      accidentDate: "04/01/24",
-      startDate: "01/26/25",
-      status: "In Progress",
-      statusColor: "text-blue-600 bg-blue-50",
-    },
-    {
-      id: 4,
-      name: "Kristina Bush",
-      files: 4,
-      accidentDate: "04/01/24",
-      startDate: "02/15/25",
-      status: "In Progress",
-      statusColor: "text-blue-600 bg-blue-50",
-    },
-    {
-      id: 5,
-      name: "Kristina Bush",
-      files: 4,
-      accidentDate: "04/01/24",
-      startDate: "02/15/25",
-      status: "In Progress",
-      statusColor: "text-blue-600 bg-blue-50",
-    },
-  ]
-
-  const filteredCases = cases.filter((c) =>
-    c.name.toLowerCase().includes(search.toLowerCase())
-  );
-
+  
   const [isModalVisible, setIsModalVisible] = useState(false)
-
+  
   const showModal = () => {
     setIsModalVisible(true)
   }
-
+  
   const handleCancel = () => {
     setIsModalVisible(false)
   }
+  
+  
+  const [cases, setCases] = useState([]); // State to store cases
+  const [error, setError] = useState(null); // State to store errors
+  
+  // Fetch all cases when the component mounts
+  useEffect(() => {
+    fetchAllCases();
+  }, []);
 
+  const fetchAllCases = () => {
+    getAllCases(userID)
+    .then((response) => {
+      console.log('resp : ' , response)
+      setCases(response);  
+    })
+    .catch((err) => {
+      console.error("Error fetching cases:", err);
+      setError("Failed to fetch cases. Please try again later.");
+    });
+  };
+  
   const handleSubmit = (values) => {
-    console.log("Form values:", values)
-    setIsModalVisible(false)
-    // Here you would typically send the data to your backend
-  }
+    const model = {
+      caseData: {
+        ...values,
+      },
+      userId: user?.id || 3,
+    };
+    
+    createCase(model)
+      .then((response) => {
+        console.log("Case created successfully:", response);
+        setIsModalVisible(false);
+        fetchAllCases(); // Refresh the list of cases after a successful submission
+      })
+      .catch((err) => {
+        console.error("Error creating case:", err);
+        setError("Failed to create case. Please try again.");
+      });
+    };
+    
+    
+    const filteredCases = cases.filter((c) =>
+      c.fullName?.toLowerCase().includes(search.toLowerCase())
+    );
+    
+    
   return (
     <AuthenticatedLayout>
       <div className='lg:flex gap-2 justify-between'>
@@ -119,9 +117,10 @@ const OngoingCases = () => {
    
  
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4">
-        {filteredCases.map((caseItem) => (
-         <CaseCard caseItem={caseItem}  />
-        ))}
+      {filteredCases.map((caseItem) => (
+  <CaseCard key={caseItem.id} caseItem={caseItem} />
+))}
+
       </div>
     </div>
 
