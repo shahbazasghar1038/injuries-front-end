@@ -48,8 +48,8 @@ const ActionModal = ({ open, onCancel, onConfirm, title, content, icon, showButt
         <div className='flex items-center justify-center'>
           {icon || defaultIcon}
         </div>
-        <h2 className='text-lg font-medium mt-7 mb-2'>{title}</h2>
-        <p>{content || "Are you sure you want to proceed with this action?"}</p>
+        <h5 className='text-blue-39 mt-7 mb-2'>{title}</h5>
+        <p className='fs-14 fw-400 text-blue-85'>{content || "Are you sure you want to proceed with this action?"}</p>
       </div>
     </Modal>
   );
