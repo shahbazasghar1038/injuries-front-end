@@ -21,4 +21,13 @@ export const getAllCases = async (id) => {
   }
 };
 
+export const getSingleCase = async (id) => {
+  try {
+    const response = await axiosInstance.get(`cases/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "fetching cases failed");
+  }
+};
+
 

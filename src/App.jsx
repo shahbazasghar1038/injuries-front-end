@@ -37,7 +37,7 @@ function App() {
         <Route path="/otp-verification" element={<OTPVerfication />} />
         <Route path="/home" element={<Home />} />
         <Route path="/ongoing-cases" element={<OngoingCases />} />
-        <Route path="/cases-detail" element={<CaseDetailPage />} />
+        <Route path="/cases-detail/:id" element={<CaseDetailPage />} />
         <Route path="/providers" element={<ProviderPage />} />
         <Route path="/settings/profile" element={<UserProfile />} />
         <Route path="/settings/password" element={<UpdatePassword />} />
