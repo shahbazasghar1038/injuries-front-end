@@ -30,6 +30,10 @@ h6{
     font-style: normal;
     font-weight: 700;
     line-height: 133.333%;
+
+    &.font-600{
+        font-weight: 600;
+    }
 }
 
 p{

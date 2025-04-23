@@ -364,3 +364,25 @@ label{
         margin-bottom: 20px !important;
     }
 }
+.task-form{
+    .ant-form-item-label{
+        padding-bottom: 6px !important;
+    }
+    label{
+        color: #344054 !important;
+        font-weight: 500 !important;
+line-height: 142.857% !important;
+    }
+
+    input{
+        height: 44px !important;
+    }
+
+    :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
+        margin-bottom: 20px !important;
+    }
+    :where(.css-dev-only-do-not-override-1a3rktk).ant-select-single{
+        height: 44px !important;
+    }
+
+}

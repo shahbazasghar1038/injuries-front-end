@@ -51,17 +51,17 @@ const TaskForm = ({ form, initialValues, isEdit = false, onCancel, onSubmit }) =
   return (
       <>
       <div className="pb-2">
-          <h2 className="text-2xl font-semibold">Add a new task</h2>
-          <p className="text-gray-500 text-sm mt-1">Effortlessly manage your to-do list: add a new task.</p>
+          <h6 className="font-600 text-blue-39">Add a new task</h6>
+          <p className="fs-14 fw-400 text-blue-85 mt-2">Effortlessly manage your to-do list: add a new task.</p>
         </div>
     <Form form={form} layout="vertical" initialValues={initialValues} className="task-form">
       {/* Task Title */}
-      <Form.Item name="title" label="Task Title" rules={[{ required: true, message: "Please enter task title" }]}>
+      <Form.Item name="title" label="Task Title" rules={[{ required: false, message: "Please enter task title" }]}>
         <Input placeholder="Enter task title" />
       </Form.Item>
 
       {/* Status */}
-      <Form.Item name="status" label="Status" rules={[{ required: true, message: "Please select status" }]}>
+      <Form.Item name="status" label="Status" rules={[{ required: false, message: "Please select status" }]}>
         <Select placeholder="Select status">
           {statusOptions.map((option) => (
             <Option key={option.value} value={option.value}>
@@ -77,7 +77,7 @@ const TaskForm = ({ form, initialValues, isEdit = false, onCancel, onSubmit }) =
       </Form.Item>
 
       {/* Files */}
-      <div className="mb-6">
+      <div className="mt-20 mb-6">
         <label className="block text-sm font-medium text-gray-700 mb-2">Files</label>
         <div className="flex flex-wrap gap-2">
           {fileList.map((file) => (

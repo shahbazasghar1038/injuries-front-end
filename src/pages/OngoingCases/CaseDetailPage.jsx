@@ -35,7 +35,7 @@ const PatientStatusCard = ({ data, index }) => (
       </div>
       <div>
         <p className="text-[#667085] font-normal text-xs">{data?.heading}</p>
-        <div className="font-medium text-xs">{data?.name}</div>
+        <div className="fs-14 fw-500 text-gray-54 whitespace-nowrap">{data?.name}</div>
       </div>
     </div>
   </div>
@@ -272,7 +272,7 @@ const CaseDetailPage = () => {
   return (
     <AuthenticatedLayout>
       <div className="lg:flex gap-2 justify-between">
-        <p className="page-heading">Case Dashboard</p>
+        <p className="page-heading text-blue-39">Case Dashboard</p>
         <Breadcrumb links={breadcrumbLinks} />
       </div>
 
