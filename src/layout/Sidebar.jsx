@@ -9,7 +9,7 @@ const Sidebar = ({ isOpen, onClose }) => {
   
   // Menu navigation items
   const menuItems = [
-    { path: '/home', label: 'Pre-vetted Cases', icon: <Icons.PreVettedCasesIcon /> },
+    { path: '/home', label: 'Intake', icon: <Icons.PreVettedCasesIcon /> },
     { path: '/ongoing-cases', label: 'Ongoing Cases', icon: <Icons.OngoingCasesIcon /> },
     { path: '/lien-resolution', label: 'Lien Resolution', icon: <Icons.LienResolutionIcon /> },
     { path: '/archive', label: 'Archive', icon: <Icons.ArchiveIcon /> },

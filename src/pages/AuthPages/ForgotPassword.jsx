@@ -220,7 +220,7 @@ export const ForgotPassword = () => {
       >
         <h4 className="text-blue-39 mb-3">Set New Password</h4>
             <p className="text-blue-85 mb-8">Please enter a new password</p>
-        <Form layout="vertical" style={{ marginTop: 24 }} className="set-new-password-form">
+        <Form layout="vertical" style={{ marginTop: 20 }} className="set-new-password-form">
           <Form.Item label="Password">
             <Input.Password
               className="auth-input"

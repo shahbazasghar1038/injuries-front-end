@@ -217,11 +217,11 @@ const Home = () => {
     <AuthenticatedLayout>
       <style>{dropdownAnimation}</style>
       <div className='flex justify-between items-center gap-2'>
-        <p className='fs-20 fw-600 text-blue-39'>Pre-vetted Cases</p>
+        <p className='fs-20 fw-600 text-blue-39'>Intake</p>
         <div className="flex items-center gap-1.5">
           <p className='fs-14 fw-400 text-gray-54'>Home</p>
           <Icons.ArrowRightIcon />
-          <p className='fs-14 fw-400 text-blue-39'>Pre-vetted Cases</p>
+          <p className='fs-14 fw-400 text-blue-39'>Intake</p>
         </div>
       </div>
       {/* ----------------------------------------------------------------------------- */}
@@ -415,7 +415,7 @@ const Home = () => {
               <div className="flex flex-col h-[688px] items-start gap-6 p-6 relative self-stretch w-full bg-white overflow-hidden overflow-y-scroll">
                 <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
                   <div className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-                    <div className="relative w-fit mt-[-1.00px] font-text-md-medium font-[number:var(--text-md-medium-font-weight)] text-[#1d2838] text-[length:var(--text-md-medium-font-size)] tracking-[var(--text-md-medium-letter-spacing)] leading-[var(--text-md-medium-line-height)] whitespace-nowrap [font-style:var(--text-md-medium-font-style)]">
+                    <div className="relative w-fit mt-[-1.00px] whitespace-nowrap fs-16 fw-500 text-blue-39">
                       Intake
                     </div>
                   </div>
@@ -462,7 +462,7 @@ const Home = () => {
                         </div>
                         <div className="flex flex-col items-start justify-center gap-1 relative flex-1 grow">
                           <div className="items-center gap-2.5 self-stretch w-full flex-[0_0_auto] flex relative">
-                            <p className="text-question cursor-pointer relative w-fit "
+                            <p className="text-question cursor-pointer relative w-fit fs-16 fw-400 text-blue-39"
                                onClick={() => toggleQuestion(item.id)}>
                               {item.question}
                             </p>

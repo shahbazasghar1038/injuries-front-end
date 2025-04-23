@@ -360,4 +360,7 @@ label{
         font-weight: 500;
         line-height: 142.857%;
     }
+    :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
+        margin-bottom: 20px !important;
+    }
 }
