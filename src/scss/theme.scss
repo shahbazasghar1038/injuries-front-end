@@ -9,6 +9,10 @@ body {
     font-family: "Outfit", sans-serif;
 }
 
+.font-outfit{
+    font-family: "Outfit", sans-serif;
+}
+
 .container-auth{
     max-width: 1440px;
     padding-left: 9.4%;
@@ -359,6 +363,7 @@ label{
         font-style: normal;
         font-weight: 500;
         line-height: 142.857%;
+    font-family: "Outfit", sans-serif;
     }
     :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
         margin-bottom: 20px !important;
@@ -372,6 +377,7 @@ label{
         color: #344054 !important;
         font-weight: 500 !important;
 line-height: 142.857% !important;
+font-family: "Outfit", sans-serif;
     }
 
     input{
@@ -385,4 +391,39 @@ line-height: 142.857% !important;
         height: 44px !important;
     }
 
+}
+
+.ant-btn-color-primary{
+    &:hover{
+        background: #3641F5 !important;
+    }
+}
+
+.medical-provider-form{
+    .ant-form-item-label{
+        padding-bottom: 6px !important;
+    }
+    label{
+        color: #344054 !important;
+        font-weight: 500 !important;
+line-height: 142.857% !important;
+font-family: "Outfit", sans-serif;
+    }
+
+    input{
+        height: 44px !important;
+    }
+
+    :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
+        margin-bottom: 20px !important;
+    }
+    :where(.css-dev-only-do-not-override-1a3rktk).ant-select-single{
+        height: 44px !important;
+    }
+    .ant-form-item-control-input-content{
+        height: auto !important;
+    }
+    .checkbox-provider{
+        margin-bottom: 0px !important;
+    }
 }

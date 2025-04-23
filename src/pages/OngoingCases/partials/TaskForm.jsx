@@ -50,7 +50,7 @@ const TaskForm = ({ form, initialValues, isEdit = false, onCancel, onSubmit }) =
 
   return (
       <>
-      <div className="pb-2">
+      <div className="pb-7">
           <h6 className="font-600 text-blue-39">Add a new task</h6>
           <p className="fs-14 fw-400 text-blue-85 mt-2">Effortlessly manage your to-do list: add a new task.</p>
         </div>

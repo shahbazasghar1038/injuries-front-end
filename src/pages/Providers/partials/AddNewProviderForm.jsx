@@ -94,15 +94,15 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
 
   return (<>
   
-  <div className="pb-2">
-          <h2 className="text-2xl font-semibold">Add Medical Provider</h2>
-          <p className="text-gray-500 text-sm mt-1">Create a medical provider by adding their details.</p>
+  <div className="pb-7">
+          <h6 className="font-600 text-blue-39">Add Medical Provider</h6>
+          <p className="fs-14 fw-400 text-blue-85 mt-2">Create a medical provider by adding their details.</p>
         </div>
   
     <Form form={form} layout="vertical" initialValues={initialValues} className="medical-provider-form">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
         {/* Full Name */}
-        <Form.Item name="fullName" label="Full Name" rules={[{ required: true, message: "Please enter full name" }]}>
+        <Form.Item name="fullName" label="Full Name" rules={[{ required: false, message: "Please enter full name" }]}>
           <Input placeholder="Enter full name" />
         </Form.Item>
 
@@ -111,7 +111,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
           name="email"
           label="Email"
           rules={[
-            { required: true, message: "Please enter email" },
+            { required: false, message: "Please enter email" },
             { type: "email", message: "Please enter a valid email" },
           ]}
           >
@@ -122,7 +122,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
        <Form.Item
       name="phone"
       label="Phone"
-      rules={[{ required: true, message: "Please enter phone number" }]}
+      rules={[{ required: false, message: "Please enter phone number" }]}
     >
       <PhoneInput
         country={'us'}
@@ -143,7 +143,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
     </Form.Item>
 
         {/* Specialty */}
-        <Form.Item name="specialty" label="Specialty" rules={[{ required: true, message: "Please select specialty" }]}>
+        <Form.Item name="specialty" label="Specialty" rules={[{ required: false, message: "Please select specialty" }]}>
           <Select placeholder="Select specialty">
             {specialtyOptions.map((option) => (
               <Option key={option.value} value={option.value}>
@@ -156,7 +156,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
 
       {/* Addresses */}
       {addresses.map((address, index) => (
-        <div key={address.id} className="mb-6">
+        <div key={address.id} className="mb-6 bg-gray-50 p-4 rounded-lg">
           <div className="flex justify-between items-center mb-2">
             <h3 className="text-base font-medium">{index === 0 ? "Address" : `Address ${index + 1}`}</h3>
             {addresses.length > 1 && (
@@ -170,13 +170,13 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
             )}
           </div>
 
-          <div className="bg-gray-50 p-4 rounded-lg">
+          <div className="">
             {/* Street */}
             <Form.Item
               name={["address", address.id, "street"]}
               label="Street"
               initialValue={initialValues[`address_${address.id}`]?.street}
-              rules={[{ required: true, message: "Please enter street address" }]}
+              rules={[{ required: false, message: "Please enter street address" }]}
               >
               <Input placeholder="Enter street address" />
             </Form.Item>
@@ -187,7 +187,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
                 name={["address", address.id, "state"]}
                 label="State"
                 initialValue={initialValues[`address_${address.id}`]?.state}
-                rules={[{ required: true, message: "Please enter state" }]}
+                rules={[{ required: false, message: "Please enter state" }]}
                 >
                 <Input placeholder="Enter state" />
               </Form.Item>
@@ -197,14 +197,14 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
                 name={["address", address.id, "zipCode"]}
                 label="ZIP Code"
                 initialValue={initialValues[`address_${address.id}`]?.zipCode}
-                rules={[{ required: true, message: "Please enter ZIP code" }]}
+                rules={[{ required: false, message: "Please enter ZIP code" }]}
                 >
                 <Input placeholder="Enter ZIP code" />
               </Form.Item>
             </div>
 
             {/* Mark as primary */}
-            <Form.Item>
+            <Form.Item className="checkbox-provider">
               <Checkbox checked={address.isPrimary} onChange={() => handlePrimaryChange(address.id)}>
                 Mark as primary address
               </Checkbox>
@@ -218,7 +218,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
         type="link"
         icon={<PlusOutlined />}
         onClick={addNewAddress}
-        className="text-blue-600 hover:text-blue-800 p-0 h-auto flex items-center mb-6"
+        className="text-blue-600 hover:text-blue-800 p-0 h-auto flex items-center mb-6 fs-16 fw-500 font-outfit"
         >
         Add New Address
       </Button>

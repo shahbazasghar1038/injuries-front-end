@@ -110,7 +110,7 @@ const OngoingCases = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-          <Button type="primary"  onClick={showModal} icon={<PlusOutlined />} size="large" className="order-0 md:order-1 mt-2 md:mt-0 bg-blue-600 hover:bg-blue-700">
+          <Button type="primary"  onClick={showModal} icon={<PlusOutlined />} size="large" className="order-0 md:order-1 mt-2 md:mt-0 bg-blue-600 hover:bg-[#3641F5]">
             Add New Case
           </Button>
         </div>
