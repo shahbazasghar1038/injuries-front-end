@@ -329,7 +329,7 @@ const Home = () => {
 
                     <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
                       <div className="relative contact-name">{contact.name}</div>
-                      <div className="relative contact-phone text-gray-500">{contact.phone}</div>
+                      <div className="relative contact-phone fs-12 fw-400 text-gray-500">{contact.phone}</div>
                     </div>
                   </div>
                 </div>
@@ -345,18 +345,18 @@ const Home = () => {
                 <div className="relative w-5 h-5 bg-[#98a1b2] rounded-[10px]" />
 
                 <div className="flex flex-col items-start gap-1 relative flex-1 grow mt-[-11.00px] mb-[-11.00px]">
-                  <div className="self-stretch font-medium text-[#1d2838] text-base leading-6 relative mt-[-1.00px] [font-family:'Outfit',Helvetica] tracking-[0]">
+                  <div className="self-stretch relative mt-[-1.00px] fs-14 fw-500 text-blue-39">
                     {selectedContact ? selectedContact.name : "No contact selected"}
                   </div>
 
                   <div className="flex items-start gap-1 relative self-stretch w-full flex-[0_0_auto]">
-                    <div className="w-fit font-[number:var(--text-xs-regular-font-weight)] text-[#667084] text-[length:var(--text-xs-regular-font-size)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap relative mt-[-1.00px] font-text-xs-regular tracking-[var(--text-xs-regular-letter-spacing)] [font-style:var(--text-xs-regular-font-style)]">
+                    <div className="w-fit whitespace-nowrap relative mt-[-1.00px] fs-12 fw-400 text-blue-85">
                       {selectedContact ? selectedContact.phone : ""}
                     </div>
 
                     {/* Only show "Transferred Call" text in New Cases tab */}
                     {selectedContact && activeTab === "new" && (
-                      <div className="w-fit font-[number:var(--text-xs-regular-font-weight)] text-[#465fff] text-[length:var(--text-xs-regular-font-size)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap relative mt-[-1.00px] font-text-xs-regular tracking-[var(--text-xs-regular-letter-spacing)] [font-style:var(--text-xs-regular-font-style)]">
+                      <div className="w-fit whitespace-nowrap relative mt-[-1.00px] fs-12 fw-400 text-primary">
                         Transferred Call
                       </div>
                     )}
