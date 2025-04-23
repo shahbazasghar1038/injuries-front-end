@@ -19,6 +19,7 @@ import LienResolution from './pages/LienResolution/Index';
 import CaseDashboard from './pages/LienResolution/CaseDashboard';
 import CreateDocumentPage from './pages/Settings/Documents/CreateDocumentPage';
 import MyDocuments from './pages/Settings/Documents/MyDocuments';
+import SignDocumentPage from './pages/Settings/Documents/SignDocumentPage';
 const NotFound = () => <h1>404: Page Not Found</h1>;
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path="/settings/intake-setting" element={<IntakeSetting />} />
         <Route path="/settings/payment" element={<Payment />} />
         <Route path="/settings/create-documents" element={<CreateDocumentPage />} />
+        <Route path="/settings/sign-documents" element={<SignDocumentPage />} />
         <Route path="/settings/my-documents" element={<MyDocuments />} />
         
 

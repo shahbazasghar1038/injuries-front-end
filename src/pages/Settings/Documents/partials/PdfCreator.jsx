@@ -9,7 +9,7 @@ const PdfCreator = () => {
         .then(data => setToken(data.token));
   
       const script = document.createElement("script");
-      script.src = "https://cdn.docuseal.com/docuseal.js"; // Make sure it's correct
+      script.src = "https://cdn.docuseal.com/docuseal.js";
       script.async = true;
       document.body.appendChild(script);
     }, []);
