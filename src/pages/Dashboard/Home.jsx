@@ -113,12 +113,29 @@ const Home = () => {
     setOpenQuestions({});
   };
 
-  // Add this function to handle question deletion
+  // Add state for delete question confirmation modal
+  const [deleteQuestionModalVisible, setDeleteQuestionModalVisible] = useState(false);
+  const [questionToDelete, setQuestionToDelete] = useState(null);
+  
+  // Modify the handleDeleteQuestion function to show confirmation modal
   const handleDeleteQuestion = (questionId) => {
+    setQuestionToDelete(questionId);
+    setDeleteQuestionModalVisible(true);
+  };
+  
+  // Add function to handle actual question deletion after confirmation
+  const confirmDeleteQuestion = () => {
+    if (!questionToDelete) return;
+    
     setDeletedQuestions(prev => ({
       ...prev,
-      [`${selectedContact.phone}-${questionId}`]: true
+      [`${selectedContact.phone}-${questionToDelete}`]: true
     }));
+    
+    // Close the modal
+    setDeleteQuestionModalVisible(false);
+    // Reset the questionToDelete
+    setQuestionToDelete(null);
   };
 
   // Add state for delete confirmation modal
@@ -537,6 +554,18 @@ const Home = () => {
               <path fill-rule="evenodd" clip-rule="evenodd" d="M46.9375 60C46.9375 52.785 52.7864 46.9361 60.0014 46.9361C67.2164 46.9361 73.0653 52.785 73.0653 60C73.0653 67.215 67.2164 73.0639 60.0014 73.0639C52.7864 73.0639 46.9375 67.215 46.9375 60ZM60.0014 43.9361C51.1296 43.9361 43.9375 51.1281 43.9375 60C43.9375 68.8719 51.1296 76.0639 60.0014 76.0639C68.8733 76.0639 76.0653 68.8719 76.0653 60C76.0653 51.1281 68.8733 43.9361 60.0014 43.9361ZM65.7855 58.0571C66.3713 57.4713 66.3713 56.5215 65.7855 55.9358C65.1997 55.35 64.25 55.35 63.6642 55.9358L58.7177 60.8823L56.3387 58.5032C55.7529 57.9174 54.8031 57.9174 54.2173 58.5032C53.6316 59.089 53.6316 60.0388 54.2173 60.6245L57.657 64.0642C57.9383 64.3455 58.3199 64.5036 58.7177 64.5036C59.1155 64.5036 59.4971 64.3455 59.7784 64.0642L65.7855 58.0571Z" fill="#039855"/>
           </svg>
         }
+      />
+      
+      {/* Add Delete Question confirmation modal */}
+      <ActionModal 
+        open={deleteQuestionModalVisible}
+        onCancel={() => setDeleteQuestionModalVisible(false)}
+        onConfirm={confirmDeleteQuestion}
+        title="Are you sure you want to delete this case?"
+        content="This action will permanently remove the case and all associated data. This cannot be undone. Please confirm that you want to proceed."
+        showButtons={true}
+        confirmText="Delete"
+        cancelText="Cancel"
       />
       
       {/* Keep existing modals */}

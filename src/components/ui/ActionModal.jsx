@@ -17,17 +17,17 @@ const ActionModal = ({ open, onCancel, onConfirm, title, content, icon, showButt
       onCancel={onCancel}
       className='action-modal'
       footer={showButtons ? [
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center justify-center gap-3 w-full'>
             <button 
                 key="cancel" 
-                className="btn btn-secondary mr-3"
+                className="btn btn-cancel max-w-[91px] w-full mr-3"
                 onClick={onCancel}
                 >
                 Cancel
-            </button>,
+            </button>
             <button 
                 key="delete" 
-                className="btn btn-danger"
+                className="btn btn-danger max-w-[123px] w-full"
                 onClick={onConfirm}
                 >
                 Delete
