@@ -241,9 +241,16 @@ body {
     :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
         margin-bottom: 0px !important;
     }
+    .ant-form-item{
+        margin-bottom: 0px !important;
+    }
     label{
         font-weight: 500 !important;
         color: #344054 !important;
+    font-family: "Outfit", sans-serif;
+    }
+    .ant-input{
+        height: 44px !important;
     }
 }
 
@@ -459,5 +466,12 @@ font-family: "Outfit", sans-serif;
     }
     :where(.css-dev-only-do-not-override-1a3rktk).ant-select-single{
         height: 44px !important;
+    }
+}
+
+.checkbox-signup{
+    margin-bottom: 20px !important;
+    .ant-checkbox-label{
+        color: #667085 !important;
     }
 }

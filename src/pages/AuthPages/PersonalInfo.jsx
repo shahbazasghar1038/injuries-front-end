@@ -102,7 +102,7 @@ const PersonalInfo = () => {
                   </>
                 }
                 rules={[
-                  { required: true, message: "Please enter your full name" },
+                  { required: false, message: "Please enter your full name" },
                   { min: 2, message: "Name must be at least 2 characters" },
                 ]}
               >
@@ -122,7 +122,7 @@ const PersonalInfo = () => {
                   </>
                 }
                 rules={[
-                  { required: true, message: "Please enter your email" },
+                  { required: false, message: "Please enter your email" },
                   { type: "email", message: "Please enter a valid email" },
                 ]}
               >
@@ -144,7 +144,7 @@ const PersonalInfo = () => {
                   </>
                 }
                 rules={[
-                  { required: true, message: "Please enter your password" },
+                  { required: false, message: "Please enter your password" },
                   { min: 8, message: "Password must be at least 8 characters" },
                 ]}
               >
@@ -167,7 +167,7 @@ const PersonalInfo = () => {
                 }
                 dependencies={["password"]}
                 rules={[
-                  { required: true, message: "Please re-enter your password" },
+                  { required: false, message: "Please re-enter your password" },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
                       if (!value || getFieldValue("password") === value) {
@@ -199,7 +199,7 @@ const PersonalInfo = () => {
                   </>
                 }
                 rules={[
-                  { required: true, message: "Please enter phone number" },
+                  { required: false, message: "Please enter phone number" },
                 ]}
               >
                 <PhoneInput
@@ -226,7 +226,7 @@ const PersonalInfo = () => {
                 label="Specialty"
                 rules={[
                   {
-                    required: userRole === "doctor",
+                    required: userRole === "doctor" && false,
                     message: "Please select specialty",
                   },
                 ]}
@@ -241,7 +241,7 @@ const PersonalInfo = () => {
                 name="address"
                 label="Street Address"
                 rules={[
-                  { required: true, message: "Please enter your address" },
+                  { required: false, message: "Please enter your address" },
                 ]}
               >
                 <GooglePlacesAutocomplete
@@ -257,7 +257,7 @@ const PersonalInfo = () => {
                 name="state"
                 label="Select State"
                 rules={[
-                  { required: true, message: "Please select your state" },
+                  { required: false, message: "Please select your state" },
                 ]}
               >
                 <Input className="auth-input" placeholder="Select your state" />
@@ -268,7 +268,7 @@ const PersonalInfo = () => {
                 name="zipCode"
                 label="Zip Code"
                 rules={[
-                  { required: true, message: "Please enter your zip code" },
+                  { required: false, message: "Please enter your zip code" },
                 ]}
               >
                 <Input className="auth-input" placeholder="Enter your zip" />
@@ -288,7 +288,7 @@ const PersonalInfo = () => {
             ]}
             className="remember-checkbox"
           >
-            <Checkbox>
+            <Checkbox className="fs-14 fw-400 font-outfit checkbox-signup">
               By creating an account means you agree to the{" "}
               <a href="#">Terms and Conditions</a>, and our{" "}
               <a href="#">Privacy Policy</a>
