@@ -3,7 +3,7 @@ import React from 'react'
 const PatientDetail = () => {
   return (
    <>
-    <div className="flex items-center justify-between relative">
+    <div className="flex items-center justify-between relative flex-wrap gap-5">
       <div className="inline-flex items-start pl-0 pr-4 py-4 relative flex-[0_0_auto] bg-white rounded-2xl border border-solid border-[#e4e7ec]">
         <div className="inline-flex items-center gap-3 p-4 relative self-stretch flex-[0_0_auto] border-r [border-right-style:solid] border-[#e4e7ec]">
           <div className="inline-flex items-center gap-2.5 p-3 relative flex-[0_0_auto] bg-[#f2f3f6] rounded-lg overflow-hidden">
@@ -83,7 +83,7 @@ const PatientDetail = () => {
         </div>
       </div>
 
-      <div className="flex w-[191px] items-center justify-between relative">
+      <div className="flex w-[191px] items-center justify-end gap-6 w-full xl:w-fit relative">
         <button className="all-[unset] px-4 py-3 relative overflow-hidden btn btn-primary">
           <div className="relative w-5 h-5">
             <img
