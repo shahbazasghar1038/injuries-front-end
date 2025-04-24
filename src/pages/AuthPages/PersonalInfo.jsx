@@ -48,6 +48,7 @@ const PersonalInfo = () => {
           password: values.password,
           phone: values.phone,
           role: userRole.charAt(0).toUpperCase() + userRole.slice(1),
+          speciality: userRole === "doctor" ? values.specialty : null,
         },
         addresses: [
           {
