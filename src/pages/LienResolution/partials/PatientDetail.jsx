@@ -14,11 +14,11 @@ const PatientDetail = () => {
           </div>
 
           <div className="inline-flex flex-col items-start justify-center gap-1 relative flex-[0_0_auto]">
-            <div className="relative w-fit mt-[-1.00px] font-text-xs-regular font-[number:var(--text-xs-regular-font-weight)] text-[#667084] text-[length:var(--text-xs-regular-font-size)] tracking-[var(--text-xs-regular-letter-spacing)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap [font-style:var(--text-xs-regular-font-style)]">
+            <div className="relative w-fit mt-[-1.00px] whitespace-nowrap fs-12 fw-400 text-blue-85">
               Patient
             </div>
 
-            <div className="relative w-fit font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+            <div className="relative w-fit whitespace-nowrap fs-14 fw-500 text-gray-54">
               Emerson Workman
             </div>
           </div>
@@ -32,12 +32,12 @@ const PatientDetail = () => {
           </div>
 
           <div className="inline-flex flex-col items-start justify-center gap-1 relative flex-[0_0_auto]">
-            <div className="relative w-fit mt-[-1.00px] font-text-xs-regular font-[number:var(--text-xs-regular-font-weight)] text-[#667084] text-[length:var(--text-xs-regular-font-size)] tracking-[var(--text-xs-regular-letter-spacing)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap [font-style:var(--text-xs-regular-font-style)]">
+            <div className="relative w-fit mt-[-1.00px] whitespace-nowrap fs-12 fw-400 text-blue-85">
               Case Status
             </div>
 
             <div className="inline-flex items-center justify-center px-2 py-0.5 relative flex-[0_0_auto] bg-[#ecf3ff] rounded-[999px]">
-              <div className="relative w-fit mt-[-1.00px] font-text-xs-medium font-[number:var(--text-xs-medium-font-weight)] text-[#465fff] text-[length:var(--text-xs-medium-font-size)] text-center tracking-[var(--text-xs-medium-letter-spacing)] leading-[var(--text-xs-medium-line-height)] whitespace-nowrap [font-style:var(--text-xs-medium-font-style)]">
+              <div className="relative w-fit mt-[-1.00px] text-[#465fff] text-center whitespace-nowrap fs-12 fw-500">
                 In Progress
               </div>
             </div>
@@ -53,11 +53,11 @@ const PatientDetail = () => {
           </div>
 
           <div className="inline-flex flex-col items-start justify-center gap-1 relative flex-[0_0_auto]">
-            <div className="relative w-fit mt-[-1.00px] font-text-xs-regular font-[number:var(--text-xs-regular-font-weight)] text-[#667084] text-[length:var(--text-xs-regular-font-size)] tracking-[var(--text-xs-regular-letter-spacing)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap [font-style:var(--text-xs-regular-font-style)]">
+            <div className="relative w-fit mt-[-1.00px] whitespace-nowrap fs-12 fw-400 text-blue-85">
               Date of Accident
             </div>
 
-            <div className="relative w-fit font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+            <div className="relative w-fit whitespace-nowrap fs-14 fw-500 text-gray-54">
               04/01/24
             </div>
           </div>
@@ -72,11 +72,11 @@ const PatientDetail = () => {
           </div>
 
           <div className="inline-flex flex-col items-start justify-center gap-1 relative flex-[0_0_auto]">
-            <div className="relative w-fit mt-[-1.00px] font-text-xs-regular font-[number:var(--text-xs-regular-font-weight)] text-[#667084] text-[length:var(--text-xs-regular-font-size)] tracking-[var(--text-xs-regular-letter-spacing)] leading-[var(--text-xs-regular-line-height)] whitespace-nowrap [font-style:var(--text-xs-regular-font-style)]">
+            <div className="relative w-fit mt-[-1.00px] whitespace-nowrap fs-12 fw-400 text-blue-85">
               Case Starting Date
             </div>
 
-            <div className="relative w-fit font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+            <div className="relative w-fit whitespace-nowrap fs-14 fw-500 text-gray-54">
               08/02/24
             </div>
           </div>
@@ -84,7 +84,7 @@ const PatientDetail = () => {
       </div>
 
       <div className="flex w-[191px] items-center justify-between relative">
-        <button className="all-[unset] box-border inline-flex items-center justify-center gap-2 px-4 py-3 relative flex-[0_0_auto] bg-[#465fff] rounded-lg overflow-hidden border border-solid shadow-[0px_1px_8px_1px_#465fff3d]">
+        <button className="all-[unset] px-4 py-3 relative overflow-hidden btn btn-primary">
           <div className="relative w-5 h-5">
             <img
               className="w-3 h-3 left-1 absolute top-1"
@@ -93,7 +93,7 @@ const PatientDetail = () => {
             />
           </div>
 
-          <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-white text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+          <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap">
             Add Provider
           </div>
         </button>

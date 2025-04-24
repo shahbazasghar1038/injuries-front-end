@@ -65,11 +65,11 @@ const CaseDashboard = () => {
         <div className="mt-6">
           <p className='fs-16 fw-500 text-blue-39'>Medical Providers</p>
           {/* -----------------------------------------------------------------  */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-3 relative ">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 lg:gap-4 xl:gap-6 mt-3 relative ">
             {medicalProviders.map((provider) => (
-              <div key={provider.id} className="flex flex-col w-[361px] items-center gap-3 pt-2 pb-3 px-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]">
+              <div key={provider.id} className="flex flex-col w-full items-center gap-3 pt-2 pb-3 px-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]">
                 <div className="flex flex-col items-start gap-3 p-4 self-stretch w-full bg-[#f8f9fb] rounded-lg relative flex-[0_0_auto]">
-                  <div className="flex items-center gap-3 self-stretch w-full relative flex-[0_0_auto]">
+                  <div className="flex items-start gap-3 justify-between w-full relative flex-[0_0_auto]">
                     <div className="inline-flex flex-col items-start justify-center gap-1 relative flex-[0_0_auto]">
                       <div className="relative w-fit mt-[-1.00px] fs-20 fw-700 text-blue-39">
                         {provider.name}
@@ -77,6 +77,15 @@ const CaseDashboard = () => {
 
                       <div className="relative w-fit fs-14 fw-500 blue-light-b3 whitespace-nowrap">
                         {provider.specialty}
+                      </div>
+                    </div>
+                    <div className="cursor-pointer inline-flex p-2 pr-0 items-center justify-center gap-2 rounded-lg overflow-hidden shadow-shadow-xs">
+                      <div className="relative w-5 h-5">
+                        <img
+                          className="absolute w-3.5 h-3.5 top-0.5 left-1"
+                          alt="Icon"
+                          src="https://c.animaapp.com/m9vlz8e7aemWY8/img/icon.svg"
+                        />
                       </div>
                     </div>
                   </div>
@@ -98,8 +107,20 @@ const CaseDashboard = () => {
                       Lien Offer:
                     </div>
 
-                    <div className="bg-[#ecf3ff] inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] rounded-[999px]">
-                      <div className="mt-[-1.00px] text-[#465fff] text-center relative w-fit  whitespace-nowrap fs-14 fw-500">
+                    <div className={`inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] rounded-[999px] ${
+                      provider.lienOfferStatus === "Pending" 
+                        ? "bg-[#FFFAEB]" 
+                        : provider.lienOfferStatus === "Completed" 
+                          ? "bg-[#ebfdf2]" 
+                          : "bg-[#ecf3ff]"
+                    }`}>
+                      <div className={`mt-[-1.00px] text-center relative w-fit whitespace-nowrap fs-14 fw-500 ${
+                        provider.lienOfferStatus === "Pending" 
+                          ? "text-[#DC6803]" 
+                          : provider.lienOfferStatus === "Completed" 
+                            ? "text-[#039754]" 
+                            : "text-[#465fff]"
+                      }`}>
                         {provider.lienOfferStatus}
                       </div>
                     </div>
@@ -122,7 +143,7 @@ const CaseDashboard = () => {
                           Reduced Amount:
                         </div>
 
-                        <div className="mt-[-1.00px] text-[#98a1b2] relative w-fit font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                        <div className="mt-[-1.00px] text-[#98a1b2] relative w-fit  whitespace-nowrap fs-14 fw-500">
                           {provider.reducedAmount === "-" ? "-" : `$${provider.reducedAmount}`}
                         </div>
                       </div>
@@ -135,32 +156,24 @@ const CaseDashboard = () => {
 
                   <div className="flex items-start gap-6 self-stretch w-full relative flex-[0_0_auto]">
                     <button className="all-[unset] box-border flex items-center justify-center gap-2 px-4 py-3 relative flex-1 grow rounded-lg overflow-hidden border border-solid border-[#e4e7ec]">
-                      <div className="mt-[-1.00px] text-[#344053] relative w-fit font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                      <div className="mt-[-1.00px] relative w-fit whitespace-nowrap fs-14 fw-500 text-gray-54">
                         Medical records
                       </div>
                     </button>
 
                     <button className="all-[unset] box-border flex items-center justify-center gap-2 px-4 py-3 relative flex-1 grow rounded-lg overflow-hidden border border-solid border-[#e4e7ec]">
-                      <div className="mt-[-1.00px] text-[#344053] relative w-fit font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                      <div className="mt-[-1.00px] relative w-fit whitespace-nowrap fs-14 fw-500 text-gray-54">
                         Bills
                       </div>
                     </button>
                   </div>
 
-                  <div className="inline-flex p-2 absolute top-4 left-[301px] items-center justify-center gap-2 rounded-lg overflow-hidden shadow-shadow-xs">
-                    <div className="relative w-5 h-5">
-                      <img
-                        className="absolute w-3.5 h-3.5 top-0.5 left-1"
-                        alt="Icon"
-                        src="https://c.animaapp.com/m9vlz8e7aemWY8/img/icon.svg"
-                      />
-                    </div>
-                  </div>
+                  
                 </div>
 
-                <div className="flex flex-col w-[313px] items-start gap-2.5 relative flex-[0_0_auto]">
-                  <button className="all-[unset] box-border flex px-4 py-3 relative self-stretch w-full flex-[0_0_auto] bg-[#465fff] border-0 border-none items-center justify-center gap-2 rounded-lg overflow-hidden shadow-shadow-xs">
-                    <div className="text-white relative w-fit font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">
+                <div className="flex flex-col w-[90%] items-start gap-2.5 relative flex-[0_0_auto]">
+                  <button className="all-[unset] whitespace-nowrap btn btn-primary px-4 py-3 relative w-full overflow-hidden">
+                    <div className="text-white relative w-fit ">
                       Negotiate Amount
                     </div>
                   </button>
