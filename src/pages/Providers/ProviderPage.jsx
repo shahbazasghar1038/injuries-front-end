@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
-import { Breadcrumb, Button, Input, Table } from 'antd'
+import { Button, Input, Table } from 'antd'
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import CustomModal from '../../components/ui/CustomModal';
 import AddNewCaseForm from '../OngoingCases/partials/AddNewCaseForm';
 import AddNewProviderForm from './partials/AddNewProviderForm';
+import Breadcrumb from '../../components/ui/Breadcrumb'
+
 
 const ProviderPage = () => {
     const breadcrumbLinks = [
@@ -192,7 +194,7 @@ const ProviderPage = () => {
   return (
     <AuthenticatedLayout>
     <div className='lg:flex gap-2 justify-between'>
-      <p className='page-heading'>Providers</p>
+      <p className='fs-20 fw-600 text-blue-39'>Providers</p>
       <Breadcrumb  links={breadcrumbLinks} />
     </div>
 

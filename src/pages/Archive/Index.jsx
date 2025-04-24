@@ -96,7 +96,7 @@ const Archieve = () => {
    <>
     <AuthenticatedLayout>
         <div className='lg:flex gap-2 justify-between mb-6'>
-            <p className='page-heading'>Archive</p>
+            <p className='fs-20 fw-600 text-blue-39'>Archive</p>
             <Breadcrumb  links={breadcrumbLinks} />
         </div>
 
