@@ -127,7 +127,7 @@ const AddNewCaseForm = ({onCancel, onSubmit}) => {
           name="streetAddress"
           label="Street Address"
           rules={[{ required: false, message: "Please enter street address" }]}
-          className="mt-2"
+          className=""
         >
           <GooglePlacesAutocomplete placeholder="Enter address" size="large" />
         </Form.Item>
