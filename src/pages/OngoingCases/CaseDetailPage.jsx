@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Avatar, Card, Input, Form, Menu, Dropdown, Spin } from "antd";
+import { Button, Avatar, Card, Input, Form, Menu, Dropdown, Spin, message } from "antd";
 import {
   UserOutlined,
   CheckCircleOutlined,
@@ -23,7 +23,8 @@ import TaskForm from "./partials/TaskForm";
 import SelectMedicalProvidersDemo from "./partials/SelectMedicalProvidersModal";
 import ActionModal from "../../components/ui/ActionModal";
 import { useParams } from "react-router-dom";
-import { deleteSingleCase, getSingleCase } from "../../services/cases";
+import { addTaskToCase, deleteSingleCase, getSingleCase } from "../../services/cases";
+import { formatDate } from "../../helper/formateDate";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -73,25 +74,25 @@ console.log('caseData' , caseData)
     {
       id: 1,
       heading: "Patient",
-      name: "Emerson Workman",
+      name: caseData?.fullName,
       img: oldman,
     },
     {
       id: 2,
       heading: "Case Status",
-      name: "Enrolled",
+      name: caseData?.status,
       img: flash,
     },
     {
       id: 3,
       heading: "Date of Accident",
-      name: "04/01/24",
+      name: formatDate(caseData?.dateOfAccident),
       img: calender,
     },
     {
       id: 4,
       heading: "Case Starting Date",
-      name: "04/01/24",
+      name:formatDate(caseData?.caseStartData),
       img: calender,
     },
   ];
@@ -234,9 +235,25 @@ console.log('caseData' , caseData)
     
     
       const handleAddSubmit = (values) => {
-        console.log("Add task values:", values)
-        addForm.resetFields()
-        setIsAddModalVisible(false)
+        const model = {
+          taskData: {...values},
+          caseId: caseData?.id,
+        };
+        console.log("Add task values:", model)
+        
+        addTaskToCase(model)
+          .then((response) => {
+            console.log("Case created successfully:", response);
+          message.success(response?.message || "Task created successfully");
+          addForm.resetFields()
+          setIsAddModalVisible(false)
+        })
+        .catch((err) => {
+            message.error(err?.message || "Task created failed");
+            console.error("Error creating task:", err);
+            setError("Failed to create task. Please try again.");
+          });
+        
       }
 
     //   provider menu 

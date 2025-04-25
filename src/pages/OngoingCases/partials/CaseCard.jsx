@@ -2,6 +2,7 @@ import React from 'react'
 import { Avatar, Button, Input } from 'antd';
 import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { formatDate } from '../../../helper/formateDate';
 
 const CaseCard = ({caseItem}) => {
   return (
@@ -26,12 +27,12 @@ const CaseCard = ({caseItem}) => {
 
       <div className="flex">
         <span className="fs-14 fw-400 text-blue-85 w-32">Date of Accident:</span>
-        <span className="fs-14 fw-500 text-gray-54">{caseItem.dateOfAccident}</span>
+        <span className="fs-14 fw-500 text-gray-54">{formatDate(caseItem.dateOfAccident)}</span>
       </div>
 
       <div className="flex">
         <span className="fs-14 fw-400 text-blue-85 w-32">Case Started on:</span>
-        <span className="fs-14 fw-500 text-gray-54">{caseItem.startDate}</span>
+        <span className="fs-14 fw-500 text-gray-54">{formatDate(caseItem.caseStartData)}</span>
       </div>
 
       <div className="flex items-center">

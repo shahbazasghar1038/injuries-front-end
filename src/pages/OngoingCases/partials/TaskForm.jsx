@@ -56,7 +56,7 @@ const TaskForm = ({ form, initialValues, isEdit = false, onCancel, onSubmit }) =
         </div>
     <Form form={form} layout="vertical" initialValues={initialValues} className="task-form">
       {/* Task Title */}
-      <Form.Item name="title" label="Task Title" rules={[{ required: false, message: "Please enter task title" }]}>
+      <Form.Item name="taskTitle" label="Task Title" rules={[{ required: false, message: "Please enter task title" }]}>
         <Input placeholder="Enter task title" />
       </Form.Item>
 
