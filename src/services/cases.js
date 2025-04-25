@@ -1,7 +1,15 @@
 import axiosInstance from "./axios";
 
+export const getAllProvider = async () => {
+  try {
+    const response = await axiosInstance.get(`users/providers`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "fetching cases failed");
+  }
+};
+
 export const createCase = async (payload) => {
-  console.log("payload : ", payload);
   try {
     const response = await axiosInstance.post("cases/create", payload);
     console.log(response);
@@ -30,4 +38,20 @@ export const getSingleCase = async (id) => {
   }
 };
 
+export const deleteSingleCase = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`cases/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "fetching cases failed");
+  }
+};
 
+export const addDoctorToCase = async (model) => {
+  try {
+    const response = await axiosInstance.post(`cases/add-provider`, model);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "fetching cases failed");
+  }
+};

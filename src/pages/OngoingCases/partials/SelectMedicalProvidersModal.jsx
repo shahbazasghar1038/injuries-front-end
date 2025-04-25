@@ -1,18 +1,17 @@
-"use client"
-
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Modal, Input, Button, Table } from "antd"
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons"
+import { addDoctorToCase, getAllProvider } from "../../../services/cases"
 
 const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
   // State for selected providers
-  const [selectedRowKeys, setSelectedRowKeys] = useState([" "])
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [searchText, setSearchText] = useState("")
 
   // Sample data for medical providers
-  const providersData = [
+  const allProviders  = [
     {
-      key: "1",
+      id: "1",
       name: "Alex Smith",
       speciality: "Neurologist",
       address: "591 Memorial Dr, Chicago MA 10320",
@@ -21,7 +20,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       availability: "Available",
     },
     {
-      key: "2",
+      id: "2",
       name: "Alex Smith",
       speciality: "Neurologist",
       address: "55 Brooksby Village Way, Danvers MA...",
@@ -30,7 +29,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       availability: "Available",
     },
     {
-      key: "3",
+      id: "3",
       name: "Tomas Carroll",
       speciality: "Orthopedic Surgeon",
       address: "233 5th Ave Ext, Johnstown NY 12...",
@@ -39,7 +38,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       availability: "Available",
     },
     {
-      key: "4",
+      id: "4",
       name: "Daisy Acosta",
       speciality: "Pediatrician",
       address: "200 Otis Street, Northborough MA...",
@@ -48,7 +47,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       availability: "Available",
     },
     {
-      key: "5",
+      id: "5",
       name: "Jamie Owens",
       speciality: "Neurologist",
       address: "72 Main St, North Reading MA 1864",
@@ -57,7 +56,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       availability: "Available",
     },
     {
-      key: "6",
+      id: "6",
       name: "Jake Paul",
       speciality: "Orthopedic Surgeon",
       address: "55 Brooksby Village Way, Danvers MA...",
@@ -66,7 +65,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       availability: "Available",
     },
     {
-      key: "7",
+      id: "7",
       name: "Michelle Rivera",
       speciality: "Orthopedic Surgeon",
       address: "2972 Westheimer Rd, Santa Ana, Ill...",
@@ -75,7 +74,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       availability: "Available",
     },
     {
-      key: "8",
+      id: "8",
       name: "Jessica Hanson",
       speciality: "Orthopedic Surgeon",
       address: "2972 Westheimer Rd, Santa Ana, Ill...",
@@ -84,7 +83,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       availability: "Available",
     },
     {
-      key: "9",
+      id: "9",
       name: "Deanna Curtis",
       speciality: "Neurologist",
       address: "2464 Royal Ln, Mesa, New Jersey...",
@@ -93,7 +92,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       availability: "Available",
     },
     {
-      key: "10",
+      id: "10",
       name: "Nevaeh Simmons",
       speciality: "Pediatrician",
       address: "3517 W. Gray St, Utica, Pennsylvan...",
@@ -103,9 +102,30 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
     },
   ]
 
+    const [providersData, setProvidersData] = useState(allProviders); // State to store cases
+    const [error, setError] = useState(null); // State to store errors
+    
+    // Fetch all cases when the component mounts
+    useEffect(() => {
+      fetchAllProviders();
+    }, []);
+  
+    const fetchAllProviders = () => {
+      getAllProvider()
+      .then((response) => {
+        console.log('resp : ' , response)
+        // setProvidersData(response);  
+      })
+      .catch((err) => {
+        console.error("Error fetching cases:", err);
+        setError("Failed to fetch cases. Please try again later.");
+      });
+    };
+
+
   // Handle row selection change
-  const onSelectChange = (selectedRowKeys) => {
-    setSelectedRowKeys(selectedRowKeys)
+  const onSelectChange = (newSelectedRowKeys) => {
+    setSelectedRowKeys(newSelectedRowKeys)
   }
 
   // Row selection configuration
@@ -182,7 +202,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
 
   // Handle send invite
   const handleSendInvite = () => {
-    const selectedProviders = providersData.filter((item) => selectedRowKeys.includes(item.key))
+    const selectedProviders = providersData.filter((item) => selectedRowKeys.includes(item.id))
     onSendInvite(selectedProviders)
   }
 
@@ -230,7 +250,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
 }
 
 // Demo component to show the modal
-const SelectMedicalProvidersDemo = () => {
+const SelectMedicalProvidersDemo = ({caseID}) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const showModal = () => {
@@ -242,20 +262,34 @@ const SelectMedicalProvidersDemo = () => {
   }
 
   const handleSendInvite = (selectedProviders) => {
-    console.log("Selected providers:", selectedProviders)
-    setIsModalVisible(false)
+    const selectedProviderIDs = selectedProviders.map(provider => provider.id);
+
+    const model = {
+      doctorId: selectedProviderIDs,
+      caseId: caseID || 3,
+    };
+    
+    addDoctorToCase(model)
+      .then((response) => {
+        console.log("Case created successfully:", response);
+        setIsModalVisible(false)
+      })
+      .catch((err) => {
+        console.error("Error creating case:", err);
+        setError("Failed to create case. Please try again.");
+      });
   }
 
   return (
-    <div    >
+    <div>
       <Button
-       onClick={showModal}
-              type="primary"
-              icon={<PlusOutlined />}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
-              Add Provider
-            </Button>
+        onClick={showModal}
+        type="primary"
+        icon={<PlusOutlined />}
+        className="bg-blue-600 hover:bg-blue-700"
+      >
+        Add Provider
+      </Button>
 
       <SelectMedicalProvidersModal visible={isModalVisible} onCancel={handleCancel} onSendInvite={handleSendInvite} />
     </div>

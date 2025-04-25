@@ -23,7 +23,7 @@ import TaskForm from "./partials/TaskForm";
 import SelectMedicalProvidersDemo from "./partials/SelectMedicalProvidersModal";
 import ActionModal from "../../components/ui/ActionModal";
 import { useParams } from "react-router-dom";
-import { getSingleCase } from "../../services/cases";
+import { deleteSingleCase, getSingleCase } from "../../services/cases";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -49,7 +49,7 @@ const CaseDetailPage = () => {
   const [caseData, setCaseData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+console.log('caseData' , caseData)
   useEffect(() => {
     getSingleCase(id)
       .then((response) => {
@@ -265,8 +265,16 @@ const CaseDetailPage = () => {
     // Handler for confirming deletion
     const handleConfirmDelete = () => {
       console.log('Confirmed delete action');
-      // Add your delete implementation here
-      setIsDeleteModalVisible(false);
+      deleteSingleCase(id)
+      .then((response) => {
+        setIsDeleteModalVisible(false);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching case:", err);
+        setError("Failed to fetch case data. Please try again later.");
+        setLoading(false);
+      });
     };
     
     // Handler for canceling deletion
@@ -341,7 +349,7 @@ const CaseDetailPage = () => {
             </div>
 
             <div className="flex gap-2">
-              <SelectMedicalProvidersDemo />
+              <SelectMedicalProvidersDemo caseID={caseData?.id} />
 
               <Dropdown overlay={menu} trigger={['click']}>
                 <Button

@@ -41,7 +41,6 @@ const Sidebar = ({ isOpen, onClose }) => {
                  (pathname.includes('case') && !pathname.includes('case-dashboard')) ||
                  pathname.includes('/cases/');
       
-      console.log('Is Ongoing Cases active?', isActive);
     }
     
     // Special case for Lien Resolution
@@ -49,7 +48,6 @@ const Sidebar = ({ isOpen, onClose }) => {
       // Check if the current path includes case-dashboard
       isActive = isActive || pathname.includes('case-dashboard');
       
-      console.log('Is Lien Resolution active?', isActive);
     }
     
     // Special case for settings
@@ -58,7 +56,6 @@ const Sidebar = ({ isOpen, onClose }) => {
       isActive = isActive || 
                  pathname.startsWith('/settings/');
       
-      console.log('Is Settings active?', isActive);
     }
 
     return (
