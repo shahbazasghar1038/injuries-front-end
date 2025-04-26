@@ -447,7 +447,7 @@ font-family: "Outfit", sans-serif;
     }
 }
 
-.add-new-case-form{
+.add-new-case-form, .edit-personal-info-form{
     .ant-form-item-label{
         padding-bottom: 6px !important;
     }
@@ -477,6 +477,8 @@ font-family: "Outfit", sans-serif;
         height: 44px !important;
     }
 }
+
+
 
 .checkbox-signup{
     margin-bottom: 20px !important;

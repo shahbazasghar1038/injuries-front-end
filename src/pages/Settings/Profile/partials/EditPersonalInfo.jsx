@@ -13,8 +13,9 @@ const EditPersonalInfo = ({ open, onClose, onSave, initialData }) => {
 
   const handleSubmit = () => {
     form.validateFields().then((values) => {
-      onSave(values)
-    })
+      delete values.email;
+      onSave(values);
+    });
   }
 
   return (
@@ -23,22 +24,14 @@ const EditPersonalInfo = ({ open, onClose, onSave, initialData }) => {
           <h2 className="text-2xl font-semibold">Edit Personal Information</h2>
           <p className="text-gray-500 text-sm mt-1">Update your details to keep your profile up-to-date.</p>
         </div>
-        <Form form={form} layout="vertical" initialValues={initialData}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Form form={form} layout="vertical" initialValues={initialData} className="edit-personal-info-form">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <Form.Item
             name="firstName"
             label="First Name"
             rules={[{ required: true, message: "Please enter your first name" }]}
           >
             <Input placeholder="Enter your first name" />
-          </Form.Item>
-
-          <Form.Item
-            name="lastName"
-            label="Last Name"
-            rules={[{ required: true, message: "Please enter your last name" }]}
-          >
-            <Input placeholder="Enter your last name" />
           </Form.Item>
 
           <Form.Item
@@ -49,8 +42,9 @@ const EditPersonalInfo = ({ open, onClose, onSave, initialData }) => {
               { type: "email", message: "Please enter a valid email" },
             ]}
           >
-            <Input placeholder="Enter your email" />
+            <Input placeholder="Enter your email" disabled />
           </Form.Item>
+<div className="col-span-2">
 
           <Form.Item name="phone" label="Phone" rules={[{ required: true, message: "Please enter your phone number" }]}>
           <PhoneInput
@@ -68,8 +62,9 @@ const EditPersonalInfo = ({ open, onClose, onSave, initialData }) => {
                     background: "transparent",
                   }}
                   containerStyle={{ width: "100%" }}
-                />
+                  />
           </Form.Item>
+                  </div>
 
           <Form.Item name="bio" label="Bio" className="md:col-span-2">
             <Input placeholder="Enter your bio" />
@@ -77,8 +72,8 @@ const EditPersonalInfo = ({ open, onClose, onSave, initialData }) => {
         </div>
 
         <div className="flex justify-end gap-2 mt-4">
-          <Button onClick={onClose}>Close</Button>
-          <Button type="primary" onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700">
+        <Button onClick={onClose} className="h-11">Close</Button>
+        <Button type="primary" onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700 h-11">
             Save Changes
           </Button>
         </div>

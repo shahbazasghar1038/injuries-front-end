@@ -19,14 +19,14 @@ const EditAddress = ({ open, onClose, onSave, initialData }) => {
           <h2 className="text-2xl font-semibold">Edit Address</h2>
           <p className="text-gray-500 text-sm mt-1">Update your details to keep your profile up-to-date.</p>
         </div>
-        <Form form={form} layout="vertical" initialValues={initialData}>
+        <Form form={form} layout="vertical" initialValues={initialData} className="edit-personal-info-form">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Form.Item name="country" label="Country" rules={[{ required: true, message: "Please enter your country" }]}>
-            <Input placeholder="Enter your country" />
+          <Form.Item name="street" label="Street" rules={[{ required: true, message: "Please enter your street address" }]}>
+            <Input placeholder="Enter your street address" />
           </Form.Item>
 
           <Form.Item
-            name="city"
+            name="state"
             label="City/State"
             rules={[{ required: true, message: "Please enter your city/state" }]}
           >
@@ -34,7 +34,7 @@ const EditAddress = ({ open, onClose, onSave, initialData }) => {
           </Form.Item>
 
           <Form.Item
-            name="postalCode"
+            name="zipCode"
             label="Postal Code"
             rules={[{ required: true, message: "Please enter your postal code" }]}
           >
@@ -47,8 +47,8 @@ const EditAddress = ({ open, onClose, onSave, initialData }) => {
         </div>
 
         <div className="flex justify-end gap-2 mt-4">
-          <Button onClick={onClose}>Close</Button>
-          <Button type="primary" onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={onClose} className="h-11">Close</Button>
+          <Button type="primary" onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700 h-11">
             Save Changes
           </Button>
         </div>

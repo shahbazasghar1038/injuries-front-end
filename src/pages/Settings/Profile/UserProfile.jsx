@@ -43,11 +43,10 @@ console.log('user :' ,  user)
     <SettingsLayout>
         <div className="min-h-screen">
           <Card className="mb-6 shadow-sm">
-            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 h-[80px] ">
-              <Avatar
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 h-fit md:h-[80px] ">
+              <img
                 src={placeholder}
-                size={80}
-                className="border-2 border-gray-200"
+                className="border-2 border-gray-200 h-11 md:h-[80px] rounded-full "
               />
               <div className="text-center sm:text-left flex flex-col justify-center h-full">
                 <h1 className="text-xl font-semibold">

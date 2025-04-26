@@ -181,10 +181,10 @@ const UpdatePassword = () => {
         </Form.Item>
 
         <div className="flex gap-2 mt-6">
-          <Button type="primary" htmlType="submit" className="bg-blue-600 hover:bg-blue-700">
-            Save Changes
+          <Button type="primary" htmlType="submit" className="bg-blue-600 px-2 md:px-5 hover:bg-blue-700 h-11">
+          Update Password
           </Button>
-          <Button onClick={() => form.resetFields()}>Cancel</Button>
+          <Button onClick={() => form.resetFields()} className="h-11 px-2 md:px-6">Cancel</Button>
         </div>
       </Form>
     </Card>
