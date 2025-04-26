@@ -92,7 +92,7 @@ console.log('caseData' , caseData)
     {
       id: 4,
       heading: "Case Starting Date",
-      name:formatDate(caseData?.caseStartData),
+      name:formatDate(caseData?.caseStartData) || 'Not started yet',
       img: calender,
     },
   ];
@@ -243,7 +243,6 @@ console.log('caseData' , caseData)
         
         addTaskToCase(model)
           .then((response) => {
-            console.log("Case created successfully:", response);
           message.success(response?.message || "Task created successfully");
           addForm.resetFields()
           setIsAddModalVisible(false)

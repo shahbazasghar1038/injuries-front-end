@@ -32,7 +32,8 @@ const TaskForm = ({ form, initialValues, isEdit = false, onCancel, onSubmit }) =
       .validateFields()
       .then((values) => {
         // Add files to the form values
-        values.files = fileList
+        // values.files = fileList
+        values.files = 'file name List'
         onSubmit(values)
       })
       .catch((info) => {
@@ -43,7 +44,7 @@ const TaskForm = ({ form, initialValues, isEdit = false, onCancel, onSubmit }) =
   // Status options
   const statusOptions = [
     { value: "pending", label: "Pending" },
-    { value: "in_progress", label: "In Progress" },
+    { value: "open", label: "Open" },
     { value: "completed", label: "Completed" },
     { value: "cancelled", label: "Cancelled" },
   ]

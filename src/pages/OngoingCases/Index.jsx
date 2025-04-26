@@ -11,10 +11,6 @@ import { useSelector } from 'react-redux';
 const OngoingCases = () => {
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
 
-console.log('user',user)
-
-const userID = 3;
-
   const breadcrumbLinks = [
     { label: "Home", href: "/" },
     { label: "Ongoing Cases"},
@@ -42,7 +38,7 @@ const userID = 3;
   }, []);
 
   const fetchAllCases = () => {
-    getAllCases(userID)
+    getAllCases(user?.id)
     .then((response) => {
       console.log('resp : ' , response)
       setCases(response);  
@@ -58,7 +54,7 @@ const userID = 3;
       caseData: {
         ...values,
       },
-      userId: user?.id || 3,
+      userId: user?.id,
     };
     
     createCase(model)

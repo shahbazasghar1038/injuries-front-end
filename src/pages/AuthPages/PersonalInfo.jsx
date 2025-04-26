@@ -36,6 +36,8 @@ const PersonalInfo = () => {
     }
   }, [userRole, navigate]);
 
+  console.log('user role is :' , userRole)
+
   const onFinish = async (values) => {
     try {
       setLoading(true);
@@ -99,7 +101,7 @@ const PersonalInfo = () => {
                 name="fullName"
                 label={
                   <>
-                    Full name <span style={{ color: "red" }}>*</span>
+                   {userRole == 'attorney' ? 'Law firm name'  : 'Full name'}  <span style={{ color: "red" }}>*</span>
                   </>
                 }
                 rules={[
@@ -190,7 +192,7 @@ const PersonalInfo = () => {
             </Col>
           </Row>
           <Row gutter={[16, 16]} style={{ marginBottom: "16px" }}>
-            <Col xs={24} sm={12}>
+            <Col xs={24} sm={userRole !== 'attorney' && 12}>
               <Form.Item
                 name="phone"
                 className="phone-field-container"
@@ -221,7 +223,7 @@ const PersonalInfo = () => {
                 />
               </Form.Item>
             </Col>
-            <Col xs={24} sm={12}>
+           {userRole !=='attorney' && <Col xs={24} sm={12}>
               <Form.Item
                 name="specialty"
                 label="Specialty"
@@ -234,7 +236,7 @@ const PersonalInfo = () => {
               >
                 <Input className="auth-input" placeholder="Select specialty" />
               </Form.Item>
-            </Col>
+            </Col>}
           </Row>
           <Row gutter={[16, 16]} style={{ marginBottom: "16px" }}>
             <Col span={24}>

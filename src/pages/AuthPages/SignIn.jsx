@@ -10,6 +10,9 @@ import {
 import { Button, Checkbox, Form, Input, Flex, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/auth";
+import { useDispatch } from "react-redux";
+import { setAuthData } from "../../store/authSlice";
+
 
 const SignIn = () => {
   const [form] = Form.useForm();
@@ -18,18 +21,27 @@ const SignIn = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
+  const dispatch = useDispatch();
+
   const handleLogin = async (credentials) => {
     try {
-      console.log('Sending credentials to server:', credentials);
+      console.log("Sending credentials to server:", credentials);
       const response = await loginUser(credentials);
-      console.log('Server response:', response);
-      
+      console.log("Server response:", response);
+
       if (response?.token) {
+        // Save user and token in Redux store
+        dispatch(
+          setAuthData({
+            user: response.user, // Assuming the API returns user data
+            token: response.token,
+          })
+        );
         return response;
       }
-      throw new Error('Login failed: No token received');
+      throw new Error("Login failed: No token received");
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       throw error;
     }
   };

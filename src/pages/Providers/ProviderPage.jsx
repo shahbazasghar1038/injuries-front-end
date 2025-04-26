@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import { Button, Input, Table } from 'antd'
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
@@ -6,6 +6,7 @@ import CustomModal from '../../components/ui/CustomModal';
 import AddNewCaseForm from '../OngoingCases/partials/AddNewCaseForm';
 import AddNewProviderForm from './partials/AddNewProviderForm';
 import Breadcrumb from '../../components/ui/Breadcrumb'
+import { getAllProvider } from '../../services/cases';
 
 
 const ProviderPage = () => {
@@ -30,98 +31,130 @@ const ProviderPage = () => {
         // Here you would typically send the data to your backend
       }
 
-      const providersData = [
-        {
-          key: "1",
-          name: "Alex Smith",
-          speciality: "Neurologist",
-          address: "591 Memorial Dr, Chicago MA 10320",
-          contact: "+1 (094) 724-3099",
-          email: "smith@medicalworks.com",
-          availability: "Available",
-        },
-        {
-          key: "2",
-          name: "Alex Smith",
-          speciality: "Neurologist",
-          address: "55 Brooksby Village Way, Danvers MA...",
-          contact: "+1 (509) 472-4309",
-          email: "smith@medicalworks.com",
-          availability: "Available",
-        },
-        {
-          key: "3",
-          name: "Tomas Carroll",
-          speciality: "Orthopedic Surgeon",
-          address: "233 5th Ave Ext, Johnstown NY 12...",
-          contact: "+1 (705) 024-0800",
-          email: "tyrone_ortega@yahoo.com",
-          availability: "Available",
-        },
-        {
-          key: "4",
-          name: "Daisy Acosta",
-          speciality: "Pediatrician",
-          address: "200 Otis Street, Northborough MA...",
-          contact: "+1 (276) 763-4443",
-          email: "willie_mason@outlook.com",
-          availability: "Available",
-        },
-        {
-          key: "5",
-          name: "Jamie Owens",
-          speciality: "Neurologist",
-          address: "72 Main St, North Reading MA 1864",
-          contact: "+1 (670) 629-7944",
-          email: "ana_larson@icloud.com",
-          availability: "Available",
-        },
-        {
-          key: "6",
-          name: "Jake Paul",
-          speciality: "Orthopedic Surgeon",
-          address: "55 Brooksby Village Way, Danvers MA...",
-          contact: "+1 (688) 481-3328",
-          email: "jake-paul@medical.com",
-          availability: "Available",
-        },
-        {
-          key: "7",
-          name: "Michelle Rivera",
-          speciality: "Orthopedic Surgeon",
-          address: "2972 Westheimer Rd, Santa Ana, Ill...",
-          contact: "+1 (219) 555-0114",
-          email: "michelle.rivera@example.com",
-          availability: "Available",
-        },
-        {
-          key: "8",
-          name: "Jessica Hanson",
-          speciality: "Orthopedic Surgeon",
-          address: "2972 Westheimer Rd, Santa Ana, Ill...",
-          contact: "+1 (688) 481-3328",
-          email: "jessica.hanson@example.com",
-          availability: "Available",
-        },
-        {
-          key: "9",
-          name: "Deanna Curtis",
-          speciality: "Neurologist",
-          address: "2464 Royal Ln, Mesa, New Jersey...",
-          contact: "+1 (603) 555-0123",
-          email: "deanna.curtis@example.com",
-          availability: "Available",
-        },
-        {
-          key: "10",
-          name: "Nevaeh Simmons",
-          speciality: "Pediatrician",
-          address: "3517 W. Gray St, Utica, Pennsylvan...",
-          contact: "+1 (229) 555-0109",
-          email: "nevaeh.simmons@example.com",
-          availability: "Available",
-        },
-      ]
+      // const providersData = [
+      //   {
+      //     key: "1",
+      //     name: "Alex Smith",
+      //     speciality: "Neurologist",
+      //     address: "591 Memorial Dr, Chicago MA 10320",
+      //     contact: "+1 (094) 724-3099",
+      //     email: "smith@medicalworks.com",
+      //     availability: "Available",
+      //   },
+      //   {
+      //     key: "2",
+      //     name: "Alex Smith",
+      //     speciality: "Neurologist",
+      //     address: "55 Brooksby Village Way, Danvers MA...",
+      //     contact: "+1 (509) 472-4309",
+      //     email: "smith@medicalworks.com",
+      //     availability: "Available",
+      //   },
+      //   {
+      //     key: "3",
+      //     name: "Tomas Carroll",
+      //     speciality: "Orthopedic Surgeon",
+      //     address: "233 5th Ave Ext, Johnstown NY 12...",
+      //     contact: "+1 (705) 024-0800",
+      //     email: "tyrone_ortega@yahoo.com",
+      //     availability: "Available",
+      //   },
+      //   {
+      //     key: "4",
+      //     name: "Daisy Acosta",
+      //     speciality: "Pediatrician",
+      //     address: "200 Otis Street, Northborough MA...",
+      //     contact: "+1 (276) 763-4443",
+      //     email: "willie_mason@outlook.com",
+      //     availability: "Available",
+      //   },
+      //   {
+      //     key: "5",
+      //     name: "Jamie Owens",
+      //     speciality: "Neurologist",
+      //     address: "72 Main St, North Reading MA 1864",
+      //     contact: "+1 (670) 629-7944",
+      //     email: "ana_larson@icloud.com",
+      //     availability: "Available",
+      //   },
+      //   {
+      //     key: "6",
+      //     name: "Jake Paul",
+      //     speciality: "Orthopedic Surgeon",
+      //     address: "55 Brooksby Village Way, Danvers MA...",
+      //     contact: "+1 (688) 481-3328",
+      //     email: "jake-paul@medical.com",
+      //     availability: "Available",
+      //   },
+      //   {
+      //     key: "7",
+      //     name: "Michelle Rivera",
+      //     speciality: "Orthopedic Surgeon",
+      //     address: "2972 Westheimer Rd, Santa Ana, Ill...",
+      //     contact: "+1 (219) 555-0114",
+      //     email: "michelle.rivera@example.com",
+      //     availability: "Available",
+      //   },
+      //   {
+      //     key: "8",
+      //     name: "Jessica Hanson",
+      //     speciality: "Orthopedic Surgeon",
+      //     address: "2972 Westheimer Rd, Santa Ana, Ill...",
+      //     contact: "+1 (688) 481-3328",
+      //     email: "jessica.hanson@example.com",
+      //     availability: "Available",
+      //   },
+      //   {
+      //     key: "9",
+      //     name: "Deanna Curtis",
+      //     speciality: "Neurologist",
+      //     address: "2464 Royal Ln, Mesa, New Jersey...",
+      //     contact: "+1 (603) 555-0123",
+      //     email: "deanna.curtis@example.com",
+      //     availability: "Available",
+      //   },
+      //   {
+      //     key: "10",
+      //     name: "Nevaeh Simmons",
+      //     speciality: "Pediatrician",
+      //     address: "3517 W. Gray St, Utica, Pennsylvan...",
+      //     contact: "+1 (229) 555-0109",
+      //     email: "nevaeh.simmons@example.com",
+      //     availability: "Available",
+      //   },
+      // ]
+
+        const [providersData, setProvidersData] = useState([]); // State to store cases
+          const [error, setError] = useState(null); // State to store errors
+          
+          // Fetch all cases when the component mounts
+          useEffect(() => {
+            fetchAllProviders();
+          }, []);
+        
+          const fetchAllProviders = () => {
+            getAllProvider()
+            .then((response) => {
+              console.log('resp :', response);
+            
+              const formattedProviders = response.map((item) => ({
+                id: item.id?.toString() || "", // making sure id is string
+                name: item.fullName || "",      // mapping fullName to name
+                speciality: item.speciality || "", 
+                address: item.address || "",    
+                contact: item.phone || "",      
+                email: item.email || "",        
+                availability: item.availability || "Available", // default to Available
+              }));
+            
+              setProvidersData(formattedProviders);
+            })
+            
+            .catch((err) => {
+              console.error("Error fetching cases:", err);
+              setError("Failed to fetch cases. Please try again later.");
+            });
+          };
   const [searchText, setSearchText] = useState("")
 
       

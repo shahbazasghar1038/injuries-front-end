@@ -156,7 +156,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
 
       {/* Addresses */}
       {addresses.map((address, index) => (
-        <div key={address.id} className="mb-6 bg-gray-50 p-4 rounded-lg">
+        <div key={address.id} className="mb-2 bg-gray-50 p-4 rounded-lg">
           <div className="flex justify-between items-center mb-2">
             <h3 className="text-base font-medium">{index === 0 ? "Address" : `Address ${index + 1}`}</h3>
             {addresses.length > 1 && (

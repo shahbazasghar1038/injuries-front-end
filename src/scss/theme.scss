@@ -407,6 +407,9 @@ font-family: "Outfit", sans-serif;
 }
 
 .medical-provider-form{
+    .ant-form-item{
+        margin-bottom: 8px !important;
+    }
     .ant-form-item-label{
         padding-bottom: 6px !important;
     }
@@ -422,7 +425,7 @@ font-family: "Outfit", sans-serif;
     }
 
     :where(.css-dev-only-do-not-override-1a3rktk).ant-form-item{
-        margin-bottom: 20px !important;
+        margin-bottom: 10px !important;
     }
     :where(.css-dev-only-do-not-override-1a3rktk).ant-select-single{
         height: 44px !important;
@@ -465,7 +468,7 @@ font-family: "Outfit", sans-serif;
         margin-bottom: 20px !important;
     }
     .ant-form-item{
-        margin-bottom: 20px !important;
+        margin-bottom: 8px !important;
     }
     :where(.css-dev-only-do-not-override-1a3rktk).ant-select-single{
         height: 44px !important;
@@ -480,4 +483,15 @@ font-family: "Outfit", sans-serif;
     .ant-checkbox-label{
         color: #667085 !important;
     }
+}
+
+// .ant-form-item{
+//     margin-bottom: 4px !important;
+// }
+
+.ant-input-outlined{
+    height: 44px !important;
+}
+.ant-select-single{
+    height: 44px !important;
 }

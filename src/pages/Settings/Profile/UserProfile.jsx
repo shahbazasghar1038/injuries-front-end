@@ -8,18 +8,21 @@ import EditAddress from "./partials/EditAddress"
 import CustomModal from "../../../components/ui/CustomModal"
 import AuthenticatedLayout from "../../../layout/AuthenticatedLayout"
 import SettingsLayout from "../../../layout/SettingsLayout"
+import { useSelector } from "react-redux"
 
 export default function UserProfile() {
+  const user = useSelector((state) => state.auth.user); // Add this line to select the user
+console.log('user :' ,  user)
   const [userData, setUserData] = useState({
-    firstName: "Emirhan",
-    lastName: "Boruch",
-    email: "emirhanboruch55@gmail.com",
-    phone: "+09 363 398 46",
-    bio: "Team Manager",
-    country: "United Kingdom",
-    city: "Leeds, East London",
-    postalCode: "ERT 2489",
-    taxId: "AS4568384",
+    firstName: user?.fullName,
+    // lastName: "Boruch",
+    email: user?.email,
+    phone: user?.phone ,
+    bio: user?.bio || 'N/A',
+    street: user?.Addresses[0]?.streetAddress,
+    state: user?.Addresses[0]?.state,
+    zipCode: user?.Addresses[0]?.zipCode,
+    taxId: user?.textID || "Not added yet",
   })
 
   const [personalInfoModalOpen, setPersonalInfoModalOpen] = useState(false)
@@ -39,19 +42,19 @@ export default function UserProfile() {
     <SettingsLayout>
         <div className="min-h-screen">
           <Card className="mb-6 shadow-sm">
-            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 h-[80px] ">
               <Avatar
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-83blJX1WvAAyInDTx0RK0Md9DUtYDN.png"
                 size={80}
                 className="border-2 border-gray-200"
               />
-              <div className="text-center sm:text-left">
+              <div className="text-center sm:text-left flex flex-col justify-center h-full">
                 <h1 className="text-xl font-semibold">
-                  {userData.firstName} {userData.lastName}
+                  {userData.firstName}  
                 </h1>
-                <p className="text-gray-600">{userData.bio}</p>
-                <p className="text-gray-600">
-                  {userData.city.split(",")[0]}, {userData.country}
+                {/* <p className="text-gray-600">{userData.bio}</p> */}
+                <p className="text-gray-600 mt-2">
+                {userData?.bio} | {user?.Addresses[0]?.state}
                 </p>
               </div>
             </div>
@@ -74,10 +77,10 @@ export default function UserProfile() {
                 <p className="text-gray-500 text-sm">First Name</p>
                 <p>{userData.firstName}</p>
               </div>
-              <div>
+              {/* <div>
                 <p className="text-gray-500 text-sm">Last Name</p>
                 <p>{userData.lastName}</p>
-              </div>
+              </div> */}
               <div>
                 <p className="text-gray-500 text-sm">Email address</p>
                 <p>{userData.email}</p>
@@ -107,16 +110,16 @@ export default function UserProfile() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="text-gray-500 text-sm">Country</p>
-                <p>{userData.country}</p>
+                <p className="text-gray-500 text-sm">Street</p>
+                <p>{userData.street}</p>
               </div>
               <div>
                 <p className="text-gray-500 text-sm">City/State</p>
-                <p>{userData.city}</p>
+                <p>{userData.state}</p>
               </div>
               <div>
                 <p className="text-gray-500 text-sm">Postal Code</p>
-                <p>{userData.postalCode}</p>
+                <p>{userData.zipCode}</p>
               </div>
               <div>
                 <p className="text-gray-500 text-sm">TAX ID</p>

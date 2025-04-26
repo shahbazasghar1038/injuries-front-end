@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Form, Input, Select, Button } from "antd"
 import { PlusOutlined, FilePdfOutlined, GoogleOutlined } from "@ant-design/icons"
+import PhoneInput from "react-phone-input-2"
 
 const { TextArea } = Input
 const { Option } = Select
@@ -52,7 +53,22 @@ const EditPersonalInfo = ({ open, onClose, onSave, initialData }) => {
           </Form.Item>
 
           <Form.Item name="phone" label="Phone" rules={[{ required: true, message: "Please enter your phone number" }]}>
-            <Input placeholder="Enter your phone number" className="bg-blue-50" />
+          <PhoneInput
+                  country={"us"}
+                  enableSearch
+                  inputStyle={{
+                    width: "100%",
+                    height: "44px",
+                    borderRadius: "6px",
+                    border: "1px solid #d9d9d9",
+                    fontSize: "16px",
+                  }}
+                  buttonStyle={{
+                    border: "none",
+                    background: "transparent",
+                  }}
+                  containerStyle={{ width: "100%" }}
+                />
           </Form.Item>
 
           <Form.Item name="bio" label="Bio" className="md:col-span-2">
