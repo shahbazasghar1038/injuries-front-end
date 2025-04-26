@@ -1,3 +1,4 @@
+import { Archive } from "lucide-react";
 import axiosInstance from "./axios";
 
 export const getAllProvider = async () => {
@@ -16,7 +17,7 @@ export const createCase = async (payload) => {
 
     return response.data;
   } catch (error) {
-    throw new Error(error || "An error occurred");
+    throw new Error(error?.response?.data?.error || "An error occurred");
   }
 };
 
@@ -34,7 +35,7 @@ export const getSingleCase = async (id) => {
     const response = await axiosInstance.get(`cases/${id}`);
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.message || "fetching cases failed");
+    throw new Error(error?.response?.data?.error || "fetching single cases failed");
   }
 };
 
@@ -43,7 +44,7 @@ export const deleteSingleCase = async (id) => {
     const response = await axiosInstance.delete(`cases/${id}`);
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.message || "fetching cases failed");
+    throw new Error(error?.response?.data?.error || "delete case failed");
   }
 };
 
@@ -52,7 +53,7 @@ export const addDoctorToCase = async (model) => {
     const response = await axiosInstance.post(`cases/add-provider`, model);
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.message || "fetching cases failed");
+    throw new Error(error?.response?.data?.message || "add provider to case failed");
   }
 };
 
@@ -62,5 +63,15 @@ export const addTaskToCase = async (model) => {
     return response.data;
   } catch (error) {
     throw new Error(error?.response?.data?.message || "task create failed");
+  }
+};
+
+// Archive a case
+export const archiveCase = async (model) => {
+  try {
+    const response = await axiosInstance.put(`archive/archived`, model);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "archiving case failed");
   }
 };

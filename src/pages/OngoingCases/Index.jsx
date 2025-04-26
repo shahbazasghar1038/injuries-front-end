@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from './partials/Breadcrumb';
-import { Avatar, Button, Input } from 'antd';
+import { Avatar, Button, Input, message } from 'antd';
 import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import CaseCard from './partials/CaseCard';
 import AddNewCaseForm from './partials/AddNewCaseForm';
@@ -65,6 +65,7 @@ const OngoingCases = () => {
       })
       .catch((err) => {
         console.error("Error creating case:", err);
+        message.error(err.message);
         setError("Failed to create case. Please try again.");
       });
     };

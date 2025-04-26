@@ -96,7 +96,16 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
       getAllProvider()
       .then((response) => {
         console.log('resp : ' , response)
-        setProvidersData(response);  
+        const formattedProviders = response.map((item) => ({
+          id: item.id, // making sure id is string
+          name: item.fullName || "",      // mapping fullName to name
+          speciality: item.speciality || "", 
+          address: item.address || "",    
+          contact: item.phone || "",      
+          email: item.email || "",        
+          availability: item.availability || "Available", // default to Available
+        }));
+        setProvidersData(formattedProviders);  
       })
       .catch((err) => {
         console.error("Error fetching cases:", err);
@@ -223,7 +232,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
         </div>
         <Button
           type="primary"
-          className="bg-blue-600 hover:bg-blue-700"
+          className="bg-blue-600 hover:bg-blue-700 h-10"
           onClick={handleSendInvite}
           disabled={selectedRowKeys.length === 0}
         >
@@ -274,7 +283,6 @@ const SelectMedicalProvidersDemo = ({caseID}) => {
       })
       .catch((err) => {
         console.error("Error creating case:", err);
-        setError("Failed to create case. Please try again.");
       });
   }
 
@@ -284,7 +292,7 @@ const SelectMedicalProvidersDemo = ({caseID}) => {
         onClick={showModal}
         type="primary"
         icon={<PlusOutlined />}
-        className="bg-blue-600 hover:bg-blue-700"
+        className="bg-blue-600 hover:bg-blue-700 h-11"
       >
         Add Provider
       </Button>

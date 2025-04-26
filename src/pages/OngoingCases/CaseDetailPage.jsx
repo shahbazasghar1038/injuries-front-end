@@ -47,6 +47,7 @@ const PatientStatusCard = ({ data, index }) => (
 
 const CaseDetailPage = () => {
   const { id } = useParams();
+    const [messageApi, contextHolder] = message.useMessage();
   const [caseData, setCaseData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -54,11 +55,14 @@ const CaseDetailPage = () => {
     getSingleCase(id)
       .then((response) => {
         setCaseData(response);
+        console.log('single case data:', response);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Error fetching case:", err);
-        setError("Failed to fetch case data. Please try again later.");
+        console.error(err);
+        messageApi.error(err);
+
+        setError("Failed to fetch single case data. Please try again later.");
         setLoading(false);
       });
   }, [id]);
@@ -73,25 +77,25 @@ const CaseDetailPage = () => {
     {
       id: 1,
       heading: "Patient",
-      name: caseData?.fullName,
+      name: caseData?.case?.fullName,
       img: oldman,
     },
     {
       id: 2,
       heading: "Case Status",
-      name: caseData?.status,
+      name: caseData?.case?.status,
       img: flash,
     },
     {
       id: 3,
       heading: "Date of Accident",
-      name: formatDate(caseData?.dateOfAccident),
+      name: formatDate(caseData?.case?.dateOfAccident),
       img: calender,
     },
     {
       id: 4,
       heading: "Case Starting Date",
-      name:formatDate(caseData?.caseStartData) || 'Not started yet',
+      name:formatDate(caseData?.case?.caseStartData) || 'Not started yet',
       img: calender,
     },
   ];
@@ -236,7 +240,7 @@ const CaseDetailPage = () => {
       const handleAddSubmit = (values) => {
         const model = {
           taskData: {...values},
-          caseId: caseData?.id,
+          caseId: caseData?.case?.id,
         };
         console.log("Add task values:", model)
         
@@ -364,7 +368,7 @@ const CaseDetailPage = () => {
             </div>
 
             <div className="flex gap-2">
-              <SelectMedicalProvidersDemo caseID={caseData?.id} />
+              <SelectMedicalProvidersDemo caseID={caseData?.case?.id} />
 
               <Dropdown overlay={menu} trigger={['click']}>
                 <Button
@@ -425,7 +429,7 @@ const CaseDetailPage = () => {
                   icon={<PlusOutlined />}
                   size="large"
                   onClick={showAddModal}
-                  className="bg-blue-600 hover:bg-blue-700"
+                  className="bg-blue-600 hover:bg-blue-700 h-11"
                 >
                   Add New Task
                 </Button>
