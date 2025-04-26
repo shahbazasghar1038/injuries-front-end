@@ -50,7 +50,6 @@ const CaseDetailPage = () => {
   const [caseData, setCaseData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-console.log('caseData' , caseData)
   useEffect(() => {
     getSingleCase(id)
       .then((response) => {

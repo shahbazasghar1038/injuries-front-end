@@ -33,7 +33,7 @@ const Header = ({ toggleSidebar }) => {
             </div>
 
             <Link to='/settings/profile' className="inline-flex items-center gap-3 relative flex-[0_0_auto]">
-              <img src={placeholder} className="relative w-11 h-11 rounded-[200px] bg-[url(https://c.animaapp.com/m8ozaishjm3gzM/img/avatar.png)] bg-cover bg-[50%_50%]" />
+              <img src={placeholder} className="relative w-11 h-11 rounded-[200px]  *: bg-cover bg-[50%_50%]" />
 
               <div className="inline-flex items-center gap-1 relative flex-[0_0_auto]">
                 <div className="relative w-fit mt-[-1.00px] font-text-sm-medium font-[number:var(--text-sm-medium-font-weight)] text-[#344053] text-[length:var(--text-sm-medium-font-size)] tracking-[var(--text-sm-medium-letter-spacing)] leading-[var(--text-sm-medium-line-height)] whitespace-nowrap [font-style:var(--text-sm-medium-font-style)]">

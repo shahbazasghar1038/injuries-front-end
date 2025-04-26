@@ -42,3 +42,12 @@ export const resendOtp = async (payload) => {
     throw new Error(error?.response?.data?.message || "Resend OTP failed");
   }
 };
+
+export const updatePassword = async (payload) => {
+  try {
+    const response = await axiosInstance.put("users/update-password", payload);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "Password updated failed");
+  }
+};

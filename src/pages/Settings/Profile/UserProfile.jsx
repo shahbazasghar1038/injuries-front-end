@@ -9,6 +9,7 @@ import CustomModal from "../../../components/ui/CustomModal"
 import AuthenticatedLayout from "../../../layout/AuthenticatedLayout"
 import SettingsLayout from "../../../layout/SettingsLayout"
 import { useSelector } from "react-redux"
+import placeholder from '../../../assets/img/placeholder.png'
 
 export default function UserProfile() {
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
@@ -44,7 +45,7 @@ console.log('user :' ,  user)
           <Card className="mb-6 shadow-sm">
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 h-[80px] ">
               <Avatar
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-83blJX1WvAAyInDTx0RK0Md9DUtYDN.png"
+                src={placeholder}
                 size={80}
                 className="border-2 border-gray-200"
               />

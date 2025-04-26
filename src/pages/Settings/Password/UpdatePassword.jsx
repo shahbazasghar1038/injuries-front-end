@@ -1,11 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { Card, Button, Form, Input, Divider } from "antd"
+import { Card, Button, Form, Input, Divider, message } from "antd"
 import { EyeOutlined, EyeInvisibleOutlined, CheckCircleFilled, ExclamationCircleFilled } from "@ant-design/icons"
 import SettingsLayout from "../../../layout/SettingsLayout"
+import { updatePassword } from "../../../services/auth"
+import { useSelector } from "react-redux"
 
 const UpdatePassword = () => {
+  const user = useSelector((state) => state.auth.user); // Add this line to select the user
+
   const [form] = Form.useForm()
   const [passwordVisible, setPasswordVisible] = useState({
     current: false,
@@ -39,8 +43,17 @@ const UpdatePassword = () => {
 
   const handleSubmit = (values) => {
     console.log("Password change submitted:", values)
-    // Here you would typically call an API to update the password
-    form.resetFields()
+    
+    const model = {
+      ...values,
+      email: user?.email, 
+    };
+    console.log("Add task values:", model)
+    
+    updatePassword(model)
+      .then((response) => {
+      message.success(response?.message || "Password updated successfully");
+      form.resetFields()
     setPassword("")
     setPasswordValidation({
       length: false,
@@ -48,6 +61,14 @@ const UpdatePassword = () => {
       lowercase: false,
       number: false,
     })
+    })
+    .catch((err) => {
+        message.error(err?.message || "Password updated failed");
+        console.error("Error creating Password updated:", err);
+      });
+
+
+   
   }
 
   const ValidationIcon = ({ isValid }) => {
