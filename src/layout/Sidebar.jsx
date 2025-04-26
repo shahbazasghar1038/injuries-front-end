@@ -2,9 +2,12 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Icons } from '../components/svg/Icons'
 import logo from '../assets/logo.svg'
+import { clearAuthData } from '../store/authSlice'
+import { useDispatch } from 'react-redux'
 
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const { pathname } = location;
   
   // Menu navigation items
@@ -18,8 +21,18 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   // User options navigation items
   const userOptions = [
-    { path: '/settings/profile', label: 'Settings', icon: <Icons.SettingsIcon /> },
-    { path: '/logout', label: 'Logout', icon: <Icons.LogoutIcon />, className: 'logout' },
+    { path: "/settings/profile", label: "Settings", icon: <Icons.SettingsIcon /> },
+    {
+      path: "",
+      label: "Logout",
+      icon: <Icons.LogoutIcon />,
+      className: "logout",
+      onClick: () => {
+        console.log("Logout clicked");
+        dispatch(clearAuthData());
+        console.log("Auth data cleared");
+      },
+    },
   ];
 
   // Render navigation link
@@ -73,6 +86,32 @@ const Sidebar = ({ isOpen, onClose }) => {
       </Link>
     );
   };
+
+
+  const renderNavLink2 = (option) => {
+    if (option.onClick) {
+      return (
+        <button
+          key={option.label}
+          onClick={option.onClick}
+          className={`flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-gray-100 text-left ${option.className || ''}`}
+        >
+          {option.icon}
+          <span>{option.label}</span>
+        </button>
+      );
+    }
+    return (
+      <Link
+        key={option.label}
+        href={option.path}
+        className="flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-gray-100"
+      >
+        {option.icon}
+        <span>{option.label}</span>
+      </Link>
+    );
+  };
   
   return (
     <>
@@ -110,8 +149,8 @@ const Sidebar = ({ isOpen, onClose }) => {
               </div>
 
               <div className="flex flex-col items-start gap-1 relative self-stretch w-full flex-[0_0_auto]">
-                {userOptions.map(renderNavLink)}
-              </div>
+    {userOptions.map(renderNavLink2)}
+  </div>
             </div>
           </div>
         </div>

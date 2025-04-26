@@ -8,7 +8,7 @@ export const loginUser = async (payload) => {
 
     return response.data;
   } catch (error) {
-    throw new Error(error || "An error occurred");
+    throw new Error(error?.response?.data?.message || "An error occurred");
   }
 };
 
