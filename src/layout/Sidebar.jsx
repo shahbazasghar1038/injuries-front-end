@@ -21,10 +21,13 @@ const Sidebar = ({ isOpen, onClose }) => {
 
   // User options navigation items
   const userOptions = [
-    { path: "/settings/profile", label: "Settings", icon: <Icons.SettingsIcon /> },
     {
-      path: "",
-      label: "Logout",
+      path: "/settings/profile",
+      label: "Settings",
+      icon: <Icons.SettingsIcon />,
+    },
+    {
+      label: "Logout", // 🔥 Don't set path for Logout
       icon: <Icons.LogoutIcon />,
       className: "logout",
       onClick: () => {
@@ -34,6 +37,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       },
     },
   ];
+  
 
   // Render navigation link
   const renderNavLink = (item) => {
@@ -88,6 +92,7 @@ const Sidebar = ({ isOpen, onClose }) => {
   };
 
 
+
   const renderNavLink2 = (option) => {
     if (option.onClick) {
       return (
@@ -101,10 +106,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         </button>
       );
     }
+  
     return (
       <Link
         key={option.label}
-        href={option.path}
+        to={option.path} // 🔥 Use `to`, not `href`
         className="flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-gray-100"
       >
         {option.icon}
@@ -112,6 +118,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       </Link>
     );
   };
+  
   
   return (
     <>
