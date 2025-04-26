@@ -22,8 +22,8 @@ import CustomModal from "../../components/ui/CustomModal";
 import TaskForm from "./partials/TaskForm";
 import SelectMedicalProvidersDemo from "./partials/SelectMedicalProvidersModal";
 import ActionModal from "../../components/ui/ActionModal";
-import { useParams } from "react-router-dom";
-import { addTaskToCase, deleteSingleCase, getSingleCase } from "../../services/cases";
+import { useNavigate, useParams } from "react-router-dom";
+import { addTaskToCase, archiveCase, deleteSingleCase, getSingleCase } from "../../services/cases";
 import { formatDate } from "../../helper/formateDate";
 
 const PatientStatusCard = ({ data, index }) => (
@@ -49,6 +49,7 @@ const CaseDetailPage = () => {
   const { id } = useParams();
     const [messageApi, contextHolder] = message.useMessage();
   const [caseData, setCaseData] = useState(null);
+ const navigate = useNavigate()
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -270,6 +271,7 @@ const CaseDetailPage = () => {
           break;
         case 'archive':
           // Handle archive logic
+          handleArchiveCase()
           console.log('Move to archive selected');
           break;
         case 'delete':
@@ -287,6 +289,8 @@ const CaseDetailPage = () => {
       deleteSingleCase(id)
       .then((response) => {
         setIsDeleteModalVisible(false);
+        navigate('/ongoing-cases')
+
         setLoading(false);
       })
       .catch((err) => {
@@ -295,6 +299,28 @@ const CaseDetailPage = () => {
         setLoading(false);
       });
     };
+
+
+
+      const handleArchiveCase = () => {
+    
+        const model = {
+          reason: 'Case is completed',
+          caseId: caseData?.case?.id,
+        };
+        
+        archiveCase(model)
+          .then((response) => {
+            console.log("Case archived successfully:", response);
+          message.success(response?.message || "Case archived successfully");
+          navigate('/ongoing-cases')
+          })
+          .catch((err) => {
+        messageApi.error(err);
+
+            console.error("Error archive case:", err);
+          });
+      }
     
     // Handler for canceling deletion
     const handleCancelDelete = () => {

@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from '../../components/ui/Breadcrumb'
 import ActionModal from '../../components/ui/ActionModal'
 import { Avatar, Button, Input } from 'antd';
 import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
+import { getAllarchiveCase } from '../../services/cases';
+import { formatDate } from '../../helper/formateDate';
 
 
 const Archieve = () => {
@@ -92,6 +94,26 @@ const Archieve = () => {
       },
     ];
 
+      const [cases, setCases] = useState([]); // State to store cases
+      const [error, setError] = useState(null); // State to store errors
+      
+      // Fetch all cases when the component mounts
+      useEffect(() => {
+        fetchAllArchivedCases();
+      }, []);
+    
+      const fetchAllArchivedCases = () => {
+        getAllarchiveCase()
+        .then((response) => {
+          console.log('resp : ' , response)
+          setCases(response);  
+        })
+        .catch((err) => {
+          console.error("Error fetching cases:", err);
+          setError("Failed to fetch cases. Please try again later.");
+        });
+      };
+
   return (
    <>
     <AuthenticatedLayout>
@@ -118,13 +140,13 @@ const Archieve = () => {
                 </div>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_20px] relative">
-                {archiveItems.map((item, index) => (
+                {cases.map((item, index) => (
                     <div key={index} className="flex flex-col w-full items-center gap-2 p-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]">
                         <div className="flex flex-col items-start gap-3 p-4 relative flex-1 self-stretch w-full grow bg-[#f8f9fb] rounded-lg">
                             <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">
                                 <div className="inline-flex flex-col items-start justify-center gap-1 relative flex-[0_0_auto]">
                                     <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-20 fw-700 text-blue-39">
-                                        {item.name}
+                                        {item?.case.fullName}
                                     </div>
                                 </div>
 
@@ -178,7 +200,7 @@ const Archieve = () => {
                                     </div>
 
                                     <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-14 fw-500 text-gray-54">
-                                        {item.filesCount}
+                                        {item?.case.filesCount || 0}
                                     </div>
                                 </div>
 
@@ -188,7 +210,7 @@ const Archieve = () => {
                                     </div>
 
                                     <div className="relative w-fit mt-[-1.00px]  whitespace-nowrap fs-14 fw-500 text-gray-54">
-                                        {item.caseStartDate}
+                                        {formatDate(item.case?.caseStartData) || 'Not started yet'}
                                     </div>
                                 </div>
 
@@ -199,7 +221,7 @@ const Archieve = () => {
 
                                     <div className="inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] bg-[#98a1b2] rounded-[999px]">
                                         <div className="relative w-fit mt-[-1.00px]  text-white  text-center   whitespace-nowrap fs-14 fw-500">
-                                            {item.status}
+                                            Archived
                                         </div>
                                     </div>
                                 </div>

@@ -69,9 +69,18 @@ export const addTaskToCase = async (model) => {
 // Archive a case
 export const archiveCase = async (model) => {
   try {
-    const response = await axiosInstance.put(`archive/archived`, model);
+    const response = await axiosInstance.post(`archive/archived`, model);
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.message || "archiving case failed");
+    throw new Error(error?.response?.data?.error || "archiving case failed");
+  }
+};
+
+export const getAllarchiveCase = async () => {
+  try {
+    const response = await axiosInstance.get(`archive`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.error || "archiving case failed");
   }
 };
