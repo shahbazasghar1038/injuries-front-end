@@ -74,7 +74,7 @@ const CaseDashboard = () => {
         </div>
 
         <div className='mt-6'>
-                <PatientDetail />
+                <PatientDetail onAddProviderClick={showModal} />
         </div>
         <div className="mt-6">
           <p className='fs-16 fw-500 text-blue-39'>Medical Providers</p>

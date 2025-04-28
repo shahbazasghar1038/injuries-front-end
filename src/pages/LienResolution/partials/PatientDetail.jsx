@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PatientDetail = () => {
+const PatientDetail = ({ onAddProviderClick }) => {
   return (
    <>
     <div className="flex items-center justify-between relative flex-wrap gap-5">
@@ -84,7 +84,10 @@ const PatientDetail = () => {
       </div>
 
       <div className="flex w-[191px] items-center justify-end gap-6 w-full xl:w-fit relative">
-        <button className="all-[unset] px-4 py-3 relative overflow-hidden btn btn-primary">
+        <button 
+          className="all-[unset] px-4 py-3 relative overflow-hidden btn btn-primary"
+          onClick={onAddProviderClick}
+        >
           <div className="relative w-5 h-5">
             <img
               className="w-3 h-3 left-1 absolute top-1"
