@@ -77,6 +77,7 @@ const AddNewCaseForm = ({onCancel, onSubmit}) => {
           borderRadius: '6px',
           border: '1px solid #d9d9d9',
           fontSize: '16px',
+          padding: '7px 11px',
         }}
         buttonStyle={{
           border: 'none',

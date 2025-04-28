@@ -497,3 +497,19 @@ font-family: "Outfit", sans-serif;
 .ant-select-single{
     height: 44px !important;
 }
+
+.add-new-case-form{
+    .ant-form-item{
+        margin-bottom: 20px !important;
+    }
+    .react-tel-input{
+        .special-label{
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            line-height: 142.857% !important;
+            font-family: "Outfit", sans-serif;
+            color: #344054 !important;
+            margin-bottom: 6px !important;
+        }
+    } 
+}
