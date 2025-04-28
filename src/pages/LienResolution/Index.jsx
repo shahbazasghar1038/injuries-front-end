@@ -4,7 +4,8 @@ import Breadcrumb from '../../components/ui/Breadcrumb'
 import { Avatar, Button, Input } from 'antd';
 import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import CaseCard from './partials/CaseCard';
-
+import CustomModal from '../../components/ui/CustomModal';
+import AddNewCaseForm from './partials/AddNewCaseForm';
 
 const LienResolution = () => {
 
@@ -14,7 +15,7 @@ const LienResolution = () => {
       ];
 
   const [search, setSearch] = useState("");
-
+ 
   const cases = [
     {
       id: 1,
@@ -106,6 +107,8 @@ const LienResolution = () => {
         ))}
       </div>
     </div>
+
+  
 
     </AuthenticatedLayout>
 

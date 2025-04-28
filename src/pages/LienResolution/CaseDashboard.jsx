@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from '../../components/ui/Breadcrumb';
 import PatientDetail from './partials/PatientDetail';
+import CustomModal from '../../components/ui/CustomModal';
+import AddNewCaseForm from './partials/AddNewCaseForm';
 
 
 const CaseDashboard = () => {
@@ -11,6 +13,18 @@ const CaseDashboard = () => {
         { label: "Lien Resolution", href: "/" },
         { label: "Case Details"},
       ];
+
+      const [isModalVisible, setIsModalVisible] = useState(false)
+
+    
+      const showModal = () => {
+        setIsModalVisible(true)
+      }
+      
+      const handleCancel = () => {
+        setIsModalVisible(false)
+      }
+    
     
     // Add sample medical provider data
     const medicalProviders = [
@@ -185,7 +199,9 @@ const CaseDashboard = () => {
         </div>
 
         
-
+        <CustomModal  open={isModalVisible} onClose={handleCancel} borderRadius={24}>
+      <AddNewCaseForm visible={isModalVisible} onCancel={handleCancel} />
+  </CustomModal>
 
     </AuthenticatedLayout>
   )

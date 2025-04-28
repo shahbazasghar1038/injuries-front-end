@@ -65,7 +65,7 @@ const AddNewCaseForm = ({onCancel, onSubmit}) => {
           {/* Phone */}
           <Form.Item
       name="phone"
-      // label="Phone"
+      label="Phone"
       rules={[{ required: false, message: "Please enter phone number" }]}
     >
       <PhoneInput
