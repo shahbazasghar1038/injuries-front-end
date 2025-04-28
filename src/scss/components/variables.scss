@@ -10,6 +10,7 @@ $white-color: #FFF;
 $blue-39: #1D2939;
 $blue-85: #667085;
 $blue-light-B3: #98A2B3;
+$dark-light-A8: #8899A8;
 $dark-light-EC: #E4E7EC;
 $danger-color: #F04438;
 $pink-color: #DD2590;
@@ -28,6 +29,9 @@ $primary-hover-color: #465fff9e;
 }
 .text-gray-54{
   color: $color-gray-54;
+}
+.text-dark-light-A8{
+  color: $dark-light-A8;
 }
 .text-blue-39{
   color: $blue-39 !important;

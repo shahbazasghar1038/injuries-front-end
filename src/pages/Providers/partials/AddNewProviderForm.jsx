@@ -100,7 +100,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
         </div>
   
     <Form form={form} layout="vertical" initialValues={initialValues} className="medical-provider-form">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
         {/* Full Name */}
         <Form.Item name="fullName" label="Full Name" rules={[{ required: false, message: "Please enter full name" }]}>
           <Input placeholder="Enter full name" />
@@ -121,7 +121,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
        {/* Phone */}
        <Form.Item
       name="phone"
-      label="Phone"
+      // label="Phone"
       rules={[{ required: false, message: "Please enter phone number" }]}
     >
       <PhoneInput
@@ -133,6 +133,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
           borderRadius: '6px',
           border: '1px solid #d9d9d9',
           fontSize: '16px',
+          padding: '4px 10px',
         }}
         buttonStyle={{
           border: 'none',

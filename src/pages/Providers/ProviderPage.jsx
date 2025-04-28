@@ -234,7 +234,7 @@ const ProviderPage = () => {
 
 
     <div className=" bg-white rounded-xl shadow-sm mt-6  ">
-      <div className=" p-3 lg:p-6 lg:flex xl:flex justify-between items-center relative">
+      <div className="px-3 lg:px-6 py-2 lg:py-4 lg:flex xl:flex justify-between items-center relative">
 
         <div className="flex flex-col mb-">
           <h1 className="text-xl font-semibold text-gray-800">Medical Providers</h1>
@@ -244,13 +244,13 @@ const ProviderPage = () => {
         <Input
         placeholder="Search providers..."
         prefix={<SearchOutlined className="text-gray-400" />}
-        className=" md:max-w-md mb-4 order-1 md:order-0"
+        className=" md:max-w-md order-1 md:order-0"
         size="large"
         value={searchText}
             onChange={handleSearch}
             allowClear
       />
-          <Button type="primary"  onClick={showModal} icon={<PlusOutlined />} size="large" className="order-0 md:order-1 mt-2 md:mt-0 bg-blue-600 hover:bg-blue-700">
+          <Button type="primary"  onClick={showModal} icon={<PlusOutlined />} size="large" className="order-0 md:order-1 mt-2 md:mt-0 bg-blue-600 hover:bg-blue-700 h-11">
           Add medical provider
           </Button>
         </div>

@@ -84,8 +84,8 @@ const UpdatePassword = () => {
 
 
     <Card className="shadow-sm mb-6">
-      <h2 className="text-lg font-semibold mb-4">Password</h2>
-      <Divider/>
+      <h2 className="fs-16 fw-500 text-blue-39">Password</h2>
+      <Divider className="my-4"/>
       <Form form={form} layout="vertical" onFinish={handleSubmit}  className="max-w-[491px]">
         <Form.Item className="password-field-container"
           name="currentPassword"
@@ -138,19 +138,19 @@ const UpdatePassword = () => {
         <div className="mb-5 ml-2">
           <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
             <ValidationIcon isValid={passwordValidation.length} />
-            <span>Min. of 8-16 characters</span>
+            <span className="fs-12 fw-400 text-dark-light-A8">Min. of 8-16 characters</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
             <ValidationIcon isValid={passwordValidation.uppercase} />
-            <span>Min. one uppercase letter (A-Z)</span>
+            <span className="fs-12 fw-400 text-dark-light-A8">Min. one uppercase letter (A-Z)</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
             <ValidationIcon isValid={passwordValidation.lowercase} />
-            <span>Min. one lowercase letter (a-z)</span>
+            <span className="fs-12 fw-400 text-dark-light-A8">Min. one lowercase letter (a-z)</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
             <ValidationIcon isValid={passwordValidation.number} />
-            <span>Min. one number (0-9)</span>
+            <span className="fs-12 fw-400 text-dark-light-A8">Min. one number (0-9)</span>
           </div>
         </div>
 

@@ -304,6 +304,14 @@ body {
     .ant-input-outlined{
         height: 48px !important;
     }
+    .ant-form-item-required{
+        color: #344054  !important;
+        font-family: "Outfit", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height:142.857%;
+    }
    
 }
 
@@ -330,6 +338,7 @@ label{
     font-style: normal !important;
     font-weight: 500 !important;
     line-height: 142.857% !important;
+    font-family: "Outfit", sans-serif !important;
 }
 }
 
@@ -340,6 +349,8 @@ label{
                 th{
                     font-weight: 500 !important;
                     color: #667085 !important;
+                    padding: 0px 24px !important;
+
                 }
             }
         }
@@ -359,6 +370,24 @@ label{
                     }
                 }
             }
+        }
+    }
+
+    .ant-table-body{
+        table{
+            tbody{
+                tr{
+                    td{
+                        &:first-child{
+                            padding: 14px 24px !important;
+                        }
+                    }
+                    &:first-child{
+                        display: none !important;
+                    }
+                }
+            }
+           
         }
     }
 }
@@ -436,6 +465,17 @@ font-family: "Outfit", sans-serif;
     .checkbox-provider{
         margin-bottom: 0px !important;
     }
+    .react-tel-input{
+        margin-top:  3px !important;
+        .special-label{
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            line-height: 142.857% !important;
+            font-family: "Outfit", sans-serif;
+            color: #344054 !important;
+            margin-bottom: 6px !important;
+        }
+    } 
 }
 
 .action-modal{
@@ -503,6 +543,7 @@ font-family: "Outfit", sans-serif;
         margin-bottom: 20px !important;
     }
     .react-tel-input{
+        margin-top: 3px !important;
         .special-label{
             font-size: 14px !important;
             font-weight: 500 !important;

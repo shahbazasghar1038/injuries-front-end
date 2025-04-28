@@ -365,7 +365,7 @@ export default function Payment() {
         <Form.Item name="enableAutomaticPayments" valuePropName="checked">
           <Checkbox checked={enableAutomaticPayments} onChange={(e) => setEnableAutomaticPayments(e.target.checked)}>
             <div className="ml-2">
-              <span className="fs-14 fw-600 ext-gray-54">Enable Automatic Payments</span>
+              <span className="fs-14 fw-600 text-gray-54">Enable Automatic Payments</span>
               <p className="fs-14 fw-400 gray-color-67">Save this card for automatic payments in the future.</p>
             </div>
           </Checkbox>
