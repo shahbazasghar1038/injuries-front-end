@@ -317,16 +317,18 @@ export const ForgotPassword = () => {
         footer={null}
         closable={false}
         centered
+        className="password-reset-modal"
         style={{
           borderRadius: "24px",
           maxWidth: "580px",
-          height: "298px"
+          height: "258px"
         }}
         width={580}
         bodyStyle={{ 
           padding: "40px", 
           textAlign: "center",
-          height: "298px"
+          height: "258px",
+          borderRadius: "24px",
         }}
         modalRender={(node) => (
           <Link to={'/sign-up'} style={{ borderRadius: "24px", overflow: "hidden" }}>
@@ -372,7 +374,7 @@ export const ForgotPassword = () => {
         </Row>
 
           <h5 className="text-blue-39 mb-3">Password Reset</h5>
-          <p className="fs-14 text-blue-85 mb-8">Congratulations! You've successfully update the password.</p>
+          <p className="fs-14 text-blue-85 mb-6">Congratulations! You've successfully update the password.</p>
 
         <div
           style={{

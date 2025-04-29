@@ -196,11 +196,11 @@ const PersonalInfo = () => {
               <Form.Item
                 name="phone"
                 className="phone-field-container"
-                label={
-                  <>
-                    Phone <span style={{ color: "red" }}>*</span>
-                  </>
-                }
+                // label={
+                //   <>
+                //     Phone <span style={{ color: "red" }}>*</span>
+                //   </>
+                // }
                 rules={[
                   { required: false, message: "Please enter phone number" },
                 ]}
@@ -214,6 +214,7 @@ const PersonalInfo = () => {
                     borderRadius: "6px",
                     border: "1px solid #d9d9d9",
                     fontSize: "16px",
+                    padding: '7px 11px',
                   }}
                   buttonStyle={{
                     border: "none",

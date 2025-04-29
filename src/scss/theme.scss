@@ -554,3 +554,29 @@ font-family: "Outfit", sans-serif;
         }
     } 
 }
+
+.personal-info-form{
+    .react-tel-input{
+        margin-top: 3px !important;
+        .special-label{
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            line-height: 142.857% !important;
+            font-family: "Outfit", sans-serif;
+            color: #344054 !important;
+            margin-bottom: 8px !important;
+        }
+    } 
+}
+
+.password-reset-modal{
+    .ant-modal-content{
+        border-radius: 24px !important;
+        .ant-modal-body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: end;
+        }
+    }
+}
