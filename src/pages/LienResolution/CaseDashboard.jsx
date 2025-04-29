@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from '../../components/ui/Breadcrumb';
 import PatientDetail from './partials/PatientDetail';
+import CustomModal from '../../components/ui/CustomModal';
+import AddNewCaseForm from './partials/AddNewCaseForm';
 
 
 const CaseDashboard = () => {
@@ -11,6 +13,18 @@ const CaseDashboard = () => {
         { label: "Lien Resolution", href: "/" },
         { label: "Case Details"},
       ];
+
+      const [isModalVisible, setIsModalVisible] = useState(false)
+
+    
+      const showModal = () => {
+        setIsModalVisible(true)
+      }
+      
+      const handleCancel = () => {
+        setIsModalVisible(false)
+      }
+    
     
     // Add sample medical provider data
     const medicalProviders = [
@@ -60,7 +74,7 @@ const CaseDashboard = () => {
         </div>
 
         <div className='mt-6'>
-                <PatientDetail />
+                <PatientDetail onAddProviderClick={showModal} />
         </div>
         <div className="mt-6">
           <p className='fs-16 fw-500 text-blue-39'>Medical Providers</p>
@@ -95,8 +109,8 @@ const CaseDashboard = () => {
                       Treatment Status:
                     </div>
 
-                    <div className={`inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] ${provider.treatmentStatus === "Completed" ? "bg-[#ebfdf2]" : "bg-[#ecf3ff]"} rounded-[999px]`}>
-                      <div className={`relative w-fit mt-[-1.00px] fs-14 fw-500 ${provider.treatmentStatus === "Completed" ? "text-[#039754]" : "text-[#465fff]"} text-center  whitespace-nowrap `}>
+                    <div className={`inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] ${provider.treatmentStatus === "Completed" ? "bg-[#ECFDF3]" : "bg-[#ecf3ff]"} rounded-[999px]`}>
+                      <div className={`relative w-fit mt-[-1.00px] fs-14 fw-500 ${provider.treatmentStatus === "Completed" ? "text-[#039855]" : "text-[#465fff]"} text-center  whitespace-nowrap `}>
                         {provider.treatmentStatus}
                       </div>
                     </div>
@@ -111,14 +125,14 @@ const CaseDashboard = () => {
                       provider.lienOfferStatus === "Pending" 
                         ? "bg-[#FFFAEB]" 
                         : provider.lienOfferStatus === "Completed" 
-                          ? "bg-[#ebfdf2]" 
+                          ? "bg-[#ECFDF3]" 
                           : "bg-[#ecf3ff]"
                     }`}>
                       <div className={`mt-[-1.00px] text-center relative w-fit whitespace-nowrap fs-14 fw-500 ${
                         provider.lienOfferStatus === "Pending" 
                           ? "text-[#DC6803]" 
                           : provider.lienOfferStatus === "Completed" 
-                            ? "text-[#039754]" 
+                            ? "text-[#039855]" 
                             : "text-[#465fff]"
                       }`}>
                         {provider.lienOfferStatus}
@@ -143,7 +157,7 @@ const CaseDashboard = () => {
                           Reduced Amount:
                         </div>
 
-                        <div className="mt-[-1.00px] text-[#98a1b2] relative w-fit  whitespace-nowrap fs-14 fw-500">
+                        <div className="mt-[-1.00px] text-[#344054] relative w-fit  whitespace-nowrap fs-14 fw-500">
                           {provider.reducedAmount === "-" ? "-" : `$${provider.reducedAmount}`}
                         </div>
                       </div>
@@ -185,7 +199,9 @@ const CaseDashboard = () => {
         </div>
 
         
-
+        <CustomModal  open={isModalVisible} onClose={handleCancel} borderRadius={24}>
+      <AddNewCaseForm visible={isModalVisible} onCancel={handleCancel} />
+  </CustomModal>
 
     </AuthenticatedLayout>
   )

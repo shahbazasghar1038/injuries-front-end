@@ -227,9 +227,9 @@ body {
     }
 }
 
-.ant-form-item-control-input-content{
-    height: 44px !important;
-}
+// .ant-form-item-control-input-content{
+//     height: 44px !important;
+// }
 
 .remember-checkbox{
     .ant-form-item-control-input-content{
@@ -304,6 +304,14 @@ body {
     .ant-input-outlined{
         height: 48px !important;
     }
+    .ant-form-item-required{
+        color: #344054  !important;
+        font-family: "Outfit", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height:142.857%;
+    }
    
 }
 
@@ -330,6 +338,7 @@ label{
     font-style: normal !important;
     font-weight: 500 !important;
     line-height: 142.857% !important;
+    font-family: "Outfit", sans-serif !important;
 }
 }
 
@@ -340,6 +349,8 @@ label{
                 th{
                     font-weight: 500 !important;
                     color: #667085 !important;
+                    padding: 0px 24px !important;
+
                 }
             }
         }
@@ -359,6 +370,24 @@ label{
                     }
                 }
             }
+        }
+    }
+
+    .ant-table-body{
+        table{
+            tbody{
+                tr{
+                    td{
+                        &:first-child{
+                            padding: 14px 24px !important;
+                        }
+                    }
+                    &:first-child{
+                        display: none !important;
+                    }
+                }
+            }
+           
         }
     }
 }
@@ -436,6 +465,17 @@ font-family: "Outfit", sans-serif;
     .checkbox-provider{
         margin-bottom: 0px !important;
     }
+    .react-tel-input{
+        margin-top:  3px !important;
+        .special-label{
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            line-height: 142.857% !important;
+            font-family: "Outfit", sans-serif;
+            color: #344054 !important;
+            margin-bottom: 6px !important;
+        }
+    } 
 }
 
 .action-modal{
@@ -496,4 +536,66 @@ font-family: "Outfit", sans-serif;
 }
 .ant-select-single{
     height: 44px !important;
+}
+
+.add-new-case-form{
+    .ant-form-item{
+        margin-bottom: 20px !important;
+    }
+    .react-tel-input{
+        margin-top: 3px !important;
+        .special-label{
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            line-height: 142.857% !important;
+            font-family: "Outfit", sans-serif;
+            color: #344054 !important;
+            margin-bottom: 6px !important;
+        }
+    } 
+}
+
+.personal-info-form{
+    .react-tel-input{
+        margin-top: 3px !important;
+        .special-label{
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            line-height: 142.857% !important;
+            font-family: "Outfit", sans-serif;
+            color: #344054 !important;
+            margin-bottom: 8px !important;
+        }
+    } 
+}
+
+.password-reset-modal{
+    .ant-modal-content{
+        border-radius: 24px !important;
+        .ant-modal-body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: end;
+        }
+    }
+}
+
+.edit-personal-info-form{
+    .react-tel-input{
+        .special-label{
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            line-height: 142.857% !important;
+            font-family: "Outfit", sans-serif;
+            color: #344054 !important;
+            margin-bottom: 8px !important;
+        }
+    } 
+}
+
+.login-form{
+    .ant-form-item{
+        margin-bottom: 0px !important;
+    }
 }

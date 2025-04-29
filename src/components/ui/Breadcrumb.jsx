@@ -9,7 +9,7 @@ const Breadcrumb = ({ links }) => {
           <li key={index} className="flex items-center">
             {index !== 0 && <span className="mx-2"><Icons.ArrowRightIcon /></span>}
             {link.href ? (
-              <a href={link.href} className="hover:underline">
+              <a href={link.href} className="fs-14 fw-400 text-blue-85 hover:underline">
                 {link.label}
               </a>
             ) : (

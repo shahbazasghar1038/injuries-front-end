@@ -15,12 +15,12 @@ const EditAddress = ({ open, onClose, onSave, initialData }) => {
 
   return (
       <>
-      <div className="pb-2">
-          <h2 className="text-2xl font-semibold">Edit Address</h2>
-          <p className="text-gray-500 text-sm mt-1">Update your details to keep your profile up-to-date.</p>
+      <div className="pt-2">
+          <h6 className="font-600 text-blue-39">Edit Address</h6>
+          <p className="fs-14 fw-400 text-blue-85 mb-7 mt-1">Update your details to keep your profile up-to-date.</p>
         </div>
         <Form form={form} layout="vertical" initialValues={initialData} className="edit-personal-info-form">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-3">
           <Form.Item name="street" label="Street" rules={[{ required: true, message: "Please enter your street address" }]}>
             <Input placeholder="Enter your street address" />
           </Form.Item>

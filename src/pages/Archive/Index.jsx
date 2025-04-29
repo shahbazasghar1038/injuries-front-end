@@ -124,15 +124,15 @@ const Archieve = () => {
 
         <div className="content-card-bg p--24">
             <div className="lg:flex xl:flex justify-between items-center border-b border-solid border-[#e4e7ec] pb-2.5 mb-6 relative">
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                     <h1 className="text-xl font-semibold text-gray-800">Cases</h1>
                 </div>
 
-                <div className="flex  md:flex-row flex-col justify-between gap-4">
+                <div className="flex  md:flex-row flex-col justify-end gap-4 w-full">
                     <Input
                     placeholder="Search cases..."
                     prefix={<SearchOutlined className="text-gray-400" />}
-                    className=" md:max-w-xl w-full order-1 md:order-0 h-12"
+                    className=" md:max-w-sm w-full order-1 md:order-0 h-12"
                     size="large"
                     onChange={(e) => setSearch(e.target.value)}
                     />
@@ -219,7 +219,7 @@ const Archieve = () => {
                                         Case Status:
                                     </div>
 
-                                    <div className="inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] bg-[#98a1b2] rounded-[999px]">
+                                    <div className="inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] bg-[#98A2B3] rounded-[999px]">
                                         <div className="relative w-fit mt-[-1.00px]  text-white  text-center   whitespace-nowrap fs-14 fw-500">
                                             Archived
                                         </div>

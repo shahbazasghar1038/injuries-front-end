@@ -86,11 +86,11 @@ console.log('user :' ,  user)
                 className="border-2 border-gray-200 h-11 md:h-[80px] rounded-full "
               />
               <div className="text-center sm:text-left flex flex-col justify-center h-full">
-                <h1 className="text-xl font-semibold">
+                <h1 className="fs-18 fw-600 text-blue-39">
                   {userData.firstName}  
                 </h1>
                 {/* <p className="text-gray-600">{userData.bio}</p> */}
-                <p className="text-gray-600 mt-2">
+                <p className="fs-14 fw-400 text-blue-85 mt-2">
                 {userData?.bio} | {user?.Addresses[0]?.state}
                 </p>
               </div>
@@ -99,7 +99,7 @@ console.log('user :' ,  user)
 
           <Card className="mb-6 shadow-sm">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold">Personal Information</h2>
+              <h2 className="fs-18 fw-600 text-blue-39">Personal Information</h2>
               <Button
                 type="text"
                 icon={<EditOutlined />}
@@ -111,31 +111,31 @@ console.log('user :' ,  user)
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="text-gray-500 text-sm">First Name</p>
-                <p>{userData.firstName}</p>
+                <p className="fs-12 fw-400 text-blue-85 mb-2">First Name</p>
+                <p className="fs-14 fw-500 text-blue-39">{userData.firstName}</p>
               </div>
               {/* <div>
-                <p className="text-gray-500 text-sm">Last Name</p>
+                <p className="fs-12 fw-400 text-blue-85 mb-2">Last Name</p>
                 <p>{userData.lastName}</p>
               </div> */}
               <div>
-                <p className="text-gray-500 text-sm">Email address</p>
-                <p>{userData.email}</p>
+                <p className="fs-12 fw-400 text-blue-85 mb-2">Email address</p>
+                <p className="fs-14 fw-500 text-blue-39">{userData.email}</p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm">Phone</p>
-                <p>{userData.phone}</p>
+                <p className="fs-12 fw-400 text-blue-85 mb-2">Phone</p>
+                <p className="fs-14 fw-500 text-blue-39">{userData.phone}</p>
               </div>
               <div className="md:col-span-2">
-                <p className="text-gray-500 text-sm">Bio</p>
-                <p>{userData.bio}</p>
+                <p className="fs-12 fw-400 text-blue-85 mb-2">Bio</p>
+                <p className="fs-14 fw-500 text-blue-39">{userData.bio}</p>
               </div>
             </div>
           </Card>
 
           <Card className="shadow-sm">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold">Address</h2>
+              <h2 className="fs-18 fw-600 text-blue-39">Address</h2>
               <Button
                 type="text"
                 icon={<EditOutlined />}
@@ -147,20 +147,20 @@ console.log('user :' ,  user)
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="text-gray-500 text-sm">Street</p>
-                <p>{userData.street}</p>
+                <p className="fs-12 fw-400 text-blue-85 mb-2">Street</p>
+                <p className="fs-14 fw-500 text-blue-39">{userData.street}</p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm">City/State</p>
-                <p>{userData.state}</p>
+                <p className="fs-12 fw-400 text-blue-85 mb-2">City/State</p>
+                <p className="fs-14 fw-500 text-blue-39">{userData.state}</p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm">Postal Code</p>
-                <p>{userData.zipCode}</p>
+                <p className="fs-12 fw-400 text-blue-85 mb-2">Postal Code</p>
+                <p className="fs-14 fw-500 text-blue-39">{userData.zipCode}</p>
               </div>
               <div>
-                <p className="text-gray-500 text-sm">TAX ID</p>
-                <p>{userData.taxId}</p>
+                <p className="fs-12 fw-400 text-blue-85 mb-2">TAX ID</p>
+                <p className="fs-14 fw-500 text-blue-39">{userData.taxId}</p>
               </div>
             </div>
           </Card>

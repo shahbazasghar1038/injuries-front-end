@@ -4,15 +4,19 @@
 
 
 $primary-color: #465FFF;
+$primary-color-bg: #ECF3FF;
 $Background-Body-Secondary: #F9FAFB;
 $color-gray-54:  #344054;
 $white-color: #FFF;
 $blue-39: #1D2939;
 $blue-85: #667085;
 $blue-light-B3: #98A2B3;
+$dark-light-A8: #8899A8;
 $dark-light-EC: #E4E7EC;
 $danger-color: #F04438;
 $pink-color: #DD2590;
+$success-color: #039855;
+$success-color-bg: #ECFDF3;
 
 $secondary-color-54: #344054;
 $gray-color-67: #475467;
@@ -28,6 +32,9 @@ $primary-hover-color: #465fff9e;
 }
 .text-gray-54{
   color: $color-gray-54;
+}
+.text-dark-light-A8{
+  color: $dark-light-A8;
 }
 .text-blue-39{
   color: $blue-39 !important;
@@ -47,9 +54,17 @@ $primary-hover-color: #465fff9e;
 .blue-light-b3{
   color: $blue-light-B3;
 }
- 
+.success-color{
+  color: $success-color;
+}
+.success-color-bg{
+  background-color: $success-color-bg;
+}
 .bg-gray-54{
   background-color: $Background-Body-Secondary;
+}
+.bg-primary-color-bg{
+  background-color: $primary-color-bg;
 }
 
 

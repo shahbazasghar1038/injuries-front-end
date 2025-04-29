@@ -4,7 +4,8 @@ import Breadcrumb from '../../components/ui/Breadcrumb'
 import { Avatar, Button, Input } from 'antd';
 import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import CaseCard from './partials/CaseCard';
-
+import CustomModal from '../../components/ui/CustomModal';
+import AddNewCaseForm from './partials/AddNewCaseForm';
 
 const LienResolution = () => {
 
@@ -14,7 +15,7 @@ const LienResolution = () => {
       ];
 
   const [search, setSearch] = useState("");
-
+ 
   const cases = [
     {
       id: 1,
@@ -23,7 +24,7 @@ const LienResolution = () => {
       accidentDate: "04/01/24",
       startDate: "03/11/25",
       status: "Enrolled",
-      statusColor: "text-emerald-600 bg-emerald-50",
+      statusColor: "success-color success-color-bg",
     },
     {
       id: 2,
@@ -32,7 +33,7 @@ const LienResolution = () => {
       accidentDate: "04/01/24",
       startDate: "12/25/24",
       status: "In Progress",
-      statusColor: "text-blue-600 bg-blue-50",
+      statusColor: "text-primary bg-primary-color-bg",
     },
     {
       id: 3,
@@ -41,7 +42,7 @@ const LienResolution = () => {
       accidentDate: "04/01/24",
       startDate: "01/26/25",
       status: "In Progress",
-      statusColor: "text-blue-600 bg-blue-50",
+      statusColor: "text-primary bg-primary-color-bg",
     },
     {
       id: 4,
@@ -50,7 +51,7 @@ const LienResolution = () => {
       accidentDate: "04/01/24",
       startDate: "02/15/25",
       status: "In Progress",
-      statusColor: "text-blue-600 bg-blue-50",
+      statusColor: "text-primary bg-primary-color-bg",
     },
     {
       id: 5,
@@ -59,7 +60,7 @@ const LienResolution = () => {
       accidentDate: "04/01/24",
       startDate: "02/15/25",
       status: "In Progress",
-      statusColor: "text-blue-600 bg-blue-50",
+      statusColor: "text-primary bg-primary-color-bg",
     },
   ]
 
@@ -106,6 +107,8 @@ const LienResolution = () => {
         ))}
       </div>
     </div>
+
+  
 
     </AuthenticatedLayout>
 

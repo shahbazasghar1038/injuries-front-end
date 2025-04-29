@@ -239,7 +239,7 @@ const Home = () => {
       <div className='flex justify-between items-center gap-2'>
         <p className='fs-20 fw-600 text-blue-39'>Intake</p>
         <div className="flex items-center gap-1.5">
-          <p className='fs-14 fw-400 text-gray-54'>Home</p>
+          <p className='fs-14 fw-400 text-blue-85'>Home</p>
           <Icons.ArrowRightIcon />
           <p className='fs-14 fw-400 text-blue-39'>Intake</p>
         </div>
