@@ -89,6 +89,7 @@ const SignIn = () => {
         </p>
 
         <Form
+          className="login-form"
           form={form}
           name="login"
           initialValues={{
