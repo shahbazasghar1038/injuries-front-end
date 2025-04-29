@@ -109,8 +109,8 @@ const CaseDashboard = () => {
                       Treatment Status:
                     </div>
 
-                    <div className={`inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] ${provider.treatmentStatus === "Completed" ? "bg-[#ebfdf2]" : "bg-[#ecf3ff]"} rounded-[999px]`}>
-                      <div className={`relative w-fit mt-[-1.00px] fs-14 fw-500 ${provider.treatmentStatus === "Completed" ? "text-[#039754]" : "text-[#465fff]"} text-center  whitespace-nowrap `}>
+                    <div className={`inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] ${provider.treatmentStatus === "Completed" ? "bg-[#ECFDF3]" : "bg-[#ecf3ff]"} rounded-[999px]`}>
+                      <div className={`relative w-fit mt-[-1.00px] fs-14 fw-500 ${provider.treatmentStatus === "Completed" ? "text-[#039855]" : "text-[#465fff]"} text-center  whitespace-nowrap `}>
                         {provider.treatmentStatus}
                       </div>
                     </div>
@@ -125,14 +125,14 @@ const CaseDashboard = () => {
                       provider.lienOfferStatus === "Pending" 
                         ? "bg-[#FFFAEB]" 
                         : provider.lienOfferStatus === "Completed" 
-                          ? "bg-[#ebfdf2]" 
+                          ? "bg-[#ECFDF3]" 
                           : "bg-[#ecf3ff]"
                     }`}>
                       <div className={`mt-[-1.00px] text-center relative w-fit whitespace-nowrap fs-14 fw-500 ${
                         provider.lienOfferStatus === "Pending" 
                           ? "text-[#DC6803]" 
                           : provider.lienOfferStatus === "Completed" 
-                            ? "text-[#039754]" 
+                            ? "text-[#039855]" 
                             : "text-[#465fff]"
                       }`}>
                         {provider.lienOfferStatus}
@@ -157,7 +157,7 @@ const CaseDashboard = () => {
                           Reduced Amount:
                         </div>
 
-                        <div className="mt-[-1.00px] text-[#98a1b2] relative w-fit  whitespace-nowrap fs-14 fw-500">
+                        <div className="mt-[-1.00px] text-[#344054] relative w-fit  whitespace-nowrap fs-14 fw-500">
                           {provider.reducedAmount === "-" ? "-" : `$${provider.reducedAmount}`}
                         </div>
                       </div>

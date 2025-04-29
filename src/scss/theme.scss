@@ -227,9 +227,9 @@ body {
     }
 }
 
-.ant-form-item-control-input-content{
-    height: 44px !important;
-}
+// .ant-form-item-control-input-content{
+//     height: 44px !important;
+// }
 
 .remember-checkbox{
     .ant-form-item-control-input-content{
@@ -579,4 +579,17 @@ font-family: "Outfit", sans-serif;
             justify-content: end;
         }
     }
+}
+
+.edit-personal-info-form{
+    .react-tel-input{
+        .special-label{
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            line-height: 142.857% !important;
+            font-family: "Outfit", sans-serif;
+            color: #344054 !important;
+            margin-bottom: 8px !important;
+        }
+    } 
 }

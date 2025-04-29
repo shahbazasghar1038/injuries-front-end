@@ -219,7 +219,7 @@ const Archieve = () => {
                                         Case Status:
                                     </div>
 
-                                    <div className="inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] bg-[#98a1b2] rounded-[999px]">
+                                    <div className="inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] bg-[#98A2B3] rounded-[999px]">
                                         <div className="relative w-fit mt-[-1.00px]  text-white  text-center   whitespace-nowrap fs-14 fw-500">
                                             Archived
                                         </div>

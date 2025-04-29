@@ -84,7 +84,7 @@ const SignIn = () => {
       {contextHolder}
       <div className="form-bg">
         <h4 className="text-blue-39 fw-600 mb-3">Sign In</h4>
-        <p className="text-blue-85 fw-400 mb-8">
+        <p className="text-blue-85 fw-400 fs-14 mb-8">
           Enter your email and password to sign in!
         </p>
 

@@ -7,7 +7,7 @@ import placeholder from '../assets/img/placeholder.png'
 const Header = ({ toggleSidebar }) => {
   const user = useSelector((state) => state.auth.user); // user from store
   return (
-    <div className='bg-white py-6 pr-6 border-b [border-bottom-style:solid] border-[#e4e7ec] sticky top-0 z-[1]'>
+    <div className='bg-white py-4 pr-6 border-b [border-bottom-style:solid] border-[#e4e7ec] sticky top-0 z-[1]'>
       <div className='content-wrapper'>
         <div className="flex w-full items-center justify-between relative">
           {/* Hamburger menu for mobile and tablet */}
