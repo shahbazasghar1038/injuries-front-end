@@ -41,7 +41,7 @@ const EditAddress = ({ open, onClose, onSave, initialData }) => {
             <Input placeholder="Enter your postal code" />
           </Form.Item>
 
-          <Form.Item name="taxId" label="TAX ID">
+          <Form.Item name="texId" label="TAX ID">
             <Input placeholder="Enter your TAX ID" />
           </Form.Item>
         </div>

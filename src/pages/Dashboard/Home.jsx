@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import { Icons } from '../../components/svg/Icons'
 import ActionModal from '../../components/ui/ActionModal'
+import { getAllIntakes } from '../../services/cases';
 
 // At the top of your component, before the return statement
 const dropdownAnimation = `
@@ -22,18 +23,40 @@ const dropdownAnimation = `
 `;
 
 const Home = () => {
+
+    const [cases, setCases] = useState([]); // State to store cases
+      const [error, setError] = useState(null); // State to store errors
+      
+      // Fetch all cases when the component mounts
+      useEffect(() => {
+        fetchAllIntakes();
+      }, []);
+    
+      const fetchAllIntakes = () => {
+        getAllIntakes()
+        .then((response) => {
+          console.log('resp : ' , response)
+          setCases(response);  
+        })
+        .catch((err) => {
+          console.error("Error fetching intakes:", err);
+          setError("Failed to fetch intakes. Please try again later.");
+        });
+      };
+
   // Add state for active tab
   const [activeTab, setActiveTab] = useState("new");
 
-  const contacts = [
-    { initials: "KF", name: "Kierra Franci", phone: "+1 (603) 111-2233", bgColor: "#fdf1f9", textColor: "#dc2590" },
-    { initials: "?", name: "Unknown", phone: "+1 (603) 555-0123", bgColor: "white", textColor: "#344053" },
-    { initials: "CP", name: "Chance Philips", phone: "+1 (603) 222-3344", bgColor: "#fff5ed", textColor: "#ec4909" },
-    { initials: "TG", name: "Terry Geidt", phone: "+1 (603) 333-4455", bgColor: "#ebfdf2", textColor: "#039754" },
-    { initials: "KF", name: "Kierra Frances", phone: "+1 (603) 444-5566", bgColor: "#fdf1f9", textColor: "#dc2590" },
-    { initials: "TJ", name: "Terry Jones", phone: "+1 (603) 555-6677", bgColor: "#ebfdf2", textColor: "#039754" },
-    { initials: "MP", name: "Michael Philips", phone: "+1 (603) 666-7788", bgColor: "#fff5ed", textColor: "#ec4909" },
-  ];
+  const contacts =cases?.intakeCases || [];
+  // const contacts = [
+  //   { initials: "KF", name: "Kierra Franci", phone: "+1 (603) 111-2233", bgColor: "#fdf1f9", textColor: "#dc2590" },
+  //   { initials: "?", name: "Unknown", phone: "+1 (603) 555-0123", bgColor: "white", textColor: "#344053" },
+  //   { initials: "CP", name: "Chance Philips", phone: "+1 (603) 222-3344", bgColor: "#fff5ed", textColor: "#ec4909" },
+  //   { initials: "TG", name: "Terry Geidt", phone: "+1 (603) 333-4455", bgColor: "#ebfdf2", textColor: "#039754" },
+  //   { initials: "KF", name: "Kierra Frances", phone: "+1 (603) 444-5566", bgColor: "#fdf1f9", textColor: "#dc2590" },
+  //   { initials: "TJ", name: "Terry Jones", phone: "+1 (603) 555-6677", bgColor: "#ebfdf2", textColor: "#039754" },
+  //   { initials: "MP", name: "Michael Philips", phone: "+1 (603) 666-7788", bgColor: "#fff5ed", textColor: "#ec4909" },
+  // ];
 
   // Create separate arrays for new and archived contacts
   const archivedContacts = [
@@ -44,6 +67,8 @@ const Home = () => {
 
   // Instead of using the contacts array directly, maintain it in state so we can modify it
   const [contactsList, setContactsList] = useState(contacts);
+  console.log('list' , contactsList)
+  console.log('contacts' , contacts)
   const [archivedList, setArchivedList] = useState(archivedContacts);
   
   const [searchQuery, setSearchQuery] = useState("");
@@ -57,43 +82,18 @@ const Home = () => {
   const getContactQuestions = (contact) => {
     if (!contact) return [];
     
-    return [
-      { 
-        id: 1, 
-        question: "What is your first name?", 
-        answer: contact.name.split(' ')[0], // Extract first name from full name
-        status: "Completed" 
-      },
-      { 
-        id: 2, 
-        question: "What is your last name?", 
-        answer: contact.name.split(' ').length > 1 ? contact.name.split(' ')[1] : "N/A", // Extract last name if available
-        status: "Pending" 
-      },
-      { 
-        id: 3, 
-        question: "What is your phone number?", 
-        answer: contact.phone, 
-        status: "Completed" 
-      },
-      { 
-        id: 4, 
-        question: "When did the incident occur?", 
-        answer: `Last ${contact.name.length > 5 ? "Thursday" : "Monday"} around ${contact.phone.slice(-1)}pm.`, // Just an example of dynamic content
-        status: "Pending" 
-      }
-    ];
-  };
+    };
 
   // Track which questions are open
   const [openQuestions, setOpenQuestions] = useState({});
   
   // Get questions for the selected contact
   const currentQuestions = getContactQuestions(selectedContact);
-  
+  console.log('current        :' , currentQuestions)
+  console.log('selectedContact        :' , selectedContact)
   // Filter out deleted questions
   const filteredQuestions = currentQuestions.filter(
-    question => !deletedQuestions[`${selectedContact.phone}-${question.id}`]
+    question => !deletedQuestions[`${selectedContact.phoneNumber}-${question.id}`]
   );
 
   const toggleQuestion = (id) => {
@@ -129,7 +129,7 @@ const Home = () => {
     
     setDeletedQuestions(prev => ({
       ...prev,
-      [`${selectedContact.phone}-${questionToDelete}`]: true
+      [`${selectedContact.phoneNumber}-${questionToDelete}`]: true
     }));
     
     // Close the modal
@@ -163,7 +163,7 @@ const Home = () => {
   // Add function to handle actual deletion after confirmation
   const confirmDeleteContact = () => {
     // Remove the contact from the list
-    const updatedContacts = contactsList.filter(contact => contact.phone !== selectedContact.phone);
+    const updatedContacts = contactsList.filter(contact => contact.phoneNumber !== selectedContact.phoneNumber);
     setContactsList(updatedContacts);
     
     // Select the first contact from the remaining list or set to null if empty
@@ -181,13 +181,15 @@ const Home = () => {
   };
   
   // Get the current list based on active tab
-  const currentList = activeTab === "new" ? contactsList : archivedList;
+  const currentList = activeTab === "new" ? contacts : archivedList;
+
+  console.log('first , contacts : ' , contactsList)
   
   // Filter contacts based on search query from the current list
   const filteredContacts = currentList.filter(
     (contact) =>
-      contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      contact.phone.toLowerCase().includes(searchQuery.toLowerCase())
+      contact.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      contact.phoneNumber.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   // Update tab switching to set the first contact as active
@@ -229,6 +231,7 @@ const Home = () => {
     // Close the modal
     setAcceptModalVisible(false);
   };
+
 
   return (
     <AuthenticatedLayout>
@@ -327,7 +330,7 @@ const Home = () => {
                 <div
                   key={index}
                   className={`contact-list-item flex flex-col items-start gap-[50px] p-3 relative self-stretch w-full flex-[0_0_auto] rounded-lg transition-all duration-300 hover:bg-[var(--Card-Secondary-Background,#F2F4F7)] hover:rounded-[var(--Utilities-Border-Radius-LG,8px)] cursor-pointer ${
-                    selectedContact && selectedContact.phone === contact.phone ? 'active bg-[var(--Card-Secondary-Background,#F2F4F7)] rounded-[var(--Utilities-Border-Radius-LG,8px)]' : ''
+                    selectedContact && selectedContact.phoneNumber === contact.phoneNumber ? 'active bg-[var(--Card-Secondary-Background,#F2F4F7)] rounded-[var(--Utilities-Border-Radius-LG,8px)]' : ''
                   }`}
                   onClick={() => handleContactSelect(contact)}
                 >
@@ -345,8 +348,8 @@ const Home = () => {
                     </div>
 
                     <div className="flex flex-col items-start justify-center gap-0.5 relative flex-1 grow">
-                      <div className="relative contact-name">{contact.name}</div>
-                      <div className="relative contact-phone fs-12 fw-400 text-gray-500">{contact.phone}</div>
+                      <div className="relative contact-name">{contact.fullName}</div>
+                      <div className="relative contact-phone fs-12 fw-400 text-gray-500">{contact.phoneNumber}</div>
                     </div>
                   </div>
                 </div>
@@ -363,12 +366,12 @@ const Home = () => {
 
                 <div className="flex flex-col items-start gap-1 relative flex-1 grow mt-[-11.00px] mb-[-11.00px]">
                   <div className="self-stretch relative mt-[-1.00px] fs-14 fw-500 text-blue-39">
-                    {selectedContact ? selectedContact.name : "No contact selected"}
+                    {selectedContact ? selectedContact.fullName : "No contact selected"}
                   </div>
 
                   <div className="flex items-start gap-1 relative self-stretch w-full flex-[0_0_auto]">
                     <div className="w-fit whitespace-nowrap relative mt-[-1.00px] fs-12 fw-400 text-blue-85">
-                      {selectedContact ? selectedContact.phone : ""}
+                      {selectedContact ? selectedContact.phoneNumber : ""}
                     </div>
 
                     {/* Only show "Transferred Call" text in New Cases tab */}

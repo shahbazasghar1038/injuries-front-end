@@ -1,6 +1,20 @@
 import { Archive } from "lucide-react";
 import axiosInstance from "./axios";
 
+
+// intakes page 
+export const getAllIntakes = async () => {
+  try {
+    const response = await axiosInstance.get(`intakes/all`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.error || "Get intakes failed");
+  }
+};
+
+
+
+
 export const getAllProvider = async () => {
   try {
     const response = await axiosInstance.get(`users/providers`);
@@ -79,6 +93,26 @@ export const archiveCase = async (model) => {
 export const getAllarchiveCase = async () => {
   try {
     const response = await axiosInstance.get(`archive`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.error || "archiving case failed");
+  }
+};
+
+// invite doctor 
+export const inviteNewDoctor = async (model) => {
+  try {
+    const response = await axiosInstance.post(`invite/doctor`, model);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "task create failed");
+  }
+};
+
+
+export const updateUser = async (id, model) => {
+  try {
+    const response = await axiosInstance.put(`users/${id}`, model);
     return response.data;
   } catch (error) {
     throw new Error(error?.response?.data?.error || "archiving case failed");

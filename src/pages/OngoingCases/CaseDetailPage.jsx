@@ -25,6 +25,7 @@ import ActionModal from "../../components/ui/ActionModal";
 import { useNavigate, useParams } from "react-router-dom";
 import { addTaskToCase, archiveCase, deleteSingleCase, getSingleCase } from "../../services/cases";
 import { formatDate } from "../../helper/formateDate";
+import CaseDetailProviderCard from "./partials/CaseDetailProviderCard";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -47,9 +48,10 @@ const PatientStatusCard = ({ data, index }) => (
 
 const CaseDetailPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate()
     const [messageApi, contextHolder] = message.useMessage();
   const [caseData, setCaseData] = useState(null);
- const navigate = useNavigate()
+  console.log('caseData' , caseData)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -410,6 +412,14 @@ const CaseDetailPage = () => {
               Medical Providers
             </h2>
           </div>
+{true ? 
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  {caseData?.doctors?.map((provider, index) => (
+    <CaseDetailProviderCard key={index} provider={provider} />
+  ))}
+</div>
+
+:
 
           <div className="flex flex-col items-center justify-center py-12 text-center">
             <h3 className="text-lg font-medium text-gray-800 mb-2">
@@ -419,6 +429,7 @@ const CaseDetailPage = () => {
               The doctors will appear once they are added to the case.
             </p>
           </div>
+}
 
           <div className="bg-white rounded-xl shadow-sm mt-6  ">
             <div className="lg:flex xl:flex justify-between relative items-center p-6">

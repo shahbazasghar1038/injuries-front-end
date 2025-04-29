@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Avatar, Button, Card } from "antd"
+import { Avatar, Button, Card, message } from "antd"
 import { EditOutlined } from "@ant-design/icons"
 import EditPersonalInfo from "./partials/EditPersonalInfo"
 import EditAddress from "./partials/EditAddress"
@@ -10,6 +10,7 @@ import AuthenticatedLayout from "../../../layout/AuthenticatedLayout"
 import SettingsLayout from "../../../layout/SettingsLayout"
 import { useSelector } from "react-redux"
 import placeholder from '../../../assets/img/placeholder.png'
+import { updateUser } from "../../../services/cases"
 
 export default function UserProfile() {
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
@@ -23,7 +24,7 @@ console.log('user :' ,  user)
     street: user?.Addresses[0]?.streetAddress,
     state: user?.Addresses[0]?.state,
     zipCode: user?.Addresses[0]?.zipCode,
-    taxId: user?.textID || "Not added yet",
+    texId: user?.texID || "Not added yet",
   })
 
   const [personalInfoModalOpen, setPersonalInfoModalOpen] = useState(false)
@@ -31,12 +32,48 @@ console.log('user :' ,  user)
 
   const handlePersonalInfoUpdate = (updatedInfo) => {
     setUserData({ ...userData, ...updatedInfo })
-    setPersonalInfoModalOpen(false)
+    console.log('as;ldfjs' , updatedInfo)
+    let model ={
+      fullName: updatedInfo.firstName,
+      phonNumber: updatedInfo.phone,
+      role: updatedInfo.bio, 
+    }
+    
+    updateUser(user?.id , model)
+    .then((response) => {
+      message.success(response?.message || "Personal info updated successfully");
+      setPersonalInfoModalOpen(false)
+    })
+    .catch((err) => {
+        message.error(err?.message || "personal failed");
+        console.error("Error personal info:", err);
+        setError("Failed to personal info. Please try again.");
+      });
   }
+
 
   const handleAddressUpdate = (updatedAddress) => {
     setUserData({ ...userData, ...updatedAddress })
-    setAddressModalOpen(false)
+    
+    let model ={
+      streetAddress: updatedAddress.street,
+      state: updatedAddress.state,
+      zipCode: updatedAddress.zipCode,
+      texID: updatedAddress.taxId,
+    }
+    
+    updateUser(user?.id , model)
+    .then((response) => {
+      message.success(response?.message || "Address updated successfully");
+      setAddressModalOpen(false)
+    })
+    .catch((err) => {
+        message.error(err?.message || "Task created failed");
+        console.error("Error creating task:", err);
+        setError("Failed to create task. Please try again.");
+      });
+
+
   }
 
   return (

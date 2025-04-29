@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
-import { Button, Input, Table } from 'antd'
+import { Button, Form, Input, Table } from 'antd'
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import CustomModal from '../../components/ui/CustomModal';
 import AddNewCaseForm from '../OngoingCases/partials/AddNewCaseForm';
 import AddNewProviderForm from './partials/AddNewProviderForm';
 import Breadcrumb from '../../components/ui/Breadcrumb'
-import { getAllProvider } from '../../services/cases';
+import { getAllProvider, inviteNewDoctor } from '../../services/cases';
 
 
 const ProviderPage = () => {
+  const [form] = Form.useForm()
     const breadcrumbLinks = [
         { label: "Home", href: "/" },
         { label: "Providers"},
@@ -27,8 +28,21 @@ const ProviderPage = () => {
     
       const handleSubmit = (values) => {
         console.log("Form values:", values)
-        setIsModalVisible(false)
-        // Here you would typically send the data to your backend
+        
+    
+        inviteNewDoctor(values)
+        .then((response) => {
+          message.success(response?.message || "Task created successfully");
+          addForm.resetFields()
+          setIsModalVisible(false) 
+        })
+        .catch((err) => {
+            message.error(err?.message || "Task created failed");
+            console.error("Error creating task:", err);
+            setError("Failed to create task. Please try again.");
+          });
+
+
       }
 
       // const providersData = [
@@ -271,7 +285,7 @@ const ProviderPage = () => {
 
     <CustomModal  open={isModalVisible} onClose={handleCancel} borderRadius={24}>
 
-<AddNewProviderForm visible={isModalVisible} onCancel={handleCancel} onSubmit={handleSubmit} />
+<AddNewProviderForm form={form} visible={isModalVisible} onCancel={handleCancel} onSubmit={handleSubmit} />
 </CustomModal>
     </AuthenticatedLayout>
   )
