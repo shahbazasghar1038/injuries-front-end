@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from '../../components/ui/Breadcrumb'
 import ActionModal from '../../components/ui/ActionModal'
-import { Avatar, Button, Input } from 'antd';
+import { Avatar, Button, Input, message } from 'antd';
 import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
-import { getAllarchiveCase } from '../../services/cases';
+import { deleteSingleCase, getAllarchiveCase } from '../../services/cases';
 import { formatDate } from '../../helper/formateDate';
 
 
@@ -27,11 +27,16 @@ const Archieve = () => {
         }
     };
 
+const [deleteData, setDeleteData] = useState({});
+
     // Function to open delete modal
     const handleDeleteClick = (item, index) => {
         setItemToDelete(item);
         setDeleteModalOpen(true);
         setOpenDropdownIndex(null); // Close dropdown after clicking
+
+        setDeleteData(item)
+
     };
 
     // Function to open move modal
@@ -44,9 +49,17 @@ const Archieve = () => {
     // Function to handle deletion confirmation
     const handleConfirmDelete = () => {
         // Implement actual deletion logic here
-        console.log('Deleting item:', itemToDelete);
-        setDeleteModalOpen(false);
-        setItemToDelete(null);
+        deleteSingleCase(deleteData?.caseId)
+        .then((response) => {
+            setIsDeleteModalVisible(false);
+            
+            setDeleteModalOpen(false);
+            setItemToDelete(null);
+              })
+              .catch((err) => {
+                console.error("Error delete case:", err);
+                setError("Failed to delete case data. Please try again later.");
+              });
     };
 
     // Function to handle move confirmation
@@ -96,6 +109,7 @@ const Archieve = () => {
 
       const [cases, setCases] = useState([]); // State to store cases
       const [error, setError] = useState(null); // State to store errors
+      const [searchQuery, setSearchQuery] = useState(""); // State for search query
       
       // Fetch all cases when the component mounts
       useEffect(() => {
@@ -109,10 +123,19 @@ const Archieve = () => {
           setCases(response);  
         })
         .catch((err) => {
-          console.error("Error fetching cases:", err);
+          console.error("Error fetching archive cases:", err);
+      message.error(err?.message);
+
           setError("Failed to fetch cases. Please try again later.");
         });
       };
+
+
+
+// Update the filtered cases based on the search query
+const filteredCases = cases.filter((item) =>
+  item?.case?.fullName?.toLowerCase().includes(searchQuery.toLowerCase())
+);
 
   return (
    <>
@@ -130,17 +153,17 @@ const Archieve = () => {
 
                 <div className="flex  md:flex-row flex-col justify-end gap-4 w-full">
                     <Input
-                    placeholder="Search cases..."
-                    prefix={<SearchOutlined className="text-gray-400" />}
-                    className=" md:max-w-sm w-full order-1 md:order-0 h-12"
-                    size="large"
-                    onChange={(e) => setSearch(e.target.value)}
+                      placeholder="Search cases..."
+                      prefix={<SearchOutlined className="text-gray-400" />}
+                      className="md:max-w-sm w-full order-1 md:order-0 h-12"
+                      size="large"
+                      onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state
                     />
                  
                 </div>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_20px] relative">
-                {cases.map((item, index) => (
+            {filteredCases.map((item, index) => (
                     <div key={index} className="flex flex-col w-full items-center gap-2 p-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]">
                         <div className="flex flex-col items-start gap-3 p-4 relative flex-1 self-stretch w-full grow bg-[#f8f9fb] rounded-lg">
                             <div className="flex items-center justify-between relative self-stretch w-full flex-[0_0_auto]">

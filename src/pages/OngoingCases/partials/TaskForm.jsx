@@ -5,38 +5,48 @@ import { PlusOutlined } from "@ant-design/icons";
 const { TextArea } = Input;
 const { Option } = Select;
 
-const TaskForm = ({ form, initialValues, isEdit = false, onCancel, onSubmit }) => {
+const TaskForm = ({caseId, form, initialValues, isEdit = false, onCancel, onSubmit }) => {
   const [fileList, setFileList] = useState([]); // Initialize with an empty file list
-
+console.log('files are :' , fileList)
   // Handle file upload
   const handleFileChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
 
+  // Add this new function to convert file to base64
+  const convertFileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   // Handle form submission
-  const handleSubmit = () => {
-    form
-      .validateFields()
-      .then((values) => {
-        // Create FormData object
-        const formData = new FormData();
+  const handleSubmit = async () => {
+    try {
+      const values = await form.validateFields();
+      console.log('Validated form values:', values);
 
-        // Append form fields to FormData
-        Object.keys(values).forEach((key) => {
-          formData.append(key, values[key]);
-        });
+      let fileBase64 = null;
+      if (fileList.length > 0 && fileList[0].originFileObj) {
+        fileBase64 = await convertFileToBase64(fileList[0].originFileObj);
+      }
 
-        // Append files to FormData
-        fileList.forEach((file) => {
-          formData.append("files", file.originFileObj); // Use the original file object
-        });
+      // Create payload object
+      const payload = {
+        taskTitle: values.taskTitle,
+        status: values.status,
+        description: values.description,
+        caseId: caseId,
+        file: fileBase64 // This will be null if no file was selected
+      };
 
-        // Pass FormData to the onSubmit handler
-        onSubmit(formData);
-      })
-      .catch((info) => {
-        console.log("Validate Failed:", info);
-      });
+      onSubmit(payload);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   // Status options

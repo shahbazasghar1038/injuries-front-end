@@ -95,7 +95,7 @@ export const getAllarchiveCase = async () => {
     const response = await axiosInstance.get(`archive`);
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.error || "archiving case failed");
+    throw new Error(error?.response?.data?.message   || "archiving case failed");
   }
 };
 

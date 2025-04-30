@@ -239,11 +239,11 @@ const CaseDetailPage = () => {
         setIsAddModalVisible(false)
       }
     
-    
+  //  add task to case 
       const handleAddSubmit = (values) => {
         const model = {
           taskData: {...values},
-          caseId: caseData?.case?.id,
+          
         };
         console.log("Add task values:", model)
         
@@ -584,7 +584,7 @@ const CaseDetailPage = () => {
       <CustomModal
         open={isAddModalVisible}
         onClose={handleAddCancel}>
-        <TaskForm form={addForm} onCancel={handleAddCancel} onSubmit={handleAddSubmit} isEdit={false} />
+        <TaskForm caseId={caseData?.case?.id} form={addForm} onCancel={handleAddCancel} onSubmit={handleAddSubmit} isEdit={false} />
       </CustomModal>
 
       <ActionModal

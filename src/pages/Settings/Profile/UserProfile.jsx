@@ -34,9 +34,11 @@ console.log('user :' ,  user)
     setUserData({ ...userData, ...updatedInfo })
     console.log('as;ldfjs' , updatedInfo)
     let model ={
-      fullName: updatedInfo.firstName,
-      phonNumber: updatedInfo.phone,
-      role: updatedInfo.bio, 
+      userData:{
+        fullName: updatedInfo.firstName,
+        phonNumber: updatedInfo.phone,
+        role: updatedInfo.bio, 
+      }
     }
     
     updateUser(user?.id , model)
@@ -56,10 +58,12 @@ console.log('user :' ,  user)
     setUserData({ ...userData, ...updatedAddress })
     
     let model ={
-      streetAddress: updatedAddress.street,
-      state: updatedAddress.state,
-      zipCode: updatedAddress.zipCode,
-      texID: updatedAddress.taxId,
+      addresses:{
+        streetAddress: updatedAddress.street,
+        state: updatedAddress.state,
+        zipCode: updatedAddress.zipCode,
+        texID: updatedAddress.taxId,
+      }
     }
     
     updateUser(user?.id , model)

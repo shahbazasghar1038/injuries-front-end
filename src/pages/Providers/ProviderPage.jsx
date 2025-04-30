@@ -28,9 +28,14 @@ const ProviderPage = () => {
     
       const handleSubmit = (values) => {
         console.log("Form values:", values)
+
+        let model ={
+          ...values,
+          caseId: 3,
+        }
         
     
-        inviteNewDoctor(values)
+        inviteNewDoctor(model)
         .then((response) => {
           message.success(response?.message || "Task created successfully");
           addForm.resetFields()
