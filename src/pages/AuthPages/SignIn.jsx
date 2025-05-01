@@ -13,7 +13,6 @@ import { loginUser } from "../../services/auth";
 import { useDispatch } from "react-redux";
 import { setAuthData } from "../../store/authSlice";
 
-
 const SignIn = () => {
   const [form] = Form.useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -49,34 +48,33 @@ const SignIn = () => {
   const onFinish = async (values) => {
     try {
       setLoading(true);
-      console.log('Form values:', values);
-      
+      console.log("Form values:", values);
+
       const loginPayload = {
         email: values.email,
-        password: values.password
+        password: values.password,
       };
 
       const response = await handleLogin(loginPayload);
-      messageApi.success('Login successful!');
-      
-      if (response.token) {
-        localStorage.setItem('token', response.token);
-      }
-      
-      setTimeout(() => {
-        navigate('/home');
-      }, 1000);
+      messageApi.success("Login successful!");
 
+      if (response.token) {
+        localStorage.setItem("token", response.token);
+      }
+
+      setTimeout(() => {
+        navigate("/home");
+      }, 1000);
     } catch (error) {
-      messageApi.error(error.message || 'Login failed. Please try again.');
+      messageApi.error(error.message || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Form validation failed:', errorInfo);
-    messageApi.error('Please check your input and try again.');
+    console.log("Form validation failed:", errorInfo);
+    messageApi.error("Please check your input and try again.");
   };
 
   return (
@@ -85,7 +83,7 @@ const SignIn = () => {
       <div className="form-bg">
         <h4 className="text-blue-39 fw-600 mb-3">Sign In</h4>
         <p className="text-blue-85 fw-400 fs-14 mb-8">
-          Enter your email and password to sign in!
+          Enter your email and password to sign in!!!!!!
         </p>
 
         <Form
@@ -111,9 +109,9 @@ const SignIn = () => {
                 message: "Please input your Email!",
               },
               {
-                type: 'email',
-                message: 'Please enter a valid email!',
-              }
+                type: "email",
+                message: "Please enter a valid email!",
+              },
             ]}
           >
             <div>
@@ -123,11 +121,11 @@ const SignIn = () => {
               >
                 Email
               </label>
-              <Input 
-                type="email" 
-                className="auth-input" 
+              <Input
+                type="email"
+                className="auth-input"
                 placeholder="Email"
-                autoComplete="email" 
+                autoComplete="email"
               />
             </div>
           </Form.Item>
@@ -158,7 +156,11 @@ const SignIn = () => {
                     onClick={() => setPasswordVisible(!passwordVisible)}
                     style={{ cursor: "pointer" }}
                   >
-                    {passwordVisible ? <EyeOutlined /> : <EyeInvisibleOutlined />}
+                    {passwordVisible ? (
+                      <EyeOutlined />
+                    ) : (
+                      <EyeInvisibleOutlined />
+                    )}
                   </span>
                 }
               />
@@ -171,12 +173,19 @@ const SignIn = () => {
           >
             <Flex justify="space-between" align="center">
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox className='text-14 fw-400 secondary-color-54 font-outfit'>Keep me logged in</Checkbox>
+                <Checkbox className="text-14 fw-400 secondary-color-54 font-outfit">
+                  Keep me logged in
+                </Checkbox>
               </Form.Item>
-              <Link to={"/forgot-password"} className="text-14 fw-400 text-primary font-outfit">Forgot password</Link>
+              <Link
+                to={"/forgot-password"}
+                className="text-14 fw-400 text-primary font-outfit"
+              >
+                Forgot password
+              </Link>
             </Flex>
           </Form.Item>
-              
+
           <Form.Item>
             <Button
               block
@@ -187,8 +196,11 @@ const SignIn = () => {
             >
               Log in
             </Button>
-            <p className='text-14 fw-400 text-gray-54 text-center mt-5'>
-              Don't have an account? <Link to={'/sign-up'} className="text-primary">Sign Up</Link>
+            <p className="text-14 fw-400 text-gray-54 text-center mt-5">
+              Don't have an account?{" "}
+              <Link to={"/sign-up"} className="text-primary">
+                Sign Up
+              </Link>
             </p>
           </Form.Item>
         </Form>
