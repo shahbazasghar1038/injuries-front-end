@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from '../../components/ui/Breadcrumb'
 import { Avatar, Button, Input } from 'antd';
@@ -6,8 +6,12 @@ import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/ic
 import CaseCard from './partials/CaseCard';
 import CustomModal from '../../components/ui/CustomModal';
 import AddNewCaseForm from './partials/AddNewCaseForm';
+import { getAllLienCases } from '../../services/cases';
+import { useSelector } from 'react-redux';
+
 
 const LienResolution = () => {
+  const user = useSelector((state) => state.auth.user); // Add this line to select the user
 
     const breadcrumbLinks = [
         { label: "Home", href: "/" },
@@ -15,57 +19,26 @@ const LienResolution = () => {
       ];
 
   const [search, setSearch] = useState("");
- 
-  const cases = [
-    {
-      id: 1,
-      name: "Emerson Workman",
-      files: 0,
-      accidentDate: "04/01/24",
-      startDate: "03/11/25",
-      status: "Enrolled",
-      statusColor: "success-color success-color-bg",
-    },
-    {
-      id: 2,
-      name: "Flora Berry",
-      files: 4,
-      accidentDate: "04/01/24",
-      startDate: "12/25/24",
-      status: "In Progress",
-      statusColor: "text-primary bg-primary-color-bg",
-    },
-    {
-      id: 3,
-      name: "Robyn Washington",
-      files: 4,
-      accidentDate: "04/01/24",
-      startDate: "01/26/25",
-      status: "In Progress",
-      statusColor: "text-primary bg-primary-color-bg",
-    },
-    {
-      id: 4,
-      name: "Kristina Bush",
-      files: 4,
-      accidentDate: "04/01/24",
-      startDate: "02/15/25",
-      status: "In Progress",
-      statusColor: "text-primary bg-primary-color-bg",
-    },
-    {
-      id: 5,
-      name: "Kristina Bush",
-      files: 4,
-      accidentDate: "04/01/24",
-      startDate: "02/15/25",
-      status: "In Progress",
-      statusColor: "text-primary bg-primary-color-bg",
-    },
-  ]
+  const [cases, setCases] = useState([]);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    fetchAllCases();
+  }, []);
+
+  const fetchAllCases = () => {
+    getAllLienCases(user?.id)
+    .then((response) => {
+      console.log('resp lien cases : ' , response)
+      setCases(response);  
+    })
+    .catch((err) => {
+      setError("Failed to fetch cases. Please try again later.");
+    });
+  };
+ 
   const filteredCases = cases.filter((c) =>
-    c.name.toLowerCase().includes(search.toLowerCase())
+    c.name?.toLowerCase().includes(search.toLowerCase())
   );
 
 
@@ -103,9 +76,10 @@ const LienResolution = () => {
  
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4 mt-6">
         {filteredCases.map((caseItem) => (
-         <CaseCard caseItem={caseItem}  />
+         <CaseCard key={caseItem.id} caseItem={caseItem}  />
         ))}
       </div>
+      {error && <div className="text-red-500 mt-4">{error}</div>}
     </div>
 
   
