@@ -5,9 +5,16 @@ import { PlusOutlined } from "@ant-design/icons";
 const { TextArea } = Input;
 const { Option } = Select;
 
-const TaskForm = ({caseId, form, initialValues, isEdit = false, onCancel, onSubmit }) => {
+const TaskForm = ({
+  caseId,
+  form,
+  initialValues,
+  isEdit = false,
+  onCancel,
+  onSubmit,
+}) => {
   const [fileList, setFileList] = useState([]); // Initialize with an empty file list
-console.log('files are :' , fileList)
+  console.log("files are :", fileList);
   // Handle file upload
   const handleFileChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
@@ -27,7 +34,7 @@ console.log('files are :' , fileList)
   const handleSubmit = async () => {
     try {
       const values = await form.validateFields();
-      console.log('Validated form values:', values);
+      console.log("Validated form values:", values);
 
       let fileBase64 = null;
       if (fileList.length > 0 && fileList[0].originFileObj) {
@@ -40,21 +47,21 @@ console.log('files are :' , fileList)
         status: values.status,
         description: values.description,
         caseId: caseId,
-        file: fileBase64 // This will be null if no file was selected
+        file: fileBase64, // This will be null if no file was selected
       };
 
       onSubmit(payload);
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
   // Status options
   const statusOptions = [
-    { value: "pending", label: "Pending" },
-    { value: "open", label: "Open" },
-    { value: "completed", label: "Completed" },
-    { value: "cancelled", label: "Cancelled" },
+    // { value: "pending", label: "Pending" },
+    { value: "Open", label: "Open" },
+    { value: "In Progress", label: "In Progress" },
+    { value: "Completed", label: "Completed" },
   ];
 
   return (
@@ -106,23 +113,22 @@ console.log('files are :' , fileList)
             Files
           </label>
           <Upload
-  multiple={false}
-  fileList={fileList}
-  onChange={({ file, fileList }) => {
-    // Keep only the latest selected file
-    setFileList(fileList.slice(-1));
-  }}
-  beforeUpload={() => false} // Prevent automatic upload
-  listType="picture-card"
->
-  {fileList.length >= 1 ? null : (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Add File</div>
-    </div>
-  )}
-</Upload>
-
+            multiple={false}
+            fileList={fileList}
+            onChange={({ file, fileList }) => {
+              // Keep only the latest selected file
+              setFileList(fileList.slice(-1));
+            }}
+            beforeUpload={() => false} // Prevent automatic upload
+            listType="picture-card"
+          >
+            {fileList.length >= 1 ? null : (
+              <div>
+                <PlusOutlined />
+                <div style={{ marginTop: 8 }}>Add File</div>
+              </div>
+            )}
+          </Upload>
         </div>
 
         {/* Form Actions */}
@@ -145,4 +151,3 @@ console.log('files are :' , fileList)
 };
 
 export default TaskForm;
-
