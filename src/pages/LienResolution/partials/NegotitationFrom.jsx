@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 const NegotitationFrom = () => {
   // 1. State for price (default: 4200)
   const [price, setPrice] = useState(4200);
+  const [isManual, setIsManual] = useState(false);
+  const [manualValue, setManualValue] = useState(price);
 
   // 2. Handlers
   const priceUp = () => setPrice(prev => prev + 1);
@@ -10,6 +12,24 @@ const NegotitationFrom = () => {
 
   // 3. Format price as currency
   const formattedPrice = `$${price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+  const handleManualInput = (e) => {
+    const value = e.target.value.replace(/[^0-9.]/g, '');
+    setManualValue(value);
+  };
+
+  const handleManualBlur = () => {
+    const num = parseFloat(manualValue);
+    if (!isNaN(num)) setPrice(num);
+    setIsManual(false);
+  };
+
+  const handleManualKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleManualBlur();
+    }
+  };
 
   return (
     <div className=' w-full'>
@@ -22,8 +42,20 @@ const NegotitationFrom = () => {
         <p className='fs-14 fw-500 text-gray-54 mb-3'>Enter Price</p>
         <div className="flex items-center gap-6 mb-6">
           <div className="flex items-center">
-            <div className="border rounded-lg px-6 py-4 bg-white flex items-center">
-              <span className="text-5xl font-bold text-black tracking-wide">{formattedPrice}</span>
+            <div className="border rounded-lg px-6 py-2.5 bg-white flex items-center h-[68px]">
+              {isManual ? (
+                <input
+                  type="text"
+                  className="text-[40px] font-bold font-outfit text-black tracking-wide outline-none w-32"
+                  value={manualValue}
+                  onChange={handleManualInput}
+                  onBlur={handleManualBlur}
+                  onKeyDown={handleManualKeyDown}
+                  autoFocus
+                />
+              ) : (
+                <span className="text-[40px] font-bold font-outfit text-black tracking-wide">{formattedPrice}</span>
+              )}
             </div>
             <div className="flex flex-col ml-2">
               <button onClick={priceUp} className="text-gray-500 hover:text-black">
@@ -35,7 +67,15 @@ const NegotitationFrom = () => {
             </div>
           </div>
           <span className="text-gray-500 mx-2">or</span>
-          <button className="text-blue-600 font-medium hover:underline">Add Manually</button>
+          <button
+            className="text-blue-600 font-medium hover:underline"
+            onClick={() => {
+              setManualValue(price);
+              setIsManual(true);
+            }}
+          >
+            Add Manually
+          </button>
         </div>
         <p className='fs-14 fw-500 text-gray-54 mb-3'>Write a Message</p>
         <textarea className="w-full border rounded-lg px-4 py-3 bg-white" cols={30} rows={3} placeholder="" />
