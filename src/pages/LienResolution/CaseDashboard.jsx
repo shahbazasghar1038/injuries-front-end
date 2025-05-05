@@ -4,6 +4,8 @@ import Breadcrumb from '../../components/ui/Breadcrumb';
 import PatientDetail from './partials/PatientDetail';
 import CustomModal from '../../components/ui/CustomModal';
 import AddNewCaseForm from './partials/AddNewCaseForm';
+import SubmissionModal from '../../components/ui/SubmissionModal';
+import NegotitationFrom from './partials/NegotitationFrom';
 
 
 const CaseDashboard = () => {
@@ -15,6 +17,8 @@ const CaseDashboard = () => {
       ];
 
       const [isModalVisible, setIsModalVisible] = useState(false)
+      const [isNegotiationModalOpen, setNegotiationModalOpen] = useState(false);
+      const [isSubmissionModalOpen, setSubmissionModalOpen] = useState(false);
 
     
       const showModal = () => {
@@ -65,6 +69,11 @@ const CaseDashboard = () => {
         reducedAmount: "2,100"
       }
     ];
+
+    const showNegotiationModal = () => {
+      // setNegotiationModalOpen(true); // Remove or comment this out if you don't want to open NegotiationModal
+      setSubmissionModalOpen(true); // Open the SubmissionModal instead
+    };
 
   return (
     <AuthenticatedLayout>
@@ -186,7 +195,7 @@ const CaseDashboard = () => {
                 </div>
 
                 <div className="flex flex-col w-[90%] items-start gap-2.5 relative flex-[0_0_auto]">
-                  <button className="all-[unset] whitespace-nowrap btn btn-primary px-4 py-3 relative w-full overflow-hidden">
+                  <button onClick={showNegotiationModal} className="all-[unset] whitespace-nowrap btn btn-primary px-4 py-3 relative w-full overflow-hidden">
                     <div className="text-white relative w-fit ">
                       Negotiate Amount
                     </div>
@@ -200,8 +209,12 @@ const CaseDashboard = () => {
 
         
         <CustomModal  open={isModalVisible} onClose={handleCancel} borderRadius={24}>
-      <AddNewCaseForm visible={isModalVisible} onCancel={handleCancel} />
-  </CustomModal>
+            <AddNewCaseForm visible={isModalVisible} onCancel={handleCancel} />
+        </CustomModal> 
+
+        <SubmissionModal open={isSubmissionModalOpen} onClose={() => setSubmissionModalOpen(false)} borderRadius={24}>
+            <NegotitationFrom visible={isNegotiationModalOpen} onCancel={() => setNegotiationModalOpen(false)} />
+        </SubmissionModal> 
 
     </AuthenticatedLayout>
   )
