@@ -248,10 +248,12 @@ const PersonalInfo = () => {
                   { required: false, message: "Please enter your address" },
                 ]}
               >
-                <GooglePlacesAutocomplete
+                <Input className="auth-input" placeholder="Enter your address" />
+
+                {/* <GooglePlacesAutocomplete
                   className="auth-input"
                   placeholder="Enter your address"
-                />
+                /> */}
               </Form.Item>
             </Col>
           </Row>
