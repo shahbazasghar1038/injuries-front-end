@@ -247,7 +247,7 @@ const CaseDetailPage = () => {
         };
         console.log("Add task values:", model)
         
-        addTaskToCase(model)
+        addTaskToCase(values)
           .then((response) => {
           message.success(response?.message || "Task created successfully");
           addForm.resetFields()

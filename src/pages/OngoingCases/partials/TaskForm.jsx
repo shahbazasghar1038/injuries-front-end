@@ -40,7 +40,7 @@ console.log('files are :' , fileList)
         status: values.status,
         description: values.description,
         caseId: caseId,
-        file: fileBase64 // This will be null if no file was selected
+        fileBase64: fileBase64 // This will be null if no file was selected
       };
 
       onSubmit(payload);
