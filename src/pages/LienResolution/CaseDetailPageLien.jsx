@@ -42,6 +42,10 @@ import {
 } from "../../services/cases";
 import { formatDate } from "../../helper/formateDate";
 import CaseDetailProviderCard from "./partials/CaseDetailProviderCard";
+import AddNewCaseForm from "./partials/AddNewCaseForm";
+import SubmissionModal from "../../components/ui/SubmissionModal";
+import NegotitationFrom from "./partials/NegotitationFrom";
+import BillRecords from "./partials/BillRecords";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -77,7 +81,7 @@ const CaseDetailPageLien = () => {
     getSingleCase(id)
       .then((response) => {
         setCaseData(response);
-        // console.log("single case data:", response);
+        console.log("single case data:", response);
         setLoading(false);
       })
       .catch((err) => {
@@ -110,6 +114,21 @@ const CaseDetailPageLien = () => {
     { label: "Ongoing Cases", href: "/cases" },
     { label: "Case Details" },
   ];
+
+
+     const [isModalVisible, setIsModalVisible] = useState(false)
+        const [isNegotiationModalOpen, setNegotiationModalOpen] = useState(false);
+        const [isSubmissionModalOpen, setSubmissionModalOpen] = useState(false);
+        const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
+  
+      
+        const showModal = () => {
+          setIsModalVisible(true)
+        }
+        
+        const handleCancel = () => {
+          setIsModalVisible(false)
+        }
 
   const items = [
     {
@@ -363,6 +382,16 @@ const CaseDetailPageLien = () => {
     setIsDeleteModalVisible(false);
   };
 
+
+  const showRecordModal = () => {
+    setIsRecordModalOpen(true);
+  };
+
+  const handleRecordModalClose = () => {
+    setIsRecordModalOpen(false);
+  };
+
+
   const menu = (
     <Menu
       className="rounded-2xl shadow-xl p-6 bg-white w-44 gap-8"
@@ -454,7 +483,7 @@ const CaseDetailPageLien = () => {
           </div>
           {true ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {medicalProviders.map((provider) => (
+              {caseData?.doctors.map((provider) => (
                 <div
                   key={provider.id}
                   className="flex flex-col w-full items-center gap-3 pt-2 pb-3 px-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]"
@@ -579,7 +608,7 @@ const CaseDetailPageLien = () => {
                   </div>
 
                   <div className="flex flex-col w-[90%] items-start gap-2.5 relative flex-[0_0_auto]">
-                    <button className="all-[unset] whitespace-nowrap btn btn-primary px-4 py-3 relative w-full overflow-hidden">
+                    <button onClick={()=>setSubmissionModalOpen(true)} className="all-[unset] whitespace-nowrap btn btn-primary px-4 py-3 relative w-full overflow-hidden">
                       <div className="text-white relative w-fit ">
                         Negotiate Amount
                       </div>
@@ -760,6 +789,19 @@ const CaseDetailPageLien = () => {
           </div>
         </div>
       )}
+
+
+<CustomModal  open={isModalVisible} onClose={handleCancel} borderRadius={24}>
+            <AddNewCaseForm visible={isModalVisible} onCancel={handleCancel} />
+        </CustomModal> 
+
+        <SubmissionModal open={isSubmissionModalOpen} onClose={() => setSubmissionModalOpen(false)} borderRadius={24}>
+            <NegotitationFrom  visible={isNegotiationModalOpen} onCancel={() => setNegotiationModalOpen(false)} />
+        </SubmissionModal> 
+
+        <SubmissionModal open={isRecordModalOpen} onClose={handleRecordModalClose} borderRadius={24}>
+            <BillRecords visible={isRecordModalOpen} onCancel={handleRecordModalClose} />
+        </SubmissionModal> 
 
       <CustomModal open={isAddModalVisible} onClose={handleAddCancel}>
         <TaskForm

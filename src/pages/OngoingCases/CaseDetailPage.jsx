@@ -42,6 +42,7 @@ import {
 } from "../../services/cases";
 import { formatDate } from "../../helper/formateDate";
 import CaseDetailProviderCard from "./partials/CaseDetailProviderCard";
+import { useSelector } from "react-redux";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -70,6 +71,7 @@ const CaseDetailPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [caseData, setCaseData] = useState(null);
   const [taskData, setTaskData] = useState([]);
+  const user = useSelector((state) => state.auth.user); // Add this line to select the user
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -306,6 +308,7 @@ const CaseDetailPage = () => {
     const model = {
       reason: "Case is completed",
       caseId: caseData?.case?.id,
+      userId: user?.id,
     };
 
     archiveCase(model)

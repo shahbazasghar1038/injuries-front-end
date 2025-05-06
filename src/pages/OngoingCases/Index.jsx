@@ -55,6 +55,7 @@ const OngoingCases = () => {
     const model = {
       caseData: {
         ...values,
+        billAmount: 0,
       },
       userId: user?.id,
     };
