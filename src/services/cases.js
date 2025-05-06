@@ -99,9 +99,9 @@ export const archiveCase = async (model) => {
   }
 };
 
-export const getAllarchiveCase = async () => {
+export const getAllarchiveCase = async (id) => {
   try {
-    const response = await axiosInstance.get(`archive`);
+    const response = await axiosInstance.get(`archive/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(error?.response?.data?.message || "archiving case failed");

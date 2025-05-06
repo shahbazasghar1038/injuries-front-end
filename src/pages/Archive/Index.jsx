@@ -6,6 +6,7 @@ import { Avatar, Button, Input, message } from 'antd';
 import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { deleteSingleCase, getAllarchiveCase } from '../../services/cases';
 import { formatDate } from '../../helper/formateDate';
+import { useSelector } from 'react-redux';
 
 
 const Archieve = () => {
@@ -17,7 +18,7 @@ const Archieve = () => {
     // Add state for move modal
     const [moveModalOpen, setMoveModalOpen] = useState(false);
     const [itemToMove, setItemToMove] = useState(null);
-
+    const user = useSelector((state) => state.auth.user); // Add this line to select the user
     // Function to handle dropdown toggle
     const toggleDropdown = (index) => {
         if (openDropdownIndex === index) {
@@ -117,7 +118,7 @@ const [deleteData, setDeleteData] = useState({});
       }, []);
     
       const fetchAllArchivedCases = () => {
-        getAllarchiveCase()
+        getAllarchiveCase(user?.id)
         .then((response) => {
           console.log('resp : ' , response)
           setCases(response);  

@@ -246,7 +246,7 @@ const PersonalInfo = () => {
                 label="Street Address"
                 rules={[
                   { required: false, message: "Please enter your address" },
-                ]}
+                ]} 
               >
                 <Input className="auth-input" placeholder="Enter your address" />
 
