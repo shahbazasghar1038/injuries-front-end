@@ -1,8 +1,7 @@
 import { Archive } from "lucide-react";
 import axiosInstance from "./axios";
 
-
-// intakes page 
+// intakes page
 export const getAllIntakes = async () => {
   try {
     const response = await axiosInstance.get(`intakes/all`);
@@ -11,9 +10,6 @@ export const getAllIntakes = async () => {
     throw new Error(error?.response?.data?.error || "Get intakes failed");
   }
 };
-
-
-
 
 export const getAllProvider = async () => {
   try {
@@ -49,7 +45,9 @@ export const getSingleCase = async (id) => {
     const response = await axiosInstance.get(`cases/${id}`);
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.error || "fetching single cases failed");
+    throw new Error(
+      error?.response?.data?.error || "fetching single cases failed"
+    );
   }
 };
 
@@ -67,7 +65,9 @@ export const addDoctorToCase = async (model) => {
     const response = await axiosInstance.post(`cases/add-provider`, model);
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.message || "add provider to case failed");
+    throw new Error(
+      error?.response?.data?.message || "add provider to case failed"
+    );
   }
 };
 
@@ -77,6 +77,15 @@ export const addTaskToCase = async (model) => {
     return response.data;
   } catch (error) {
     throw new Error(error?.response?.data?.message || "task create failed");
+  }
+};
+
+export const getTaskbyCaseId = async (id) => {
+  try {
+    const response = await axiosInstance.get(`tasks/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.error || "fetching task failed");
   }
 };
 
@@ -95,11 +104,11 @@ export const getAllarchiveCase = async () => {
     const response = await axiosInstance.get(`archive`);
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.message   || "archiving case failed");
+    throw new Error(error?.response?.data?.message || "archiving case failed");
   }
 };
 
-// invite doctor 
+// invite doctor
 export const inviteNewDoctor = async (model) => {
   try {
     const response = await axiosInstance.post(`invite/doctor`, model);
@@ -108,7 +117,6 @@ export const inviteNewDoctor = async (model) => {
     throw new Error(error?.response?.data?.message || "task create failed");
   }
 };
-
 
 export const updateUser = async (id, model) => {
   try {

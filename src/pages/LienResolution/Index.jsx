@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
 import Breadcrumb from '../../components/ui/Breadcrumb'
 import { Avatar, Button, Input } from 'antd';
@@ -6,8 +6,11 @@ import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/ic
 import CaseCard from './partials/CaseCard';
 import CustomModal from '../../components/ui/CustomModal';
 import AddNewCaseForm from './partials/AddNewCaseForm';
+import { useSelector } from 'react-redux';
+
 
 const LienResolution = () => {
+  const user = useSelector((state) => state.auth.user); // Add this line to select the user
 
     const breadcrumbLinks = [
         { label: "Home", href: "/" },
@@ -15,7 +18,8 @@ const LienResolution = () => {
       ];
 
   const [search, setSearch] = useState("");
- 
+  const [error, setError] = useState(null);
+
   const cases = [
     {
       id: 1,
@@ -63,9 +67,9 @@ const LienResolution = () => {
       statusColor: "text-primary bg-primary-color-bg",
     },
   ]
-
+ 
   const filteredCases = cases.filter((c) =>
-    c.name.toLowerCase().includes(search.toLowerCase())
+    c.name?.toLowerCase().includes(search.toLowerCase())
   );
 
 
@@ -103,9 +107,10 @@ const LienResolution = () => {
  
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4 mt-6">
         {filteredCases.map((caseItem) => (
-         <CaseCard caseItem={caseItem}  />
+         <CaseCard key={caseItem.id} caseItem={caseItem}  />
         ))}
       </div>
+      {error && <div className="text-red-500 mt-4">{error}</div>}
     </div>
 
   
