@@ -136,3 +136,15 @@ export const updateUser = async (id, model) => {
     throw new Error(error?.response?.data?.error || "archiving case failed");
   }
 };
+
+
+export const ongoingMedicalProvider = async (payload) => {
+  try {
+    const response = await axiosInstance.post("cases/create", payload);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.error || "An error occurred");
+  }
+};
