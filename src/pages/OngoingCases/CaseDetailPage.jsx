@@ -42,6 +42,7 @@ import {
 } from "../../services/cases";
 import { formatDate } from "../../helper/formateDate";
 import CaseDetailProviderCard from "./partials/CaseDetailProviderCard";
+import { truncateText } from "../../helper/truncateText";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -115,7 +116,7 @@ const CaseDetailPage = () => {
     {
       id: 1,
       heading: "Patient",
-      name: caseData?.case?.fullName,
+      name:  truncateText(caseData?.case?.fullName, 12),
       img: oldman,
     },
     {
@@ -207,7 +208,6 @@ const CaseDetailPage = () => {
 
   const getContactQuestions = (contact) => {
     if (!contact) return [];
-
     return taskData;
   };
 
@@ -315,8 +315,7 @@ const CaseDetailPage = () => {
         navigate("/ongoing-cases");
       })
       .catch((err) => {
-        messageApi.error(err);
-
+        message.error(err.message);
         console.error("Error archive case:", err);
       });
   };

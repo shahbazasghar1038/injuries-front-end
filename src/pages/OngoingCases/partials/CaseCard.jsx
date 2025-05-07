@@ -22,7 +22,7 @@ const CaseCard = ({caseItem}) => {
     <div className="space-y-2 text-sm">
       <div className="flex">
         <span className="fs-14 fw-400 text-blue-85 w-32">No of files:</span>
-        <span className="fs-14 fw-500 text-gray-54">{caseItem.files}</span>
+        <span className="fs-14 fw-500 text-gray-54">{caseItem.files || 0}</span>
       </div>
 
       <div className="flex">
@@ -32,7 +32,7 @@ const CaseCard = ({caseItem}) => {
 
       <div className="flex">
         <span className="fs-14 fw-400 text-blue-85 w-32">Case Started on:</span>
-        <span className="fs-14 fw-500 text-gray-54">{formatDate(caseItem.caseStartData)}</span>
+        <span className="fs-14 fw-500 text-gray-54">{formatDate(caseItem.caseStartData) || 'Not started yet'}</span>
       </div>
 
       <div className="flex items-center">

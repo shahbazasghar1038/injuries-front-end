@@ -202,7 +202,7 @@ const filteredCases = cases.filter((item) =>
                                             </div>
                                             <div onClick={() => handleDeleteClick(item, index)} className="archive-dropdown-item p-2 cursor-pointer hover:bg-red-50 rounded-lg">
                                                 <div 
-                                                    className="flex items-center" 
+                                                    className="flex items-center gap-2" 
                                                     
                                                 >
                                                     <span>
