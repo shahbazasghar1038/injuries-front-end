@@ -4,9 +4,10 @@ import Breadcrumb from '../../components/ui/Breadcrumb'
 import ActionModal from '../../components/ui/ActionModal'
 import { Avatar, Button, Input, message } from 'antd';
 import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
-import { deleteSingleCase, getAllarchiveCase } from '../../services/cases';
+import { deleteSingleCase, getAllarchiveCase, unArchiveCase } from '../../services/cases';
 import { formatDate } from '../../helper/formateDate';
 import { useSelector } from 'react-redux';
+import { Rss } from 'lucide-react';
 
 
 const Archieve = () => {
@@ -63,6 +64,23 @@ const [deleteData, setDeleteData] = useState({});
               });
     };
 
+    // Function to handle deletion confirmation
+    const handleUnArchiveCase = (item) => {
+        let model = {
+            caseId: item?.caseId,
+            userId: user?.id,
+            status: "ongoing",
+        }
+        unArchiveCase(model)
+        .then((response) => {
+            console.log('res :' , response)
+              })
+              .catch((err) => {
+                console.error("Error un-archive  case:", err);
+                setError("Failed to un-archive case. Please try again later.");
+              });
+    };
+
     // Function to handle move confirmation
     const handleConfirmMove = () => {
         // Implement actual move logic here
@@ -76,37 +94,7 @@ const [deleteData, setDeleteData] = useState({});
         { label: "Archive"},
       ];
       
-    // Sample data array for archive items
-    const archiveItems = [
-      {
-        name: "Robyn Washington",
-        filesCount: 4,
-        accidentDate: "04/01/24",
-        caseStartDate: "01/26/25",
-        status: "Archived"
-      },
-      {
-        name: "John Smith",
-        filesCount: 2,
-        accidentDate: "03/15/24",
-        caseStartDate: "03/20/24",
-        status: "Archived"
-      },
-      {
-        name: "Emma Johnson",
-        filesCount: 6,
-        accidentDate: "02/10/24",
-        caseStartDate: "02/25/24",
-        status: "Archived"
-      },
-      {
-        name: "Emma Johnson",
-        filesCount: 6,
-        accidentDate: "02/10/24",
-        caseStartDate: "02/25/24",
-        status: "Archived"
-      },
-    ];
+
 
       const [cases, setCases] = useState([]); // State to store cases
       const [error, setError] = useState(null); // State to store errors
@@ -191,7 +179,7 @@ const filteredCases = cases.filter((item) =>
                                 </div>
                                 {openDropdownIndex === index && (
                                         <div className="archive-dropdown absolute right-2 top-10 z-10">
-                                            <div className="archive-dropdown-item p-2 cursor-pointer hover:bg-gray-50 rounded-lg">
+                                            <div onClick={()=>{handleUnArchiveCase(item)}} className="archive-dropdown-item p-2 cursor-pointer hover:bg-gray-50 rounded-lg">
                                                 <span>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18" fill="none">
                                                         <path d="M22.5 5.66289H7.3875C6.9375 5.66289 6.5625 5.28789 6.5625 4.83789C6.5625 4.38789 6.9375 4.01289 7.3875 4.01289H20.7L18.975 1.98789C18.675 1.61289 18.7125 1.08789 19.0875 0.787891C19.4625 0.487891 19.9875 0.52539 20.2875 0.90039L23.175 4.31289C23.4 4.57539 23.4375 4.91289 23.2875 5.21289C23.1375 5.47539 22.8375 5.66289 22.5 5.66289Z" fill="#667085"/>

@@ -99,6 +99,16 @@ export const archiveCase = async (model) => {
   }
 };
 
+// Un-Archive a case
+export const unArchiveCase = async (model) => {
+  try {
+    const response = await axiosInstance.post(`archive/unarchive`, model);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.error || "archiving case failed");
+  }
+};
+
 export const getAllarchiveCase = async (id) => {
   try {
     const response = await axiosInstance.get(`archive/${id}`);
