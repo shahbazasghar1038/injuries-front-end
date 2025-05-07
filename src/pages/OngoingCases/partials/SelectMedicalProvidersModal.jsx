@@ -276,13 +276,13 @@ const SelectMedicalProvidersDemo = ({caseID}) => {
     
     addDoctorToCase(model)
       .then((response) => {
-        console.log("Case created successfully:", response);
+        console.log("Invtie sent successfully:", response);
         setIsModalVisible(false)
-      message.success(response?.message || "Case created successfully");
+      message.success(response?.message || "Invite sent successfully");
 
       })
       .catch((err) => {
-        console.error("Error creating case:", err);
+        message.error("Error invite provider to case", err);
       });
   }
 

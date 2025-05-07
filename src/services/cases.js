@@ -66,7 +66,7 @@ export const addDoctorToCase = async (model) => {
     return response.data;
   } catch (error) {
     throw new Error(
-      error?.response?.data?.message || "add provider to case failed"
+      error
     );
   }
 };
