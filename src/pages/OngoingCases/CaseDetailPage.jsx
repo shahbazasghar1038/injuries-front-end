@@ -43,6 +43,7 @@ import {
 import { formatDate } from "../../helper/formateDate";
 import CaseDetailProviderCard from "./partials/CaseDetailProviderCard";
 import { truncateText } from "../../helper/truncateText";
+import { useSelector } from "react-redux";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -51,14 +52,14 @@ const PatientStatusCard = ({ data, index }) => (
     }  hover:shadow-md transition-shadow px-2`}
     size="small"
   >
-    <div className="flex gap-2.5">
+    <div title={data?.name} className="flex gap-2.5">
       <div className="p-3 rounded-lg bg-[#F2F4F7]">
         <img src={data?.img} alt="" className="h-4" />
       </div>
       <div>
         <p className="text-[#667085] font-normal text-xs">{data?.heading}</p>
         <div className="fs-14 fw-500 text-gray-54 whitespace-nowrap">
-          {data?.name}
+          {truncateText(data?.name, 12) }
         </div>
       </div>
     </div>
@@ -71,6 +72,7 @@ const CaseDetailPage = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const [caseData, setCaseData] = useState(null);
   const [taskData, setTaskData] = useState([]);
+  const user = useSelector((state) => state.auth.user); // Add this line to select the user
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -116,7 +118,7 @@ const CaseDetailPage = () => {
     {
       id: 1,
       heading: "Patient",
-      name:  truncateText(caseData?.case?.fullName, 12),
+      name:  caseData?.case?.fullName,
       img: oldman,
     },
     {
@@ -306,6 +308,7 @@ const CaseDetailPage = () => {
     const model = {
       reason: "Case is completed",
       caseId: caseData?.case?.id,
+      userId: user?.id,
     };
 
     archiveCase(model)
