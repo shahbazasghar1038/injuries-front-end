@@ -1,31 +1,88 @@
-import  React from "react"
+import  React, { useEffect, useState } from "react"
 import { Form, Input, Button, Select, DatePicker } from "antd"
 import { CalendarOutlined } from "@ant-design/icons"
 import GooglePlacesAutocomplete from "../../../components/ui/GooglePlacesAutocomplete"
 import PhoneInput from "react-phone-input-2"
+import moment from "moment"
 
-const AddNewCaseForm = ({onCancel, onSubmit}) => {
+const AddNewCaseForm = ({onCancel, onSubmit , data={}}) => {
 
-    const [form] = Form.useForm()
+  console.log('data:' , data)
 
-    const handleSubmit = () => {
-      form
-        .validateFields()
-        .then((values) => {
-          onSubmit(values)
-        })
-        .catch((info) => {
-          console.log("Validate Failed:", info)
-        })
+   
+  const [form] = Form.useForm();
+  const [addresses, setAddresses] = useState ([{ id: 1, isPrimary: true }]); // Initialize addresses state
+
+  // Pre-fill form fields when editing a case
+  useEffect(() => {
+    if (data?.case) {
+      form.setFieldsValue({
+        fullName: data.case.fullName,
+        email: data.case.email,
+        phone: data.case.phone,
+        dateOfBirth: data.case.dateOfBirth
+          ? moment(data.case.dateOfBirth)
+          : null,
+        dateOfAccident: data.case.dateOfAccident
+          ? moment(data.case.dateOfAccident)
+          : null,
+        gender: data.case.gender,
+        streetAddress: data.case.streetAddress,
+      });
     }
-    
-      // Gender options
-      const genderOptions = [
-        { value: "male", label: "Male" },
-        { value: "female", label: "Female" },
-        { value: "other", label: "Other" },
-        { value: "prefer_not_to_say", label: "Prefer not to say" },
-      ]
+  }, [data, form]);
+
+  const handleSubmit = () => {
+    form
+      .validateFields()
+      .then((values) => {
+        // Format dates for submission
+        const formattedValues = {
+          ...values,
+          dateOfBirth: values.dateOfBirth
+            ? values.dateOfBirth.format("YYYY-MM-DD")
+            : null,
+          dateOfAccident: values.dateOfAccident
+            ? values.dateOfAccident.format("YYYY-MM-DD")
+            : null,
+        };
+
+        // Process addresses
+        const formattedAddresses = addresses.map((addr) => ({
+          street: values[`address_${addr.id}`]?.street || "",
+          state: values[`address_${addr.id}`]?.state || "",
+          zipCode: values[`address_${addr.id}`]?.zipCode || "",
+          isPrimary: addr.isPrimary,
+        }));
+
+        // Create final form data
+        const formData = {
+          ...formattedValues,
+          addresses: formattedAddresses,
+        };
+
+        onSubmit(formData);
+      })
+      .catch((info) => {
+        console.log("Validate Failed:", info);
+      });
+  };
+
+  // Gender options
+  const genderOptions = [
+    { value: "male", label: "Male" },
+    { value: "female", label: "Female" },
+    { value: "other", label: "Other" },
+    { value: "prefer_not_to_say", label: "Prefer not to say" },
+  ];
+
+  const statusOptions = [
+    { value: "Open", label: "Open" },
+    { value: "In Progress", label: "In Progress" },
+    { value: "Closed", label: "Completed" },
+    { value: "Paid", label: "Paid" },
+  ];
+
   return (
     <div>
          <div className="pb-2">
@@ -113,14 +170,30 @@ const AddNewCaseForm = ({onCancel, onSubmit}) => {
         </div>
 
         {/* Street Address with Google Places Autocomplete - Full width */}
+       {data?.case?.email ?
         <Form.Item
-          name="streetAddress"
-          label="Street Address"
-          rules={[{ required: false, message: "Please enter street address" }]}
-          className=""
-        >
+        name="status"
+        label="Status"
+        rules={[{ required: false, message: "Please select status" }]}
+      >
+        <Select placeholder="Select status">
+          {statusOptions.map((option) => (
+            <Option key={option.value} value={option.value}>
+              {option.label}
+            </Option>
+          ))}
+        </Select>
+      </Form.Item>
+       :
+       <Form.Item
+       name="streetAddress"
+       label="Street Address"
+       rules={[{ required: false, message: "Please enter street address" }]}
+       className=""
+       >
           <GooglePlacesAutocomplete placeholder="Enter address" size="large" />
         </Form.Item>
+        }
 
         {/* Form Actions */}
         <div className="flex justify-between gap-4 mt-6">

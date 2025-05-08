@@ -36,8 +36,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   addTaskToCase,
   archiveCase,
-  createCase,
-  createUpdate,
+  caseUpdate, 
   deleteSingleCase,
   getSingleCase,
   getTaskbyCaseId,
@@ -96,9 +95,9 @@ const CaseDetailPage = () => {
         userId: user?.id,
       };
   
-      createUpdate(model)
+      caseUpdate(values, caseData?.case?.id)
         .then((response) => {
-          console.log("Case created successfully:", response);
+          console.log("Case updated successfully:", response);
           setIsModalVisible(false);
           // fetchAllCases(); // Refresh the list of cases after a successful submission
         })
@@ -456,7 +455,7 @@ const CaseDetailPage = () => {
           </div>
           {true ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {caseData?.doctors?.map((provider, index) => (
+              {caseData?.providerTreatmentRecords?.map((provider, index) => (
                 <CaseDetailProviderCard key={index} provider={provider} />
               ))}
             </div>
@@ -652,6 +651,7 @@ const CaseDetailPage = () => {
           visible={isModalVisible}
           onCancel={handleCancel}
           onSubmit={handleSubmit}
+          data={caseData}
         />
       </CustomModal>
 

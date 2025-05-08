@@ -30,7 +30,7 @@ export const createCase = async (payload) => {
     throw new Error(error?.response?.data?.error || "An error occurred");
   }
 };
-export const createUpdate = async (payload,id) => {
+export const caseUpdate = async (payload,id) => {
   try {
     const response = await axiosInstance.put(`cases/update/${id}`, payload);
     console.log(response);
@@ -52,7 +52,7 @@ export const getAllCases = async (id) => {
 
 export const getSingleCase = async (id) => {
   try {
-    const response = await axiosInstance.get(`cases/${id}`);
+    const response = await axiosInstance.get(`cases/lienCase/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -148,13 +148,13 @@ export const updateUser = async (id, model) => {
 };
 
 
-export const ongoingMedicalProvider = async (payload) => {
+export const medicalRecordRequest = async (payload,id) => {
   try {
-    const response = await axiosInstance.post("cases/create", payload);
+    const response = await axiosInstance.put(`provider-treatment-records/update/${id}`, payload);
     console.log(response);
 
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.error || "An error occurred");
+    throw new Error(error?.response?.data?.error || "An error occurred : Record request sent failed");
   }
 };
