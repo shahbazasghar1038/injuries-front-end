@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   token: null,
+  caseId: null, // Add caseId to the initial state
 };
 
 const authSlice = createSlice({
@@ -17,9 +18,12 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
     },
+    setCaseId: (state, action) => {
+      state.caseId = action.payload; // Set the caseId
+    },
   },
 });
 
-export const { setAuthData, clearAuthData } = authSlice.actions;
+export const { setAuthData, clearAuthData, setCaseId } = authSlice.actions;
 
 export default authSlice.reducer;
