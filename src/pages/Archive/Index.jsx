@@ -68,12 +68,12 @@ const [deleteData, setDeleteData] = useState({});
     const handleUnArchiveCase = (item) => {
         let model = {
             caseId: item?.caseId,
-            userId: user?.id,
-            status: "ongoing",
         }
-        unArchiveCase(model)
+        unArchiveCase(model, item?.id)
         .then((response) => {
             console.log('res :' , response)
+        fetchAllArchivedCases();
+
               })
               .catch((err) => {
                 console.error("Error un-archive  case:", err);

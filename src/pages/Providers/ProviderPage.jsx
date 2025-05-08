@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import AuthenticatedLayout from '../../layout/AuthenticatedLayout'
-import { Button, Form, Input, Table } from 'antd'
+import { Button, Form, Input, message, Table } from 'antd'
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import CustomModal from '../../components/ui/CustomModal';
 import AddNewCaseForm from '../OngoingCases/partials/AddNewCaseForm';
@@ -27,24 +27,20 @@ const ProviderPage = () => {
       }
     
       const handleSubmit = (values) => {
-        console.log("Form values:", values)
-
         let model ={
           ...values,
           caseId: 3,
-        }
-        
-    
+        }    
         inviteNewDoctor(model)
         .then((response) => {
-          message.success(response?.message || "Task created successfully");
-          addForm.resetFields()
+          message.success(response?.message || "Provider invited successfully");
+          form.resetFields()
           setIsModalVisible(false) 
         })
         .catch((err) => {
-            message.error(err?.message || "Task created failed");
-            console.error("Error creating task:", err);
-            setError("Failed to create task. Please try again.");
+            message.error(err?.message || "Provider invited failed");
+            console.error("Error Provider invited:", err);
+            setError("Failed to Provider invited. Please try again.");
           });
 
 

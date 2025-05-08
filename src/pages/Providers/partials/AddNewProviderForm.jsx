@@ -16,9 +16,11 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
       .then((values) => {
         // Process addresses
         const formattedAddresses = addresses.map((addr) => ({
-          ...values[`address_${addr.id}`],
+          street: values[`address_${addr.id}`]?.street || "",
+          state: values[`address_${addr.id}`]?.state || "",
+          zipCode: values[`address_${addr.id}`]?.zipCode || "",
           isPrimary: addr.isPrimary,
-        }))
+        }));
 
         // Create final form data
         const formData = {
@@ -28,14 +30,14 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
           phonePrefix: values.phonePrefix,
           specialty: values.specialty,
           addresses: formattedAddresses,
-        }
+        };
 
-        onSubmit(formData)
+        onSubmit(formData);
       })
       .catch((info) => {
-        console.log("Validate Failed:", info)
-      })
-  }
+        console.log("Validate Failed:", info);
+      });
+  };
 
   // Handle primary address selection
   const handlePrimaryChange = (id) => {

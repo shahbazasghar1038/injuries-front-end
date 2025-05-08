@@ -100,9 +100,9 @@ export const archiveCase = async (model) => {
 };
 
 // Un-Archive a case
-export const unArchiveCase = async (model) => {
+export const unArchiveCase = async (model, id) => {
   try {
-    const response = await axiosInstance.post(`archive/unarchive`, model);
+    const response = await axiosInstance.delete(`archive/unarchive/${id}`, model);
     return response.data;
   } catch (error) {
     throw new Error(error?.response?.data?.error || "archiving case failed");
