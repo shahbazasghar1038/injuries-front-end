@@ -86,8 +86,8 @@ const AddNewCaseForm = ({onCancel, onSubmit , data={}}) => {
   return (
     <div>
          <div className="pb-2">
-          <h6 className="font-600 text-blue-39">Add new case</h6>
-          <p className="fs-14 fw-400 text-blue-85 mt-1">Add patient information to start the case.</p>
+          <h6 className="font-600 text-blue-39">{data?.case?.email ? 'Case Details' : 'Add new case'}</h6>
+          <p className="fs-14 fw-400 text-blue-85 mt-1"> {data?.case?.email ? 'Update case details here.' : 'Add patient information to start the case.' }</p>
         </div>
            <Form form={form} layout="vertical" name="addNewCaseForm" className="mt-4 add-new-case-form">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4">
