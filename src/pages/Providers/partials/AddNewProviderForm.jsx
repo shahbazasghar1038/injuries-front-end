@@ -82,15 +82,15 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
 
   // Prefill form with sample data
   const initialValues = {
-    fullName: "Jake Paul",
-    email: "jake@medical_com",
-    phonePrefix: "US",
-    phone: "+1 688 4813 328",
-    specialty: "orthopedic",
+    fullName: "",
+    email: "",
+    phonePrefix: "",
+    phone: "",
+    specialty: "Orthopedic",
     address_1: {
-      street: "55 Brooksby Village Way, Danvers MA 1923",
-      state: "Massachusetts",
-      zipCode: "334563",
+      street: "",
+      state: "",
+      zipCode: "",
     }
   }
 

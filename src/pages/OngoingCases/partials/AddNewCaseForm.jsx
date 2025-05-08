@@ -19,17 +19,6 @@ const AddNewCaseForm = ({onCancel, onSubmit}) => {
         })
     }
     
-      // Country code options for phone
-      const prefixSelector = (
-        <Form.Item name="prefix" noStyle initialValue="US">
-          <Select className="w-20">
-            <Select.Option value="US">US</Select.Option>
-            <Select.Option value="CA">CA</Select.Option>
-            <Select.Option value="UK">UK</Select.Option>
-          </Select>
-        </Form.Item>
-      )
-    
       // Gender options
       const genderOptions = [
         { value: "male", label: "Male" },

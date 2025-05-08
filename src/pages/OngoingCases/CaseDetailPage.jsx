@@ -36,6 +36,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   addTaskToCase,
   archiveCase,
+  createCase,
+  createUpdate,
   deleteSingleCase,
   getSingleCase,
   getTaskbyCaseId,
@@ -44,6 +46,7 @@ import { formatDate } from "../../helper/formateDate";
 import CaseDetailProviderCard from "./partials/CaseDetailProviderCard";
 import { truncateText } from "../../helper/truncateText";
 import { useSelector } from "react-redux";
+import AddNewCaseForm from "./partials/AddNewCaseForm";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -74,13 +77,46 @@ const CaseDetailPage = () => {
   const [taskData, setTaskData] = useState([]);
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+    const handleSubmit = (values) => {
+      const model = {
+        caseData: {
+          ...values,
+          billAmount: 0,
+        },
+        userId: user?.id,
+      };
+  
+      createUpdate(model)
+        .then((response) => {
+          console.log("Case created successfully:", response);
+          setIsModalVisible(false);
+          // fetchAllCases(); // Refresh the list of cases after a successful submission
+        })
+        .catch((err) => {
+          console.error("Error creating case:", err);
+          message.error(err.message);
+          setError("Failed to create case. Please try again.");
+        });
+    };
+
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
     getSingleCase(id)
       .then((response) => {
         setCaseData(response);
-        // console.log("single case data:", response);
+        console.log("single case data:", response);
         setLoading(false);
       })
       .catch((err) => {
@@ -272,6 +308,7 @@ const CaseDetailPage = () => {
       case "edit":
         // Handle edit logic
         console.log("Edit profile selected");
+        showModal()
         break;
       case "archive":
         // Handle archive logic
@@ -603,6 +640,18 @@ const CaseDetailPage = () => {
           onCancel={handleAddCancel}
           onSubmit={handleAddSubmit}
           isEdit={false}
+        />
+      </CustomModal>
+
+      <CustomModal
+        open={isModalVisible}
+        onClose={handleCancel}
+        borderRadius={24}
+      >
+        <AddNewCaseForm
+          visible={isModalVisible}
+          onCancel={handleCancel}
+          onSubmit={handleSubmit}
         />
       </CustomModal>
 

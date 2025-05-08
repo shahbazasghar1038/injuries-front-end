@@ -30,6 +30,16 @@ export const createCase = async (payload) => {
     throw new Error(error?.response?.data?.error || "An error occurred");
   }
 };
+export const createUpdate = async (payload,id) => {
+  try {
+    const response = await axiosInstance.put(`cases/update/${id}`, payload);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.error || "An error occurred");
+  }
+};
 
 export const getAllCases = async (id) => {
   try {
