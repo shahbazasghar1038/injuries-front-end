@@ -4,7 +4,11 @@ import { ArrowRightOutlined, PlusOutlined, SearchOutlined } from '@ant-design/ic
 import { Link } from 'react-router-dom';
 import { formatDate } from '../../../helper/formateDate';
 
-const CaseCard = ({caseItem}) => {
+const CaseCard = ({caseItem, isDoctor}) => {
+  const getRandomColor = () => {
+    const colors = ["#FF5733", "#33B5FF", "#FFC300", "#9B59B6", "#2ECC71", "#FF33A6", "#F39C12"];
+    return colors[Math.floor(Math.random() * colors.length)];
+  };
   return (
     <div
     key={caseItem.id}
@@ -13,7 +17,19 @@ const CaseCard = ({caseItem}) => {
 
 <div className='rounded-xl bg-[#F9FAFB] p-3 '>
     <div className="flex justify-between items-start mb-4">
-      <h2 className="fs-20 fw-700 text-blue-39">{caseItem.fullName}</h2>
+      <div className="flex items-center gap-1">
+     {isDoctor &&
+     <div
+  style={{
+    width: "12px",
+    height: "12px",
+    borderRadius: "50%",
+    backgroundColor: getRandomColor(),
+  }}
+></div>}
+      <h2 className="fs-20 fw-700 text-blue-39 mb-0"> {caseItem.fullName}</h2>
+
+      </div>
 
      <Link to={`/cases-detail/${caseItem?.id}`} className='rounded-lg bg-[#fff] w-8 h-8 flex justify-center items-center'> <ArrowRightOutlined className="text-gray-400" /></Link>
 

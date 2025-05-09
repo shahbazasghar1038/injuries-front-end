@@ -12,6 +12,7 @@ import AddNewCaseForm from "./partials/AddNewCaseForm";
 import CustomModal from "../../components/ui/CustomModal";
 import { createCase, getAllCases } from "../../services/cases";
 import { useSelector } from "react-redux";
+import DoctorInvitationCard from "./partials/DoctorInvitationCard";
 const OngoingCases = () => {
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
 const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
@@ -84,6 +85,8 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
         <Breadcrumb links={breadcrumbLinks} />
       </div>
 
+     {isDoctor && <DoctorInvitationCard/>}
+
       <div className="p-6 bg-white rounded-xl shadow-sm mt-6  ">
         <div className="lg:flex xl:flex justify-between relative">
           <div className="flex flex-col mb-6">
@@ -117,7 +120,7 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4">
           {filteredCases.map((caseItem) => (
-            <CaseCard key={caseItem.id} caseItem={caseItem} />
+            <CaseCard key={caseItem.id} caseItem={caseItem} isDoctor={isDoctor} />
           ))}
         </div>
       </div>

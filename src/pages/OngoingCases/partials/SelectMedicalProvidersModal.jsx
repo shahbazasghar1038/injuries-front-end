@@ -255,7 +255,7 @@ const SelectMedicalProvidersModal = ({ visible, onCancel, onSendInvite }) => {
 }
 
 // Demo component to show the modal
-const SelectMedicalProvidersDemo = ({caseID}) => {
+const SelectMedicalProvidersDemo = ({caseID, isDoctor}) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const showModal = () => {
@@ -294,7 +294,7 @@ const SelectMedicalProvidersDemo = ({caseID}) => {
         icon={<PlusOutlined />}
         className="bg-blue-600 hover:bg-blue-700 h-11"
       >
-        Add Provider
+        {isDoctor ? 'Refer Patient' : 'Add Provider'} 
       </Button>
 
       <SelectMedicalProvidersModal visible={isModalVisible} onCancel={handleCancel} onSendInvite={handleSendInvite} />

@@ -10,15 +10,16 @@ const Sidebar = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
   const { pathname } = location;
   const user = useSelector((state) => state.auth.user);
+  const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
 console.log('user :' , user)
   const menuItems = [
     // Only include Intake if user is not a doctor
-    ...(user?.role !== 'Doctor'
+    ...(!isDoctor
       ? [{ path: '/home', label: 'Intake', icon: <Icons.PreVettedCasesIcon /> }]
       : []),
   
-    { path: '/ongoing-cases', label: 'Ongoing Cases', icon: <Icons.OngoingCasesIcon /> },
-    { path: '/lien-resolution', label: 'Lien Resolution', icon: <Icons.LienResolutionIcon /> },
+    { path: '/ongoing-cases', label: isDoctor ? 'Cases' : 'Ongoing Cases', icon: <Icons.OngoingCasesIcon /> },
+    { path: '/lien-resolution', label: isDoctor ? 'Post Treatment' : 'Lien Resolution', icon: isDoctor ? <Icons.PostTreatmentIcon/> : <Icons.LienResolutionIcon /> },
     { path: '/archive', label: 'Archive', icon: <Icons.ArchiveIcon /> },
     { path: '/providers', label: 'Providers', icon: <Icons.ProviderIcon /> },
   ];

@@ -2,17 +2,16 @@ import React, { useState } from 'react'
 import { medicalRecordRequest } from "../../../services/cases";
 import { message } from 'antd';
 
-const CaseDetailProviderCard = ({provider}) => {
-    const [medicalActive, setMedicalActive] = useState(false);
+const CaseDetailProviderCard = ({provider, handleFetchSignleCase}) => {
 
     const handleongoingMedicalProvider = () => {
       const model = {
         recordRequest: 'Requested',
-      };
-  
+      };  
       medicalRecordRequest(model, provider?.id)
         .then((response) => {
           console.log("Case archived successfully:", response);
+          handleFetchSignleCase()
           message.success(response?.message || "Record request sent successfully");
         })
         .catch((err) => {
@@ -58,7 +57,8 @@ const CaseDetailProviderCard = ({provider}) => {
       </div>
 
       <div className="flex items-start gap-6 self-stretch w-full relative flex-[0_0_auto]">
-        <button
+        <button 
+        disabled={provider?.recordRequest === 'Requested'}
           className={`all-[unset] box-border flex items-center justify-center gap-2 px-4 py-3 relative flex-1 grow rounded-lg overflow-hidden border border-solid border-[#e4e7ec] ${
             // provider?.recordRequest == 'Pending' ? 'bg-[#F79009] text-[#fff]' : 'bg-[#ECF3FF] text-gray-54'
             provider?.recordRequest === 'Pending'

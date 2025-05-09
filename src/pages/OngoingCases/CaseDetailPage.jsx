@@ -75,6 +75,7 @@ const CaseDetailPage = () => {
   const [caseData, setCaseData] = useState(null);
   const [taskData, setTaskData] = useState([]);
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
+  const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -111,20 +112,25 @@ const CaseDetailPage = () => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  useEffect(() => {
-    getSingleCase(id)
-      .then((response) => {
-        setCaseData(response);
-        console.log("single case data:", response);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        messageApi.error(err);
+const handleFetchSignleCase = () => {
+  getSingleCase(id)
+  .then((response) => {
+    setCaseData(response);
+    console.log("single case data:", response);
+    setLoading(false);
+  })
+  .catch((err) => {
+    console.error(err);
+    messageApi.error(err);
 
-        setError("Failed to fetch single case data. Please try again later.");
-        setLoading(false);
-      });
+    setError("Failed to fetch single case data. Please try again later.");
+    setLoading(false);
+  });
+}
+
+  useEffect(() => {
+    handleFetchSignleCase()
+   
   }, [id]);
 
   useEffect(() => {
@@ -437,7 +443,7 @@ const CaseDetailPage = () => {
             </div>
 
             <div className="flex gap-2">
-              <SelectMedicalProvidersDemo caseID={caseData?.case?.id} />
+              <SelectMedicalProvidersDemo caseID={caseData?.case?.id} isDoctor={isDoctor} />
 
               <Dropdown overlay={menu} trigger={["click"]}>
                 <Button
@@ -456,7 +462,7 @@ const CaseDetailPage = () => {
           {true ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {caseData?.providerTreatmentRecords?.map((provider, index) => (
-                <CaseDetailProviderCard key={index} provider={provider} />
+                <CaseDetailProviderCard key={index} provider={provider} handleFetchSignleCase={handleFetchSignleCase} />
               ))}
             </div>
           ) : (
