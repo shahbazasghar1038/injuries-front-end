@@ -19,16 +19,17 @@ const CaseCard = ({ caseItem }) => {
           <h2 className="fs-20 fw-700 text-blue-39">{caseItem.fullName}</h2>
 
           <Link
-            to={"/case-dashboard"}
+            // to={"/case-dashboard"}
+            to={`/cases-detail-lien/${caseItem?.id}`}
             className="rounded-lg bg-[#fff] w-8 h-8 flex justify-center items-center"
           >
             {" "}
             <ArrowRightOutlined className="text-gray-400" />
           </Link>
-          <Link
+          {/* <Link
             to={`/cases-detail-lien/${caseItem?.id}`}
             className="rounded-lg bg-[#fff] w-8 h-8 flex justify-center items-center"
-          ></Link>
+          ></Link> */}
         </div>
 
         <div className="space-y-3 text-sm">

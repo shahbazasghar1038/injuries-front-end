@@ -478,12 +478,12 @@ const CaseDetailPageLien = () => {
           </div>
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-medium text-gray-800">
-              Medical Providerssssss
+              Medical Providers
             </h2>
           </div>
           {true ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {caseData?.doctors.map((provider) => (
+              {caseData?.providerTreatmentRecords.map((provider) => (
                 <div
                   key={provider.id}
                   className="flex flex-col w-full items-center gap-3 pt-2 pb-3 px-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]"
