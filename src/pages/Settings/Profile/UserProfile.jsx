@@ -14,16 +14,19 @@ import { updateUser } from "../../../services/cases"
 
 export default function UserProfile() {
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
-console.log('user :' ,  user)
+const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
+  
   const [userData, setUserData] = useState({
     firstName: user?.fullName,
     // lastName: "Boruch",
     email: user?.email,
     phone: user?.phone ,
     bio: user?.bio || 'N/A',
+    role: user?.role,
     street: user?.Addresses[0]?.streetAddress,
     state: user?.Addresses[0]?.state,
     zipCode: user?.Addresses[0]?.zipCode,
+    speciality: user?.speciality || 'N/A',
     texId: user?.texID || "Not added yet",
   })
 
@@ -37,7 +40,7 @@ console.log('user :' ,  user)
       userData:{
         fullName: updatedInfo.firstName,
         phonNumber: updatedInfo.phone,
-        role: updatedInfo.bio, 
+        bio: updatedInfo.bio, 
       }
     }
     
@@ -72,9 +75,9 @@ console.log('user :' ,  user)
       setAddressModalOpen(false)
     })
     .catch((err) => {
-        message.error(err?.message || "Task created failed");
-        console.error("Error creating task:", err);
-        setError("Failed to create task. Please try again.");
+        message.error(err?.message || "Address update failed");
+        console.error("Error Address update:", err);
+        setError("Failed to Address update. Please try again.");
       });
 
 
@@ -95,7 +98,7 @@ console.log('user :' ,  user)
                 </h1>
                 {/* <p className="text-gray-600">{userData.bio}</p> */}
                 <p className="fs-14 fw-400 text-blue-85 mt-2">
-                {userData?.bio} | {user?.Addresses[0]?.state}
+                {isDoctor ? userData?.speciality : userData?.bio} | {user?.Addresses[0]?.state}
                 </p>
               </div>
             </div>
@@ -130,9 +133,9 @@ console.log('user :' ,  user)
                 <p className="fs-12 fw-400 text-blue-85 mb-2">Phone</p>
                 <p className="fs-14 fw-500 text-blue-39">{userData.phone}</p>
               </div>
-              <div className="md:col-span-2">
-                <p className="fs-12 fw-400 text-blue-85 mb-2">Bio</p>
-                <p className="fs-14 fw-500 text-blue-39">{userData.bio}</p>
+              <div className="">
+                <p className="fs-12 fw-400 text-blue-85 mb-2">{isDoctor ? 'Specialty' : 'Law Firm Name'} </p>
+                <p className="fs-14 fw-500 text-blue-39">{isDoctor ? userData?.speciality : userData.bio}</p>
               </div>
             </div>
           </Card>
@@ -162,10 +165,11 @@ console.log('user :' ,  user)
                 <p className="fs-12 fw-400 text-blue-85 mb-2">Postal Code</p>
                 <p className="fs-14 fw-500 text-blue-39">{userData.zipCode}</p>
               </div>
+             {!isDoctor &&
               <div>
                 <p className="fs-12 fw-400 text-blue-85 mb-2">TAX ID</p>
                 <p className="fs-14 fw-500 text-blue-39">{userData.taxId}</p>
-              </div>
+              </div>}
             </div>
           </Card>
 

@@ -21,6 +21,7 @@ import CreateDocumentPage from "./pages/Settings/Documents/CreateDocumentPage";
 import MyDocuments from "./pages/Settings/Documents/MyDocuments";
 import SignDocumentPage from "./pages/Settings/Documents/SignDocumentPage";
 import CaseDetailPageLien from "./pages/LienResolution/CaseDetailPageLien";
+import DoctorCaseSetting from "./pages/Settings/DoctorCaseSetting/DoctorCaseSetting";
 
 const NotFound = () => <h1>404: Page Not Found</h1>;
 
@@ -140,6 +141,14 @@ function App() {
           element={
             <PrivateRoute>
               <Payment />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/settings/case-setting"
+          element={
+            <PrivateRoute>
+              <DoctorCaseSetting />
             </PrivateRoute>
           }
         />

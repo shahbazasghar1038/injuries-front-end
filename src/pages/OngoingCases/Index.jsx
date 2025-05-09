@@ -14,7 +14,7 @@ import { createCase, getAllCases } from "../../services/cases";
 import { useSelector } from "react-redux";
 const OngoingCases = () => {
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
-
+const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
   const breadcrumbLinks = [
     { label: "Home", href: "/" },
     { label: "Ongoing Cases" },
@@ -80,18 +80,18 @@ const OngoingCases = () => {
   return (
     <AuthenticatedLayout>
       <div className="lg:flex gap-2 justify-between">
-        <p className="fs-20 fw-600 text-blue-39">Ongoing Cases</p>
+        <p className="fs-20 fw-600 text-blue-39">{isDoctor ? 'Cases' : 'Ongoing Cases' }</p>
         <Breadcrumb links={breadcrumbLinks} />
       </div>
 
       <div className="p-6 bg-white rounded-xl shadow-sm mt-6  ">
         <div className="lg:flex xl:flex justify-between relative">
           <div className="flex flex-col mb-6">
-            <h1 className="fs-16 fw-500 text-blue-39">Cases</h1>
-            <p className="fs-14 fw-400 text-blue-85">
+            <h1 className="fs-16 fw-500 text-blue-39">{isDoctor ? 'My Cases' : 'Cases' } </h1>
+           {!isDoctor && <p className="fs-14 fw-400 text-blue-85">
               First three cases are free, after that you will have to pay $50
               per case.
-            </p>
+            </p>}
           </div>
 
           <div className="flex  md:flex-row flex-col justify-between gap-4 mb-8">
@@ -103,7 +103,7 @@ const OngoingCases = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <Button
+           {!isDoctor &&  <Button
               type="primary"
               onClick={showModal}
               icon={<PlusOutlined />}
@@ -111,7 +111,7 @@ const OngoingCases = () => {
               className="order-0 md:order-1 mt-2 md:mt-0 bg-blue-600 hover:bg-[#3641F5]"
             >
               Add New Case
-            </Button>
+            </Button>}
           </div>
         </div>
 

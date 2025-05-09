@@ -57,13 +57,18 @@ const SignIn = () => {
 
       const response = await handleLogin(loginPayload);
       messageApi.success("Login successful!");
-
+console.log('logn response', response)
       if (response.token) {
         localStorage.setItem("token", response.token);
       }
 
       setTimeout(() => {
-        navigate("/home");
+        if (response?.user?.role === "Doctor") {
+          navigate("/ongoing-cases");
+          
+        }else{
+          navigate("/home");
+        }
       }, 1000);
     } catch (error) {
       messageApi.error(error.message || "Login failed. Please try again.");

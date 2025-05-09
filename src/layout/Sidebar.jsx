@@ -3,22 +3,26 @@ import { Link, useLocation } from 'react-router-dom'
 import { Icons } from '../components/svg/Icons'
 import logo from '../assets/logo.svg'
 import { clearAuthData } from '../store/authSlice'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { pathname } = location;
-  
-  // Menu navigation items
+  const user = useSelector((state) => state.auth.user);
+console.log('user :' , user)
   const menuItems = [
-    { path: '/home', label: 'Intake', icon: <Icons.PreVettedCasesIcon /> },
+    // Only include Intake if user is not a doctor
+    ...(user?.role !== 'Doctor'
+      ? [{ path: '/home', label: 'Intake', icon: <Icons.PreVettedCasesIcon /> }]
+      : []),
+  
     { path: '/ongoing-cases', label: 'Ongoing Cases', icon: <Icons.OngoingCasesIcon /> },
     { path: '/lien-resolution', label: 'Lien Resolution', icon: <Icons.LienResolutionIcon /> },
     { path: '/archive', label: 'Archive', icon: <Icons.ArchiveIcon /> },
     { path: '/providers', label: 'Providers', icon: <Icons.ProviderIcon /> },
   ];
-
+  
   // User options navigation items
   const userOptions = [
     {

@@ -143,7 +143,7 @@ export const updateUser = async (id, model) => {
     const response = await axiosInstance.put(`users/${id}`, model);
     return response.data;
   } catch (error) {
-    throw new Error(error?.response?.data?.error || "archiving case failed");
+    throw new Error(error?.response?.data?.error || "Address update failed");
   }
 };
 
