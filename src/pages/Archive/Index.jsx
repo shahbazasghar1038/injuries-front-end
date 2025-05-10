@@ -113,7 +113,7 @@ const [deleteData, setDeleteData] = useState({});
         })
         .catch((err) => {
           console.error("Error fetching archive cases:", err);
-      message.error(err?.message);
+    //   message.error(err?.message);
 
           setError("Failed to fetch cases. Please try again later.");
         });
@@ -151,6 +151,7 @@ const filteredCases = cases.filter((item) =>
                  
                 </div>
             </div>
+          {filteredCases?.length > 0 ?
             <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_20px] relative">
             {filteredCases.map((item, index) => (
                     <div key={index} className="flex flex-col w-full items-center gap-2 p-2 relative bg-white rounded-2xl overflow-hidden border border-solid border-[#e4e7ec]">
@@ -242,6 +243,11 @@ const filteredCases = cases.filter((item) =>
                     </div>
                 ))}
             </div>
+            :
+            <div className="flex justify-center items-center p-6">
+                <p className="text-gray-500">No archived cases</p>
+        </div>
+}
         </div>
 
         {/* Add delete confirmation modal */}

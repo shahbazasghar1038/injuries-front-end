@@ -15,6 +15,7 @@ import { getAllCases } from "../../services/cases";
 
 const LienResolution = () => {
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
+  const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
 
   const [cases, setCases] = useState([]); // State to store cases
   const [search, setSearch] = useState("");
@@ -27,7 +28,10 @@ const LienResolution = () => {
     getAllCases(user?.id)
       .then((response) => {
         console.log("resp  lien : ", response);
-        setCases(response);
+        const filteredCases = isDoctor
+        ? response.filter(c => c.DoctorAcceptanceStatus === 'Accepted')
+        : response;
+        setCases(filteredCases);
       })
       .catch((err) => {
         console.error("Error fetching cases:", err);
@@ -40,13 +44,13 @@ const LienResolution = () => {
   );
   const breadcrumbLinks = [
     { label: "Home", href: "/" },
-    { label: "Lien Resolution" },
+    { label: isDoctor ? 'Post Treatment': 'Lien Resolution'  },
   ];
 
   return (
     <AuthenticatedLayout>
       <div className="lg:flex gap-2 justify-between">
-        <p className="fs-20 fw-600 text-blue-39">Lien Resolution</p>
+        <p className="fs-20 fw-600 text-blue-39"> {isDoctor ? 'Post Treatment': 'Lien Resolution' }</p>
         <Breadcrumb links={breadcrumbLinks} />
       </div>
 
@@ -68,12 +72,14 @@ const LienResolution = () => {
           </div>
         </div>
         <hr />
-
+       {filteredCases?.length > 0 ? 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4 mt-6">
           {filteredCases.map((caseItem) => (
             <CaseCard key={caseItem.id} caseItem={caseItem} />
           ))}
         </div>
+        : <div className="text-center text-gray-400 p-8">No cases</div>
+        }
         {error && <div className="text-red-500 mt-4">{error}</div>}
       </div>
     </AuthenticatedLayout>

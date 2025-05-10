@@ -22,7 +22,7 @@ const OngoingCases = () => {
 const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
   const breadcrumbLinks = [
     { label: "Home", href: "/" },
-    { label: "Ongoing Cases" },
+    { label: isDoctor ? 'Cases' : 'Ongoing Cases' },
   ];
   const [search, setSearch] = useState("");
 
@@ -150,11 +150,14 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4">
+       {filteredCases?.length > 0  ? <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4">
           {filteredCases.map((caseItem) => (
             <CaseCard key={caseItem.id} caseItem={caseItem} isDoctor={isDoctor} />
           ))}
-        </div>
+        </div> : 
+        <div className="flex justify-center items-center p-6">
+          <p className="text-gray-500">No cases</p>
+        </div>}
       </div>
 
       <CustomModal
