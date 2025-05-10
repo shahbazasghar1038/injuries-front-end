@@ -108,7 +108,7 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
         <Breadcrumb links={breadcrumbLinks} />
       </div>
 
-     {isDoctor && casesRequest?.length > 0 ? <DoctorInvitationCard casesRequest={casesRequest} /> : null}
+     {isDoctor && casesRequest?.length > 0 ? <DoctorInvitationCard casesRequest={casesRequest} onSuccess={fetchAllCases} /> : null}
 
       <div className="p-6 bg-white rounded-xl shadow-sm mt-6  ">
         <div className="lg:flex xl:flex justify-between relative">

@@ -4,8 +4,7 @@ import { CloseOutlined, HomeOutlined } from '@ant-design/icons';
 import 'antd/dist/reset.css';
 import { medicalRecordRequest } from '../../../services/cases';
 
-function DoctorInvitationCard({casesRequest}) {
-  console.log('casesRequest' , casesRequest)
+function DoctorInvitationCard({casesRequest,onSuccess}) {
 
   const handleCaseInvitation = (id, accept ) => {
     let model = {
@@ -14,7 +13,7 @@ function DoctorInvitationCard({casesRequest}) {
     medicalRecordRequest(model, id)
       .then((response) => {
         console.log("case invite action successfully:", response);
-        handleFetchSignleCase()
+        onSuccess()
         message.success(response?.message || "invitation action successfully");
       })
       .catch((err) => {
