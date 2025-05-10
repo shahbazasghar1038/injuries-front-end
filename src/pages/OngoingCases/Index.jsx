@@ -13,6 +13,10 @@ import CustomModal from "../../components/ui/CustomModal";
 import { createCase, getAllCases } from "../../services/cases";
 import { useSelector } from "react-redux";
 import DoctorInvitationCard from "./partials/DoctorInvitationCard";
+import SubmissionModal from "../../components/ui/SubmissionModal";
+import PurchaseCases from "./partials/PurchaseCases";
+
+
 const OngoingCases = () => {
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
 const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
@@ -23,6 +27,7 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
   const [search, setSearch] = useState("");
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isPurchaseModalVisible, setIsPurchaseModalVisible] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -30,6 +35,14 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+
+  const showPurchaseModal = () => {
+    setIsPurchaseModalVisible(true);
+  };
+
+  const handlePurchaseModalClose = () => {
+    setIsPurchaseModalVisible(false);
   };
 
   const [cases, setCases] = useState([]); // State to store cases
@@ -125,6 +138,15 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
             >
               Add New Case
             </Button>}
+            {/* <Button
+              type="primary"
+              onClick={showPurchaseModal}
+              icon={<PlusOutlined />}
+              size="large"
+              className="order-0 md:order-1 mt-2 md:mt-0 bg-blue-600 hover:bg-[#3641F5]"
+            >
+              Add New purchaseCase
+            </Button> */}
           </div>
         </div>
 
@@ -146,6 +168,10 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
           onSubmit={handleSubmit}
         />
       </CustomModal>
+
+      <SubmissionModal open={isPurchaseModalVisible} onClose={handlePurchaseModalClose}>
+        <PurchaseCases/>
+      </SubmissionModal>
     </AuthenticatedLayout>
   );
 };
