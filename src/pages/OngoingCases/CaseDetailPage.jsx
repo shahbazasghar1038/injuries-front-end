@@ -46,6 +46,7 @@ import CaseDetailProviderCard from "./partials/CaseDetailProviderCard";
 import { truncateText } from "../../helper/truncateText";
 import { useSelector } from "react-redux";
 import AddNewCaseForm from "./partials/AddNewCaseForm";
+ 
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -671,6 +672,8 @@ const handleFetchSignleCase = () => {
         confirmText="Delete"
         confirmButtonProps={{ danger: true }}
       />
+
+    
     </AuthenticatedLayout>
   );
 };

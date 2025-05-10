@@ -1,8 +1,22 @@
 import React, { useState } from 'react'
 import { medicalRecordRequest } from "../../../services/cases";
 import { message } from 'antd';
+import SubmissionModal from '../../../components/ui/SubmissionModal';
+import ProviderEditDetail from './ProviderEditDetail';
 
 const CaseDetailProviderCard = ({provider, handleFetchSignleCase}) => {
+    // Add state for modal visibility
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Function to open the modal
+    const EditProviderDetailshowModal = () => {
+      setIsModalOpen(true);
+    };
+
+    // Function to close the modal
+    const handleModalClose = () => {
+      setIsModalOpen(false);
+    };
 
     const handleongoingMedicalProvider = () => {
       const model = {
@@ -34,7 +48,7 @@ const CaseDetailProviderCard = ({provider, handleFetchSignleCase}) => {
           </div>
         </div>
         <div className="cursor-pointer inline-flex p-2 pr-0 items-center justify-center gap-2 rounded-lg overflow-hidden shadow-shadow-xs">
-          <div className="relative w-5 h-5">
+          <div className="relative w-5 h-5" onClick={() => EditProviderDetailshowModal()}>
             <img
               className="absolute w-3.5 h-3.5 top-0.5 left-1"
               alt="Icon"
@@ -112,7 +126,11 @@ const CaseDetailProviderCard = ({provider, handleFetchSignleCase}) => {
 
       
     </div>  
-  </div></div>
+  </div>
+  <SubmissionModal open={isModalOpen} onClose={handleModalClose}>
+    <ProviderEditDetail />
+  </SubmissionModal>
+  </div>
   )
 }
 
