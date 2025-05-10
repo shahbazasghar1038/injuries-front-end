@@ -86,7 +86,7 @@ const EditPersonalInfo = ({ open, onClose, onSave, initialData }) => {
           {initialData?.role == "Doctor" ? (
             <Form.Item
               className="md:col-span-1"
-              name="specialty"
+              name="speciality"
               label="Specialty"
             >
               <Input className="auth-input" placeholder="Select specialty" />

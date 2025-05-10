@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Avatar, Button, Card, message } from "antd"
 import { EditOutlined } from "@ant-design/icons"
 import EditPersonalInfo from "./partials/EditPersonalInfo"
@@ -10,12 +10,28 @@ import AuthenticatedLayout from "../../../layout/AuthenticatedLayout"
 import SettingsLayout from "../../../layout/SettingsLayout"
 import { useSelector } from "react-redux"
 import placeholder from '../../../assets/img/placeholder.png'
-import { updateUser } from "../../../services/cases"
+import { getAllCases, updateUser } from "../../../services/cases"
+import { getSingleUser } from "../../../services/auth"
 
 export default function UserProfile() {
-  const user = useSelector((state) => state.auth.user); // Add this line to select the user
-const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
-  
+  const storeUser = useSelector((state) => state.auth.user); // Add this line to select the user
+  const [user, setUser] = useState(storeUser);
+  const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
+
+  // const fetchSingleUser = () => {
+  //   getSingleUser(user?.id)
+  //     .then((response) => {
+  //       console.log("single user resp : ", response);
+  //       setUser(filteredCases);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error fetching cases:", err);
+  //       setError("Failed to fetch cases. Please try again later.");
+  //     });
+  // };
+
+
+
   const [userData, setUserData] = useState({
     firstName: user?.fullName,
     // lastName: "Boruch",
@@ -41,12 +57,14 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
         fullName: updatedInfo.firstName,
         phonNumber: updatedInfo.phone,
         bio: updatedInfo.bio, 
+        speciality: updatedInfo.speciality,
       }
     }
     
     updateUser(user?.id , model)
     .then((response) => {
       message.success(response?.message || "Personal info updated successfully");
+      fetchSingleUser()
       setPersonalInfoModalOpen(false)
     })
     .catch((err) => {
@@ -72,6 +90,7 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
     updateUser(user?.id , model)
     .then((response) => {
       message.success(response?.message || "Address updated successfully");
+      fetchSingleUser()
       setAddressModalOpen(false)
     })
     .catch((err) => {

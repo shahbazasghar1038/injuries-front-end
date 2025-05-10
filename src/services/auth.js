@@ -51,3 +51,14 @@ export const updatePassword = async (payload) => {
     throw new Error(error?.response?.data?.message || "Password updated failed");
   }
 };
+
+export const getSingleUser = async (id) => {
+  try {
+    const response = await axiosInstance.get(`users/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error?.response?.data?.error || "fetching single user failed"
+    );
+  }
+};
