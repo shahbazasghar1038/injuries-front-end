@@ -33,6 +33,7 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
   };
 
   const [cases, setCases] = useState([]); // State to store cases
+  const [casesRequest, setCasesRequest] = useState([]); // State to store cases
   const [error, setError] = useState(null); // State to store errors
 
   // Fetch all cases when the component mounts
@@ -43,8 +44,17 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
   const fetchAllCases = () => {
     getAllCases(user?.id)
       .then((response) => {
-        console.log("resp : ", response);
-        setCases(response);
+        console.log("al  cases resp : ", response);
+
+        // If user is doctor, filter cases with DoctorAcceptanceStatus === 'Accepted'
+        const filteredCases = isDoctor
+          ? response.filter(c => c.DoctorAcceptanceStatus === 'Accepted')
+          : response;
+        const filteredCasesRequest = isDoctor
+          && response.filter(c => c.DoctorAcceptanceStatus === 'Pending')
+      
+        setCases(filteredCases);
+        setCasesRequest(filteredCasesRequest)
       })
       .catch((err) => {
         console.error("Error fetching cases:", err);
@@ -85,7 +95,7 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
         <Breadcrumb links={breadcrumbLinks} />
       </div>
 
-     {isDoctor && <DoctorInvitationCard/>}
+     {isDoctor && casesRequest?.length > 0 ? <DoctorInvitationCard casesRequest={casesRequest} /> : null}
 
       <div className="p-6 bg-white rounded-xl shadow-sm mt-6  ">
         <div className="lg:flex xl:flex justify-between relative">

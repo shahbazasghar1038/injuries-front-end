@@ -429,9 +429,7 @@ const CaseDetailPageLien = () => {
     </Menu>
   );
 
-  // Add state for action modal
-  const [isActionModalVisible, setIsActionModalVisible] = useState(false);
-
+console.log(  'asfd',caseData?.providerTreatmentRecords)
   return (
     <AuthenticatedLayout>
       <div className="lg:flex gap-2 justify-between">
@@ -492,7 +490,7 @@ const CaseDetailPageLien = () => {
                     <div className="flex items-start gap-3 justify-between w-full relative flex-[0_0_auto]">
                       <div className="inline-flex flex-col items-start justify-center gap-1 relative flex-[0_0_auto]">
                         <div className="relative w-fit mt-[-1.00px] fs-20 fw-700 text-blue-39">
-                          {provider.name}
+                          {provider?.user?.fullName}
                         </div>
 
                         <div className="relative w-fit fs-14 fw-500 blue-light-b3 whitespace-nowrap">

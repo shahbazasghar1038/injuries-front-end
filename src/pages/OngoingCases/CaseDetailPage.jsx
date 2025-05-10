@@ -74,6 +74,7 @@ const CaseDetailPage = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
   const [caseData, setCaseData] = useState(null);
+  const [caseDoctors, setCaseDoctors] = useState([]);
   const [taskData, setTaskData] = useState([]);
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
   const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
@@ -87,16 +88,8 @@ const CaseDetailPage = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-    const handleSubmit = (values) => {
-      const model = {
-        caseData: {
-          ...values,
-          billAmount: 0,
-        },
-        userId: user?.id,
-      };
-  
+// case update fucntion 
+    const handleSubmit = (values) => {  
       caseUpdate(values, caseData?.case?.id)
         .then((response) => {
           console.log("Case updated successfully:", response);
@@ -117,6 +110,8 @@ const handleFetchSignleCase = () => {
   getSingleCase(id)
   .then((response) => {
     setCaseData(response);
+    const filteredCases =  response?.providerTreatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Accepted')
+    setCaseDoctors(filteredCases);
     console.log("single case data:", response);
     setLoading(false);
   })
@@ -460,9 +455,9 @@ const handleFetchSignleCase = () => {
               Medical Providers
             </h2>
           </div>
-          {true ? (
+          {caseDoctors?.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {caseData?.providerTreatmentRecords?.map((provider, index) => (
+              {caseDoctors?.map((provider, index) => (
                 <CaseDetailProviderCard key={index} provider={provider} handleFetchSignleCase={handleFetchSignleCase} />
               ))}
             </div>
