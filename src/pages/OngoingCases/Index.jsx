@@ -58,15 +58,23 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
     getAllCases(user?.id)
       .then((response) => {
         console.log("al  cases resp : ", response);
+        const filteredCasesRequest = isDoctor
+          && response?.treatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Pending')
 
         // If user is doctor, filter cases with DoctorAcceptanceStatus === 'Accepted'
         const filteredCases = isDoctor
-          ? response.filter(c => c.DoctorAcceptanceStatus === 'Accepted')
-          : response;
-        const filteredCasesRequest = isDoctor
-          && response.filter(c => c.DoctorAcceptanceStatus === 'Pending')
-      
-        setCases(filteredCases);
+          ? response?.treatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Accepted')
+          : response?.cases;
+
+          const caseIds = filteredCases.map(item => item.caseId);
+
+const matchedCases = response?.cases?.filter(caseItem =>
+  caseIds.includes(caseItem.id)
+);
+
+
+      console.log('matchedCases' , matchedCases)
+        setCases(isDoctor ? matchedCases : response?.cases);
         setCasesRequest(filteredCasesRequest)
       })
       .catch((err) => {

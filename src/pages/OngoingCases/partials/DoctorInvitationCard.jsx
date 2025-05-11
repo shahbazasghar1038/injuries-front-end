@@ -8,7 +8,7 @@ function DoctorInvitationCard({casesRequest,onSuccess}) {
 
   const handleCaseInvitation = (id, accept ) => {
     let model = {
-      DoctorAcceptanceStatus: accept ? 'Accepted' : 'Rejected',
+      doctorAcceptanceStatus: accept ? 'Accepted' : 'Rejected',
     };  
     medicalRecordRequest(model, id)
       .then((response) => {

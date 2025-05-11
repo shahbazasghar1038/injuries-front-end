@@ -93,6 +93,7 @@ const CaseDetailPage = () => {
       caseUpdate(values, caseData?.case?.id)
         .then((response) => {
           console.log("Case updated successfully:", response);
+          handleFetchSignleCase()
           setIsModalVisible(false);
           // fetchAllCases(); // Refresh the list of cases after a successful submission
         })
