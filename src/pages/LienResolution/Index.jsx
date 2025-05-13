@@ -28,8 +28,8 @@ const LienResolution = () => {
     getAllCases(user?.id)
       .then((response) => {
         console.log("al  cases resp : ", response);
-        const filteredCasesRequest = isDoctor
-          && response?.treatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Pending')
+        // const filteredCasesRequest = isDoctor
+        //   && response?.treatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Pending')
 
         // If user is doctor, filter cases with DoctorAcceptanceStatus === 'Accepted'
         const filteredCases = isDoctor
@@ -45,7 +45,7 @@ const matchedCases = response?.cases?.filter(caseItem =>
 
       console.log('matchedCases' , matchedCases)
         setCases(isDoctor ? matchedCases : response?.cases);
-        setCasesRequest(filteredCasesRequest)
+        // setCasesRequest(filteredCasesRequest)
       })
       .catch((err) => {
         console.error("Error fetching cases:", err);

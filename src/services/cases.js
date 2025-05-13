@@ -158,3 +158,16 @@ export const medicalRecordRequest = async (payload,id) => {
     throw new Error(error?.response?.data?.error || "An error occurred : Record request sent failed");
   }
 };
+
+
+// buy case /// case payment 
+
+// invite doctor
+export const casePayment = async (model) => {
+  try {
+    const response = await axiosInstance.post(`payment/create-payment-intent`, model);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "task create failed");
+  }
+};

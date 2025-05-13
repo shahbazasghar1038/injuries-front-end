@@ -8,27 +8,37 @@ import EditAddress from "./partials/EditAddress"
 import CustomModal from "../../../components/ui/CustomModal"
 import AuthenticatedLayout from "../../../layout/AuthenticatedLayout"
 import SettingsLayout from "../../../layout/SettingsLayout"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import placeholder from '../../../assets/img/placeholder.png'
 import { getAllCases, updateUser } from "../../../services/cases"
 import { getSingleUser } from "../../../services/auth"
+import { setAuthData } from "../../../store/authSlice"
 
 export default function UserProfile() {
+  const dispatch = useDispatch();
+
   const storeUser = useSelector((state) => state.auth.user); // Add this line to select the user
   const [user, setUser] = useState(storeUser);
   const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
+  const token = useSelector((state) => state.auth.token);
 
-  // const fetchSingleUser = () => {
-  //   getSingleUser(user?.id)
-  //     .then((response) => {
-  //       console.log("single user resp : ", response);
-  //       setUser(filteredCases);
-  //     })
-  //     .catch((err) => {
-  //       console.error("Error fetching cases:", err);
-  //       setError("Failed to fetch cases. Please try again later.");
-  //     });
-  // };
+  const fetchSingleUser = () => {
+    getSingleUser(user?.id)
+      .then((response) => {
+        console.log("single user resp : ", response);
+          dispatch(
+                  setAuthData({
+                    user: response.user, // Assuming the API returns user data
+                    token: token,
+                  })
+                );
+        // setUser(response);
+      })
+      .catch((err) => {
+        console.error("Error fetching cases:", err);
+        setError("Failed to fetch cases. Please try again later.");
+      });
+  };
 
 
 

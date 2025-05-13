@@ -16,6 +16,10 @@ import DoctorInvitationCard from "./partials/DoctorInvitationCard";
 import SubmissionModal from "../../components/ui/SubmissionModal";
 import PurchaseCases from "./partials/PurchaseCases";
 
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import StripeModal from '../OngoingCases/partials/StripeModal';
+import { getSingleUser } from "../../services/auth";
 
 const OngoingCases = () => {
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
@@ -26,11 +30,22 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
   ];
   const [search, setSearch] = useState("");
 
+  const [showStripeModal, setshowStripeModal] = useState(false);
+
+const handleSuccessBuyNow =()=>{
+  setshowStripeModal(true)
+  setIsPurchaseModalVisible(false)
+}
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isPurchaseModalVisible, setIsPurchaseModalVisible] = useState(false);
 
   const showModal = () => {
-    setIsModalVisible(true);
+    if (userr?.usercaseLimit === userr?.usercaseCount) {
+      showPurchaseModal()
+    }else{
+      setIsModalVisible(true);
+    }
   };
 
   const handleCancel = () => {
@@ -83,7 +98,27 @@ const matchedCases = response?.cases?.filter(caseItem =>
       });
   };
 
+  const [userr, setUserr] = useState({});
+
+
+    const fetchSingleUser = () => {
+      getSingleUser(user?.id)
+        .then((response) => {
+          console.log("single user resp : ", response?.user);
+          setUserr(response?.user);
+        })
+        .catch((err) => {
+          console.error("Error fetching cases:", err);
+        });
+    };
+
+    useEffect(() => {
+      fetchSingleUser()
+    }, [])
+    
+
   const handleSubmit = (values) => {
+
     const model = {
       caseData: {
         ...values,
@@ -97,6 +132,7 @@ const matchedCases = response?.cases?.filter(caseItem =>
         console.log("Case created successfully:", response);
         setIsModalVisible(false);
         fetchAllCases(); // Refresh the list of cases after a successful submission
+        fetchSingleUser()
       })
       .catch((err) => {
         console.error("Error creating case:", err);
@@ -109,8 +145,13 @@ const matchedCases = response?.cases?.filter(caseItem =>
     c.fullName?.toLowerCase().includes(search.toLowerCase())
   );
 
+  const stripePromise = loadStripe(
+    'pk_test_51QX4TeRxPAKwS0RQDfJWlYr58kB5RtqT9GYbww0hgLN60xSDFqXWwRIYP8xcS2cCjYsvXrImKoR7np37xaspqokZ00bywJODfC'
+  );
+
   return (
     <AuthenticatedLayout>
+
       <div className="lg:flex gap-2 justify-between">
         <p className="fs-20 fw-600 text-blue-39">{isDoctor ? 'Cases' : 'Ongoing Cases' }</p>
         <Breadcrumb links={breadcrumbLinks} />
@@ -181,8 +222,17 @@ const matchedCases = response?.cases?.filter(caseItem =>
       </CustomModal>
 
       <SubmissionModal open={isPurchaseModalVisible} onClose={handlePurchaseModalClose}>
-        <PurchaseCases/>
+        <PurchaseCases onSuccess={handleSuccessBuyNow}/>
       </SubmissionModal>
+
+      {showStripeModal && (
+        <Elements stripe={stripePromise}>
+          <StripeModal
+            setshowStripeModal={setshowStripeModal}
+            showStripeModal={showStripeModal}
+          />
+        </Elements>
+      )}
     </AuthenticatedLayout>
   );
 };
