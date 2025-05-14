@@ -46,6 +46,7 @@ import CaseDetailProviderCard from "./partials/CaseDetailProviderCard";
 import { truncateText } from "../../helper/truncateText";
 import { useSelector } from "react-redux";
 import AddNewCaseForm from "./partials/AddNewCaseForm";
+import DoctorCardFileUpload from "./partials/DoctorCardsFileUpload";
  
 
 const PatientStatusCard = ({ data, index }) => (
@@ -451,6 +452,9 @@ const handleFetchSignleCase = () => {
               </Dropdown>
             </div>
           </div>
+{isDoctor && 
+          <DoctorCardFileUpload/>
+}
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-medium text-gray-800">
               Medical Providers
