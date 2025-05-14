@@ -20,7 +20,7 @@ const CaseCard = ({ caseItem }) => {
 
           <Link
             // to={"/case-dashboard"}
-            to={`/cases-detail-lien/${caseItem?.id}`}
+            to={`/lien-resolution-detail/${caseItem?.id}`}
             className="rounded-lg bg-[#fff] w-8 h-8 flex justify-center items-center"
           >
             {" "}

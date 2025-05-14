@@ -46,6 +46,7 @@ import AddNewCaseForm from "./partials/AddNewCaseForm";
 import SubmissionModal from "../../components/ui/SubmissionModal";
 import NegotitationFrom from "./partials/NegotitationFrom";
 import BillRecords from "./partials/BillRecords";
+import { useSelector } from "react-redux";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -72,6 +73,9 @@ const CaseDetailPageLien = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+  const user = useSelector((state) => state.auth.user); // Add this line to select the user
+  const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
+
   const [caseData, setCaseData] = useState(null);
   const [taskData, setTaskData] = useState([]);
 
@@ -111,7 +115,7 @@ const CaseDetailPageLien = () => {
 
   const breadcrumbLinks = [
     { label: "Home", href: "/" },
-    { label: "Ongoing Cases", href: "/cases" },
+    { label: isDoctor ? 'Post Treatment' : "Lien Resolution", href: "/lien-resolution" },
     { label: "Case Details" },
   ];
 

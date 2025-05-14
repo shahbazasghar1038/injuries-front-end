@@ -97,7 +97,7 @@ function App() {
           }
         />
         <Route
-          path="/cases-detail-lien/:id"
+          path="/lien-resolution-detail/:id"
           element={
             <PrivateRoute>
               <CaseDetailPageLien />

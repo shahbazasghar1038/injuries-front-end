@@ -59,7 +59,7 @@ console.log('user :' , user)
       // but exclude case-dashboard path
       isActive = isActive || 
                  pathname.startsWith('/ongoing-cases') || 
-                 pathname.startsWith('/case-detail') ||
+                 pathname.startsWith('/case-detail') ||  
                  (pathname.includes('case') && !pathname.includes('case-dashboard')) ||
                  pathname.includes('/cases/');
       
@@ -68,7 +68,7 @@ console.log('user :' , user)
     // Special case for Lien Resolution
     if (item.path === '/lien-resolution') {
       // Check if the current path includes case-dashboard
-      isActive = isActive || pathname.includes('case-dashboard');
+      isActive = isActive  || pathname.startsWith('/lien-resolution-detail') || pathname.includes('case-dashboard') ;
       
     }
     
