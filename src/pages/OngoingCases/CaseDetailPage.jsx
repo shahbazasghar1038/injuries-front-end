@@ -77,6 +77,7 @@ const CaseDetailPage = () => {
   const [caseData, setCaseData] = useState(null);
   const [caseDoctors, setCaseDoctors] = useState([]);
   const [taskData, setTaskData] = useState([]);
+  const [currentDocCase, setCurrentDocCase] = useState({});
   const user = useSelector((state) => state.auth.user); // Add this line to select the user
   const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
 
@@ -114,6 +115,10 @@ const handleFetchSignleCase = () => {
     setCaseData(response);
     const filteredCases =  response?.providerTreatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Accepted')
     setCaseDoctors(filteredCases);
+
+const currDoc = filteredCases?.find((doc) => doc?.user?.id === user?.id);
+    setCurrentDocCase(currDoc);
+// console.log(currDoc, "current doc case")
     console.log("single case data:", filteredCases);
     setLoading(false);
   })
@@ -453,7 +458,7 @@ const handleFetchSignleCase = () => {
             </div>
           </div>
 {isDoctor && 
-          <DoctorCardFileUpload/>
+          <DoctorCardFileUpload data={currentDocCase}/>
 }
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-medium text-gray-800">
