@@ -171,3 +171,12 @@ export const casePayment = async (model) => {
     throw new Error(error?.response?.data?.message || "task create failed");
   }
 };
+
+export const storePaymentToServer = async (model) => {
+  try {
+    const response = await axiosInstance.post(`payment/payment-success`, model);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "task create failed");
+  }
+};

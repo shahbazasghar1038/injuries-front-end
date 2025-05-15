@@ -67,7 +67,7 @@ const DoctorCardFileUpload = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-50 min-h-fit">
+    <div className="py-6 bg-gray-50 min-h-fit">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Medical Records Card */}
         <Card className="shadow-sm hover:shadow-md transition-shadow duration-300">

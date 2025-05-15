@@ -114,7 +114,7 @@ const handleFetchSignleCase = () => {
     setCaseData(response);
     const filteredCases =  response?.providerTreatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Accepted')
     setCaseDoctors(filteredCases);
-    console.log("single case data:", response);
+    console.log("single case data:", filteredCases);
     setLoading(false);
   })
   .catch((err) => {
@@ -463,7 +463,7 @@ const handleFetchSignleCase = () => {
           {caseDoctors?.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {caseDoctors?.map((provider, index) => (
-                <CaseDetailProviderCard key={index} provider={provider} handleFetchSignleCase={handleFetchSignleCase} />
+                <CaseDetailProviderCard key={index} provider={provider} handleFetchSignleCase={handleFetchSignleCase} isDoctor={isDoctor} />
               ))}
             </div>
           ) : (

@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { casePayment } from '../../../services/cases';
-import { Currency } from 'lucide-react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { casePayment, storePaymentToServer } from "../../../services/cases";
+import { Currency } from "lucide-react";
+import { useSelector } from "react-redux";
 // import caseV2 from '@/service/caseV2';
 
-const StripeModal = ({ setshowStripeModal }) => {
-    const user = useSelector((state) => state.auth.user);
+const StripeModal = ({ setshowStripeModal, onSuccess, userId }) => {
+  const user = useSelector((state) => state.auth.user);
   const stripe = useStripe();
   const elements = useElements();
-  const [email, setEmail] = useState(user?.email || '');
+  const [email, setEmail] = useState(user?.email || "");
   const [amount, setAmount] = useState(5000); // $50 in cents (Stripe expects cents)
-  const [currency] = useState('USD');
-  const [message, setMessage] = useState('');
+  const [currency] = useState("USD");
+  const [message, setMessage] = useState("");
   const [paymentIntentSecret, setPaymentIntentSecret] = useState(null);
   // Fetch PaymentIntent secret when modal opens or amount/currency changes
   useEffect(() => {
@@ -25,7 +25,7 @@ const StripeModal = ({ setshowStripeModal }) => {
         if (response?.clientSecret) {
           setPaymentIntentSecret(response.clientSecret);
         } else {
-          throw new Error('Failed to fetch PaymentIntent');
+          throw new Error("Failed to fetch PaymentIntent");
         }
       } catch (err) {
         setMessage(`Error: ${err.message}`);
@@ -38,13 +38,13 @@ const StripeModal = ({ setshowStripeModal }) => {
     e.preventDefault();
 
     if (!stripe || !elements) {
-      alert('Stripe.js has not loaded yet.');
+      alert("Stripe.js has not loaded yet.");
       return;
     }
 
     const cardElement = elements.getElement(CardElement);
     if (!cardElement) {
-      alert('Card element not found.');
+      alert("Card element not found.");
       return;
     }
 
@@ -58,32 +58,46 @@ const StripeModal = ({ setshowStripeModal }) => {
           },
         }
       );
-
+      console.log("asdfasdfsd ", paymentIntent);
       if (error) {
+        console.error("Payment error:", error);
         setMessage(`Payment failed: ${error.message}`);
-      } else if (paymentIntent?.status === 'succeeded') {
-        setshowStripeModal(false);
+      } else if (paymentIntent?.status === "succeeded") {
+        const model = {
+          paymentIntentId: paymentIntent.id,
+          userId: userId, 
+        };
+    
+        storePaymentToServer(model)
+          .then((response) => {
+            console.log("payment save successfully:", response);
+            onSuccess();
+          })
+          .catch((err) => {
+            console.error("Error payment saving to server:", err);
+          });
+
       }
     } catch (err) {
       setMessage(`Error processing payment: ${err.message}`);
     }
   };
-
+  console.log("erro msg : ", message);
   const CARD_ELEMENT_OPTIONS = {
     style: {
       base: {
-        fontSize: '16px',
-        color: '#424770',
-        borderRadius: '8px',
-        border: '1px solid lightgray',
-        padding: '10px',
-        margin: '20px 0',
-        '::placeholder': {
-          color: '#aab7c4',
+        fontSize: "16px",
+        color: "#424770",
+        borderRadius: "8px",
+        border: "1px solid lightgray",
+        padding: "10px",
+        margin: "20px 0",
+        "::placeholder": {
+          color: "#aab7c4",
         },
       },
       invalid: {
-        color: '#9e2146',
+        color: "#9e2146",
       },
     },
   };
@@ -127,7 +141,7 @@ const StripeModal = ({ setshowStripeModal }) => {
             <CardElement options={CARD_ELEMENT_OPTIONS} />
             <button
               type="submit"
-            //   disabled={!stripe || !paymentIntentSecret}
+              //   disabled={!stripe || !paymentIntentSecret}
               className="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2"
             >
               Pay now

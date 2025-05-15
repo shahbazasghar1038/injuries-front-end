@@ -3,8 +3,9 @@ import { medicalRecordRequest } from "../../../services/cases";
 import { message } from "antd";
 import SubmissionModal from "../../../components/ui/SubmissionModal";
 import ProviderEditDetail from "./ProviderEditDetail";
+import DoctorCardData from "./DoctorCardData";
 
-const CaseDetailProviderCard = ({ provider, handleFetchSignleCase }) => {
+const CaseDetailProviderCard = ({ provider, handleFetchSignleCase ,isDoctor }) => {
   // Add state for modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -73,30 +74,9 @@ const CaseDetailProviderCard = ({ provider, handleFetchSignleCase }) => {
             </div>
           </div>
 
-          <div className="flex items-center gap-1 relative self-stretch w-full flex-[0_0_auto]">
-            <div className="relative w-fit whitespace-nowrap fs-14 fw-400 text-blue-85">
-              Treatment Status:
-            </div>
+         <DoctorCardData provider={provider} isDoctor={isDoctor} />
 
-            <div
-              className={`inline-flex items-center justify-center px-2.5 py-0.5 relative flex-[0_0_auto] ${
-                provider.treatmentStatus === "Completed"
-                  ? "bg-[#ebfdf2]"
-                  : "bg-[#ecf3ff]"
-              } rounded-[999px]`}
-            >
-              <div
-                className={`relative w-fit mt-[-1.00px] fs-14 fw-500 ${
-                  provider.treatmentStatus === "Completed"
-                    ? "text-[#039754]"
-                    : "text-[#465fff]"
-                } text-center  whitespace-nowrap `}
-              >
-                {provider.treatmentStatus}
-              </div>
-            </div>
-          </div>
-
+{!isDoctor && <>
           <div className="flex items-start gap-6 self-stretch w-full relative flex-[0_0_auto]">
             <button
               disabled={provider?.recordRequest === "Requested"}
@@ -183,6 +163,8 @@ const CaseDetailProviderCard = ({ provider, handleFetchSignleCase }) => {
               </div>
             </button>
           </div>
+</>}
+
         </div>
       </div>
       <SubmissionModal open={isModalOpen} onClose={handleModalClose}>

@@ -32,12 +32,14 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
 
   const [showStripeModal, setshowStripeModal] = useState(false);
 
-const handleSuccessBuyNow =()=>{
-  setshowStripeModal(true)
-  setIsPurchaseModalVisible(false)
-}
-
   const [isModalVisible, setIsModalVisible] = useState(false);
+  
+  const handleSuccessBuyNow =()=>{
+    setshowStripeModal(true)
+    setIsPurchaseModalVisible(false)
+  }
+  
+
   const [isPurchaseModalVisible, setIsPurchaseModalVisible] = useState(false);
 
   const showModal = () => {
@@ -116,6 +118,11 @@ const matchedCases = response?.cases?.filter(caseItem =>
       fetchSingleUser()
     }, [])
     
+    const handleSuccessStripePayment =()=>{
+      message.success('Payment successful!');
+      fetchSingleUser()
+setshowStripeModal(false)
+}
 
   const handleSubmit = (values) => {
 
@@ -146,7 +153,7 @@ const matchedCases = response?.cases?.filter(caseItem =>
   );
 
   const stripePromise = loadStripe(
-    'pk_test_51QX4TeRxPAKwS0RQDfJWlYr58kB5RtqT9GYbww0hgLN60xSDFqXWwRIYP8xcS2cCjYsvXrImKoR7np37xaspqokZ00bywJODfC'
+    'pk_test_51RNeokQ6HHYXAL2WzWHmXRzwzBtgFLUjbMge2O1LecJwE8YPawolnNBD7N783m1WGhnpT7JI3OCBN0sQ4t6SM6GI00VCpNKhHu'
   );
 
   return (
@@ -230,6 +237,8 @@ const matchedCases = response?.cases?.filter(caseItem =>
           <StripeModal
             setshowStripeModal={setshowStripeModal}
             showStripeModal={showStripeModal}
+            onSuccess={handleSuccessStripePayment}
+            userId={user?.id}
           />
         </Elements>
       )}
