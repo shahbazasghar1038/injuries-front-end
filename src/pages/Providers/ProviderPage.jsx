@@ -265,7 +265,7 @@ const ProviderPage = () => {
             onChange={handleSearch}
             allowClear
       />
-          <Button type="primary"  onClick={showModal} icon={<PlusOutlined />} size="large" className="order-0 md:order-1 mt-2 md:mt-0 bg-blue-600 hover:bg-blue-700 h-11">
+          <Button onClick={showModal} icon={<PlusOutlined />} size="large" className="order-0 md:order-1 mt-2 md:mt-0 btn btn-primary h-11">
           Add medical provider
           </Button>
         </div>

@@ -161,7 +161,7 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
       {addresses.map((address, index) => (
         <div key={address.id} className="mb-2 bg-gray-50 p-4 rounded-lg">
           <div className="flex justify-between items-center mb-2">
-            <h3 className="text-base font-medium">{index === 0 ? "Address" : `Address ${index + 1}`}</h3>
+            <h3 className="fs-18 fw-500 text-blue-39">{index === 0 ? "Address" : `Address ${index + 1}`}</h3>
             {addresses.length > 1 && (
               <Button
                 type="text"
@@ -221,17 +221,17 @@ const AddNewProviderForm = ({ form, onCancel, onSubmit }) => {
         type="link"
         icon={<PlusOutlined />}
         onClick={addNewAddress}
-        className="text-blue-600 hover:text-blue-800 p-0 h-auto flex items-center mb-6 fs-16 fw-500 font-outfit"
+        className="text-primary p-0 h-auto flex items-center mb-6 fs-16 fw-500 font-outfit"
         >
         Add New Address
       </Button>
 
       {/* Form Actions */}
       <div className="flex justify-between gap-4 mt-6">
-        <Button size="large" className="w-full" onClick={onCancel}>
+        <Button size="large" className="w-full btn btn-cancel" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="primary" size="large" className="w-full bg-blue-600 hover:bg-blue-700" onClick={handleSubmit}>
+        <Button size="large" className="w-full btn btn-primary" onClick={handleSubmit}>
           Create
         </Button>
       </div>
