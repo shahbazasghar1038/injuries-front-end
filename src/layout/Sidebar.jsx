@@ -99,6 +99,12 @@ console.log('user :' , user)
 
 
   const renderNavLink2 = (option) => {
+    // Add active class for settings
+    let isActive = false;
+    if (option.path === "/settings/profile") {
+      isActive = pathname.startsWith("/settings/");
+    }
+
     if (option.onClick) {
       return (
         <button
@@ -106,19 +112,23 @@ console.log('user :' , user)
           onClick={option.onClick}
           className={`flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-gray-100 text-left ${option.className || ''}`}
         >
-          {option.icon}
+          <div className={`group-hover:text-[#465FFF] ${isActive ? 'text-[#465FFF]' : ''}`}>
+            {option.icon}
+          </div>
           <span>{option.label}</span>
         </button>
       );
     }
-  
+
     return (
       <Link
         key={option.label}
-        to={option.path} // 🔥 Use `to`, not `href`
-        className="flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-gray-100"
+        to={option.path}
+        className={`flex items-center gap-2 w-full px-3 py-2 rounded-md hover:bg-gray-100 ${isActive ? 'bg-[#ecf3ff] text-[#465FFF]' : ''}`}
       >
-        {option.icon}
+        <span className={`group-hover:text-[#465FFF] ${isActive ? 'text-[#465FFF]' : ''}`}>
+          {option.icon}
+        </span>
         <span>{option.label}</span>
       </Link>
     );
