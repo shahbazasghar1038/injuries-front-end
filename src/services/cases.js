@@ -180,3 +180,14 @@ export const storePaymentToServer = async (model) => {
     throw new Error(error?.response?.data?.message || "task create failed");
   }
 };
+
+
+// get all Lien 
+export const getAllLienOffers = async (id) => {
+  try {
+    const response = await axiosInstance.get(`lien-offers/all?caseId=${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "archiving case failed");
+  }
+};

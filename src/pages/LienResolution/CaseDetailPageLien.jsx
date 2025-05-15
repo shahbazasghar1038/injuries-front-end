@@ -589,7 +589,7 @@ console.log(  'asfd',caseData?.providerTreatmentRecords)
                         </div>
                       </div>
 
-                      <div className="relative w-fit whitespace-nowrap fs-14 fw-500 text-blue-85">
+                      <div onClick={showRecordModal} className="cursor-pointer relative w-fit whitespace-nowrap fs-14 fw-500 text-blue-85">
                         View offer
                       </div>
                     </div>

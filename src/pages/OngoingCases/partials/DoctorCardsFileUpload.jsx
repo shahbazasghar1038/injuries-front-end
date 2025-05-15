@@ -3,11 +3,12 @@ import { Card, Button, Modal, Upload, DatePicker, Select, Input, message } from 
 import { UploadOutlined, PlusOutlined, FileTextOutlined, DollarOutlined, MedicineBoxOutlined } from "@ant-design/icons"
 import { InboxOutlined } from "@ant-design/icons"
 import "antd/dist/reset.css"
+import { medicalRecordRequest } from "../../../services/cases"
 
 const { Dragger } = Upload
 const { TextArea } = Input
 
-const DoctorCardFileUpload = () => {
+const DoctorCardFileUpload = ({data}) => {
   // State for modals
   const [recordsModalVisible, setRecordsModalVisible] = useState(false)
   const [billsModalVisible, setBillsModalVisible] = useState(false)
@@ -44,7 +45,22 @@ const DoctorCardFileUpload = () => {
   }
 
   // Submit handlers
-  const handleRecordsSubmit = () => {
+  const handleRecordsSubmit = () => {         
+          const model = {
+            medicalRecord: recordsFileList[0],
+          }; 
+        medicalRecordRequest(model, data?.id)
+          .then((response) => {
+            console.log("record sent successfully:", response);
+            message.success(
+              response?.message || "Record sent successfully"
+            );
+          })
+          .catch((err) => {
+            message.error(err.message);
+            console.error("Error Record request sent :", err);
+          });      
+
     message.success(`${recordsFileList.length} medical record(s) uploaded successfully`)
     setRecordsModalVisible(false)
   }
@@ -70,6 +86,7 @@ const DoctorCardFileUpload = () => {
     <div className="py-6 bg-gray-50 min-h-fit">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Medical Records Card */}
+        {data?.recordRequest === "Requested" &&
         <Card className="shadow-sm hover:shadow-md transition-shadow duration-300">
           <div className="flex flex-col h-full">
             <div className="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
@@ -88,8 +105,10 @@ const DoctorCardFileUpload = () => {
             </div>
           </div>
         </Card>
+        }
 
         {/* Medical Bills Card */}
+                {data?.BillRequest === "Requested" && 
         <Card className="shadow-sm hover:shadow-md transition-shadow duration-300">
           <div className="flex flex-col h-full">
             <div className="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
@@ -108,6 +127,7 @@ const DoctorCardFileUpload = () => {
             </div>
           </div>
         </Card>
+}
 
         {/* Treatment Status Card */}
         <Card className="shadow-sm hover:shadow-md transition-shadow duration-300">

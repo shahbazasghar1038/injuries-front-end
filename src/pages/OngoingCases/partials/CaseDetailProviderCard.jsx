@@ -20,14 +20,26 @@ const CaseDetailProviderCard = ({ provider, handleFetchSignleCase ,isDoctor }) =
   };
 
   const handleongoingMedicalProvider = (type) => {
-    const model = {};
 
-    if (type === "records") {
-      model.recordRequest = "Requested";
-    } else {
-      model.BillRequest = "Requested";
-    }
-
+    if (
+      provider?.recordRequest === "Requested" && provider?.medicalRecord
+    ){
+      const link = document.createElement("a");
+      link.href = provider?.medicalRecord;
+      link.download = provider?.medicalRecord.split("/").pop(); // Set default filename
+      link.target = "_blank"; // Optional: open in new tab
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else{
+      
+      
+      const model = {};
+      if (type === "records") {
+        model.recordRequest = "Requested";
+      } else {
+        model.BillRequest = "Requested";
+      }
     medicalRecordRequest(model, provider?.id)
       .then((response) => {
         console.log("Case archived successfully:", response);
@@ -40,6 +52,11 @@ const CaseDetailProviderCard = ({ provider, handleFetchSignleCase ,isDoctor }) =
         message.error(err.message);
         console.error("Error Record request sent :", err);
       });
+    }
+  };
+
+  const handleDownload = () => {
+   
   };
 
   return (
@@ -79,18 +96,21 @@ const CaseDetailProviderCard = ({ provider, handleFetchSignleCase ,isDoctor }) =
 {!isDoctor && <>
           <div className="flex items-start gap-6 self-stretch w-full relative flex-[0_0_auto]">
             <button
-              disabled={provider?.recordRequest === "Requested"}
+             disabled={provider?.recordRequest === "Requested" && !provider?.medicalRecord}
+
               className={`all-[unset] box-border flex items-center justify-center gap-2 px-4 py-3 relative flex-1 grow rounded-lg overflow-hidden border border-solid border-[#e4e7ec] ${
-                // provider?.recordRequest == 'Pending' ? 'bg-[#F79009] text-[#fff]' : 'bg-[#ECF3FF] text-gray-54'
                 provider?.recordRequest === "Pending"
                   ? "bg-[#ECF3FF] text-[#3366FF]" // Pending: light blue bg, blue text
                   : provider?.recordRequest === "Requested"
-                  ? "bg-[#F79009] text-white" // Requested: orange bg, white text
-                  : "bg-[#12B76A] text-white"
+                  ? provider?.medicalRecord
+                    ? "bg-[#12B76A] text-white" // Requested + record exists: green bg
+                    : "bg-[#F79009] text-white" // Requested + no record: orange bg
+                  : ""
               }`}
+              
               onClick={() => handleongoingMedicalProvider("records")}
             >
-              {provider?.recordRequest === "Requested" ? (
+              {provider?.recordRequest === "Requested" && !provider?.medicalRecord ? (
                 // Show 1st icon (eye icon)
                 <span className="flex items-center">
                   {/* Eye Icon */}
