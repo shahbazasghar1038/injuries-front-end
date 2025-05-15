@@ -31,6 +31,27 @@ const NegotitationFrom = () => {
     }
   };
 
+
+  const [caseData, setCaseData] = useState(null);
+  
+const handleFetchSignleCase = () => {
+  getSingleCase(id)
+  .then((response) => {
+    setCaseData(response);
+    const filteredCases =  response?.providerTreatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Accepted')
+    setCaseDoctors(filteredCases);
+    console.log("single case data:", filteredCases);
+    setLoading(false);
+  })
+  .catch((err) => {
+    console.error(err);
+    messageApi.error(err);
+
+    setError("Failed to fetch single case data. Please try again later.");
+    setLoading(false);
+  });
+}
+
   return (
     <div className=' w-full'>
         <h6 className='font-600 text-blue-39 mb-2'>Select a lien negotiation request</h6>
