@@ -57,7 +57,7 @@ const PatientStatusCard = ({ data, index }) => (
     size="small"
   >
     <div title={data?.name} className="flex gap-2.5">
-      <div className="p-3 rounded-lg bg-[#F2F4F7]">
+      <div className="p-3 rounded-lg bg-[#F2F4F7] w-10 h-10 flex items-center justify-center">
         <img src={data?.img} alt="" className="h-4" />
       </div>
       <div>
@@ -154,7 +154,7 @@ const currDoc = filteredCases?.find((doc) => doc?.user?.id === user?.id);
 
   const breadcrumbLinks = [
     { label: "Home", href: "/" },
-    { label: "Ongoing Cases", href: "/cases" },
+    { label: isDoctor ? 'Cases' : 'Ongoing Cases', href: "/cases" },
     { label: "Case Details" },
   ];
 

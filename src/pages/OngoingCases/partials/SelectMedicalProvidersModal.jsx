@@ -289,10 +289,9 @@ const SelectMedicalProvidersDemo = ({caseID, isDoctor}) => {
   return (
     <div>
       <Button
-        onClick={showModal}
-        type="primary"
+        onClick={showModal} 
         icon={<PlusOutlined />}
-        className="bg-blue-600 hover:bg-blue-700 h-11"
+        className="btn btn-primary h-11"
       >
         {isDoctor ? 'Refer Patient' : 'Add Provider'} 
       </Button>

@@ -92,16 +92,20 @@ const DoctorCardFileUpload = ({data}) => {
             <div className="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
               <FileTextOutlined className="text-blue-600 text-xl" />
             </div>
-            <h3 className="text-lg font-medium mb-2">Medical Records</h3>
-            <p className="text-gray-600 mb-4">Easily upload and share patient medical records.</p>
+            <h3 className="fs-20 fw-500 text-blue-39 mb-2">Medical Records</h3>
+            <p className="fs-14 fw-400 text-blue-85 mb-5">Easily upload and share patient medical records.</p>
             <div className="mt-auto">
-              <Button
-                icon={<UploadOutlined />}
-                className="flex items-center"
+              <button 
+                className="flex items-center gap-1 fs-14 fw-500 text-gray-54"
                 onClick={() => setRecordsModalVisible(true)}
               >
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.00104 1.91797C7.78669 1.91797 7.59334 2.00789 7.45666 2.15207L4.38624 5.22053C4.09326 5.51333 4.0931 5.98821 4.3859 6.28119C4.6787 6.57418 5.15358 6.57433 5.44656 6.28153L7.25104 4.4782L7.25104 10.668C7.25104 11.0822 7.58683 11.418 8.00104 11.418C8.41525 11.418 8.75104 11.0822 8.75104 10.668L8.75104 4.48092L10.5529 6.28155C10.8459 6.57434 11.3208 6.57417 11.6136 6.28118C11.9064 5.98818 11.9062 5.51331 11.6132 5.22052L8.57085 2.18028C8.43329 2.01971 8.22905 1.91797 8.00104 1.91797ZM3.41638 10.668C3.41638 10.2538 3.0806 9.91797 2.66638 9.91797C2.25217 9.91797 1.91638 10.2538 1.91638 10.668V11.8346C1.91638 13.0773 2.92374 14.0846 4.16638 14.0846H11.8336C13.0763 14.0846 14.0836 13.0773 14.0836 11.8346V10.668C14.0836 10.2538 13.7478 9.91797 13.3336 9.91797C12.9194 9.91797 12.5836 10.2538 12.5836 10.668V11.8346C12.5836 12.2488 12.2478 12.5846 11.8336 12.5846H4.16638C3.75217 12.5846 3.41638 12.2488 3.41638 11.8346V10.668Z" fill="#344054"/>
+                    </svg>
+                </span>
                 Upload
-              </Button>
+              </button>
             </div>
           </div>
         </Card>
@@ -114,16 +118,15 @@ const DoctorCardFileUpload = ({data}) => {
             <div className="bg-blue-50 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
               <DollarOutlined className="text-blue-600 text-xl" />
             </div>
-            <h3 className="text-lg font-medium mb-2">Medical Bills</h3>
-            <p className="text-gray-600 mb-4">Easily upload and share patient medical bills.</p>
+            <h3 className="fs-20 fw-500 text-blue-39 mb-2">Medical Bills</h3>
+            <p className="fs-14 fw-400 text-blue-85 mb-5">Easily upload and share patient medical bills.</p>
             <div className="mt-auto">
-              <Button
-                icon={<UploadOutlined />}
-                className="flex items-center"
+              <button
+                className="flex items-center gap-1 fs-14 fw-500 text-gray-54"
                 onClick={() => setBillsModalVisible(true)}
               >
                 Upload
-              </Button>
+              </button>
             </div>
           </div>
         </Card>
@@ -138,13 +141,18 @@ const DoctorCardFileUpload = ({data}) => {
             <h3 className="text-lg font-medium mb-2">Treatment Status</h3>
             <p className="text-gray-600 mb-4">Update and track patient treatment status.</p>
             <div className="mt-auto">
-              <Button
+              <button
                 icon={<PlusOutlined />}
-                className="flex items-center"
+                className="flex items-center gap-1 fs-14 fw-500 text-gray-54"
                 onClick={() => setTreatmentModalVisible(true)}
               >
+                <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.25016 4C7.25016 3.58579 7.58595 3.25 8.00016 3.25C8.41437 3.25 8.75016 3.58579 8.75016 4V7.25016H12.0004C12.4147 7.25016 12.7504 7.58595 12.7504 8.00016C12.7504 8.41437 12.4147 8.75016 12.0004 8.75016H8.75016V12.0004C8.75016 12.4147 8.41437 12.7504 8.00016 12.7504C7.58595 12.7504 7.25016 12.4147 7.25016 12.0004V8.75016H4C3.58579 8.75016 3.25 8.41437 3.25 8.00016C3.25 7.58595 3.58579 7.25016 4 7.25016H7.25016V4Z" fill="#344054"/>
+</svg>
+                </span>
                 Add details
-              </Button>
+              </button>
             </div>
           </div>
         </Card>
