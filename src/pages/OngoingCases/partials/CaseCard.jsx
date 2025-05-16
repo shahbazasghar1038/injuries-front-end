@@ -9,13 +9,28 @@ const CaseCard = ({caseItem, isDoctor}) => {
     const colors = ["#FF5733", "#33B5FF", "#FFC300", "#9B59B6", "#2ECC71", "#FF33A6", "#F39C12"];
     return colors[Math.floor(Math.random() * colors.length)];
   };
+
+  const getStatusStyles = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'in progress':
+        return { background: '#ECF3FF', color: '#465FFF' };
+      case 'enrolled':
+        return { background: '#F2F4F7', color: '#344054' };
+      case 'pending':
+        return { background: '#FFFAEB', color: '#DC6803' };
+      default:
+        return { background: '#F2F4F7', color: '#344054' }; // default style
+    }
+  };
+
+  console.log('caseItem', caseItem)
   return (
     <div
     key={caseItem.id}
     className="border border-gray-200 rounded-xl p-2 hover:shadow-md transition-shadow relative"
   > 
 
-<div className='rounded-xl bg-[#F9FAFB] p-3 '>
+<div className='rounded-xl bg-[#F9FAFB] p-4 '>
     <div className="flex justify-between items-start mb-4">
       <div className="flex items-center gap-1">
      {isDoctor &&
@@ -35,7 +50,7 @@ const CaseCard = ({caseItem, isDoctor}) => {
 
     </div>
 
-    <div className="space-y-2 text-sm">
+    <div className="space-y-3 text-sm">
       <div className="flex">
         <span className="fs-14 fw-400 text-blue-85 w-32">No of files:</span>
         <span className="fs-14 fw-500 text-gray-54">{caseItem.files || 0}</span>
@@ -53,7 +68,14 @@ const CaseCard = ({caseItem, isDoctor}) => {
 
       <div className="flex items-center">
         <span className="fs-14 fw-400 text-blue-85 w-32">Case Status:</span>
-        <span className={`px-2 py-0.5 rounded-md fs-14 fw-500 ${caseItem.statusColor}`}>{caseItem.status}</span>
+        <span
+          className="px-2 py-0.5 rounded-md fs-14 fw-500"
+          style={getStatusStyles(
+            caseItem.status === 'Open' ? 'Enrolled' : caseItem.status
+          )}
+        >
+          {caseItem.status === 'Open' ? 'Enrolled' : caseItem.status}
+        </span>
       </div>
     </div>
   </div>

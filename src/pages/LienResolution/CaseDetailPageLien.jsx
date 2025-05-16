@@ -47,6 +47,7 @@ import SubmissionModal from "../../components/ui/SubmissionModal";
 import NegotitationFrom from "./partials/NegotitationFrom";
 import BillRecords from "./partials/BillRecords";
 import { useSelector } from "react-redux";
+import DoctorTreatmentCard from "./partials/DoctorTreatmentCard";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -478,6 +479,9 @@ console.log(  'asfd',caseData?.providerTreatmentRecords)
                 />
               </Dropdown>
             </div>
+          </div>
+          <div className="mb-10">
+            <DoctorTreatmentCard />
           </div>
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-medium text-gray-800">

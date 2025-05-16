@@ -685,3 +685,21 @@ font-family: "Outfit", sans-serif;
     background-color: rgba(64, 150, 255, 0.1);
     color: #4096ff;
   }
+
+  .doctor-treatment-card{
+    border-radius: 12px;
+    border: 1px solid #E4E7EC;
+    background: #FFF;
+    padding: 24px;
+
+    .icon-bg{
+        border-radius: 10.5px;
+        background: #ECF3FF;
+        padding: 12px;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+  }

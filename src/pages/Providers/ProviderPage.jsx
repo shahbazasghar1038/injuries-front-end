@@ -252,7 +252,7 @@ const ProviderPage = () => {
       <div className="px-3 lg:px-6 py-2 lg:py-4 lg:flex xl:flex justify-between items-center relative">
 
         <div className="flex flex-col mb-">
-          <h1 className="text-xl font-semibold text-gray-800">Medical Providers</h1>
+          <h1 className="fs-16 fw-500 text-blue-39">Medical Providers</h1>
         </div>
 
         <div className="flex  md:flex-row flex-col justify-between gap-4 mb-">
@@ -265,7 +265,7 @@ const ProviderPage = () => {
             onChange={handleSearch}
             allowClear
       />
-          <Button type="primary"  onClick={showModal} icon={<PlusOutlined />} size="large" className="order-0 md:order-1 mt-2 md:mt-0 bg-blue-600 hover:bg-blue-700 h-11">
+          <Button onClick={showModal} icon={<PlusOutlined />} size="large" className="order-0 md:order-1 mt-2 md:mt-0 btn btn-primary h-11">
           Add medical provider
           </Button>
         </div>
