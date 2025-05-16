@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { getAllLienOffers } from '../../../services/cases';
+import { useEffect } from 'react';
 
 const NegotitationFrom = () => {
   // 1. State for price (default: 4200)
@@ -35,12 +37,11 @@ const NegotitationFrom = () => {
   const [caseData, setCaseData] = useState(null);
   
 const handleFetchSignleCase = () => {
-  getSingleCase(id)
+  getAllLienOffers(id)
   .then((response) => {
     setCaseData(response);
-    const filteredCases =  response?.providerTreatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Accepted')
-    setCaseDoctors(filteredCases);
-    console.log("single case data:", filteredCases);
+    setCaseDoctors( response);
+    console.log("single case data:", response);
     setLoading(false);
   })
   .catch((err) => {
@@ -51,6 +52,11 @@ const handleFetchSignleCase = () => {
     setLoading(false);
   });
 }
+
+useEffect(() => {
+  handleFetchSignleCase()
+}, [])
+
 
   return (
     <div className=' w-full'>

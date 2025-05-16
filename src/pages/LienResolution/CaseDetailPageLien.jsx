@@ -387,7 +387,8 @@ const CaseDetailPageLien = () => {
   };
 
 
-  const showRecordModal = () => {
+  const showRecordModal = (provi) => {
+    console.log('provider : ' , provi)
     setIsRecordModalOpen(true);
   };
 
@@ -589,7 +590,7 @@ console.log(  'asfd',caseData?.providerTreatmentRecords)
                         </div>
                       </div>
 
-                      <div onClick={showRecordModal} className="cursor-pointer relative w-fit whitespace-nowrap fs-14 fw-500 text-blue-85">
+                      <div onClick={showRecordModal(provider)} className="cursor-pointer relative w-fit whitespace-nowrap fs-14 fw-500 text-blue-85">
                         View offer
                       </div>
                     </div>

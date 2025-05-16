@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AuthenticatedLayout from "../../layout/AuthenticatedLayout";
 import Breadcrumb from "./partials/Breadcrumb";
-import { Avatar, Button, Input, message } from "antd";
+import { Avatar, Button, Input, message, Spin } from "antd";
 import {
   ArrowRightOutlined,
   PlusOutlined,
@@ -72,35 +72,38 @@ const isDoctor = user?.role === 'Doctor'; // Check if the user is a doctor
   }, []);
 
   const fetchAllCases = () => {
+    setLoading(true); // start loading
     getAllCases(user?.id)
       .then((response) => {
         console.log("al  cases resp : ", response);
         const filteredCasesRequest = isDoctor
-          && response?.treatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Pending')
-
-        // If user is doctor, filter cases with DoctorAcceptanceStatus === 'Accepted'
+          && response?.treatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Pending');
+  
         const filteredCases = isDoctor
           ? response?.treatmentRecords?.filter(c => c.doctorAcceptanceStatus === 'Accepted')
           : response?.cases;
-
-          const caseIds = filteredCases.map(item => item.caseId);
-
-const matchedCases = response?.cases?.filter(caseItem =>
-  caseIds.includes(caseItem.id)
-);
-
-
-      console.log('matchedCases' , matchedCases)
+  
+        const caseIds = filteredCases.map(item => item.caseId);
+        const matchedCases = response?.cases?.filter(caseItem =>
+          caseIds.includes(caseItem.id)
+        );
+  
+        console.log('matchedCases', matchedCases);
         setCases(isDoctor ? matchedCases : response?.cases);
-        setCasesRequest(filteredCasesRequest)
+        setCasesRequest(filteredCasesRequest);
       })
       .catch((err) => {
         console.error("Error fetching cases:", err);
         setError("Failed to fetch cases. Please try again later.");
+      })
+      .finally(() => {
+        setLoading(false); // stop loading
       });
   };
+  
 
   const [userr, setUserr] = useState({});
+  const [loading, setLoading] = useState(false);
 
 
     const fetchSingleUser = () => {
@@ -158,6 +161,8 @@ setshowStripeModal(false)
 
   return (
     <AuthenticatedLayout>
+
+<Spin spinning={loading}>
 
       <div className="lg:flex gap-2 justify-between">
         <p className="fs-20 fw-600 text-blue-39">{isDoctor ? 'Cases' : 'Ongoing Cases' }</p>
@@ -242,6 +247,9 @@ setshowStripeModal(false)
           />
         </Elements>
       )}
+
+</Spin>
+
     </AuthenticatedLayout>
   );
 };
