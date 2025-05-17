@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { getAllLienOffers } from '../../../services/cases';
 import { useEffect } from 'react';
 
-const NegotitationFrom = () => {
+const NegotitationFrom = ({data}) => {
+  console.log('selected lien data:', data);
   // 1. State for price (default: 4200)
   const [price, setPrice] = useState(4200);
   const [isManual, setIsManual] = useState(false);
@@ -32,31 +33,6 @@ const NegotitationFrom = () => {
       handleManualBlur();
     }
   };
-
-
-  const [caseData, setCaseData] = useState(null);
-  
-const handleFetchSignleCase = () => {
-  getAllLienOffers(id)
-  .then((response) => {
-    setCaseData(response);
-    setCaseDoctors( response);
-    console.log("single case data:", response);
-    setLoading(false);
-  })
-  .catch((err) => {
-    console.error(err);
-    messageApi.error(err);
-
-    setError("Failed to fetch single case data. Please try again later.");
-    setLoading(false);
-  });
-}
-
-useEffect(() => {
-  handleFetchSignleCase()
-}, [])
-
 
   return (
     <div className=' w-full'>

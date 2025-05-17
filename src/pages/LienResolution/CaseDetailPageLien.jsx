@@ -47,7 +47,6 @@ import SubmissionModal from "../../components/ui/SubmissionModal";
 import NegotitationFrom from "./partials/NegotitationFrom";
 import BillRecords from "./partials/BillRecords";
 import { useSelector } from "react-redux";
-import DoctorTreatmentCard from "./partials/DoctorTreatmentCard";
 
 const PatientStatusCard = ({ data, index }) => (
   <div
@@ -126,7 +125,16 @@ const CaseDetailPageLien = () => {
         const [isSubmissionModalOpen, setSubmissionModalOpen] = useState(false);
         const [isRecordModalOpen, setIsRecordModalOpen] = useState(false);
   
+
       
+        const showNegotiationModal = (provider) => {
+    setSelectedLienData(provider);
+          setSubmissionModalOpen(true)
+        }
+        const closeNegotiationModal = () => {
+          setSubmissionModalOpen(false)
+        }
+
         const showModal = () => {
           setIsModalVisible(true)
         }
@@ -221,44 +229,7 @@ const CaseDetailPageLien = () => {
       textColor: "#ec4909",
     },
   ];
-  const medicalProviders = [
-    {
-      id: 1,
-      name: "Dr. Marina Paul",
-      specialty: "Orthopedic",
-      treatmentStatus: "Completed",
-      lienOfferStatus: "In Progress",
-      billAmount: "6,500",
-      reducedAmount: "-",
-    },
-    {
-      id: 2,
-      name: "Dr. John Smith",
-      specialty: "Neurology",
-      treatmentStatus: "In Progress",
-      lienOfferStatus: "Pending",
-      billAmount: "8,200",
-      reducedAmount: "5,400",
-    },
-    {
-      id: 3,
-      name: "Dr. Sarah Johnson",
-      specialty: "Physical Therapy",
-      treatmentStatus: "Completed",
-      lienOfferStatus: "Completed",
-      billAmount: "3,800",
-      reducedAmount: "2,100",
-    },
-    {
-      id: 4,
-      name: "Dr. Sarah Johnson",
-      specialty: "Physical Therapy",
-      treatmentStatus: "Completed",
-      lienOfferStatus: "Completed",
-      billAmount: "3,800",
-      reducedAmount: "2,100",
-    },
-  ];
+ 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedContact, setSelectedContact] = useState(contacts[0]);
   // Add state to track deleted questions
@@ -387,9 +358,10 @@ const CaseDetailPageLien = () => {
     setIsDeleteModalVisible(false);
   };
 
+  const [selectedLienData, setSelectedLienData] = useState({});
 
-  const showRecordModal = (provi) => {
-    console.log('provider : ' , provi)
+  const showRecordModal = (provi) => { 
+    setSelectedLienData(provi);
     setIsRecordModalOpen(true);
   };
 
@@ -479,9 +451,6 @@ console.log(  'asfd',caseData?.providerTreatmentRecords)
                 />
               </Dropdown>
             </div>
-          </div>
-          <div className="mb-10">
-            <DoctorTreatmentCard />
           </div>
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-medium text-gray-800">
@@ -594,7 +563,7 @@ console.log(  'asfd',caseData?.providerTreatmentRecords)
                         </div>
                       </div>
 
-                      <div onClick={showRecordModal(provider)} className="cursor-pointer relative w-fit whitespace-nowrap fs-14 fw-500 text-blue-85">
+                      <div onClick={()=>showRecordModal(provider)} className="cursor-pointer relative w-fit whitespace-nowrap fs-14 fw-500 text-blue-85">
                         View offer
                       </div>
                     </div>
@@ -615,7 +584,7 @@ console.log(  'asfd',caseData?.providerTreatmentRecords)
                   </div>
 
                   <div className="flex flex-col w-[90%] items-start gap-2.5 relative flex-[0_0_auto]">
-                    <button onClick={()=>setSubmissionModalOpen(true)} className="all-[unset] whitespace-nowrap btn btn-primary px-4 py-3 relative w-full overflow-hidden">
+                    <button onClick={()=>showNegotiationModal(provider)} className="all-[unset] whitespace-nowrap btn btn-primary px-4 py-3 relative w-full overflow-hidden">
                       <div className="text-white relative w-fit ">
                         Negotiate Amount
                       </div>
@@ -802,12 +771,12 @@ console.log(  'asfd',caseData?.providerTreatmentRecords)
             <AddNewCaseForm visible={isModalVisible} onCancel={handleCancel} />
         </CustomModal> 
 
-        <SubmissionModal open={isSubmissionModalOpen} onClose={() => setSubmissionModalOpen(false)} borderRadius={24}>
-            <NegotitationFrom  visible={isNegotiationModalOpen} onCancel={() => setNegotiationModalOpen(false)} />
+        <SubmissionModal open={isSubmissionModalOpen} onClose={() => closeNegotiationModal()} borderRadius={24}>
+            <NegotitationFrom  visible={isNegotiationModalOpen} onCancel={() => setNegotiationModalOpen(false)} data={selectedLienData} />
         </SubmissionModal> 
 
         <SubmissionModal open={isRecordModalOpen} onClose={handleRecordModalClose} borderRadius={24}>
-            <BillRecords visible={isRecordModalOpen} onCancel={handleRecordModalClose} />
+            <BillRecords visible={isRecordModalOpen} onCancel={handleRecordModalClose} data={selectedLienData} />
         </SubmissionModal> 
 
       <CustomModal open={isAddModalVisible} onClose={handleAddCancel}>

@@ -183,9 +183,9 @@ export const storePaymentToServer = async (model) => {
 
 
 // get all Lien 
-export const getAllLienOffers = async (id) => {
+export const getAllLienOffers = async (query) => {
   try {
-    const response = await axiosInstance.get(`lien-offers/all?caseId=${id}`);
+    const response = await axiosInstance.get(`lien-offers/${query}`);
     return response.data;
   } catch (error) {
     throw new Error(error?.response?.data?.message || "archiving case failed");

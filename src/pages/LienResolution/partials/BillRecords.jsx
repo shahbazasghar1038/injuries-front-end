@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getAllLienOffers } from '../../../services/cases';
 
 const negotiationData = [
   {
@@ -33,7 +34,28 @@ const getTitle = (type) => {
   }
 };
 
-const BillRecords = () => {
+const BillRecords = ({data}) => {
+
+  console.log('data:', data);
+
+  const [caseData, setCaseData] = useState(null);
+  
+  const handleFetchSignleCase = () => {
+    let query = `all?caseId=${data?.caseId}&userIds=${data?.user?.id}`;
+    getAllLienOffers(query)
+    .then((response) => {
+      setCaseData(response);
+      console.log("lien all data:", response);
+    })
+    .catch((err) => {
+      console.error(err);  
+    });
+  }
+  
+  useEffect(() => {
+    handleFetchSignleCase()
+  }, [])
+
   return (
     <div>
       <div style={{ color: '#A3A3A3', fontWeight: 500, marginBottom: 8 }}>Offer accepted</div>
