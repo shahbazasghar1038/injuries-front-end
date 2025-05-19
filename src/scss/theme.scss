@@ -569,6 +569,9 @@ font-family: "Outfit", sans-serif;
 
 .ant-input-outlined{
     height: 44px !important;
+    &.textarea{
+        height: 120px !important;
+    }
 }
 .ant-select-single{
     height: 44px !important;
@@ -656,9 +659,7 @@ font-family: "Outfit", sans-serif;
     border-color: #4096ff !important;
   }
   
-  .ant-btn-primary {
-    background-color: #4096ff !important;
-  }
+  
   
   .ant-btn-primary:hover {
     background-color: #1677ff !important;
