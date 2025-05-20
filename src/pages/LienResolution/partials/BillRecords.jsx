@@ -35,16 +35,14 @@ const getTitle = (type) => {
 };
 
 const BillRecords = ({data}) => {
-
-  console.log('data:', data);
-
-  const [caseData, setCaseData] = useState(null);
+console.log('data' , data)
+  const [caseLienConversation, setCaseLienConversation] = useState([]);
   
   const handleFetchSignleCase = () => {
     let query = `all?caseId=${data?.caseId}&userIds=${data?.user?.id}`;
     getAllLienOffers(query)
     .then((response) => {
-      setCaseData(response);
+      setCaseLienConversation(response?.lienOffers);
       console.log("lien all data:", response);
     })
     .catch((err) => {
@@ -54,15 +52,15 @@ const BillRecords = ({data}) => {
   
   useEffect(() => {
     handleFetchSignleCase()
-  }, [])
+  }, [data?.user?.id])
 
   return (
     <div>
       <div style={{ color: '#A3A3A3', fontWeight: 500, marginBottom: 8 }}>Offer accepted</div>
       <h2 style={{ margin: 0, fontWeight: 700 }}>Lien Negotiation</h2>
-      <div style={{ color: '#A3A3A3', fontSize: 14, marginBottom: 24 }}>Sent a request to Dr. Jake</div>
+      <div style={{ color: '#A3A3A3', fontSize: 14, marginBottom: 24 }}>Sent a request to Dr. {data?.user?.fullName}</div>
       <div style={{ borderLeft: '2px dashed #E5E7EB', marginLeft: 16, paddingLeft: 24 }}>
-        {negotiationData.map((item, idx) => (
+        {caseLienConversation.map((item, idx) => (
           <div key={idx} style={{ marginBottom: 32, position: 'relative' }}>
             <div style={{
               position: 'absolute',
@@ -81,7 +79,7 @@ const BillRecords = ({data}) => {
               <span role="img" aria-label="user">👤</span>
             </div>
             <div style={{ fontWeight: 600, fontSize: 16 }}>
-              {getTitle(item.type)}: <span style={{ color: '#525252' }}>{item.amount}</span>
+              {getTitle('your-offer')}: <span style={{ color: '#525252' }}>{item.offerAmount}</span>
             </div>
             <div style={{ color: '#737373', fontSize: 15, marginTop: 4, whiteSpace: 'pre-line' }}>
               Message: {item.message}

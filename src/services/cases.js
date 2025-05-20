@@ -60,6 +60,16 @@ export const getSingleCase = async (id) => {
     );
   }
 };
+export const getSingleCase2 = async (id) => {
+  try {
+    const response = await axiosInstance.get(`cases/lienCase2/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error?.response?.data?.error || "fetching single cases failed"
+    );
+  }
+};
 
 export const deleteSingleCase = async (id) => {
   try {
@@ -182,6 +192,15 @@ export const storePaymentToServer = async (model) => {
 };
 
 
+// create Lien 
+export const createLienOffers = async (model) => {
+  try {
+    const response = await axiosInstance.post(`lien-offers/create`, model);
+    return response.data;
+  } catch (error) {
+    throw new Error(error?.response?.data?.message || "archiving case failed");
+  }
+};
 // get all Lien 
 export const getAllLienOffers = async (query) => {
   try {
