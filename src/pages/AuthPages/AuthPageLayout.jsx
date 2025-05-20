@@ -15,7 +15,7 @@ const goback=()=>{
       <div className='container-auth'>
          <div onClick={()=>goback()} className='cursor-pointer flex items-center gap-1'>
             <Icons.BackIcon />
-            <p className='text-gray-54 fs-14'>Back</p>
+            <p className='text-gray-54 fs-14 mb-0'>Back</p>
          </div>
          <div className={`auth-layout ${fullHeight ? 'h-100' : 'h-screen-100'}`}>
           {children}

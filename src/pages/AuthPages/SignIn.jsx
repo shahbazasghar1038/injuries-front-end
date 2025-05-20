@@ -193,8 +193,7 @@ console.log('logn response', response)
 
           <Form.Item>
             <Button
-              block
-              type="primary"
+              block 
               htmlType="submit"
               className="btn btn-primary"
               loading={loading}
