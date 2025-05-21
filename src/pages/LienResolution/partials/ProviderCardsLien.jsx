@@ -230,6 +230,7 @@ const ProviderCardsLien = ({ caseData, onSuccess }) => {
           visible={isRecordModalOpen}
           onCancel={handleRecordModalClose}
           data={selectedLienData}
+          caseData={caseData}
         />
       </SubmissionModal>
     </>
