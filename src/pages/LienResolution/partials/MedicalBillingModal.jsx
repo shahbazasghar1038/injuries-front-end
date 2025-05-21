@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Modal, Input, Select, Button, Divider } from 'antd';
+import { Modal, Input, Select, Button, Divider, message } from 'antd';
 import { CloseOutlined, DownloadOutlined } from '@ant-design/icons';
+import { medicalRecordRequest } from '../../../services/cases';
 
-export const MedicalBillingModal = ({onClose, provider }) => {
+export const MedicalBillingModal = ({onClose, provider , onSuccess }) => {
+  console.log('rpahfsdf', provider)
   const [formData, setFormData] = useState({
-    billAmount: provider?.bill || '0.00',
+    bill: provider?.bill || '0.00',
     reducedAmount: provider?.reducedAmount || '0.00',
-    lienOffer: provider?.reducedAmount || '0.00',
+    reducedAmount: provider?.reducedAmount || '0.00',
     lienOfferStatus: provider?.lienOfferStatus || 'In Progress',
-    caseStatus: provider?.caseStatus || 'In Progress',
+    treatmentStatus: provider?.treatmentStatus || 'In Progress',
   });
 
   const handleInputChange = (field, value) => {
@@ -20,7 +22,19 @@ export const MedicalBillingModal = ({onClose, provider }) => {
 
   const handleSaveChanges = () => {
     console.log('Saving changes:', formData);
-    onClose();
+   
+      
+      medicalRecordRequest(formData, provider?.id)
+        .then((response) => {
+          console.log("case invite action successfully:", response);
+          onClose()
+          onSuccess()
+          message.success(response?.message || "Bill added successfully");
+        })
+        .catch((err) => {
+          message.error(err.message);
+          console.error("Error case invition action :", err);
+        });
   };
 
   return (
@@ -37,8 +51,8 @@ export const MedicalBillingModal = ({onClose, provider }) => {
           <div>
             <label className="block text-sm text-gray-600 mb-1">Bill amount</label>
             <Input
-              value={formData.billAmount}
-              onChange={(e) => handleInputChange('billAmount', e.target.value)}
+              value={formData.bill}
+              onChange={(e) => handleInputChange('bill', e.target.value)}
               className="w-full"
             />
           </div>
@@ -56,8 +70,8 @@ export const MedicalBillingModal = ({onClose, provider }) => {
           <div>
             <label className="block text-sm text-gray-600 mb-1">Lien Offer</label>
             <Input
-              value={formData.lienOffer}
-              onChange={(e) => handleInputChange('lienOffer', e.target.value)}
+              value={formData.reducedAmount}
+              onChange={(e) => handleInputChange('reducedAmount', e.target.value)}
               className="w-full"
             />
           </div>
@@ -94,8 +108,8 @@ export const MedicalBillingModal = ({onClose, provider }) => {
         <div className="mb-6">
           <label className="block text-sm text-gray-600 mb-1">Case Status</label>
           <Select
-            value={formData.caseStatus}
-            onChange={(value) => handleInputChange('caseStatus', value)}
+            value={formData.treatmentStatus}
+            onChange={(value) => handleInputChange('treatmentStatus', value)}
             className="w-full"
             suffixIcon={<span className="text-gray-400">▼</span>}
           >

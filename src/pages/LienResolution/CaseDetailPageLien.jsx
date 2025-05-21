@@ -437,7 +437,7 @@ console.log(  'asfd',caseData?.providerTreatmentRecords)
             </h2>
           </div>
           {true ? (
-            <ProviderCardsLien caseData={caseData} />
+            <ProviderCardsLien caseData={caseData} onSuccess={handleFetchSignleCase} />
           ) : (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <h3 className="text-lg font-medium text-gray-800 mb-2">

@@ -6,7 +6,7 @@ import NegotitationFrom from "./NegotitationFrom";
 import BillRecords from "./BillRecords";
 import { MedicalBillingModal } from "./MedicalBillingModal";
 
-const ProviderCardsLien = ({ caseData }) => {
+const ProviderCardsLien = ({ caseData, onSuccess }) => {
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selecedProvider, setSelectedProvider] = useState({});
@@ -202,10 +202,10 @@ const ProviderCardsLien = ({ caseData }) => {
             </div>
           ))}
       </div>
-
+{/* add bill by doctor lien page card  */}
       <SubmissionModal open={isModalOpen} onClose={handleModalClose}>
         <MedicalBillingModal provider={selecedProvider}
-          //  onSuccess={handleFetchSignleCase}
+           onSuccess={onSuccess}
           onClose={handleModalClose}/>
       </SubmissionModal>
 
